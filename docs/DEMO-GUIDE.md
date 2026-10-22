@@ -26,9 +26,13 @@ Pages, menu links and page-builder blocks live in the **database**, not in git. 
 
 ## 1. The site at a glance (what visitors see)
 
-**Header (every page):** a purple top bar with the district name and tagline, audience links (**Students, Parents, Community, Staff Intranet**) and a search box; under it the main bar with the logo, navigation **Home · About · Schools · Academics · Enroll · Resources · Extracurriculars**, a gold **Enroll Now** button and an account icon. Below 1280 px wide the navigation collapses into a **Menu** button (also contains the audience links).
+**Header (every page, identical):** a purple top bar with the district name, audience links (**Students, Parents, Community, Staff**) and a search box; under it the main bar with the logo, navigation **About ▾ · Schools · Academics · Enroll · Resources · Extracurriculars**, a gold **Enroll Now** button and an account icon. It stays at the top while you scroll. When someone is logged in, their name and **Log out** also appear in the top bar.
 
-**Quick links bar** (chips under the header on inner pages, and the footer Quick links on inner pages): Calendar · Menus · Enrollment · Jobs · Transportation · Closings · **Facility rental** · **Volunteer hours** · Search.
+**About menu:** hover or keyboard-focus **About** to open a two-column menu. Left, **About**: About the District, Mission and vision, Superintendent, Strategic plan, District facts, Board of Education. Right, **Quick links**: Calendar, Lunch menus, News, Enrollment, Jobs, Transportation, School closings, **Facility rental**, **Volunteer hours**, Search. (This replaces the old row of quick-link chips.)
+
+**Mobile (below 1280 px wide):** the navigation collapses into a **Menu** button. Its panel holds Enroll Now, search, the main links, the About links and the Quick links.
+
+**Footer (every page, identical):** Waukee CSD address and phone, Quick Links (Contact Us, Careers, Schools), District (School Board, Staff Directory, Staff Intranet), Connect With Us icons, and the legal row.
 
 **Account bar** (only when logged in, a thin dark strip above the header): "Signed in as <name>" plus buttons for what that person may do (see section 2). This is how editors and publishers find **Add page**, **Add news** and **Content**, since there is no admin toolbar on the public theme.
 
@@ -61,7 +65,7 @@ Do these in order. Each step says **who is logged in** and **what to click**.
 
 ### Step 1: Public tour (3 min, logged out / private window)
 1. Open `/`. Point out the header, hero, stat strip, "Why choose" section, school/program cards.
-2. Shrink the window below 1280 px wide: the **Menu** button appears. Click it.
+2. Hover **About** in the header to show the About menu and quick links. Shrink the window below 1280 px wide: the **Menu** button appears. Click it.
 3. Click **Schools** in the header → `/schools`: the district directory of **22 schools** grouped by level (high schools, 9th-grade campuses, middle, elementary, specialized centers) with a filter. Click **Explore** on **Waukee High School** → `/schools/waukee-high-school`: a full profile (principal's message, leadership team, bell schedule, news, family resources). Other schools (for example `/schools/brookview-elementary`) show a shorter profile built from the same data.
    Then open `/schools/sample-elementary`: the **school site** used for the editor demo (the school's own news **plus District items**, events, and a **Pages from Sample Elementary** list). It is reached by address or from the editor flow; it is not one of the 22 directory cards.
 4. Click **About** → `/district`: hero, stat strip, "Our story", photo cards (Mission and vision, Superintendent, Strategic plan, District facts, Board of Education, Our schools), "What We Value".
@@ -72,7 +76,7 @@ Do these in order. Each step says **who is logged in** and **what to click**.
 Open `/search`, search **handbook**: only the **2 public** documents. Keep this tab for step 8.
 
 ### Step 3: The two accessible forms (3 min, logged out)
-Reach them from the **Quick links bar** ("Facility rental", "Volunteer hours"), the footer of the home page, or `/community` and `/students`.
+Reach them from the header: hover **About** → **Quick links** → **Facility rental** / **Volunteer hours** (or open the **Menu** button on a phone), or from `/community` and `/students`.
 1. **Facility rental** (`/community/facility-rental`): open **Room or facility** and change it. Extra questions appear: Auditorium → stage/lighting + seating (required); Cafeteria → kitchen + tables; Gymnasium → equipment; Classroom → projector; Athletic field → field lights.
 2. Pick Auditorium, leave seating empty, fill the other required fields, submit: an error asks for seating. Pick Gymnasium instead: no seating question, submits fine.
 3. Click Submit on an empty form to show the error list. Tab through the form with the keyboard to show focus and labels.
@@ -206,7 +210,7 @@ Nothing is public until a publisher moves it to **Published** (editors can only 
 ## 8. Be upfront about these (known limits)
 
 - **The home page is a hand-built template** (`page--front.html.twig`). Editing "Home" in the page builder does **not** change what visitors see on `/`, and its news and events sections are **fixed sample text**, not live feeds: a news item you publish shows on `/news` and the school pages, **not** on the home page. Home also shows placeholder numbers (13,000 learners, 19 facilities) that do not match the two sample schools. Say it is a design mock to be wired to live content.
-- **The header exists twice** (hand-built on the home page, shared template on every other page). A link or label change must be made in both (`page--front.html.twig` and `site-header.html.twig`).
+- **Header and footer are shared files** (`templates/includes/tw-header.html.twig` and `tw-footer.html.twig`) used by every page, so a link or label change is made once. Home, Schools and Academics style them with the Tailwind web script; all other pages use a compiled stylesheet, `css/tw-chrome.css`. **After adding new Tailwind classes to those two files, rebuild it** (command in `web/themes/custom/waukee_theme/tailwind/README.md`), or the new classes will look unstyled on inner pages.
 - The header navigation links (Academics, Resources, Extracurriculars) point at existing sample pages (Student resources, Families, Activities); they are not separate sections yet.
 - The **22-school directory** shows only schools that have a Tier set. The two sample schools (Sample Elementary / Sample High School) have none, so they are not in the directory; the editor/group demo and the **Pages from <school>** list use those two. Principal names and numbers for the 22 schools come from the design files (one known conflict: Waukee High School's principal differs between the directory and the profile in the source designs).
 - `/`, `/schools`, `/schools/{slug}` and `/academics` are hand-built templates with their own header and footer; the shared header on other pages is a separate copy, so labels and links can differ slightly.
@@ -228,6 +232,7 @@ Nothing is public until a publisher moves it to **Published** (editors can only 
 | Problem | Fix |
 |---|---|
 | Page shows old content or errors | `ddev drush cr`, then Ctrl+F5 |
+| Header or footer looks unstyled on inner pages | `css/tw-chrome.css` is stale: rebuild it (see `web/themes/custom/waukee_theme/tailwind/README.md`), then `ddev drush cr` |
 | A page-builder page is **empty** (title but no content) | `ddev drush php:script scripts/phase19_repair_layouts.php`, then `scripts/phase16_about.php` |
 | Can't log in | `ddev drush uli` (admin) or `ddev drush upwd teacher.staff 'Demo#2026'` |
 | No account bar after login | Hard refresh (Ctrl+F5) and `ddev drush cr` |

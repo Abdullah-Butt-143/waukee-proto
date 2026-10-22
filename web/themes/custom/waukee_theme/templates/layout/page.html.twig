@@ -1,16 +1,22 @@
 {#
 /**
  * @file
- * Waukee page template. Own markup (no Olivero header/layout wrappers):
- * alert region, shared site header (site-header.html.twig), quick links bar,
- * main content (optional sidebar), footer.
+ * Waukee inner page template. Own markup (no Olivero header/layout wrappers):
+ * alert region, the shared site header (includes/tw-header.html.twig, the same
+ * header as the home page), a logged-in account bar, main content (optional
+ * sidebar) and the shared footer (includes/tw-footer.html.twig).
  *
- * Regions: alert, header, primary_menu, secondary_menu, quick_links, hero,
- * highlighted, breadcrumb, content_above, content, content_below, sidebar,
- * footer_top, footer_bottom.
+ * The header and footer are Tailwind markup; css/tw-chrome.css (library
+ * "chrome") styles them here and is scoped to .wk-chrome so it cannot affect
+ * page content.
+ *
+ * Regions: alert, hero, highlighted, breadcrumb, content_above, content,
+ * content_below, sidebar. (header, menus and footer regions are no longer
+ * rendered: header and footer are the shared partials.)
  */
 #}
-<div class="wk-page">
+{{ attach_library('waukee_theme/chrome') }}
+<div class="wk-page wk-chrome">
 
   {% if page.alert %}
     <div class="alert-region" role="region" aria-label="{{ 'Site alerts'|t }}">
@@ -18,17 +24,11 @@
     </div>
   {% endif %}
 
-  {% include '@waukee_theme/layout/site-header.html.twig' %}
+  {% include '@waukee_theme/includes/tw-header.html.twig' with {wk_sticky: true} %}
+  {% include '@waukee_theme/includes/account-bar.html.twig' %}
 
   <main id="main-content" class="wk-main" tabindex="-1">
     {{ page.hero }}
-    {% if page.quick_links %}
-      <div class="wk-quickbar{% if page.hero %} wk-quickbar--floating{% endif %}">
-        <div class="wk-container">
-          {{ page.quick_links }}
-        </div>
-      </div>
-    {% endif %}
     <div class="wk-container wk-main__inner{% if page.sidebar %} wk-main__inner--sidebar{% endif %}">
       {% if page.highlighted or page.breadcrumb %}
         <div class="wk-main__top">
@@ -49,18 +49,6 @@
     </div>
   </main>
 
-  <footer class="wk-footer">
-    <div class="wk-container">
-      {% if page.footer_top %}
-        <div class="wk-footer__grid">
-          {{ page.footer_top }}
-        </div>
-      {% endif %}
-      <div class="wk-footer__bottom">
-        <p class="wk-footer__legal">&copy; {{ 'now'|date('Y') }} {{ 'Sample Community Schools. Prototype with sample content only.'|t }}</p>
-        {{ page.footer_bottom }}
-      </div>
-    </div>
-  </footer>
+  {% include '@waukee_theme/includes/tw-footer.html.twig' %}
 
 </div>

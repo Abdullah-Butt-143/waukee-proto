@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Small scoped reset standing in for Tailwind's preflight. */
+.wk-chrome header *, .wk-chrome header *::before, .wk-chrome header *::after,
+.wk-chrome footer *, .wk-chrome footer *::before, .wk-chrome footer *::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #cbc4d2;
+}
+.wk-chrome header a, .wk-chrome footer a { color: inherit; text-decoration: inherit; }
+.wk-chrome header p, .wk-chrome footer p { margin: 0; }
+.wk-chrome header form, .wk-chrome footer form { margin: 0; }
+.wk-chrome header input, .wk-chrome header button { font: inherit; color: inherit; margin: 0; letter-spacing: inherit; }
+.wk-chrome header input { padding: 0; }
+.wk-chrome header button { cursor: pointer; }
+.wk-chrome header, .wk-chrome footer { font-family: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif; line-height: 1.5; }
+.wk-chrome header .material-symbols-outlined, .wk-chrome footer .material-symbols-outlined { line-height: 1; }
+/* Page-level form styles must not stretch the header search box. */
+.wk-chrome header input[type="text"] { height: 1.25rem; min-height: 0; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; line-height: 1rem; appearance: none; -webkit-appearance: none; }
+.wk-chrome header form { min-height: 0; }

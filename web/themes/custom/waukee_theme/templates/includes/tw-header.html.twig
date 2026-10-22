@@ -1,1 +1,151 @@
-<header class="fixed top-0 left-0 w-full z-50 shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full bg-primary-container text-on-primary py-space-xs"><div class="max-w-[1280px] mx-auto px-margin flex items-center justify-between font-label-sm text-label-sm"><div class="flex items-center gap-space-md"><span class="opacity-80">Waukee Community School District</span></div><div class="flex items-center gap-space-lg"><nav class="flex items-center gap-space-md" data-active-classes="text-secondary-fixed-dim font-bold underline"><a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" data-path="students" href="/students">Students</a><a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" data-path="parents" href="/families">Parents</a><a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" data-path="community" href="/community">Community</a><a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" data-path="staff-intranet" href="/user/login">Staff</a>{% if logged_in %}<a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" href="{{ wk_account_url }}">{{ wk_account_name }}</a><a class="text-on-primary hover:text-secondary-fixed-dim transition-colors font-bold underline" href="{{ wk_logout_url }}">{{ 'Log out'|t }}</a>{% endif %}</nav><form action="/search" method="get" role="search" class="flex items-center bg-primary px-space-sm py-1 rounded-lg gap-space-xs"><span class="material-symbols-outlined text-label-sm text-on-primary">search</span><input name="keys" aria-label="Search district resources" class="bg-transparent text-label-sm text-on-primary placeholder:text-on-primary/60 focus:outline-none w-28 lg:w-36" placeholder="Search district..." type="text"/></form></div></div></div><div class="h-20 bg-surface/90 backdrop-blur-xl"><div class="max-w-[1280px] mx-auto px-margin h-full flex items-center justify-between"><a href="/" class="flex items-center gap-space-md"><div class="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center text-accent-gold-bright shadow-sm"><span class="material-symbols-outlined text-[28px]">school</span></div><div class="flex flex-col"><span class="font-title-md text-title-md text-primary font-bold tracking-tight uppercase leading-tight">Waukee</span><span class="font-label-sm text-label-sm text-secondary font-bold tracking-wider uppercase leading-none">Community Schools</span></div></a><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="text-primary font-bold bg-accent-purple-tint rounded-lg"><a class="px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="about" href="/prospective-families/why-us">About</a><a class="px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="schools" href="/schools">Schools</a><a class="px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="academics" href="/academics">Academics</a><a class="px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="enroll" href="/enrollment">Enroll</a><a class="px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="resources" href="/families">Resources</a><a class="px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="extracurriculars" href="/students/activities">Extracurriculars</a></nav><div class="flex items-center gap-space-md"><a class="inline-flex items-center justify-center bg-secondary-container hover:bg-accent-gold-bright text-on-secondary-container font-label-md text-label-md px-space-lg py-2.5 rounded-lg transition-all shadow-sm" data-path="enroll-now" href="/enrollment">Enroll Now</a><a href="/user" aria-label="Profile" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></a></div></div></div></header>
+{#
+/**
+ * @file
+ * Site header, shared by every page (home, schools, academics and all inner
+ * pages). Tailwind markup: the home/schools pages style it with the Tailwind
+ * CDN, inner pages with css/tw-chrome.css (compiled from this file and
+ * tw-footer.html.twig, see tailwind/README.md). Rebuild that stylesheet after
+ * adding new Tailwind classes here.
+ *
+ * Variables: wk_sticky (inner pages: header sits in the page flow and sticks;
+ * default is fixed, as on the home page), wk_account_* / wk_logout_url /
+ * wk_intranet_url (set in waukee_theme_account_links()).
+ *
+ * "About" opens a menu with the district pages and the quick links
+ * (calendar, menus, enrollment, forms, ...). Below 1280px a Menu button
+ * opens the same links in a panel.
+ */
+#}
+{% set wk_sticky = wk_sticky|default(false) %}
+{% set current = path('<current>') %}
+{% set about_links = [
+  {label: 'About the District', href: '/district'},
+  {label: 'Mission and vision', href: '/district/mission-vision'},
+  {label: 'Superintendent', href: '/district/superintendent'},
+  {label: 'Strategic plan', href: '/district/strategic-plan'},
+  {label: 'District facts', href: '/district/facts'},
+  {label: 'Board of Education', href: '/community/board-of-education'},
+] %}
+{% set quick_links = [
+  {label: 'Calendar', href: '/calendar'},
+  {label: 'Lunch menus', href: '/lunch-menus'},
+  {label: 'News', href: '/news'},
+  {label: 'Enrollment', href: '/enrollment'},
+  {label: 'Jobs', href: '/careers/jobs'},
+  {label: 'Transportation', href: '/transportation'},
+  {label: 'School closings', href: '/closings'},
+  {label: 'Facility rental', href: '/community/facility-rental'},
+  {label: 'Volunteer hours', href: '/students/volunteer-hours'},
+  {label: 'Search', href: '/search'},
+] %}
+{% set nav = [
+  {label: 'Schools', href: '/schools', key: 'schools'},
+  {label: 'Academics', href: '/academics', key: 'academics'},
+  {label: 'Enroll', href: '/enrollment', key: 'enroll'},
+  {label: 'Resources', href: '/families', key: 'resources'},
+  {label: 'Extracurriculars', href: '/students/activities', key: 'extracurriculars'},
+] %}
+{% set active_classes = 'text-primary font-bold bg-accent-purple-tint rounded-lg' %}
+{% set link_classes = 'px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors' %}
+{% set about_active = current starts with '/district' %}
+<header class="{{ wk_sticky ? 'sticky' : 'fixed' }} top-0 left-0 w-full z-50 shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+  <div class="w-full bg-primary-container text-on-primary py-space-xs">
+    <div class="max-w-[1280px] mx-auto px-margin flex items-center justify-between font-label-sm text-label-sm">
+      <div class="hidden md:flex items-center gap-space-md"><span class="opacity-80">Waukee Community School District</span></div>
+      <div class="flex items-center gap-space-lg max-md:w-full max-md:justify-between">
+        <nav class="flex items-center gap-space-md" aria-label="{{ 'Audiences'|t }}" data-active-classes="text-secondary-fixed-dim font-bold underline">
+          <a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" data-path="students" href="/students">Students</a>
+          <a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" data-path="parents" href="/families">Parents</a>
+          <a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" data-path="community" href="/community">Community</a>
+          <a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" data-path="staff-intranet" href="{{ wk_intranet_url|default('/user/login') }}">Staff</a>
+          {% if logged_in %}
+            <a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" href="{{ wk_account_url }}">{{ wk_account_name }}</a>
+            <a class="text-on-primary hover:text-secondary-fixed-dim transition-colors font-bold underline" href="{{ wk_logout_url }}">{{ 'Log out'|t }}</a>
+          {% endif %}
+        </nav>
+        <form action="/search" method="get" role="search" class="hidden sm:flex items-center bg-primary px-space-sm py-1 rounded-lg gap-space-xs">
+          <span class="material-symbols-outlined text-label-sm text-on-primary">search</span>
+          <input name="keys" aria-label="Search district resources" class="bg-transparent text-label-sm text-on-primary placeholder:text-on-primary/60 focus:outline-none w-28 lg:w-36" placeholder="Search district..." type="text"/>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="h-20 bg-surface/90 backdrop-blur-xl">
+    <div class="max-w-[1280px] mx-auto px-margin h-full flex items-center justify-between">
+      <a href="/" class="flex items-center gap-space-md">
+        <div class="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center text-accent-gold-bright shadow-sm"><span class="material-symbols-outlined text-[28px]">school</span></div>
+        <div class="flex flex-col">
+          <span class="font-title-md text-title-md text-primary font-bold tracking-tight uppercase leading-tight">Waukee</span>
+          <span class="font-label-sm text-label-sm text-secondary font-bold tracking-wider uppercase leading-none">Community Schools</span>
+        </div>
+      </a>
+      <nav class="hidden xl:flex items-center gap-space-xs" aria-label="{{ 'Main'|t }}" data-active-classes="{{ active_classes }}">
+        <div class="relative group">
+          <a class="{{ link_classes }} inline-flex items-center gap-1{{ about_active ? ' ' ~ active_classes }}" data-path="about" href="/district" aria-haspopup="true">About<span class="material-symbols-outlined text-[18px]" aria-hidden="true">expand_more</span></a>
+          <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 absolute left-0 top-full pt-2 z-50 transition-opacity">
+            <div class="w-[34rem] bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant p-space-md grid grid-cols-2 gap-space-md">
+              <div class="flex flex-col">
+                <span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider px-3 pb-space-xs">About</span>
+                {% for item in about_links %}
+                  <a class="block px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-accent-purple-tint hover:text-primary font-label-md text-label-md transition-colors" href="{{ item.href }}">{{ item.label }}</a>
+                {% endfor %}
+              </div>
+              <div class="flex flex-col">
+                <span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider px-3 pb-space-xs">Quick links</span>
+                {% for item in quick_links %}
+                  <a class="block px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-accent-purple-tint hover:text-primary font-label-md text-label-md transition-colors" href="{{ item.href }}">{{ item.label }}</a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% for item in nav %}
+          {% set active = current == item.href or current starts with item.href ~ '/' %}
+          <a class="{{ link_classes }}{{ active ? ' ' ~ active_classes }}" data-path="{{ item.key }}" href="{{ item.href }}"{% if active %} aria-current="page"{% endif %}>{{ item.label }}</a>
+        {% endfor %}
+      </nav>
+      <div class="flex items-center gap-space-md">
+        <a class="hidden sm:inline-flex items-center justify-center bg-secondary-container hover:bg-accent-gold-bright text-on-secondary-container font-label-md text-label-md px-space-lg py-2.5 rounded-lg transition-all shadow-sm" data-path="enroll-now" href="/enrollment">Enroll Now</a>
+        <a href="/user" aria-label="Profile" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></a>
+        <button type="button" class="xl:hidden inline-flex items-center gap-1 px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-primary font-label-md text-label-md" aria-expanded="false" aria-controls="wk-mobile-panel" data-wk-mobile-toggle>
+          <span>Menu</span><span class="material-symbols-outlined text-[20px]" aria-hidden="true">menu</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="wk-mobile-panel" class="hidden xl:hidden bg-surface-container-lowest border-t border-outline-variant max-h-[70vh] overflow-y-auto" data-wk-mobile-panel>
+    <div class="max-w-[1280px] mx-auto px-margin py-space-md flex flex-col gap-space-md">
+      <a class="sm:hidden inline-flex items-center justify-center bg-secondary-container text-on-secondary-container font-label-md text-label-md px-space-lg py-2.5 rounded-lg shadow-sm" href="/enrollment">Enroll Now</a>
+      <form action="/search" method="get" role="search" class="sm:hidden flex items-center bg-surface-container rounded-lg px-3 py-2 gap-space-xs">
+        <span class="material-symbols-outlined text-[20px] text-primary" aria-hidden="true">search</span>
+        <input name="keys" aria-label="Search district resources" class="bg-transparent flex-1 text-on-surface font-label-md text-label-md focus:outline-none" placeholder="Search district..." type="text"/>
+      </form>
+      <nav class="flex flex-col" aria-label="{{ 'Main (mobile)'|t }}">
+        {% for item in nav %}
+          <a class="block px-3 py-2 rounded-lg text-on-surface font-label-md text-label-md hover:bg-accent-purple-tint" href="{{ item.href }}">{{ item.label }}</a>
+        {% endfor %}
+      </nav>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md border-t border-outline-variant pt-space-md">
+        <div class="flex flex-col">
+          <span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider px-3 pb-space-xs">About</span>
+          {% for item in about_links %}
+            <a class="block px-3 py-1.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-accent-purple-tint" href="{{ item.href }}">{{ item.label }}</a>
+          {% endfor %}
+        </div>
+        <div class="flex flex-col">
+          <span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider px-3 pb-space-xs">Quick links</span>
+          {% for item in quick_links %}
+            <a class="block px-3 py-1.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-accent-purple-tint" href="{{ item.href }}">{{ item.label }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-x-space-md gap-y-space-xs border-t border-outline-variant pt-space-md px-3">
+        <a class="text-on-surface-variant font-label-md text-label-md" href="/students">Students</a>
+        <a class="text-on-surface-variant font-label-md text-label-md" href="/families">Parents</a>
+        <a class="text-on-surface-variant font-label-md text-label-md" href="/community">Community</a>
+        <a class="text-on-surface-variant font-label-md text-label-md" href="{{ wk_intranet_url|default('/user/login') }}">Staff</a>
+        {% if logged_in %}<a class="text-primary font-bold underline font-label-md text-label-md" href="{{ wk_logout_url }}">{{ 'Log out'|t }}</a>{% endif %}
+      </div>
+    </div>
+  </div>
+</header>
