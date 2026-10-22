@@ -57,7 +57,7 @@
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         return;
       }
-      var targets = once('wk-reveal', '.wk-main .layout > .layout__region > .block, .wk-schools__grid > li, .wk-schools__grid .field__item, .view-news-feed .views-row, .view-events .views-row', context);
+      var targets = once('wk-reveal', '.wk-main .layout > .layout__region > .block, .wk-schools__grid > li, .wk-schools__grid .field--name-field-cards > .field__item, .view-news-feed .views-row, .view-events .views-row', context);
       if (!targets.length) {
         return;
       }

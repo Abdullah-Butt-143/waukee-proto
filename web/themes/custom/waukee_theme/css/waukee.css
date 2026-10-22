@@ -1054,8 +1054,8 @@ td a:hover { text-decoration: underline; }
 .alert-region .block__content { margin: 0; padding: 0; min-height: 0; }
 
 /* Schools listing (/schools) */
-.wk-schools__intro { max-width: 46rem; margin: 0 0 1.5rem; color: var(--wk-soft); font-size: 1.1rem; }
-.wk-schools__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
+.wk-school-list__intro { max-width: 46rem; margin: 0 0 1.5rem; color: var(--wk-soft); font-size: 1.1rem; }
+.wk-school-list__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
 .wk-school { position: relative; padding: 0; overflow: hidden; }
 .wk-school__banner { display: flex; align-items: center; justify-content: center; height: 8rem; font-size: 4rem; font-weight: 800; color: var(--wk-lime); background: linear-gradient(135deg, var(--wk-purple-deep), var(--wk-purple)); }
 .wk-school .wk-card__title { font-size: 1.4rem; }
@@ -1120,11 +1120,11 @@ td a:hover { text-decoration: underline; }
   .wk-split--right .wk-split__inner > * { direction: ltr; }
 }
 
-/* Explore Our Schools & Programs: photo-overlay cards reuse .wk-schools__grid
-   (the /schools listing grid) for layout; the field wrapper is collapsed so
+/* Explore Our Schools & Programs: photo-overlay cards in .wk-schools__grid; the field wrapper is collapsed so
    its .field__item children become direct grid items. */
+.wk-schools__grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); }
 .wk-schools__grid .field--name-field-cards { display: contents; }
-.wk-schools__grid .field__item { height: 100%; }
+.wk-schools__grid .field--name-field-cards > .field__item { height: 100%; }
 .wk-schools__card { position: relative; height: 16rem; border-radius: var(--wk-radius); overflow: hidden; box-shadow: var(--wk-shadow); transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .wk-schools__card:hover { transform: translateY(-3px); box-shadow: var(--wk-shadow-lg); }
 .wk-schools__card-link { display: block; height: 100%; color: inherit; text-decoration: none; }
@@ -1154,3 +1154,19 @@ td a:hover { text-decoration: underline; }
 .wk-portrait__item-text { margin: 0; font-size: 0.85rem; color: rgba(255, 255, 255, 0.78); }
 @media (min-width: 36rem) { .wk-portrait__grid { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 62rem) { .wk-portrait__grid { grid-template-columns: repeat(6, 1fr); } }
+
+/* Header: "Staff login" already sits in the utility bar and Enroll Now is the
+   header button, so drop the duplicate link to keep the nav on one row. */
+@media (min-width: 75rem) {
+  .wk-header__primary .wk-menu__item:has(> a[href^="/user/login"]) { display: none; }
+}
+
+/* Full-bleed sections (hero, stat strip, dark banners) sit flush against each
+   other; the normal section margin only applies to boxed content. */
+.wk-main .layout:has(.wk-hero, .wk-fullbleed) { margin-block: 0; }
+
+/* Component-built pages (hero, split, card sections) pad themselves, so the
+   generic section margin is dropped and the page ends flush with the footer. */
+.wk-main .layout:has(.wk-split, .wk-section) { margin-block: 0; }
+.wk-main__inner:has(.wk-hero) { padding-bottom: 0; }
+.wk-main__inner:has(.wk-hero) + * , .wk-main:has(.wk-hero) ~ .wk-footer { margin-top: 0; }

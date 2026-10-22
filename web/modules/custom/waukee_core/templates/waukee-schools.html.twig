@@ -4,9 +4,9 @@
  * Schools listing: one card per school with grades, address, phone, principal.
  */
 #}
-<section class="wk-schools" aria-label="{{ 'Schools'|t }}">
-  <p class="wk-schools__intro">{{ 'Explore our schools. Select a school to see its news, events, staff and more.'|t }}</p>
-  <ul class="wk-schools__grid">
+<section class="wk-school-list" aria-label="{{ 'Schools'|t }}">
+  <p class="wk-school-list__intro">{{ 'Explore our schools. Select a school to see its news, events, staff and more.'|t }}</p>
+  <ul class="wk-school-list__grid">
     {% for school in schools %}
       <li class="wk-card wk-school">
         <div class="wk-school__banner" aria-hidden="true">{{ school.name|first }}</div>
