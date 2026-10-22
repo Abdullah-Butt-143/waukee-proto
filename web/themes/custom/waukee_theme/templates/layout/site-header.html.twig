@@ -27,6 +27,19 @@
   {label: 'Staff Intranet', href: '/user/login'},
 ] %}
 <header class="wk-sh" data-wk-sh>
+  {% if wk_account_links %}
+    <div class="wk-sh__account">
+      <div class="wk-sh__wrap wk-sh__account-inner">
+        <span class="wk-sh__account-name">{{ 'Signed in as'|t }} <strong>{{ wk_account_name }}</strong></span>
+        <nav class="wk-sh__account-links" aria-label="{{ 'Account and editing'|t }}">
+          {% for link in wk_account_links %}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+          <a href="{{ wk_logout_url }}">{{ 'Log out'|t }}</a>
+        </nav>
+      </div>
+    </div>
+  {% endif %}
   <div class="wk-sh__top">
     <div class="wk-sh__wrap wk-sh__top-inner">
       <p class="wk-sh__tagline">

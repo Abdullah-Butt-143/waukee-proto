@@ -7,6 +7,7 @@
 
 use Drupal\Core\Asset\AttachedAssetsInterface;
 use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_css_alter().
@@ -24,4 +25,38 @@ function waukee_theme_css_alter(array &$css, AttachedAssetsInterface $assets, La
       unset($css[$key]);
     }
   }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ * Gives logged-in users a visible "account bar" in the site header. Only the
+ * links the current user may use are shown (editors: Add page, Content;
+ * publishers: also Scheduled; administrators: Admin).
+ */
+function waukee_theme_preprocess_page(array &$variables) {
+  $variables['#cache']['contexts'][] = 'user.permissions';
+  $variables['#cache']['contexts'][] = 'user.roles:authenticated';
+  $account = \Drupal::currentUser();
+  if ($account->isAnonymous()) {
+    $variables['wk_account_links'] = [];
+    return;
+  }
+  $candidates = [
+    [t('Add page'), 'node.add', ['node_type' => 'page']],
+    [t('Content'), 'system.admin_content', []],
+    [t('Scheduled'), 'view.scheduler_scheduled_content.overview', []],
+    [t('Admin'), 'system.admin', []],
+    [t('My account'), 'entity.user.canonical', ['user' => $account->id()]],
+  ];
+  $links = [];
+  foreach ($candidates as [$title, $route, $params]) {
+    $url = Url::fromRoute($route, $params);
+    if ($url->access($account)) {
+      $links[] = ['title' => $title, 'url' => $url->toString()];
+    }
+  }
+  $variables['wk_account_links'] = $links;
+  $variables['wk_account_name'] = $account->getDisplayName();
+  $variables['wk_logout_url'] = Url::fromRoute('user.logout')->toString();
 }

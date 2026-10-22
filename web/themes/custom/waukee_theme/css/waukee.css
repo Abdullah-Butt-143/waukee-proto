@@ -1246,3 +1246,11 @@ td a:hover { text-decoration: underline; }
 }
 .wk-sh .wk-sh__search { margin: 0; padding: 0.25rem 0.5rem; min-height: 0; line-height: 1rem; }
 .wk-sh .wk-sh__search input[type="text"] { height: 1rem; min-height: 0; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; color: #fff; font: inherit; font-size: 0.75rem; line-height: 1rem; }
+
+/* Logged-in account bar above the site header. */
+.wk-sh__account { background: #1f0d3a; color: #fff; font-size: 0.8rem; line-height: 1.25rem; }
+.wk-sh__account-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 0.3rem; flex-wrap: wrap; }
+.wk-sh__account-name { opacity: 0.85; }
+.wk-sh__account-links { display: flex; flex-wrap: wrap; gap: 0.25rem 0.5rem; }
+.wk-sh__account-links a { padding: 0.15rem 0.7rem; border-radius: 999px; background: rgba(255, 255, 255, 0.12); color: #fff; font-weight: 700; text-decoration: none; }
+.wk-sh__account-links a:hover, .wk-sh__account-links a:focus-visible { background: #fdba45; color: #3c1a5b; }
