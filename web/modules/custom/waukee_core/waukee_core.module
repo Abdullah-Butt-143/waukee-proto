@@ -8,6 +8,18 @@
 use Drupal\Core\Render\BubbleableMetadata;
 
 /**
+ * Implements hook_theme().
+ */
+function waukee_core_theme() {
+  return [
+    'waukee_schools' => [
+      'variables' => ['schools' => []],
+      'template' => 'waukee-schools',
+    ],
+  ];
+}
+
+/**
  * Implements hook_token_info().
  *
  * Smart Date stores timestamps, which Token cannot format. These tokens give

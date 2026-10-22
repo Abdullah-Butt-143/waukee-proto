@@ -1,0 +1,19 @@
+uuid: e2d0931f-567d-434c-bace-c361abaded1c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_principal
+    - group.type.school
+id: group.school.field_principal
+field_name: field_principal
+entity_type: group
+bundle: school
+label: Principal
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

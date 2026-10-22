@@ -1,0 +1,7 @@
+waukee_core.schools:
+  path: '/schools'
+  defaults:
+    _controller: '\Drupal\waukee_core\Controller\SchoolsController::build'
+    _title: 'Our Schools'
+  requirements:
+    _permission: 'access content'

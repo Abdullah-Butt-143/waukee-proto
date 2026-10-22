@@ -988,3 +988,17 @@ td a:hover { text-decoration: underline; }
 .alert-region .region,
 .alert-region .block,
 .alert-region .block__content { margin: 0; padding: 0; min-height: 0; }
+
+/* Schools listing (/schools) */
+.wk-schools__intro { max-width: 46rem; margin: 0 0 1.5rem; color: var(--wk-soft); font-size: 1.1rem; }
+.wk-schools__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
+.wk-school { position: relative; padding: 0; overflow: hidden; }
+.wk-school__banner { display: flex; align-items: center; justify-content: center; height: 8rem; font-size: 4rem; font-weight: 800; color: var(--wk-lime); background: linear-gradient(135deg, var(--wk-purple-deep), var(--wk-purple)); }
+.wk-school .wk-card__title { font-size: 1.4rem; }
+.wk-school__details { display: grid; grid-template-columns: auto 1fr; gap: 0.25rem 0.9rem; margin: 1rem 0; font-size: 0.95rem; }
+.wk-school__details dt { font-weight: 700; color: var(--wk-purple-ink); }
+.wk-school__details dd { margin: 0; color: var(--wk-soft); }
+.wk-school__details a { position: relative; z-index: 1; color: var(--wk-purple); }
+.wk-school__cta { margin: 0; }
+.wk-school__link { font-weight: 700; color: var(--wk-purple); text-decoration: none; }
+.wk-school__link:hover { text-decoration: underline; }

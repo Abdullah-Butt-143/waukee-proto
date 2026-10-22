@@ -3,7 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.school.field_address
+    - field.field.group.school.field_grades
+    - field.field.group.school.field_phone
+    - field.field.group.school.field_principal
     - field.field.group.school.field_school
+    - field.field.group.school.field_summary
     - group.type.school
   module:
     - path
@@ -12,11 +17,51 @@ targetEntityType: group
 bundle: school
 mode: default
 content:
+  field_address:
+    type: string_textfield
+    weight: 12
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_grades:
+    type: string_textfield
+    weight: 10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_phone:
+    type: string_textfield
+    weight: 13
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_principal:
+    type: string_textfield
+    weight: 11
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_school:
     type: options_select
     weight: 5
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_summary:
+    type: string_textarea
+    weight: 14
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
     third_party_settings: {  }
   label:
     type: string_textfield

@@ -3,13 +3,54 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.school.field_address
+    - field.field.group.school.field_grades
+    - field.field.group.school.field_phone
+    - field.field.group.school.field_principal
     - field.field.group.school.field_school
+    - field.field.group.school.field_summary
     - group.type.school
 id: group.school.default
 targetEntityType: group
 bundle: school
 mode: default
 content:
+  field_address:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_grades:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_phone:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  field_principal:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 11
+    region: content
   field_school:
     type: entity_reference_label
     label: inline
@@ -17,6 +58,13 @@ content:
       link: true
     third_party_settings: {  }
     weight: 5
+    region: content
+  field_summary:
+    type: basic_string
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 14
     region: content
   label:
     type: string

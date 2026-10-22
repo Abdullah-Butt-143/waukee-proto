@@ -1,0 +1,19 @@
+uuid: 74888626-dd86-437c-be47-0a2a18b60aec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_summary
+    - group.type.school
+id: group.school.field_summary
+field_name: field_summary
+entity_type: group
+bundle: school
+label: Summary
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

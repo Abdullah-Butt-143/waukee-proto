@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Schools listing: one card per school with grades, address, phone, principal.
+ */
+#}
+<section class="wk-schools" aria-label="{{ 'Schools'|t }}">
+  <p class="wk-schools__intro">{{ 'Explore our schools. Select a school to see its news, events, staff and more.'|t }}</p>
+  <ul class="wk-schools__grid">
+    {% for school in schools %}
+      <li class="wk-card wk-school">
+        <div class="wk-school__banner" aria-hidden="true">{{ school.name|first }}</div>
+        <div class="wk-card__body">
+          {% if school.grades %}<p class="wk-card__meta">{{ 'Grades'|t }} {{ school.grades }}</p>{% endif %}
+          <h2 class="wk-card__title"><a href="{{ school.url }}">{{ school.name }}</a></h2>
+          {% if school.summary %}<p class="wk-card__text">{{ school.summary }}</p>{% endif %}
+          <dl class="wk-school__details">
+            {% if school.principal %}<dt>{{ 'Principal'|t }}</dt><dd>{{ school.principal }}</dd>{% endif %}
+            {% if school.address %}<dt>{{ 'Address'|t }}</dt><dd>{{ school.address }}</dd>{% endif %}
+            {% if school.phone %}<dt>{{ 'Phone'|t }}</dt><dd><a href="tel:{{ school.phone|replace({' ': '', '(': '', ')': '', '-': ''}) }}">{{ school.phone }}</a></dd>{% endif %}
+          </dl>
+          <p class="wk-school__cta"><a class="wk-school__link" href="{{ school.url }}">{{ 'Visit school site'|t }}<span class="visually-hidden"> {{ school.name }}</span></a></p>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
