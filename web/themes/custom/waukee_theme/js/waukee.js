@@ -1,49 +1,39 @@
 /**
  * @file
- * Waukee theme behaviours: mobile navigation toggle and header shadow.
+ * Waukee theme behaviours: mobile navigation toggle and scroll reveal.
  */
 (function (Drupal, once) {
   'use strict';
 
-  Drupal.behaviors.waukeeHeader = {
+  /**
+   * Mobile menu of the shared header (templates/includes/tw-header.html.twig):
+   * the Menu button shows/hides the panel; Escape closes it.
+   */
+  Drupal.behaviors.waukeeMobileMenu = {
     attach: function (context) {
-      once('wk-header', '[data-wk-header]', context).forEach(function (header) {
-        var toggle = header.querySelector('.wk-header__toggle');
-        var nav = header.querySelector('.wk-header__nav');
-        if (!toggle || !nav) {
+      once('wk-mobile-menu', '[data-wk-mobile-toggle]', context).forEach(function (toggle) {
+        var panel = document.getElementById(toggle.getAttribute('aria-controls'));
+        if (!panel) {
           return;
         }
-
         function setOpen(open) {
           toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-          header.classList.toggle('is-open', open);
+          panel.classList.toggle('hidden', !open);
         }
-
         toggle.addEventListener('click', function () {
           setOpen(toggle.getAttribute('aria-expanded') !== 'true');
         });
-
-        // Escape closes the menu and returns focus to the button.
-        header.addEventListener('keydown', function (event) {
+        document.addEventListener('keydown', function (event) {
           if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
             setOpen(false);
             toggle.focus();
           }
         });
-
-        // Reset when the window becomes wide again.
-        window.matchMedia('(min-width: 62rem)').addEventListener('change', function (e) {
+        window.matchMedia('(min-width: 80rem)').addEventListener('change', function (e) {
           if (e.matches) {
             setOpen(false);
           }
         });
-
-        // Soft shadow once the page scrolls.
-        function onScroll() {
-          header.classList.toggle('is-scrolled', window.scrollY > 4);
-        }
-        window.addEventListener('scroll', onScroll, {passive: true});
-        onScroll();
       });
     }
   };
@@ -57,7 +47,7 @@
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         return;
       }
-      var targets = once('wk-reveal', '.wk-main .layout > .layout__region > .block, .wk-schools__grid > li, .wk-schools__grid .field__item, .view-news-feed .views-row, .view-events .views-row', context);
+      var targets = once('wk-reveal', '.wk-main .layout > .layout__region > .block, .wk-schools__grid > li, .wk-schools__grid .field--name-field-cards > .field__item, .view-news-feed .views-row, .view-events .views-row', context);
       if (!targets.length) {
         return;
       }

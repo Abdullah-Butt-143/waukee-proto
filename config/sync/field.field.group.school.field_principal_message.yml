@@ -1,0 +1,22 @@
+uuid: 457fe44c-bd6e-4359-926d-f35caf3d2d7a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_principal_message
+    - group.type.school
+  module:
+    - text
+id: group.school.field_principal_message
+field_name: field_principal_message
+entity_type: group
+bundle: school
+label: 'Principal message (full profile only)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

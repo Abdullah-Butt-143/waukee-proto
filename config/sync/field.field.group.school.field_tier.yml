@@ -1,0 +1,21 @@
+uuid: f1fd6c9e-6e7d-4324-a5fd-2358a072f57c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_tier
+    - group.type.school
+  module:
+    - options
+id: group.school.field_tier
+field_name: field_tier
+entity_type: group
+bundle: school
+label: Tier
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

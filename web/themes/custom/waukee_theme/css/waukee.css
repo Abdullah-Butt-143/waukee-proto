@@ -231,10 +231,10 @@ a:hover { color: var(--wk-purple-deep); }
 }
 .wk-header .wk-menu__link {
   display: block;
-  padding: 0.55rem 0.85rem;
+  padding: 0.5rem 0.6rem;
   border-radius: 999px;
   color: var(--wk-ink);
-  font-size: 0.97rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
@@ -276,7 +276,7 @@ a:hover { color: var(--wk-purple-deep); }
 .wk-header.is-open .wk-header__toggle-icon::before { transform: translateY(6px) rotate(45deg); }
 .wk-header.is-open .wk-header__toggle-icon::after { transform: translateY(-6px) rotate(-45deg); }
 
-@media (max-width: 61.99rem) {
+@media (max-width: 74.99rem) {
   .wk-header__toggle { display: inline-flex; }
   .wk-header__nav {
     display: none;
@@ -1054,8 +1054,8 @@ td a:hover { text-decoration: underline; }
 .alert-region .block__content { margin: 0; padding: 0; min-height: 0; }
 
 /* Schools listing (/schools) */
-.wk-schools__intro { max-width: 46rem; margin: 0 0 1.5rem; color: var(--wk-soft); font-size: 1.1rem; }
-.wk-schools__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
+.wk-school-list__intro { max-width: 46rem; margin: 0 0 1.5rem; color: var(--wk-soft); font-size: 1.1rem; }
+.wk-school-list__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
 .wk-school { position: relative; padding: 0; overflow: hidden; }
 .wk-school__banner { display: flex; align-items: center; justify-content: center; height: 8rem; font-size: 4rem; font-weight: 800; color: var(--wk-lime); background: linear-gradient(135deg, var(--wk-purple-deep), var(--wk-purple)); }
 .wk-school .wk-card__title { font-size: 1.4rem; }
@@ -1120,11 +1120,11 @@ td a:hover { text-decoration: underline; }
   .wk-split--right .wk-split__inner > * { direction: ltr; }
 }
 
-/* Explore Our Schools & Programs: photo-overlay cards reuse .wk-schools__grid
-   (the /schools listing grid) for layout; the field wrapper is collapsed so
+/* Explore Our Schools & Programs: photo-overlay cards in .wk-schools__grid; the field wrapper is collapsed so
    its .field__item children become direct grid items. */
+.wk-schools__grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); }
 .wk-schools__grid .field--name-field-cards { display: contents; }
-.wk-schools__grid .field__item { height: 100%; }
+.wk-schools__grid .field--name-field-cards > .field__item { height: 100%; }
 .wk-schools__card { position: relative; height: 16rem; border-radius: var(--wk-radius); overflow: hidden; box-shadow: var(--wk-shadow); transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .wk-schools__card:hover { transform: translateY(-3px); box-shadow: var(--wk-shadow-lg); }
 .wk-schools__card-link { display: block; height: 100%; color: inherit; text-decoration: none; }
@@ -1154,3 +1154,187 @@ td a:hover { text-decoration: underline; }
 .wk-portrait__item-text { margin: 0; font-size: 0.85rem; color: rgba(255, 255, 255, 0.78); }
 @media (min-width: 36rem) { .wk-portrait__grid { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 62rem) { .wk-portrait__grid { grid-template-columns: repeat(6, 1fr); } }
+
+/* Header: "Staff login" already sits in the utility bar and Enroll Now is the
+   header button, so drop the duplicate link to keep the nav on one row. */
+@media (min-width: 75rem) {
+  .wk-header__primary .wk-menu__item:has(> a[href^="/user/login"]) { display: none; }
+}
+
+/* Full-bleed sections (hero, stat strip, dark banners) sit flush against each
+   other; the normal section margin only applies to boxed content. */
+.wk-main .layout:has(.wk-hero, .wk-fullbleed) { margin-block: 0; }
+
+/* Component-built pages (hero, split, card sections) pad themselves, so the
+   generic section margin is dropped and the page ends flush with the footer. */
+.wk-main .layout:has(.wk-split, .wk-section) { margin-block: 0; }
+.wk-main__inner:has(.wk-hero) { padding-bottom: 0; }
+.wk-main__inner:has(.wk-hero) + * , .wk-main:has(.wk-hero) ~ .wk-footer { margin-top: 0; }
+
+/* ==========================================================================
+   Site header (templates/layout/site-header.html.twig): the home page header
+   on every inner page. Mirrors the Tailwind markup of page--front.html.twig.
+   ========================================================================== */
+.wk-sh { position: sticky; top: 0; z-index: 50; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04); font-family: var(--wk-font); }
+.wk-sh__wrap { width: 100%; max-width: 80rem; margin-inline: auto; padding-inline: 2rem; box-sizing: border-box; }
+.wk-sh__top { background: #4b2e83; color: #fff; padding-block: 0.25rem; }
+.wk-sh__top-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; line-height: 1rem; }
+.wk-sh__tagline { display: flex; align-items: center; gap: 1rem; margin: 0; opacity: 0.8; }
+.wk-sh__divider { opacity: 0.5; }
+.wk-sh__top-right { display: flex; align-items: center; gap: 1.5rem; }
+.wk-sh__audience { display: flex; align-items: center; gap: 1rem; }
+.wk-sh__audience a { color: #fff; text-decoration: none; transition: color 0.15s ease; }
+.wk-sh__audience a:hover, .wk-sh__audience a:focus-visible { color: #fdba45; }
+.wk-sh__audience--mobile { display: none; }
+.wk-sh__search { display: flex; align-items: center; gap: 0.5rem; margin: 0; padding: 0.25rem 0.5rem; background: #34146c; border-radius: 0.5rem; }
+.wk-sh__search svg { width: 0.9rem; height: 0.9rem; color: #fff; flex: none; }
+.wk-sh__search input { width: 9rem; padding: 0; border: 0; background: transparent; color: #fff; font: inherit; }
+.wk-sh__search input::placeholder { color: rgba(255, 255, 255, 0.6); }
+.wk-sh__search input:focus { outline: none; }
+.wk-sh__search:focus-within { box-shadow: 0 0 0 2px #fdba45; }
+
+.wk-sh__main { height: 5rem; background: rgba(249, 249, 255, 0.92); backdrop-filter: blur(16px); }
+.wk-sh__main-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.wk-sh__brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; flex: none; }
+.wk-sh__logo { display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 0.75rem; background: #4b2e83; color: #F2A900; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
+.wk-sh__logo svg { width: 1.75rem; height: 1.75rem; }
+.wk-sh__brand-text { display: flex; flex-direction: column; }
+.wk-sh__brand-name { color: #34146c; font-size: 1.125rem; line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; text-transform: uppercase; }
+.wk-sh__brand-sub { color: #7f5700; font-size: 0.75rem; line-height: 1; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+.wk-sh__nav { display: flex; align-items: center; gap: 1.5rem; min-width: 0; }
+.wk-sh__links { display: flex; align-items: center; gap: 0.25rem; }
+.wk-sh__links a { padding: 0.5rem 0.75rem; border-radius: 0.5rem; color: #494551; font-size: 0.875rem; line-height: 1.25rem; font-weight: 600; letter-spacing: 0.01em; text-decoration: none; white-space: nowrap; transition: color 0.15s ease, background 0.15s ease; }
+.wk-sh__links a:hover, .wk-sh__links a:focus-visible { color: #34146c; }
+.wk-sh__links a.is-active { color: #34146c; font-weight: 700; background: #F3EBF9; }
+.wk-sh__actions { display: flex; align-items: center; gap: 1rem; }
+.wk-sh__enroll { display: inline-flex; align-items: center; justify-content: center; padding: 0.625rem 1.5rem; border-radius: 0.5rem; background: #fdba45; color: #6f4b00; font-size: 0.875rem; line-height: 1.25rem; font-weight: 600; letter-spacing: 0.01em; text-decoration: none; white-space: nowrap; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08); transition: background 0.15s ease; }
+.wk-sh__enroll:hover, .wk-sh__enroll:focus-visible { background: #F2A900; color: #6f4b00; }
+.wk-sh__profile { display: flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; border-radius: 50%; background: #34146c; color: #fff; }
+.wk-sh__profile svg { width: 1.15rem; height: 1.15rem; }
+.wk-sh a:focus-visible, .wk-sh button:focus-visible { outline: 3px solid #F2A900; outline-offset: 2px; }
+
+.wk-sh__toggle { display: none; align-items: center; gap: 0.6rem; padding: 0.55rem 0.9rem; border: 1px solid #cbc4d2; border-radius: 0.5rem; background: #fff; color: #34146c; font: inherit; font-size: 0.875rem; font-weight: 700; cursor: pointer; }
+.wk-sh__toggle-icon, .wk-sh__toggle-icon::before, .wk-sh__toggle-icon::after { display: block; width: 1.1rem; height: 2px; background: currentColor; border-radius: 2px; transition: transform 0.2s ease, background 0.2s ease; }
+.wk-sh__toggle-icon { position: relative; }
+.wk-sh__toggle-icon::before, .wk-sh__toggle-icon::after { content: ""; position: absolute; left: 0; }
+.wk-sh__toggle-icon::before { top: -6px; }
+.wk-sh__toggle-icon::after { top: 6px; }
+.wk-sh.is-open .wk-sh__toggle-icon { background: transparent; }
+.wk-sh.is-open .wk-sh__toggle-icon::before { transform: translateY(6px) rotate(45deg); }
+.wk-sh.is-open .wk-sh__toggle-icon::after { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 79.99rem) {
+  .wk-sh__wrap { padding-inline: clamp(1rem, 4vw, 2rem); }
+  .wk-sh__toggle { display: inline-flex; }
+  .wk-sh__tagline { display: none; }
+  .wk-sh__top-inner { justify-content: flex-end; }
+  .wk-sh__top .wk-sh__audience { display: none; }
+  .wk-sh__nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0.75rem;
+    padding: 1rem clamp(1rem, 4vw, 2rem) 1.5rem; background: #fff;
+    border-bottom: 1px solid #e2e8f0; box-shadow: 0 18px 30px rgba(42, 18, 64, 0.12);
+    max-height: calc(100vh - 7rem); overflow-y: auto;
+  }
+  .wk-sh.is-open .wk-sh__nav { display: flex; }
+  .wk-sh__links { flex-direction: column; align-items: stretch; }
+  .wk-sh__links a { padding: 0.8rem 1rem; font-size: 1rem; }
+  .wk-sh__audience--mobile { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; padding: 0.75rem 1rem; border-top: 1px solid #e2e8f0; }
+  .wk-sh__audience--mobile a { color: #494551; font-size: 0.9rem; font-weight: 600; }
+  .wk-sh__actions { justify-content: space-between; }
+  .wk-sh__enroll { flex: 1; }
+}
+.wk-sh .wk-sh__search { margin: 0; padding: 0.25rem 0.5rem; min-height: 0; line-height: 1rem; }
+.wk-sh .wk-sh__search input[type="text"] { height: 1rem; min-height: 0; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; color: #fff; font: inherit; font-size: 0.75rem; line-height: 1rem; }
+
+/* Logged-in account bar above the site header. */
+.wk-sh__account { background: #1f0d3a; color: #fff; font-size: 0.8rem; line-height: 1.25rem; }
+.wk-sh__account-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 0.3rem; flex-wrap: wrap; }
+.wk-sh__account-name { opacity: 0.85; }
+.wk-sh__account-links { display: flex; flex-wrap: wrap; gap: 0.25rem 0.5rem; }
+.wk-sh__account-links a { padding: 0.15rem 0.7rem; border-radius: 999px; background: rgba(255, 255, 255, 0.12); color: #fff; font-weight: 700; text-decoration: none; }
+.wk-sh__account-links a:hover, .wk-sh__account-links a:focus-visible { background: #fdba45; color: #3c1a5b; }
+
+/* "Pages from <school>" list on school landing pages. */
+.wk-school-pages { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }
+.wk-school-pages li { margin: 0; }
+.wk-school-pages a { display: block; padding: 0.75rem 1rem; background: var(--wk-surface); border: 1px solid var(--wk-line); border-radius: 12px; font-weight: 700; color: var(--wk-purple-ink); text-decoration: none; }
+.wk-school-pages a:hover, .wk-school-pages a:focus-visible { border-color: var(--wk-purple); color: var(--wk-purple); }
+.block-waukee-school-pages .block__title, .wk-school-pages + .item-list__title { margin: 0; }
+
+/* ==========================================================================
+   Login / password reset / register (templates/layout/page--user--login)
+   ========================================================================== */
+.wk-auth { background: var(--wk-surface); padding: 3rem 0 4.5rem; }
+.wk-auth__box {
+  display: grid;
+  width: min(68rem, calc(100% - 2rem));
+  margin-inline: auto;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: var(--wk-shadow-lg);
+}
+@media (min-width: 56rem) { .wk-auth__box { grid-template-columns: 5fr 6fr; } }
+.wk-auth__panel {
+  position: relative;
+  overflow: hidden;
+  padding: 2.5rem clamp(1.5rem, 4vw, 3rem);
+  background: linear-gradient(150deg, #2a1240 0%, #4b2e83 62%, #6b4ea4 100%);
+  color: #fff;
+}
+.wk-auth__panel::after {
+  content: "";
+  position: absolute;
+  right: -3.5rem;
+  bottom: -3.5rem;
+  width: 14rem;
+  height: 14rem;
+  border-radius: 50%;
+  background: #F2A900;
+  opacity: 0.9;
+}
+.wk-auth__panel > * { position: relative; z-index: 1; }
+.wk-auth__badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fdba45;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.wk-auth__headline { margin: 1.25rem 0 0.75rem; color: #fff; font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.1; }
+.wk-auth__lead { margin: 0 0 1.5rem; max-width: 26rem; color: rgba(255, 255, 255, 0.88); font-size: 1.05rem; line-height: 1.55; }
+.wk-auth__list { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 0.7rem; max-width: 26rem; }
+.wk-auth__list li { position: relative; padding-left: 1.9rem; color: #fff; font-weight: 600; line-height: 1.4; }
+.wk-auth__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: #fdba45 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%233c1a5b' d='M9.5 16.2 5.3 12l-1.4 1.4 5.6 5.6L20.1 8.4 18.7 7z'/%3E%3C/svg%3E") center / 0.8rem no-repeat;
+}
+.wk-auth__note { margin: 0; max-width: 17rem; color: rgba(255, 255, 255, 0.75); font-size: 0.9rem; line-height: 1.5; }
+
+.wk-auth__card { padding: 2.5rem clamp(1.5rem, 4vw, 3rem); }
+.wk-auth__title { margin: 0 0 0.35rem; font-size: 1.9rem; line-height: 1.15; color: var(--wk-purple-ink); }
+.wk-auth__intro { margin: 0 0 1rem; color: var(--wk-soft); }
+.wk-auth__messages:empty { display: none; }
+.wk-auth__messages nav.tabs, .wk-auth__messages .tabs, .wk-auth__messages .tabs-wrapper, .wk-auth__messages .block-local-tasks-block { display: none; }
+.wk-auth__form .form-item, .wk-auth__form .form-wrapper { margin-block: 1rem; }
+.wk-auth__form input[type="text"], .wk-auth__form input[type="password"], .wk-auth__form input[type="email"] { width: 100%; max-width: none; box-sizing: border-box; }
+.wk-auth__form .form-actions { margin: 1.5rem 0 0; display: block; }
+.wk-auth__form .form-submit, .wk-auth__form input[type="submit"] { width: 100%; margin: 0; box-sizing: border-box; justify-content: center; text-align: center; padding-block: 0.9rem; font-size: 1.05rem; }
+.wk-auth__form .description, .wk-auth__form .form-item__description { color: var(--wk-soft); font-size: 0.9rem; }
+.wk-auth__links { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; margin: 1.5rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--wk-line); font-size: 0.95rem; }
+.wk-auth__links a { color: var(--wk-purple); font-weight: 700; text-decoration: none; }
+.wk-auth__links a:hover, .wk-auth__links a:focus-visible { text-decoration: underline; }
+@media (max-width: 55.99rem) {
+  .wk-auth__panel::after { width: 9rem; height: 9rem; right: -2.5rem; bottom: -2.5rem; opacity: 0.35; }
+}

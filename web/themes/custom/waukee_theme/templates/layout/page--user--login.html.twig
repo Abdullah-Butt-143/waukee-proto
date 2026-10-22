@@ -1,0 +1,65 @@
+{#
+/**
+ * @file
+ * Login / password reset / register pages: a two-panel layout (welcome panel
+ * + form card) with the shared header and footer. Chosen for the routes
+ * user.login, user.pass and user.register in
+ * waukee_theme_theme_suggestions_page_alter().
+ */
+#}
+{{ attach_library('waukee_theme/chrome') }}
+{% set route = path('<current>') %}
+{% if route starts with '/user/password' %}
+  {% set form_title = 'Reset your password'|t %}
+  {% set form_intro = 'Enter your username or email address and we will send you a one-time login link.'|t %}
+{% elseif route starts with '/user/register' %}
+  {% set form_title = 'Create new account'|t %}
+  {% set form_intro = ''|t %}
+{% else %}
+  {% set form_title = 'Log in'|t %}
+  {% set form_intro = 'Use your Waukee account to continue.'|t %}
+{% endif %}
+<div class="wk-page wk-chrome">
+
+  {% if page.alert %}
+    <div class="alert-region" role="region" aria-label="{{ 'Site alerts'|t }}">
+      {{ page.alert }}
+    </div>
+  {% endif %}
+
+  {% include '@waukee_theme/includes/tw-header.html.twig' with {wk_sticky: true} %}
+
+  <main id="main-content" class="wk-main wk-auth" tabindex="-1">
+    <div class="wk-auth__box">
+      <section class="wk-auth__panel" aria-labelledby="wk-auth-welcome">
+        <span class="wk-auth__badge">{{ 'Waukee Community Schools'|t }}</span>
+        <h1 id="wk-auth-welcome" class="wk-auth__headline">{{ 'Welcome back'|t }}</h1>
+        <p class="wk-auth__lead">{{ 'Sign in to manage content, review and publish pages, or open the staff intranet.'|t }}</p>
+        <ul class="wk-auth__list">
+          <li>{{ 'Editors: build pages and send them for approval'|t }}</li>
+          <li>{{ 'Publishers: review, schedule and publish'|t }}</li>
+          <li>{{ 'Staff: announcements, documents and the directory'|t }}</li>
+        </ul>
+        <p class="wk-auth__note">{{ 'Families and students do not need an account. Everything public is open to all.'|t }}</p>
+      </section>
+
+      <section class="wk-auth__card" aria-labelledby="wk-auth-title">
+        <h2 id="wk-auth-title" class="wk-auth__title">{{ form_title }}</h2>
+        {% if form_intro %}<p class="wk-auth__intro">{{ form_intro }}</p>{% endif %}
+        <div class="wk-auth__messages">{{ page.highlighted }}</div>
+        <div class="wk-auth__form">{{ page.content }}</div>
+        <p class="wk-auth__links">
+          {% if route starts with '/user/login' %}
+            <a href="/user/password">{{ 'Forgot your password?'|t }}</a>
+          {% else %}
+            <a href="/user/login">{{ 'Back to log in'|t }}</a>
+          {% endif %}
+          <a href="/">{{ 'Return to the home page'|t }}</a>
+        </p>
+      </section>
+    </div>
+  </main>
+
+  {% include '@waukee_theme/includes/tw-footer.html.twig' %}
+
+</div>

@@ -18,8 +18,12 @@ use Drupal\node\Entity\Node;
 foreach (\Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['title' => 'TEMP layout page']) as $old) {
   $old->delete();
 }
+// Only this script's own temp blocks (info "temp ..."). Never delete other
+// inline blocks: every page built with the page builder depends on them.
 foreach (\Drupal::entityTypeManager()->getStorage('block_content')->loadByProperties(['reusable' => 0]) as $old) {
-  $old->delete();
+  if (str_starts_with((string) $old->label(), 'temp ')) {
+    $old->delete();
+  }
 }
 
 $component = function (string $uuid, string $plugin, array $config, int $weight = 0) {
@@ -83,7 +87,9 @@ foreach (['system_branding_block', 'system_powered_by_block', 'views_block:conte
 
 // Clean up.
 foreach (\Drupal::entityTypeManager()->getStorage('block_content')->loadByProperties(['reusable' => 0]) as $b) {
-  $b->delete();
+  if (str_starts_with((string) $b->label(), 'temp ')) {
+    $b->delete();
+  }
 }
 $node->delete();
 echo "Temp content removed.\n";

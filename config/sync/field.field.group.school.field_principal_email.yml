@@ -1,0 +1,19 @@
+uuid: 62c9bb64-5fc2-4630-94b8-814e2e9fdffe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_principal_email
+    - group.type.school
+id: group.school.field_principal_email
+field_name: field_principal_email
+entity_type: group
+bundle: school
+label: 'Principal email'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

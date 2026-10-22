@@ -130,10 +130,10 @@
 </div>
 {% endif %}
 {% if school.principal %}
-<div class="p-space-sm bg-surface-container-low rounded-lg">
+<div class="p-space-sm bg-surface-container-low rounded-lg min-w-0">
 <span class="font-label-sm text-text-muted uppercase tracking-wider block">Principal</span>
 <p class="font-label-md text-on-surface font-semibold mt-0.5">{{ school.principal }}</p>
-{% if school.principal_email %}<a class="font-label-sm text-secondary font-bold hover:underline" href="mailto:{{ school.principal_email }}">{{ school.principal_email }}</a>{% endif %}
+{% if school.principal_email %}<a class="block min-w-0 break-words font-label-sm text-secondary font-bold hover:underline" href="mailto:{{ school.principal_email }}">{% set email_parts = school.principal_email|split('@', 2) %}{% if email_parts|length == 2 %}{{ email_parts[0] }}@<wbr>{{ email_parts[1] }}{% else %}{{ school.principal_email }}{% endif %}</a>{% endif %}
 </div>
 {% endif %}
 </div>
@@ -232,9 +232,9 @@
 <h3 class="font-headline-sm text-headline-sm text-primary font-bold">{{ school.principal }}</h3>
 <span class="px-3 py-1 rounded-full bg-accent-purple-tint text-primary font-label-sm font-semibold mt-1">Principal, {{ school.name }}</span>
 {% if school.principal_email %}
-<a class="font-label-md text-secondary font-bold hover:underline mt-2 flex items-center gap-1" href="mailto:{{ school.principal_email }}">
+<a class="font-label-md text-secondary font-bold hover:underline mt-2 flex flex-wrap items-center justify-center gap-1 max-w-full min-w-0 [overflow-wrap:anywhere]" href="mailto:{{ school.principal_email }}">
 <span class="material-symbols-outlined text-[16px]">mail</span>
-              {{ school.principal_email }}
+              {% set email_parts = school.principal_email|split('@', 2) %}{% if email_parts|length == 2 %}{{ email_parts[0] }}@<wbr>{{ email_parts[1] }}{% else %}{{ school.principal_email }}{% endif %}
             </a>
 {% endif %}
 </div>

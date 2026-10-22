@@ -1,0 +1,23 @@
+uuid: ce421ce0-564e-4d64-addd-6849caa514c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_full_profile
+    - group.type.school
+id: group.school.field_full_profile
+field_name: field_full_profile
+entity_type: group
+bundle: school
+label: 'Show the full profile page (principal message, staff, schedule)'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

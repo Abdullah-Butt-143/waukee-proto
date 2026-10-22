@@ -1,0 +1,19 @@
+uuid: ec947df6-4f56-4c62-a50c-0380936bb69c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_hero_tagline
+    - group.type.school
+id: group.school.field_hero_tagline
+field_name: field_hero_tagline
+entity_type: group
+bundle: school
+label: 'Hero tagline'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

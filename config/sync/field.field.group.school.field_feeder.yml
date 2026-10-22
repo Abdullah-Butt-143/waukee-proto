@@ -1,0 +1,21 @@
+uuid: 9f7694c6-98b3-4d2a-89c7-0db0a3887ae9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_feeder
+    - group.type.school
+  module:
+    - options
+id: group.school.field_feeder
+field_name: field_feeder
+entity_type: group
+bundle: school
+label: 'Feeder zone'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,19 @@
+uuid: 328ccbbb-566f-412b-8c35-3f3944a6af33
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_attendance_phone
+    - group.type.school
+id: group.school.field_attendance_phone
+field_name: field_attendance_phone
+entity_type: group
+bundle: school
+label: 'Attendance line'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
