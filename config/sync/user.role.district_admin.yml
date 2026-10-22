@@ -1,0 +1,99 @@
+uuid: d2252b42-d1a2-4617-87d0-0b01d63c0eb4
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.announcement
+    - node.type.document
+    - node.type.event
+    - node.type.job_posting
+    - node.type.lunch_menu
+    - node.type.news
+    - node.type.page
+    - node.type.staff_profile
+    - taxonomy.vocabulary.audience
+    - taxonomy.vocabulary.department
+    - taxonomy.vocabulary.document_category
+    - taxonomy.vocabulary.school
+  module:
+    - media
+    - node
+    - system
+    - taxonomy
+    - toolbar
+id: district_admin
+label: 'District admin'
+weight: 4
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access media overview'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'administer menu'
+  - 'administer nodes'
+  - 'administer taxonomy'
+  - 'administer users'
+  - 'bypass node access'
+  - 'create announcement content'
+  - 'create document content'
+  - 'create event content'
+  - 'create job_posting content'
+  - 'create lunch_menu content'
+  - 'create media'
+  - 'create news content'
+  - 'create page content'
+  - 'create staff_profile content'
+  - 'create terms in audience'
+  - 'create terms in department'
+  - 'create terms in document_category'
+  - 'create terms in school'
+  - 'delete all revisions'
+  - 'delete any media'
+  - 'delete own announcement content'
+  - 'delete own document content'
+  - 'delete own event content'
+  - 'delete own job_posting content'
+  - 'delete own lunch_menu content'
+  - 'delete own news content'
+  - 'delete own page content'
+  - 'delete own staff_profile content'
+  - 'delete terms in audience'
+  - 'delete terms in department'
+  - 'delete terms in document_category'
+  - 'delete terms in school'
+  - 'edit any announcement content'
+  - 'edit any document content'
+  - 'edit any event content'
+  - 'edit any job_posting content'
+  - 'edit any lunch_menu content'
+  - 'edit any news content'
+  - 'edit any page content'
+  - 'edit any staff_profile content'
+  - 'edit own announcement content'
+  - 'edit own document content'
+  - 'edit own event content'
+  - 'edit own job_posting content'
+  - 'edit own lunch_menu content'
+  - 'edit own news content'
+  - 'edit own page content'
+  - 'edit own staff_profile content'
+  - 'edit terms in audience'
+  - 'edit terms in department'
+  - 'edit terms in document_category'
+  - 'edit terms in school'
+  - 'revert all revisions'
+  - 'update any media'
+  - 'view all revisions'
+  - 'view announcement revisions'
+  - 'view document revisions'
+  - 'view event revisions'
+  - 'view job_posting revisions'
+  - 'view lunch_menu revisions'
+  - 'view news revisions'
+  - 'view own unpublished content'
+  - 'view own unpublished media'
+  - 'view page revisions'
+  - 'view staff_profile revisions'
+  - 'view the administration theme'

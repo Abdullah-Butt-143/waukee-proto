@@ -1,0 +1,75 @@
+uuid: aabdec29-f78f-4a71-90bf-934fbcfb2f44
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.announcement
+    - node.type.document
+    - node.type.event
+    - node.type.job_posting
+    - node.type.lunch_menu
+    - node.type.news
+    - node.type.page
+    - node.type.staff_profile
+  module:
+    - media
+    - node
+    - system
+    - taxonomy
+    - toolbar
+id: publisher
+label: Publisher
+weight: 5
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access media overview'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'create announcement content'
+  - 'create document content'
+  - 'create event content'
+  - 'create job_posting content'
+  - 'create lunch_menu content'
+  - 'create media'
+  - 'create news content'
+  - 'create page content'
+  - 'create staff_profile content'
+  - 'delete any media'
+  - 'delete own announcement content'
+  - 'delete own document content'
+  - 'delete own event content'
+  - 'delete own job_posting content'
+  - 'delete own lunch_menu content'
+  - 'delete own news content'
+  - 'delete own page content'
+  - 'delete own staff_profile content'
+  - 'edit any announcement content'
+  - 'edit any document content'
+  - 'edit any event content'
+  - 'edit any job_posting content'
+  - 'edit any lunch_menu content'
+  - 'edit any news content'
+  - 'edit any page content'
+  - 'edit any staff_profile content'
+  - 'edit own announcement content'
+  - 'edit own document content'
+  - 'edit own event content'
+  - 'edit own job_posting content'
+  - 'edit own lunch_menu content'
+  - 'edit own news content'
+  - 'edit own page content'
+  - 'edit own staff_profile content'
+  - 'update any media'
+  - 'view all revisions'
+  - 'view announcement revisions'
+  - 'view document revisions'
+  - 'view event revisions'
+  - 'view job_posting revisions'
+  - 'view lunch_menu revisions'
+  - 'view news revisions'
+  - 'view own unpublished content'
+  - 'view page revisions'
+  - 'view staff_profile revisions'
+  - 'view the administration theme'

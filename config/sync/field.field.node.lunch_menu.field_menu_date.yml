@@ -1,0 +1,21 @@
+uuid: 9a412089-effc-4e56-8d03-60da836c3a79
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_menu_date
+    - node.type.lunch_menu
+  module:
+    - datetime
+id: node.lunch_menu.field_menu_date
+field_name: field_menu_date
+entity_type: node
+bundle: lunch_menu
+label: Date
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

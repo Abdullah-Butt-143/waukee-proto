@@ -1,0 +1,22 @@
+uuid: 588fe5c3-ade4-45c5-acc2-24a640311ecc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_owner
+    - node.type.page
+id: node.page.field_owner
+field_name: field_owner
+entity_type: node
+bundle: page
+label: 'Page owner'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: false
+field_type: entity_reference

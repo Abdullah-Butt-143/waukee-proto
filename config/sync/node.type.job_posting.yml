@@ -1,0 +1,11 @@
+uuid: d61ef183-c595-4ec0-a3a4-f780b47faf51
+langcode: en
+status: true
+dependencies: {  }
+name: 'Job posting'
+type: job_posting
+description: 'Open position.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

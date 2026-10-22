@@ -1,0 +1,11 @@
+uuid: 5324a036-51d1-4d7d-8709-24d88628e1dd
+langcode: en
+status: true
+dependencies: {  }
+name: News
+type: news
+description: 'News article.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

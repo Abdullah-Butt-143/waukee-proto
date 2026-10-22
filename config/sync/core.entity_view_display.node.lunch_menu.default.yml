@@ -1,0 +1,49 @@
+uuid: 8bfb8220-30fc-4156-9330-50c353157df7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.lunch_menu.field_items
+    - field.field.node.lunch_menu.field_menu_date
+    - field.field.node.lunch_menu.field_school
+    - node.type.lunch_menu
+  module:
+    - datetime
+    - text
+    - user
+id: node.lunch_menu.default
+targetEntityType: node
+bundle: lunch_menu
+mode: default
+content:
+  field_items:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_menu_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_school:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  search_api_excerpt: true

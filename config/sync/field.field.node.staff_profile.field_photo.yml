@@ -1,0 +1,24 @@
+uuid: a8c5f1bb-3664-482c-8c33-e2a92dc1da83
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_photo
+    - media.type.image
+    - node.type.staff_profile
+id: node.staff_profile.field_photo
+field_name: field_photo
+entity_type: node
+bundle: staff_profile
+label: Photo
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+field_type: entity_reference

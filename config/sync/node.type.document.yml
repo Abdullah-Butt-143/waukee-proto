@@ -1,0 +1,11 @@
+uuid: eac0b61d-33ca-4d8c-85c6-96b3175c1019
+langcode: en
+status: true
+dependencies: {  }
+name: Document
+type: document
+description: 'File with category and access level.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

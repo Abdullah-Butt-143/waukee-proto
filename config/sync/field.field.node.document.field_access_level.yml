@@ -1,0 +1,23 @@
+uuid: 0fac057a-3b1b-4e13-a988-2cf4e28605f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_access_level
+    - node.type.document
+  module:
+    - options
+id: node.document.field_access_level
+field_name: field_access_level
+entity_type: node
+bundle: document
+label: 'Access level'
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: public
+default_value_callback: ''
+settings: {  }
+field_type: list_string

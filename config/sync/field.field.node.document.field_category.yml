@@ -1,0 +1,24 @@
+uuid: cfd1eb30-d960-4e64-9c4a-46ce153e726e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category
+    - node.type.document
+    - taxonomy.vocabulary.document_category
+id: node.document.field_category
+field_name: field_category
+entity_type: node
+bundle: document
+label: Category
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      document_category: document_category
+field_type: entity_reference

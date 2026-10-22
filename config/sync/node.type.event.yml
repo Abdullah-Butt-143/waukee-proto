@@ -1,0 +1,11 @@
+uuid: 2f618fcf-e932-44e6-9532-d4da1017674c
+langcode: en
+status: true
+dependencies: {  }
+name: Event
+type: event
+description: 'Calendar event.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

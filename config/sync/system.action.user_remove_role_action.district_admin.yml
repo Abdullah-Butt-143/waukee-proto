@@ -1,0 +1,14 @@
+uuid: 6cc622f3-ebce-45ca-8c40-8f4eda78e2c3
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.district_admin
+  module:
+    - user
+id: user_remove_role_action.district_admin
+label: 'Remove the District admin role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: district_admin

@@ -1,0 +1,22 @@
+uuid: f5c24fb0-f66b-469e-be88-cdb3f58056c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_items
+    - node.type.lunch_menu
+  module:
+    - text
+id: node.lunch_menu.field_items
+field_name: field_items
+entity_type: node
+bundle: lunch_menu
+label: 'Menu items'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

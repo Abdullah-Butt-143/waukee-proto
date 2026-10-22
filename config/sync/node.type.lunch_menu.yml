@@ -1,0 +1,11 @@
+uuid: 07392ab1-0829-4ffe-bcef-8d31e1229ff0
+langcode: en
+status: true
+dependencies: {  }
+name: 'Lunch menu'
+type: lunch_menu
+description: 'Daily lunch menu for a school.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

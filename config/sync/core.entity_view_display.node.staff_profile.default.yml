@@ -1,0 +1,85 @@
+uuid: f933d479-0e3c-4ce4-b984-e3cc2c8dd947
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.staff_profile.field_department
+    - field.field.node.staff_profile.field_email
+    - field.field.node.staff_profile.field_job_title
+    - field.field.node.staff_profile.field_phone
+    - field.field.node.staff_profile.field_photo
+    - field.field.node.staff_profile.field_school
+    - field.field.node.staff_profile.field_visibility
+    - node.type.staff_profile
+  module:
+    - options
+    - telephone
+    - user
+id: node.staff_profile.default
+targetEntityType: node
+bundle: staff_profile
+mode: default
+content:
+  field_department:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_email:
+    type: email_mailto
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_job_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_phone:
+    type: telephone_link
+    label: above
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_photo:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_school:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_visibility:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,14 @@
+uuid: 218061d3-8e33-4ada-8bac-99aa34754366
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.school_editor
+  module:
+    - user
+id: user_add_role_action.school_editor
+label: 'Add the School editor role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: school_editor

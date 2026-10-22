@@ -1,0 +1,21 @@
+uuid: b3852d9c-dca8-496c-960d-316bf6392692
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_when
+    - node.type.event
+  module:
+    - smart_date
+id: node.event.field_when
+field_name: field_when
+entity_type: node
+bundle: event
+label: 'Date and time'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: smartdate

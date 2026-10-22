@@ -1,0 +1,14 @@
+uuid: c4261ce7-4d87-4b8b-850c-7dcc8e49d568
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.district_admin
+  module:
+    - user
+id: user_add_role_action.district_admin
+label: 'Add the District admin role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: district_admin

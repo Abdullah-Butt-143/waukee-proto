@@ -1,0 +1,24 @@
+uuid: 7ef90a29-3145-4aa8-8fe2-89c4e081fd5b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_audience
+    - node.type.news
+    - taxonomy.vocabulary.audience
+id: node.news.field_audience
+field_name: field_audience
+entity_type: node
+bundle: news
+label: Audience
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      audience: audience
+field_type: entity_reference

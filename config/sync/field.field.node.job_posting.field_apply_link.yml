@@ -1,0 +1,23 @@
+uuid: 95df1566-5d7f-4882-8967-cd60af2e7f4a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_apply_link
+    - node.type.job_posting
+  module:
+    - link
+id: node.job_posting.field_apply_link
+field_name: field_apply_link
+entity_type: node
+bundle: job_posting
+label: 'Apply link'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 17
+field_type: link

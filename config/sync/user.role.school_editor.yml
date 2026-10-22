@@ -1,0 +1,43 @@
+uuid: 296357e2-da44-4252-8699-d197a9555dc4
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.announcement
+    - node.type.event
+    - node.type.lunch_menu
+    - node.type.news
+    - node.type.page
+  module:
+    - media
+    - node
+    - system
+    - toolbar
+id: school_editor
+label: 'School editor'
+weight: 6
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access media overview'
+  - 'access toolbar'
+  - 'create announcement content'
+  - 'create event content'
+  - 'create lunch_menu content'
+  - 'create media'
+  - 'create news content'
+  - 'create page content'
+  - 'edit own announcement content'
+  - 'edit own event content'
+  - 'edit own lunch_menu content'
+  - 'edit own news content'
+  - 'edit own page content'
+  - 'update media'
+  - 'view announcement revisions'
+  - 'view event revisions'
+  - 'view lunch_menu revisions'
+  - 'view news revisions'
+  - 'view own unpublished content'
+  - 'view page revisions'
+  - 'view the administration theme'

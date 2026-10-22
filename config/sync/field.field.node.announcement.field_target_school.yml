@@ -1,0 +1,24 @@
+uuid: 238a9f89-6ccd-4d33-8a9f-42fb11680329
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_target_school
+    - node.type.announcement
+    - taxonomy.vocabulary.school
+id: node.announcement.field_target_school
+field_name: field_target_school
+entity_type: node
+bundle: announcement
+label: 'Target school'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      school: school
+field_type: entity_reference

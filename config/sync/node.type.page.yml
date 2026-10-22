@@ -1,0 +1,11 @@
+uuid: 70179453-94b2-4d61-8ce8-f21a5b793006
+langcode: en
+status: true
+dependencies: {  }
+name: 'Basic page'
+type: page
+description: 'Static page, built with Layout Builder from Phase 6.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

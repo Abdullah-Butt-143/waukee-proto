@@ -1,0 +1,11 @@
+uuid: d047b503-9be1-4ecf-b18a-963aa8086196
+langcode: en
+status: true
+dependencies: {  }
+name: Announcement
+type: announcement
+description: 'Intranet announcement, optionally targeted to a school.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false
