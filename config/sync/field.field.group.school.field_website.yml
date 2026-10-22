@@ -1,0 +1,23 @@
+uuid: 1f9b4387-6268-4cda-bd34-d30f4478bf2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_website
+    - group.type.school
+  module:
+    - link
+id: group.school.field_website
+field_name: field_website
+entity_type: group
+bundle: school
+label: 'External website (athletics, news, etc.)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

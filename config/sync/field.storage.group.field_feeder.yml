@@ -1,0 +1,30 @@
+uuid: fef5662b-663e-413a-b828-7b7d4817a8ac
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+    - options
+id: group.field_feeder
+field_name: field_feeder
+entity_type: group
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: waukee
+      label: 'Waukee High Feeder'
+    -
+      value: northwest
+      label: 'Northwest Feeder'
+    -
+      value: district-wide
+      label: District-Wide
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,22 @@
+uuid: b011121b-775b-456c-a8f2-6805ce8da4e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_family_resources
+    - group.type.school
+  module:
+    - text
+id: group.school.field_family_resources
+field_name: field_family_resources
+entity_type: group
+bundle: school
+label: 'Family resources (full profile only)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

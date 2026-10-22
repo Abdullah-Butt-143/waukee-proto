@@ -1,0 +1,19 @@
+uuid: 33e22485-1a5c-4a89-acce-5555cb4f0d99
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+    - text
+id: group.field_news_highlights
+field_name: field_news_highlights
+entity_type: group
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

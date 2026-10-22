@@ -1,0 +1,22 @@
+uuid: 63a3a30a-fbf9-49ef-96d0-7cb9228734bd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_news_highlights
+    - group.type.school
+  module:
+    - text
+id: group.school.field_news_highlights
+field_name: field_news_highlights
+entity_type: group
+bundle: school
+label: 'News highlights (full profile only)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

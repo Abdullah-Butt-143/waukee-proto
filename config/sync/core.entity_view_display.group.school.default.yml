@@ -4,12 +4,36 @@ status: true
 dependencies:
   config:
     - field.field.group.school.field_address
+    - field.field.group.school.field_attendance_phone
+    - field.field.group.school.field_badge
+    - field.field.group.school.field_bell_hours
+    - field.field.group.school.field_csd_unit
+    - field.field.group.school.field_early_dismissal
+    - field.field.group.school.field_enrollment
+    - field.field.group.school.field_family_resources
+    - field.field.group.school.field_feeder
+    - field.field.group.school.field_full_profile
     - field.field.group.school.field_grades
+    - field.field.group.school.field_hero_tagline
+    - field.field.group.school.field_leadership_team
+    - field.field.group.school.field_link_label
+    - field.field.group.school.field_mascot
+    - field.field.group.school.field_news_highlights
     - field.field.group.school.field_phone
+    - field.field.group.school.field_photo_url
     - field.field.group.school.field_principal
+    - field.field.group.school.field_principal_email
+    - field.field.group.school.field_principal_message
     - field.field.group.school.field_school
+    - field.field.group.school.field_slug
     - field.field.group.school.field_summary
+    - field.field.group.school.field_tier
+    - field.field.group.school.field_website
     - group.type.school
+  module:
+    - link
+    - options
+    - text
 id: group.school.default
 targetEntityType: group
 bundle: school
@@ -24,6 +48,84 @@ content:
     third_party_settings: {  }
     weight: 12
     region: content
+  field_attendance_phone:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_badge:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_bell_hours:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_csd_unit:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_early_dismissal:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  field_enrollment:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_family_resources:
+    type: text_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 20
+    region: content
+  field_feeder:
+    type: list_key
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_full_profile:
+    type: boolean
+    label: inline
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 16
+    region: content
   field_grades:
     type: string
     label: inline
@@ -32,6 +134,47 @@ content:
       link_rel: canonical
     third_party_settings: {  }
     weight: 10
+    region: content
+  field_hero_tagline:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 14
+    region: content
+  field_leadership_team:
+    type: text_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 18
+    region: content
+  field_link_label:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 15
+    region: content
+  field_mascot:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_news_highlights:
+    type: text_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 19
     region: content
   field_phone:
     type: string
@@ -42,6 +185,13 @@ content:
     third_party_settings: {  }
     weight: 13
     region: content
+  field_photo_url:
+    type: basic_string
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
   field_principal:
     type: string
     label: inline
@@ -51,6 +201,22 @@ content:
     third_party_settings: {  }
     weight: 11
     region: content
+  field_principal_email:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_principal_message:
+    type: text_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 17
+    region: content
   field_school:
     type: entity_reference_label
     label: inline
@@ -59,12 +225,40 @@ content:
     third_party_settings: {  }
     weight: 5
     region: content
+  field_slug:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 1
+    region: content
   field_summary:
     type: basic_string
     label: inline
     settings: {  }
     third_party_settings: {  }
     weight: 14
+    region: content
+  field_tier:
+    type: list_key
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_website:
+    type: link
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 10
     region: content
   label:
     type: string

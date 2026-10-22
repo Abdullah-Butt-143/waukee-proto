@@ -1,0 +1,22 @@
+uuid: b64a38be-19ba-44fb-a483-eb7a807e6615
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_leadership_team
+    - group.type.school
+  module:
+    - text
+id: group.school.field_leadership_team
+field_name: field_leadership_team
+entity_type: group
+bundle: school
+label: 'Leadership team (full profile only)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

@@ -20,7 +20,7 @@ Site: `https://waukee-proto.ddev.site` (runs on the presenter's laptop via DDEV;
 
 ### Rebuilding on a fresh clone
 
-Pages, menu links and page-builder blocks live in the **database**, not in git. On a fresh clone run `ddev drush cim -y`, then these scripts in order (all re-runnable): `phase1` … `phase13b`, `phase14_design`, `phase14_images`, `phase15_schools`, `phase15b_menu`, `phase16_homepage`, `phase16_about`, `phase17_news`, `phase20_form_links`, `phase21_school_pages` (all in `scripts/`, run with `ddev drush php:script scripts/<name>.php`). If page-builder pages ever render **empty**, run `scripts/phase19_repair_layouts.php` (rebuilds deleted blocks) and `scripts/phase16_about.php`.
+Pages, menu links and page-builder blocks live in the **database**, not in git. On a fresh clone run `ddev drush cim -y`, then these scripts in order (all re-runnable): `phase1` … `phase13b`, `phase14_design`, `phase14_images`, `phase15_schools`, `phase15b_menu`, `phase16_homepage`, `phase16_about`, `phase17_news`, **`phase17_schools_data`** (creates the school fields and the 22 schools; **needed or `/schools` crashes**), `phase20_form_links`, `phase21_school_pages` (all in `scripts/`, run with `ddev drush php:script scripts/<name>.php`). If page-builder pages ever render **empty**, run `scripts/phase19_repair_layouts.php` (rebuilds deleted blocks) and `scripts/phase16_about.php`.
 
 ---
 
@@ -60,7 +60,8 @@ Do these in order. Each step says **who is logged in** and **what to click**.
 ### Step 1: Public tour (3 min, logged out / private window)
 1. Open `/`. Point out the header, hero, stat strip, "Why choose" section, school/program cards.
 2. Shrink the window below 1280 px wide: the **Menu** button appears. Click it.
-3. Click **Schools** in the header → `/schools`: two school cards (grades, principal, address, phone). Click **Visit school site** on Sample Elementary → `/schools/sample-elementary`: hero, the school's own news **plus District items**, events, and (once pages exist) a **Pages from Sample Elementary** list.
+3. Click **Schools** in the header → `/schools`: the district directory of **22 schools** grouped by level (high schools, 9th-grade campuses, middle, elementary, specialized centers) with a filter. Click **Explore** on **Waukee High School** → `/schools/waukee-high-school`: a full profile (principal's message, leadership team, bell schedule, news, family resources). Other schools (for example `/schools/brookview-elementary`) show a shorter profile built from the same data.
+   Then open `/schools/sample-elementary`: the **school site** used for the editor demo (the school's own news **plus District items**, events, and a **Pages from Sample Elementary** list). It is reached by address or from the editor flow; it is not one of the 22 directory cards.
 4. Click **About** → `/district`: hero, stat strip, "Our story", photo cards (Mission and vision, Superintendent, Strategic plan, District facts, Board of Education, Our schools), "What We Value".
 5. Open `/news`: card grid of all news, with a **School** filter (try Sample High School → Apply). Click a story.
 6. Open `/calendar` (pick a school in the filter), `/events`, `/lunch-menus`.
@@ -127,8 +128,10 @@ Nothing is public until a publisher moves it to **Published** (editors can only 
 | URL | What it is |
 |---|---|
 | `/` | Home (hand-built design, see limits). |
-| `/schools` | Our Schools: one card per school. |
-| `/schools/sample-elementary` · `/schools/sample-high-school` | School "sites": own news/events + District items + pages list. |
+| `/schools` | School directory: 22 schools by level, with a filter. Data comes from the school groups, editable in Drupal. |
+| `/schools/{slug}` (e.g. `/schools/waukee-high-school`, `/schools/northwest-high-school`, `/schools/brookview-elementary`) | One school's page, built from its group; unknown slugs give 404. |
+| `/academics` | Academics page (hand-built design). |
+| `/schools/sample-elementary` · `/schools/sample-high-school` | The two sample school "sites" used for the editor/group demo: own news/events + District items + pages list. Not in the 22-school directory. |
 | `/district` | About the District. Sub-pages: `/district/mission-vision`, `/district/superintendent`, `/district/strategic-plan`, `/district/facts`. |
 | `/news` | News list with School filter. |
 | `/families` · `/prospective-families` · `/students` · `/careers` · `/community` | Section pages: callout + card grid of sub-pages. |
@@ -203,6 +206,8 @@ Nothing is public until a publisher moves it to **Published** (editors can only 
 - **The home page is a hand-built template** (`page--front.html.twig`). Editing "Home" in the page builder does **not** change what visitors see on `/`, and its news and events sections are **fixed sample text**, not live feeds: a news item you publish shows on `/news` and the school pages, **not** on the home page. Home also shows placeholder numbers (13,000 learners, 19 facilities) that do not match the two sample schools. Say it is a design mock to be wired to live content.
 - **The header exists twice** (hand-built on the home page, shared template on every other page). A link or label change must be made in both (`page--front.html.twig` and `site-header.html.twig`).
 - The header navigation links (Academics, Resources, Extracurriculars) point at existing sample pages (Student resources, Families, Activities); they are not separate sections yet.
+- The **22-school directory** shows only schools that have a Tier set. The two sample schools (Sample Elementary / Sample High School) have none, so they are not in the directory; the editor/group demo and the **Pages from <school>** list use those two. Principal names and numbers for the 22 schools come from the design files (one known conflict: Waukee High School's principal differs between the directory and the profile in the source designs).
+- `/`, `/schools`, `/schools/{slug}` and `/academics` are hand-built templates with their own header and footer; the shared header on other pages is a separate copy, so labels and links can differ slightly.
 - A page created with `/node/add/page` (not the school route) belongs to no school and is not listed on a school page.
 - New pages are not added to any menu; use the **Pages from <school>** list, a Card grid, or an admin menu link.
 - **Search filters** are drop-downs (Content type, School), not "facets" with counts (Facets module not installed).
@@ -228,5 +233,6 @@ Nothing is public until a publisher moves it to **Published** (editors can only 
 | Alert stuck on | `/admin/content/block` → **Site emergency alert** → untick Active |
 | Scheduled page did not publish | `ddev drush cron` |
 | Form emails missing | Mailpit is at `https://waukee-proto.ddev.site:8026` (`ddev mailpit`) |
+| `/schools` shows "field_tier not found" | The school fields are missing: `ddev drush php:script scripts/phase17_schools_data.php`, then `ddev drush cr` |
 | School page redirects to the home page | `ddev drush cget system.site page.front` should be `/home`; fix with `ddev drush cset system.site page.front /home -y` |
 | Backup plan | Record a screen video of section 3 beforehand. |

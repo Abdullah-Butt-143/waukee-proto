@@ -1,0 +1,19 @@
+uuid: 6686c0b4-db58-4065-9ea6-319040c27eef
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_early_dismissal
+    - group.type.school
+id: group.school.field_early_dismissal
+field_name: field_early_dismissal
+entity_type: group
+bundle: school
+label: 'Early dismissal time'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

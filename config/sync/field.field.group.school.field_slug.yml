@@ -1,0 +1,19 @@
+uuid: 61afae1e-a677-4cb4-8218-d8792049873b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_slug
+    - group.type.school
+id: group.school.field_slug
+field_name: field_slug
+entity_type: group
+bundle: school
+label: 'URL slug'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

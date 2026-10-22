@@ -1,0 +1,36 @@
+uuid: 5c04a5ec-c0fa-4561-9d78-9403743fb52e
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+    - options
+id: group.field_tier
+field_name: field_tier
+entity_type: group
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: elementary
+      label: Elementary
+    -
+      value: middle
+      label: Middle
+    -
+      value: transition
+      label: '9th Grade Campus'
+    -
+      value: high
+      label: 'High School'
+    -
+      value: specialized
+      label: 'Specialized & Innovation'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
