@@ -185,13 +185,19 @@ a:hover { color: var(--wk-purple-deep); }
   white-space: nowrap;
 }
 
+.wk-header__brand { flex: 0 0 auto; }
+/* Audience menu on top; staff/utility menu (logged-in) on its own row below. */
 .wk-header__nav {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 1.25rem;
-  flex: 1;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.1rem;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-block: 0.4rem;
 }
+.wk-header__secondary .wk-menu { flex-wrap: wrap; justify-content: flex-end; }
 .wk-header .wk-nav-block { margin: 0; }
 .wk-header .wk-menu {
   display: flex;
@@ -209,6 +215,7 @@ a:hover { color: var(--wk-purple-deep); }
   font-size: 0.97rem;
   font-weight: 600;
   text-decoration: none;
+  white-space: nowrap;
   transition: background 0.15s ease, color 0.15s ease;
 }
 .wk-header .wk-menu__link:hover { background: var(--wk-purple-tint); color: var(--wk-purple-deep); }
@@ -277,6 +284,7 @@ a:hover { color: var(--wk-purple-deep); }
   }
   .wk-header.is-open .wk-header__nav { display: flex; }
   .wk-header .wk-menu { flex-direction: column; align-items: stretch; gap: 0.15rem; }
+  .wk-header .wk-menu__link { white-space: normal; }
   .wk-header .wk-menu__link { padding: 0.8rem 1rem; border-radius: 12px; font-size: 1.05rem; }
   .wk-header .wk-menu__link.is-active-trail { box-shadow: none; background: var(--wk-purple-tint); }
   .wk-header .wk-menu__link[href^="/user/login"] { margin: 0.5rem 0 0; text-align: center; }
