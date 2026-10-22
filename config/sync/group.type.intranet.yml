@@ -1,0 +1,11 @@
+uuid: 2b89213d-e2fa-4958-a287-350a4762b013
+langcode: en
+status: true
+dependencies: {  }
+id: intranet
+label: Intranet
+description: 'Staff-only space. Content is visible to members only.'
+new_revision: true
+creator_membership: false
+creator_wizard: true
+creator_roles: {  }
