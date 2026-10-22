@@ -6,6 +6,89 @@
  */
 
 use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Url;
+use Drupal\group\Entity\GroupInterface;
+
+/**
+ * Loads one "school" group by its field_slug.
+ */
+function waukee_core_school_by_slug(string $slug): ?GroupInterface {
+  $storage = \Drupal::entityTypeManager()->getStorage('group');
+  $ids = $storage->getQuery()
+    ->accessCheck(TRUE)
+    ->condition('type', 'school')
+    ->condition('field_slug', $slug)
+    ->range(0, 1)
+    ->execute();
+  return $ids ? $storage->load(reset($ids)) : NULL;
+}
+
+/**
+ * Flattens a "school" group into plain values for Twig.
+ */
+function waukee_core_school_data(GroupInterface $group): array {
+  $value = function (string $field) use ($group) {
+    return $group->hasField($field) && !$group->get($field)->isEmpty() ? $group->get($field)->value : '';
+  };
+  $rich = function (string $field) use ($group) {
+    if (!$group->hasField($field) || $group->get($field)->isEmpty()) {
+      return NULL;
+    }
+    $item = $group->get($field)->first();
+    return ['value' => $item->value, 'format' => $item->format];
+  };
+  return [
+    'id' => $group->id(),
+    'slug' => $value('field_slug'),
+    'url' => $value('field_slug') ? Url::fromRoute('waukee_core.school_detail', ['school' => $value('field_slug')])->toString() : '',
+    'name' => $group->label(),
+    'tier' => $value('field_tier'),
+    'feeder' => $value('field_feeder'),
+    'grades' => $value('field_grades'),
+    'mascot' => $value('field_mascot'),
+    'address' => $value('field_address'),
+    'phone' => $value('field_phone'),
+    'attendance_phone' => $value('field_attendance_phone'),
+    'principal' => $value('field_principal'),
+    'principal_email' => $value('field_principal_email'),
+    'summary' => $value('field_summary'),
+    'badge' => $value('field_badge'),
+    'enrollment' => $value('field_enrollment'),
+    'image' => $value('field_photo_url'),
+    'website' => $group->hasField('field_website') && !$group->get('field_website')->isEmpty() ? $group->get('field_website')->uri : '',
+    'csd_unit' => $value('field_csd_unit'),
+    'bell_hours' => $value('field_bell_hours'),
+    'early_dismissal' => $value('field_early_dismissal'),
+    'hero_tagline' => $value('field_hero_tagline'),
+    'full_profile' => (bool) $value('field_full_profile'),
+    'principal_message' => $rich('field_principal_message'),
+    'leadership_team' => $rich('field_leadership_team'),
+    'news_highlights' => $rich('field_news_highlights'),
+    'family_resources' => $rich('field_family_resources'),
+    'link_label' => $value('field_link_label') ?: 'Explore',
+  ];
+}
+
+/**
+ * All "school" groups that have a tier set, grouped by tier, for /schools.
+ */
+function waukee_core_schools_by_tier(): array {
+  $storage = \Drupal::entityTypeManager()->getStorage('group');
+  $ids = $storage->getQuery()
+    ->accessCheck(TRUE)
+    ->condition('type', 'school')
+    ->exists('field_tier')
+    ->sort('label')
+    ->execute();
+  $byTier = ['elementary' => [], 'middle' => [], 'transition' => [], 'high' => [], 'specialized' => []];
+  foreach ($storage->loadMultiple($ids) as $group) {
+    $data = waukee_core_school_data($group);
+    if (isset($byTier[$data['tier']])) {
+      $byTier[$data['tier']][] = $data;
+    }
+  }
+  return $byTier;
+}
 
 /**
  * Implements hook_theme().

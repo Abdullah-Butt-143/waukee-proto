@@ -17,7 +17,7 @@
   --wk-purple-deep: #3c1a5b;
   --wk-purple-ink: #2a1240;
   --wk-purple-tint: #f1eaf8;
-  --wk-lime: #c5e63a;
+  --wk-lime: #f2a900;
   --wk-ink: #26262e;
   --wk-soft: #55555f;
   --wk-line: #e6e1ee;
@@ -25,7 +25,7 @@
   --wk-radius: 18px;
   --wk-shadow: 0 1px 2px rgba(42, 18, 64, 0.06), 0 8px 24px rgba(42, 18, 64, 0.06);
   --wk-shadow-lg: 0 2px 4px rgba(42, 18, 64, 0.08), 0 18px 40px rgba(42, 18, 64, 0.14);
-  --wk-font: Metropolis, "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --wk-font: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
 
   /* Re-map Olivero tokens so inherited components match. */
   --color--primary-30: var(--wk-purple-deep);
@@ -185,20 +185,42 @@ a:hover { color: var(--wk-purple-deep); }
   white-space: nowrap;
 }
 
+/* Slim utility bar above the header: district name + account/staff link. */
+.wk-utility-bar { background: var(--wk-purple-ink); color: rgba(255, 255, 255, 0.85); }
+.wk-utility-bar__inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 2.25rem; font-size: 0.82rem; }
+.wk-utility-bar__tagline { font-weight: 700; letter-spacing: 0.01em; }
+.wk-utility-bar__menu .wk-menu { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0; }
+.wk-utility-bar__menu .wk-menu__link { display: inline-block; padding: 0.3rem 0.6rem; color: rgba(255, 255, 255, 0.85); font-size: 0.82rem; font-weight: 600; text-decoration: none; border-radius: 999px; }
+.wk-utility-bar__menu .wk-menu__link:hover,
+.wk-utility-bar__menu .wk-menu__link:focus-visible { color: #fff; background: rgba(255, 255, 255, 0.12); }
+
 .wk-header__brand { flex: 0 0 auto; }
-/* Audience menu on top; staff/utility menu (logged-in) on its own row below. */
+.wk-header__right { display: flex; align-items: center; gap: 1rem; }
 .wk-header__nav {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 0.1rem;
-  flex: 1 1 auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
   min-width: 0;
   padding-block: 0.4rem;
 }
-.wk-header__secondary .wk-menu { flex-wrap: wrap; justify-content: flex-end; }
 .wk-header .wk-nav-block { margin: 0; }
+.wk-header__enroll {
+  display: inline-block;
+  flex: 0 0 auto;
+  padding: 0.6rem 1.3rem;
+  border-radius: 999px;
+  background: var(--wk-purple);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+.wk-header__enroll:hover,
+.wk-header__enroll:focus-visible { background: var(--wk-purple-deep); color: #fff; }
 .wk-header .wk-menu {
   display: flex;
   align-items: center;
@@ -221,16 +243,6 @@ a:hover { color: var(--wk-purple-deep); }
 .wk-header .wk-menu__link:hover { background: var(--wk-purple-tint); color: var(--wk-purple-deep); }
 .wk-header .wk-menu__link.is-active-trail,
 .wk-header .wk-menu__link.is-active { color: var(--wk-purple); box-shadow: inset 0 -3px 0 var(--wk-lime); border-radius: 0; }
-.wk-header .wk-menu__link[href^="/user/login"] {
-  background: var(--wk-purple);
-  color: #fff;
-  padding-inline: 1.2rem;
-  margin-left: 0.4rem;
-  box-shadow: none;
-  border-radius: 999px;
-}
-.wk-header .wk-menu__link[href^="/user/login"]:hover { background: var(--wk-purple-deep); color: #fff; }
-.wk-header__secondary .wk-menu__link { font-size: 0.88rem; color: var(--wk-soft); font-weight: 600; }
 
 /* Mobile toggle */
 .wk-header__toggle {
@@ -287,8 +299,8 @@ a:hover { color: var(--wk-purple-deep); }
   .wk-header .wk-menu__link { white-space: normal; }
   .wk-header .wk-menu__link { padding: 0.8rem 1rem; border-radius: 12px; font-size: 1.05rem; }
   .wk-header .wk-menu__link.is-active-trail { box-shadow: none; background: var(--wk-purple-tint); }
-  .wk-header .wk-menu__link[href^="/user/login"] { margin: 0.5rem 0 0; text-align: center; }
-  .wk-header__secondary { border-top: 1px solid var(--wk-line); padding-top: 0.75rem; }
+  .wk-header__enroll { display: block; text-align: center; margin-top: 0.5rem; }
+  .wk-utility-bar__tagline { display: none; }
 }
 
 /* ------------------------------------------------------------------
@@ -298,6 +310,18 @@ a:hover { color: var(--wk-purple-deep); }
   background: var(--wk-surface);
   border-bottom: 1px solid var(--wk-line);
 }
+/* Floating variant: a white rounded card overlapping the bottom of the hero. */
+.wk-quickbar--floating {
+  background: transparent;
+  border-bottom: 0;
+  position: relative;
+  z-index: 1;
+  margin-top: -2.5rem;
+  padding-bottom: 1.5rem;
+}
+.wk-quickbar--floating .wk-container { background: #fff; border-radius: var(--wk-radius); box-shadow: var(--wk-shadow-lg); padding-inline: clamp(1rem, 4vw, 1.5rem); }
+.wk-quickbar--floating .wk-menu { justify-content: center; flex-wrap: wrap; overflow: visible; }
+@media (max-width: 40rem) { .wk-quickbar--floating { margin-top: 0; } }
 .wk-quickbar .block__title,
 .wk-quickbar h2 {
   position: absolute;
@@ -463,6 +487,7 @@ a:hover { color: var(--wk-purple-deep); }
 .wk-hero__actions a:hover,
 .wk-hero__actions a:focus-visible { background: #fff; color: var(--wk-purple-ink); transform: translateY(-2px); }
 .wk-hero__media .field__label { display: none; }
+.wk-hero__media { overflow: hidden; border-radius: 28px; }
 .wk-hero__media img {
   display: block;
   width: 100%;
@@ -471,6 +496,45 @@ a:hover { color: var(--wk-purple-deep); }
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
   outline: 6px solid rgba(255, 255, 255, 0.12);
   outline-offset: -6px;
+  animation: wk-hero-zoom 16s ease-in-out infinite alternate;
+}
+
+/* Hero entrance: headline, tagline, CTA fade up in sequence; image fades/scales in. */
+.wk-hero__title { animation: wk-fade-up 0.7s ease-out both; }
+.wk-hero__sub { animation: wk-fade-up 0.7s ease-out 0.15s both; }
+.wk-hero__actions { animation: wk-fade-up 0.7s ease-out 0.3s both; }
+.wk-hero__media { animation: wk-fade-in-scale 0.9s ease-out 0.2s both; }
+
+@keyframes wk-fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes wk-fade-in-scale {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes wk-hero-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.06); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wk-hero__title, .wk-hero__sub, .wk-hero__actions, .wk-hero__media, .wk-hero__media img {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Scroll reveal: homepage/section blocks fade up into view as the page scrolls. */
+.wk-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.wk-reveal.is-visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .wk-reveal { opacity: 1; transform: none; transition: none; }
 }
 
 /* ------------------------------------------------------------------
@@ -1002,3 +1066,91 @@ td a:hover { text-decoration: underline; }
 .wk-school__cta { margin: 0; }
 .wk-school__link { font-weight: 700; color: var(--wk-purple); text-decoration: none; }
 .wk-school__link:hover { text-decoration: underline; }
+
+/* ------------------------------------------------------------------
+ * Homepage sections (Phase 16): stat strip, split feature, photo/resource
+ * grids, portrait-of-a-graduate banner.
+ * ------------------------------------------------------------------ */
+.wk-fullbleed { width: 100vw; margin-inline: calc(50% - 50vw); }
+.wk-section { padding-block: 3.5rem; }
+.wk-section__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.75rem; }
+.wk-section__title { font-size: 1.9rem; margin: 0 0 1.75rem; }
+.wk-section__head .wk-section__title { margin-bottom: 0; }
+.wk-section__link a { font-weight: 700; color: var(--wk-purple); text-decoration: none; }
+.wk-section__link a:hover { color: var(--wk-purple-deep); text-decoration: underline; }
+
+/* Stat strip */
+.wk-stats { background: var(--wk-purple-deep); color: #fff; padding-block: 2.5rem; }
+.wk-stats__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; text-align: center; }
+.wk-stats__item { display: flex; flex-direction: column; gap: 0.25rem; }
+.wk-stats__value { font-size: 2.75rem; font-weight: 800; color: var(--wk-lime); letter-spacing: -0.02em; }
+.wk-stats__label { font-size: 0.9rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(255, 255, 255, 0.82); }
+@media (min-width: 48rem) { .wk-stats__grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* Why Choose split feature */
+.wk-split { padding-block: 3.5rem; }
+.wk-split__inner { display: grid; gap: 2.5rem; align-items: center; }
+.wk-split__title { font-size: 2rem; margin: 0 0 1rem; }
+.wk-split__body { color: var(--wk-soft); font-size: 1.05rem; line-height: 1.65; }
+.wk-split__body ul { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
+.wk-split__body li {
+  position: relative;
+  padding: 0.75rem 1rem 0.75rem 2.6rem;
+  background: var(--wk-surface);
+  border-radius: 12px;
+  font-weight: 700;
+  color: var(--wk-purple-ink);
+  font-size: 0.95rem;
+}
+.wk-split__body li::before {
+  content: "";
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.1rem;
+  height: 1.1rem;
+  background: var(--wk-i-badge) center / contain no-repeat;
+}
+.wk-split__media img { display: block; width: 100%; height: auto; border-radius: var(--wk-radius); box-shadow: var(--wk-shadow-lg); }
+.wk-split--right .wk-split__media { order: -1; }
+@media (min-width: 56rem) {
+  .wk-split__inner { grid-template-columns: 1fr 1fr; }
+  .wk-split--right .wk-split__inner { direction: rtl; }
+  .wk-split--right .wk-split__inner > * { direction: ltr; }
+}
+
+/* Explore Our Schools & Programs: photo-overlay cards reuse .wk-schools__grid
+   (the /schools listing grid) for layout; the field wrapper is collapsed so
+   its .field__item children become direct grid items. */
+.wk-schools__grid .field--name-field-cards { display: contents; }
+.wk-schools__grid .field__item { height: 100%; }
+.wk-schools__card { position: relative; height: 16rem; border-radius: var(--wk-radius); overflow: hidden; box-shadow: var(--wk-shadow); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.wk-schools__card:hover { transform: translateY(-3px); box-shadow: var(--wk-shadow-lg); }
+.wk-schools__card-link { display: block; height: 100%; color: inherit; text-decoration: none; }
+.wk-schools__card-media,
+.wk-schools__card-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.wk-schools__card-body {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1.1rem 1.25rem;
+  background: linear-gradient(to top, rgba(42, 18, 64, 0.92), rgba(42, 18, 64, 0.1));
+  color: #fff;
+}
+.wk-schools__card-title { font-weight: 800; font-size: 1.1rem; }
+.wk-schools__card-arrow { width: 1.1rem; height: 1.1rem; flex: none; background: var(--wk-i-arrow) center / contain no-repeat; filter: invert(1) brightness(2); }
+.wk-schools__card:hover .wk-schools__card-arrow { transform: translateX(3px); }
+
+/* Portrait of a Waukee Graduate */
+.wk-portrait { background: var(--wk-purple-ink); color: #fff; padding-block: 3.5rem; }
+.wk-portrait__title { color: #fff; text-align: center; font-size: 1.9rem; margin: 0 0 2rem; }
+.wk-portrait__grid { display: grid; gap: 1rem; grid-template-columns: repeat(2, 1fr); text-align: center; }
+.wk-portrait__item { padding: 1.25rem 1rem; border-radius: 14px; background: rgba(255, 255, 255, 0.07); }
+.wk-portrait__item-title { color: var(--wk-lime); font-size: 1rem; margin: 0 0 0.35rem; }
+.wk-portrait__item-text { margin: 0; font-size: 0.85rem; color: rgba(255, 255, 255, 0.78); }
+@media (min-width: 36rem) { .wk-portrait__grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 62rem) { .wk-portrait__grid { grid-template-columns: repeat(6, 1fr); } }

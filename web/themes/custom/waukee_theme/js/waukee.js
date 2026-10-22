@@ -48,4 +48,40 @@
     }
   };
 
+  /**
+   * Staggered scroll-reveal for homepage/section blocks and cards.
+   * Skips entirely when the visitor prefers reduced motion.
+   */
+  Drupal.behaviors.waukeeReveal = {
+    attach: function (context) {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+      }
+      var targets = once('wk-reveal', '.wk-main .layout > .layout__region > .block, .wk-schools__grid > li, .wk-schools__grid .field__item, .view-news-feed .views-row, .view-events .views-row', context);
+      if (!targets.length) {
+        return;
+      }
+      targets.forEach(function (el, i) {
+        el.classList.add('wk-reveal');
+        el.style.transitionDelay = Math.min(i % 6, 5) * 80 + 'ms';
+      });
+
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {threshold: 0.15, rootMargin: '0px 0px -40px 0px'});
+
+      targets.forEach(function (el) { observer.observe(el); });
+    }
+  };
+
 })(Drupal, once);

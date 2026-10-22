@@ -1,0 +1,42 @@
+uuid: 59593d11-1b9e-4438-9900-665f652cb282
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.competency_grid
+    - field.field.block_content.competency_grid.field_heading
+    - field.field.block_content.competency_grid.field_items
+  module:
+    - text
+id: block_content.competency_grid.default
+targetEntityType: block_content
+bundle: competency_grid
+mode: default
+content:
+  field_heading:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_items:
+    type: text_textarea_with_summary
+    weight: 1
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

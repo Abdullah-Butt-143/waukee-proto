@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Photo card grid: section heading + optional "view all" link, then a grid
+ * of photo-overlay cards (Basic pages shown with the "card_photo" view
+ * mode). Used for "Explore Our Schools & Programs".
+ */
+#}
+<section{{ attributes.addClass('wk-section') }}>
+  <div class="wk-container">
+    <div class="wk-section__head">
+      {% if content.field_heading|render|trim %}
+        <h2 class="wk-section__title">{{ content.field_heading.0 }}</h2>
+      {% endif %}
+      {% if content.field_link|render|trim %}
+        <div class="wk-section__link">{{ content.field_link.0 }}</div>
+      {% endif %}
+    </div>
+    <div class="wk-schools__grid">
+      {{ content.field_cards }}
+    </div>
+  </div>
+</section>

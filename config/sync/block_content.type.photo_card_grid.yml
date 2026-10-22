@@ -1,0 +1,8 @@
+uuid: 005becdb-16ec-4405-b7d4-496e4a4177cb
+langcode: en
+status: true
+dependencies: {  }
+id: photo_card_grid
+label: 'Photo card grid'
+revision: false
+description: 'Photo card grid component.'

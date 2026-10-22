@@ -79,6 +79,7 @@ field_settings:
           lunch_menu: default
           news: default
           page: default
+          school: default
           staff_profile: default
   status:
     label: Boolean

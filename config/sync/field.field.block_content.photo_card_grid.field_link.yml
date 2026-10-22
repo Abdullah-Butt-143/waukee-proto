@@ -1,0 +1,23 @@
+uuid: 6d04e469-00a3-4255-a9d7-21c8f8c40ae8
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.photo_card_grid
+    - field.storage.block_content.field_link
+  module:
+    - link
+id: block_content.photo_card_grid.field_link
+field_name: field_link
+entity_type: block_content
+bundle: photo_card_grid
+label: 'View all link'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

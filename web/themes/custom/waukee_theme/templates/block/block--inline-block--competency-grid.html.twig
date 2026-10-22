@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Competency grid: full-bleed dark banner with a heading and up to 6
+ * short badges ("Portrait of a Graduate").
+ */
+#}
+<div class="wk-fullbleed">
+  <section{{ attributes.addClass('wk-portrait') }}>
+    <div class="wk-container">
+      {% if content.field_heading|render|trim %}
+        <h2 class="wk-portrait__title">{{ content.field_heading.0 }}</h2>
+      {% endif %}
+      <div class="wk-portrait__grid">
+        {% for item in content.field_items['#items'] %}
+          <div class="wk-portrait__item">
+            <h3 class="wk-portrait__item-title">{{ item.summary }}</h3>
+            <p class="wk-portrait__item-text">{{ item.value|striptags|trim }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>

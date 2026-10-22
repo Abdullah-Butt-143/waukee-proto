@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ * Waukee theme hooks.
+ */
+
+use Drupal\Core\Asset\AttachedAssetsInterface;
+use Drupal\Core\Language\LanguageInterface;
+
+/**
+ * Implements hook_css_alter().
+ *
+ * Pages using the Tailwind designs (homepage, /schools) attach
+ * waukee_theme/front; Olivero's and the theme's own global
+ * stylesheets would override it. Keyed on the attached library (not the
+ * route) because the asset resolver caches results per library set.
+ */
+function waukee_theme_css_alter(array &$css, AttachedAssetsInterface $assets, LanguageInterface $language) {
+  if (!in_array('waukee_theme/front', $assets->getLibraries(), TRUE)) {
+    return;
+  }
+  foreach (array_keys($css) as $key) {
+    if (str_contains($key, 'core/themes/olivero/') || str_contains($key, 'waukee_theme/css/waukee.css')) {
+      unset($css[$key]);
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_page_alter().
+ *
+ * /schools/{school} is one route for every school; map it to a single
+ * suggestion here instead of a suggestion per slug (which is what Drupal's
+ * default path-based suggestions would otherwise produce).
+ */
+function waukee_theme_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  if (\Drupal::routeMatch()->getRouteName() === 'waukee_core.school_detail') {
+    $suggestions[] = 'page__schools__detail';
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ * Loads the data these Tailwind-design page templates render, since the
+ * controllers behind them return empty markup (see SchoolsController).
+ */
+function waukee_theme_preprocess_page(array &$variables) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name === 'waukee_core.schools') {
+    $variables['schools'] = waukee_core_schools_by_tier();
+  }
+  elseif ($route_name === 'waukee_core.school_detail') {
+    $group = waukee_core_school_by_slug(\Drupal::routeMatch()->getParameter('school'));
+    $variables['school'] = $group ? waukee_core_school_data($group) : NULL;
+  }
+}

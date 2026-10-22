@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Card grid: heading + a grid of content teasers (Basic page/News/Event).
+ * Used site-wide (e.g. "In this section" lists) as well as the homepage
+ * "Support Every Step of the Way" resources.
+ */
+#}
+<section{{ attributes.addClass('wk-section') }}>
+  <div class="wk-container">
+    {% if content.field_heading|render|trim %}
+      <h2 class="wk-section__title">{{ content.field_heading.0 }}</h2>
+    {% endif %}
+    {{ content.field_cards }}
+  </div>
+</section>
