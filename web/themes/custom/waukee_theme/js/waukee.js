@@ -32,7 +32,7 @@
         });
 
         // Reset when the window becomes wide again.
-        window.matchMedia('(min-width: 62rem)').addEventListener('change', function (e) {
+        window.matchMedia('(min-width: 75rem)').addEventListener('change', function (e) {
           if (e.matches) {
             setOpen(false);
           }
