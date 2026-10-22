@@ -1002,3 +1002,9 @@ td a:hover { text-decoration: underline; }
 .wk-school__cta { margin: 0; }
 .wk-school__link { font-weight: 700; color: var(--wk-purple); text-decoration: none; }
 .wk-school__link:hover { text-decoration: underline; }
+
+/* News listing (/news) */
+.view-news-feed .view-filters { margin: 0 0 1.5rem; }
+.view-news-feed.view-display-id-page_list .view-content { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); }
+.view-news-feed.view-display-id-page_list .wk-feed__item { display: flex; margin: 0; }
+.view-news-feed.view-display-id-page_list .wk-card { width: 100%; }
