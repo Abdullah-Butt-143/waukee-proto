@@ -1,1 +1,10 @@
 @layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+/* Emergency alert on the front page (waukee.css is not loaded here). The fixed
+   header is taller than main's top padding, so the banner is pushed clear of it. */
+.wk-front-alert{padding-top:2rem;background:#c5e63a;border-bottom:3px solid #3c1a5b;color:#2a1240}
+.wk-front-alert a{color:#2a1240;font-weight:700;text-decoration:underline}
+.wk-front-alert .region,.wk-front-alert .block,.wk-front-alert .block__content{margin:0;padding:0}
+.wk-front-alert .wk-emergency-alert{display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem .75rem;max-width:80rem;margin-inline:auto;padding:.85rem 2rem;font-size:1.0625rem;font-weight:600;color:#2a1240}
+.wk-front-alert .wk-emergency-alert__label{padding:.1rem .6rem;background:#3c1a5b;color:#fff;border-radius:4px;text-transform:uppercase;letter-spacing:.05em;font-size:.85rem}
+.wk-front-alert .wk-emergency-alert p{margin:0}
+.wk-front-alert .wk-emergency-alert .field,.wk-front-alert .wk-emergency-alert .field__item{display:inline;margin:0}

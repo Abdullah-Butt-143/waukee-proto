@@ -38,6 +38,7 @@ function waukee_theme_preprocess_page(array &$variables) {
   $variables['#cache']['contexts'][] = 'user.permissions';
   $variables['#cache']['contexts'][] = 'user';
   $account = \Drupal::currentUser();
+  $variables['wk_intranet_url'] = '/user/login';
   if ($account->isAnonymous()) {
     $variables['wk_account_links'] = [];
     return;
@@ -68,7 +69,6 @@ function waukee_theme_preprocess_page(array &$variables) {
     [t('Content'), 'system.admin_content', []],
     [t('Scheduled'), 'view.scheduler_scheduled_content.overview', []],
     [t('Admin'), 'system.admin', []],
-    [t('My account'), 'entity.user.canonical', ['user' => $account->id()]],
   ]);
   $links = [];
   foreach ($candidates as [$title, $route, $params]) {
@@ -77,6 +77,17 @@ function waukee_theme_preprocess_page(array &$variables) {
       $links[] = ['title' => $title, 'url' => $url->toString()];
     }
   }
+  // Intranet pages (staff only): shown only to users who may open them.
+  $variables['wk_intranet_url'] = '/user/login';
+  foreach ([[t('Announcements'), '/intranet/announcements'], [t('Documents'), '/intranet/documents'], [t('Staff directory'), '/intranet/staff-directory']] as [$title, $path]) {
+    $url = Url::fromUserInput($path);
+    if ($url->isRouted() && $url->access($account)) {
+      $links[] = ['title' => $title, 'url' => $url->toString()];
+      $variables['wk_intranet_url'] = '/intranet/announcements';
+    }
+  }
+  $my_account = Url::fromRoute('entity.user.canonical', ['user' => $account->id()]);
+  $links[] = ['title' => t('My account'), 'url' => $my_account->toString()];
   $variables['wk_account_links'] = $links;
   $variables['wk_account_name'] = $account->getDisplayName();
   $variables['wk_logout_url'] = Url::fromRoute('user.logout')->toString();

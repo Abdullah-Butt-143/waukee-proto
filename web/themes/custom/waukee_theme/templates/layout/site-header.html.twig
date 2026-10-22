@@ -24,7 +24,7 @@
   {label: 'Students', href: '/students'},
   {label: 'Parents', href: '/families'},
   {label: 'Community', href: '/community'},
-  {label: 'Staff Intranet', href: '/user/login'},
+  {label: 'Staff Intranet', href: wk_intranet_url|default('/user/login')},
 ] %}
 <header class="wk-sh" data-wk-sh>
   {% if wk_account_links %}
