@@ -4,11 +4,16 @@ status: true
 dependencies:
   config:
     - node.type.announcement
+    - node.type.document
     - node.type.event
+    - node.type.job_posting
     - node.type.lunch_menu
     - node.type.news
     - node.type.page
+    - node.type.staff_profile
+    - workflows.workflow.editorial
   module:
+    - content_moderation
     - media
     - node
     - system
@@ -34,10 +39,17 @@ permissions:
   - 'edit own news content'
   - 'edit own page content'
   - 'update media'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition submit_for_review'
+  - 'view all revisions'
   - 'view announcement revisions'
+  - 'view document revisions'
   - 'view event revisions'
+  - 'view job_posting revisions'
+  - 'view latest version'
   - 'view lunch_menu revisions'
   - 'view news revisions'
   - 'view own unpublished content'
   - 'view page revisions'
+  - 'view staff_profile revisions'
   - 'view the administration theme'

@@ -1,7 +1,16 @@
 uuid: 5324a036-51d1-4d7d-8709-24d88628e1dd
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - scheduler
+third_party_settings:
+  scheduler:
+    fields_display_mode: vertical_tab
+    publish_enable: true
+    publish_past_date: schedule
+    publish_touch: false
+    unpublish_enable: true
 name: News
 type: news
 description: 'News article.'

@@ -1,7 +1,16 @@
 uuid: d61ef183-c595-4ec0-a3a4-f780b47faf51
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - scheduler
+third_party_settings:
+  scheduler:
+    fields_display_mode: vertical_tab
+    publish_enable: true
+    publish_past_date: schedule
+    publish_touch: false
+    unpublish_enable: true
 name: 'Job posting'
 type: job_posting
 description: 'Open position.'

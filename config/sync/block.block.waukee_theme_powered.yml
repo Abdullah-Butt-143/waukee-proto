@@ -1,0 +1,22 @@
+uuid: ab224e3c-a89a-4f48-abe7-8714eda93262
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - waukee_theme
+_core:
+  default_config_hash: eYL19CLDyinGTWYQfBD1DswWzglEotE_kHnHx3AxTXM
+id: waukee_theme_powered
+theme: waukee_theme
+region: footer_bottom
+weight: 0
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

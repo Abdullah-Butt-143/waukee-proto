@@ -1,7 +1,16 @@
 uuid: 5acb31cc-66bf-47d4-9b3b-5052f43a014a
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - scheduler
+third_party_settings:
+  scheduler:
+    fields_display_mode: vertical_tab
+    publish_enable: true
+    publish_past_date: schedule
+    publish_touch: false
+    unpublish_enable: true
 name: 'Staff profile'
 type: staff_profile
 description: 'Staff directory entry (sample data only).'

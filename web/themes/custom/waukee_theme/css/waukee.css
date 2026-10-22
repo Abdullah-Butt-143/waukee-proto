@@ -1,0 +1,197 @@
+/**
+ * Waukee theme: purple / lime / grey on top of Olivero.
+ *
+ * Contrast ratios (WCAG 2.x, measured):
+ *   body text   #26262E on #FFFFFF   15.0:1    on #F2F2F5  13.4:1
+ *   soft text   #55555F on #FFFFFF    7.4:1    on #F2F2F5   6.6:1
+ *   purple      #5B2C83 on #FFFFFF    9.9:1    on #F2F2F5   8.8:1
+ *   white       on #5B2C83  9.9:1,  on #3C1A5B 14.1:1
+ *   deep purple #2A1240 on lime #C5E63A  11.7:1
+ *   lime        #C5E63A on #3C1A5B  9.9:1,  on #5B2C83  6.9:1
+ * Lime is never used as text or as a border on white (1.4:1). Focus rings use
+ * deep purple (14:1 on white, 3:1+ against adjacent colours as required by
+ * WCAG 2.2 SC 2.4.11 / 1.4.11).
+ */
+
+:root {
+  --wk-purple: #5b2c83;
+  --wk-purple-deep: #3c1a5b;
+  --wk-purple-ink: #2a1240;
+  --wk-purple-tint: #ece4f3;
+  --wk-lime: #c5e63a;
+  --wk-lime-dark: #a9c72a;
+  --wk-grey-bg: #f2f2f5;
+  --wk-grey-text: #55555f;
+  --wk-ink: #26262e;
+
+  /* Re-map Olivero's colour tokens. */
+  --color--primary-30: var(--wk-purple-deep);
+  --color--primary-40: var(--wk-purple);
+  --color--primary-50: var(--wk-purple);
+  --color--primary-60: #7a4aa3;
+  --color--primary-80: var(--wk-purple-tint);
+  --color--gray-5: #1b1b22;
+  --color--gray-10: #1f1f27;
+  --color--gray-20: var(--wk-ink);
+  --color--gray-45: var(--wk-grey-text);
+  --color--gray-90: #dcdce2;
+  --color--gray-95: #e8e8ed;
+  --color--gray-100: var(--wk-grey-bg);
+  --color-text-neutral-soft: var(--wk-grey-text);
+  --color-text-neutral-medium: var(--wk-ink);
+  --color-text-neutral-loud: #1b1b22;
+  --color-text-primary-medium: var(--wk-purple);
+  --color-text-primary-loud: var(--wk-purple-deep);
+}
+
+/* Visible keyboard focus everywhere (WCAG 2.2 AA). */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--wk-purple-deep);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px #fff;
+}
+.site-header :focus-visible,
+.quick-links-bar :focus-visible {
+  outline-color: var(--wk-purple-deep);
+}
+.site-footer :focus-visible {
+  outline-color: var(--wk-lime);
+  box-shadow: none;
+}
+
+/* Page chrome. */
+body {
+  background: #fff;
+  color: var(--wk-ink);
+}
+.site-footer {
+  background: var(--wk-purple-deep);
+  color: #fff;
+}
+.site-footer a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* --- Alert region: full width, above the header --- */
+.alert-region {
+  width: 100%;
+  background: var(--wk-lime);
+  color: var(--wk-purple-ink);
+  border-bottom: 3px solid var(--wk-purple-deep);
+}
+.alert-region .region-alert,
+.alert-region > .block,
+.alert-region > div {
+  max-width: 75rem;
+  margin-inline: auto;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+}
+.alert-region a {
+  color: var(--wk-purple-ink);
+  text-decoration: underline;
+}
+
+/* --- Header audience links (primary menu region) --- */
+.primary-nav__menu-link,
+.primary-nav__menu-link:hover {
+  color: var(--wk-ink);
+}
+.primary-nav__menu-link:hover,
+.primary-nav__menu-link:focus {
+  color: var(--wk-purple);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.primary-nav__menu-link[href^="/user/login"] {
+  background: var(--wk-purple);
+  color: #fff;
+  border-radius: 999px;
+  padding-inline: 1rem;
+  text-decoration: none;
+}
+.primary-nav__menu-link[href^="/user/login"]:hover,
+.primary-nav__menu-link[href^="/user/login"]:focus {
+  background: var(--wk-purple-deep);
+  color: #fff;
+}
+
+/* --- Quick links bar --- */
+.quick-links-bar {
+  background: var(--wk-lime);
+  color: var(--wk-purple-ink);
+  border-block: 1px solid var(--wk-purple-deep);
+}
+.quick-links-bar .region-quick-links,
+.quick-links-bar > div {
+  max-width: 75rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+.quick-links-bar ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0;
+}
+.quick-links-bar li {
+  margin: 0;
+  padding: 0;
+}
+.quick-links-bar a {
+  display: inline-block;
+  padding: 0.6rem 0.9rem; /* >= 24x24 CSS px target size (WCAG 2.2 SC 2.5.8). */
+  min-height: 44px;
+  line-height: 1.6;
+  color: var(--wk-purple-ink);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.quick-links-bar a:hover,
+.quick-links-bar a:focus {
+  background: var(--wk-purple-deep);
+  color: #fff;
+}
+.quick-links-bar h2 {
+  /* Block title is visually hidden but kept for screen readers. */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* Narrow screens: bar scrolls horizontally rather than wrapping into a wall. */
+@media (max-width: 43.7rem) {
+  .quick-links-bar ul {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .quick-links-bar li {
+    flex: 0 0 auto;
+  }
+}
+
+/* Buttons and links. */
+.button,
+.button--primary,
+input[type="submit"] {
+  background-color: var(--wk-purple);
+  color: #fff;
+}
+.button:hover,
+.button--primary:hover,
+input[type="submit"]:hover {
+  background-color: var(--wk-purple-deep);
+}
+a {
+  color: var(--wk-purple);
+}
+a:hover {
+  color: var(--wk-purple-deep);
+}

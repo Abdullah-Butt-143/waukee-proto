@@ -1,0 +1,25 @@
+uuid: 9dbc0e92-11a6-4364-8906-bf36d423f608
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.quick-links
+  module:
+    - system
+  theme:
+    - waukee_theme
+id: waukee_theme_quick_links
+theme: waukee_theme
+region: quick_links
+weight: 0
+provider: null
+plugin: 'system_menu_block:quick-links'
+settings:
+  id: 'system_menu_block:quick-links'
+  label: 'Quick links'
+  label_display: visible
+  provider: system
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

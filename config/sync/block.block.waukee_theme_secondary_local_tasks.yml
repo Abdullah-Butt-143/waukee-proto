@@ -1,0 +1,22 @@
+uuid: 1c38e5f3-be80-4a53-9492-845468565059
+langcode: en
+status: true
+dependencies:
+  theme:
+    - waukee_theme
+_core:
+  default_config_hash: ydSxdq7R66I8UMC460rOzlfzvlUL4VRbdwc6z9DWaUI
+id: waukee_theme_secondary_local_tasks
+theme: waukee_theme
+region: highlighted
+weight: -2
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Secondary tabs'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

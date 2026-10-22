@@ -1,0 +1,22 @@
+uuid: 069c495b-74af-4b64-8257-664bdf562d4f
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - waukee_theme
+_core:
+  default_config_hash: BZ5tpW7H8X4PVGRm3MImTIHd2tN0eF7zOtp4SpRYUA0
+id: waukee_theme_messages
+theme: waukee_theme
+region: highlighted
+weight: -5
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

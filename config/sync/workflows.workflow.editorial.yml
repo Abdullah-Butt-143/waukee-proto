@@ -2,6 +2,15 @@ uuid: 9392c8f9-4f92-4da5-bbf9-b786f4665a41
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.announcement
+    - node.type.document
+    - node.type.event
+    - node.type.job_posting
+    - node.type.lunch_menu
+    - node.type.news
+    - node.type.page
+    - node.type.staff_profile
   module:
     - content_moderation
 _core:
@@ -11,44 +20,27 @@ label: Editorial
 type: content_moderation
 type_settings:
   states:
-    archived:
-      label: Archived
-      weight: 5
-      published: false
-      default_revision: true
     draft:
       label: Draft
-      weight: -5
+      weight: 0
       published: false
       default_revision: false
     published:
       label: Published
-      weight: 0
+      weight: 2
       published: true
       default_revision: true
+    review:
+      label: 'In review'
+      weight: 1
+      published: false
+      default_revision: false
   transitions:
-    archive:
-      label: Archive
-      from:
-        - published
-      to: archived
-      weight: 2
-    archived_draft:
-      label: 'Restore to Draft'
-      from:
-        - archived
-      to: draft
-      weight: 3
-    archived_published:
-      label: Restore
-      from:
-        - archived
-      to: published
-      weight: 4
     create_new_draft:
-      label: 'Create New Draft'
+      label: 'Save as draft'
       from:
         - draft
+        - review
         - published
       to: draft
       weight: 0
@@ -56,8 +48,31 @@ type_settings:
       label: Publish
       from:
         - draft
+        - review
         - published
       to: published
+      weight: 3
+    send_back:
+      label: 'Send back to draft'
+      from:
+        - review
+      to: draft
+      weight: 2
+    submit_for_review:
+      label: 'Submit for review'
+      from:
+        - draft
+        - review
+      to: review
       weight: 1
-  entity_types: {  }
+  entity_types:
+    node:
+      - announcement
+      - document
+      - event
+      - job_posting
+      - lunch_menu
+      - news
+      - page
+      - staff_profile
   default_moderation_state: draft

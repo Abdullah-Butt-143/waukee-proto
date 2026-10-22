@@ -1,7 +1,16 @@
 uuid: 07392ab1-0829-4ffe-bcef-8d31e1229ff0
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - scheduler
+third_party_settings:
+  scheduler:
+    fields_display_mode: vertical_tab
+    publish_enable: true
+    publish_past_date: schedule
+    publish_touch: false
+    unpublish_enable: true
 name: 'Lunch menu'
 type: lunch_menu
 description: 'Daily lunch menu for a school.'

@@ -1,7 +1,16 @@
 uuid: eac0b61d-33ca-4d8c-85c6-96b3175c1019
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - scheduler
+third_party_settings:
+  scheduler:
+    fields_display_mode: vertical_tab
+    publish_enable: true
+    publish_past_date: schedule
+    publish_touch: false
+    unpublish_enable: true
 name: Document
 type: document
 description: 'File with category and access level.'

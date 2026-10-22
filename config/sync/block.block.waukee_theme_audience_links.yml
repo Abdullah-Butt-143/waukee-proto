@@ -1,0 +1,25 @@
+uuid: badd04af-ef33-4e5b-be27-6667d57957a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.audience
+  module:
+    - system
+  theme:
+    - waukee_theme
+id: waukee_theme_audience_links
+theme: waukee_theme
+region: primary_menu
+weight: 0
+provider: null
+plugin: 'system_menu_block:audience'
+settings:
+  id: 'system_menu_block:audience'
+  label: 'Audience links'
+  label_display: ''
+  provider: system
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

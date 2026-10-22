@@ -15,9 +15,12 @@ dependencies:
     - taxonomy.vocabulary.department
     - taxonomy.vocabulary.document_category
     - taxonomy.vocabulary.school
+    - workflows.workflow.editorial
   module:
+    - content_moderation
     - media
     - node
+    - scheduler
     - system
     - taxonomy
     - toolbar
@@ -84,16 +87,32 @@ permissions:
   - 'edit terms in document_category'
   - 'edit terms in school'
   - 'revert all revisions'
+  - 'revert announcement revisions'
+  - 'revert document revisions'
+  - 'revert event revisions'
+  - 'revert job_posting revisions'
+  - 'revert lunch_menu revisions'
+  - 'revert news revisions'
+  - 'revert page revisions'
+  - 'revert staff_profile revisions'
+  - 'schedule publishing of nodes'
   - 'update any media'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition publish'
+  - 'use editorial transition send_back'
+  - 'use editorial transition submit_for_review'
   - 'view all revisions'
   - 'view announcement revisions'
+  - 'view any unpublished content'
   - 'view document revisions'
   - 'view event revisions'
   - 'view job_posting revisions'
+  - 'view latest version'
   - 'view lunch_menu revisions'
   - 'view news revisions'
   - 'view own unpublished content'
   - 'view own unpublished media'
   - 'view page revisions'
+  - 'view scheduled content'
   - 'view staff_profile revisions'
   - 'view the administration theme'
