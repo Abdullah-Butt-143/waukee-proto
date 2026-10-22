@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * News teaser as a card: image, date and school, title, summary.
+ */
+#}
+<article{{ attributes.addClass('wk-card', 'wk-card--news') }}>
+  {% if content.field_image|render|trim %}
+    <div class="wk-card__media">{{ content.field_image.0 }}</div>
+  {% endif %}
+  <div class="wk-card__body">
+    <p class="wk-card__meta">
+      <time datetime="{{ node.createdtime|format_date('custom', 'Y-m-d') }}">{{ node.createdtime|format_date('custom', 'M j, Y') }}</time>
+      {%- if node.field_school.0.entity %} <span aria-hidden="true">&middot;</span> {{ node.field_school.0.entity.label }}{% endif -%}
+    </p>
+    <h3 class="wk-card__title"><a href="{{ url }}" rel="bookmark">{{ label }}</a></h3>
+    {% if content.field_summary|render|trim %}
+      <div class="wk-card__text">{{ content.field_summary.0 }}</div>
+    {% endif %}
+  </div>
+</article>

@@ -2,3 +2,8 @@ global:
   css:
     theme:
       css/waukee.css: {}
+  js:
+    js/waukee.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

@@ -1,0 +1,23 @@
+uuid: bc5f2dd4-f94c-4def-919b-81efa176eade
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:5b66c6f0-1786-44e0-969f-b46f8c8dcedd'
+  module:
+    - block_content
+  theme:
+    - waukee_theme
+id: waukee_theme_footer_contact
+theme: waukee_theme
+region: footer_top
+weight: 0
+provider: null
+plugin: 'block_content:5b66c6f0-1786-44e0-969f-b46f8c8dcedd'
+settings:
+  id: 'block_content:5b66c6f0-1786-44e0-969f-b46f8c8dcedd'
+  label: Contact
+  label_display: ''
+  provider: block_content
+  view_mode: default
+visibility: {  }

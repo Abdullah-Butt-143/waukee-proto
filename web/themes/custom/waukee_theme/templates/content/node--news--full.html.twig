@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Full news article: meta line, wide image, lead summary, body.
+ */
+#}
+<article{{ attributes.addClass('wk-article', 'wk-article--news') }}>
+  <p class="wk-article__meta">
+    <time datetime="{{ node.createdtime|format_date('custom', 'Y-m-d') }}">{{ node.createdtime|format_date('custom', 'F j, Y') }}</time>
+    {%- if node.field_school.0.entity %} <span aria-hidden="true">&middot;</span> {{ node.field_school.0.entity.label }}{% endif -%}
+    {%- if node.field_audience.0.entity %} <span aria-hidden="true">&middot;</span> {{ node.field_audience.0.entity.label }}{% endif -%}
+  </p>
+  {% if content.field_image|render|trim %}
+    <div class="wk-article__media">{{ content.field_image.0 }}</div>
+  {% endif %}
+  {% if content.field_summary|render|trim %}
+    <div class="wk-article__lead">{{ content.field_summary.0 }}</div>
+  {% endif %}
+  <div class="wk-article__body">{{ content.body.0 }}</div>
+</article>

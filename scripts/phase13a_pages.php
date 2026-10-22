@@ -159,7 +159,7 @@ foreach ($sections as $key => [$title, $alias, $intro]) {
   $ids = array_map(fn($n) => ['target_id' => $n->id()], $child_nodes[$key]);
   $make_page($title, $alias, "<p>$intro</p>", function () use ($inline, $intro, $ids, $title) {
     return [(new Section('layout_onecol'))
-      ->appendComponent($inline('callout', ['field_heading' => $title, 'field_body_text' => ['value' => "<p>$intro</p>", 'format' => 'basic_html'], 'field_style' => 'info'], 0))
+      ->appendComponent($inline('callout', ['field_heading' => 'Overview', 'field_body_text' => ['value' => "<p>$intro</p>", 'format' => 'basic_html'], 'field_style' => 'info'], 0))
       ->appendComponent($inline('card_grid', ['field_heading' => 'In this section', 'field_cards' => $ids], 1))];
   });
 }

@@ -475,6 +475,7 @@ display:
         options: {  }
       defaults:
         empty: false
+        title: false
         pager: false
         exposed_form: false
         style: false

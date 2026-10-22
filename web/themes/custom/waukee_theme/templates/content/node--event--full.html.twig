@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Full event: date badge with when/where details, then the description.
+ */
+#}
+{% set start = node.field_when.0.value %}
+{% set end = node.field_when.0.end_value %}
+{% set tz = node.field_when.0.timezone ?: 'America/Chicago' %}
+<article{{ attributes.addClass('wk-article', 'wk-article--event') }}>
+  <div class="wk-eventbox">
+    {% if start %}
+      <div class="wk-event__date wk-event__date--lg" aria-hidden="true">
+        <span class="wk-event__month">{{ start|format_date('custom', 'M', tz) }}</span>
+        <span class="wk-event__day">{{ start|format_date('custom', 'j', tz) }}</span>
+      </div>
+      <dl class="wk-eventbox__details">
+        <div>
+          <dt>{{ 'When'|t }}</dt>
+          <dd>{{ start|format_date('custom', 'l, F j, Y', tz) }}<br>{{ start|format_date('custom', 'g:i a', tz) }}{% if end %} &ndash; {{ end|format_date('custom', 'g:i a T', tz) }}{% endif %}</dd>
+        </div>
+        {% if node.field_location.value %}
+          <div><dt>{{ 'Where'|t }}</dt><dd>{{ node.field_location.value }}</dd></div>
+        {% endif %}
+        {% if node.field_school.0.entity %}
+          <div><dt>{{ 'School'|t }}</dt><dd>{{ node.field_school.0.entity.label }}</dd></div>
+        {% endif %}
+      </dl>
+    {% endif %}
+  </div>
+  <div class="wk-article__body">{{ content.body.0 }}</div>
+</article>

@@ -1,0 +1,25 @@
+uuid: 8576ac6b-746e-4dd1-a7b2-721d9e90df34
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.quick-links
+  module:
+    - system
+  theme:
+    - waukee_theme
+id: waukee_theme_footer_quick
+theme: waukee_theme
+region: footer_top
+weight: 2
+provider: null
+plugin: 'system_menu_block:quick-links'
+settings:
+  id: 'system_menu_block:quick-links'
+  label: 'Quick links'
+  label_display: '1'
+  provider: system
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

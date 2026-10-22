@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Hero component: full-width gradient banner with headline, subheading,
+ * call to action and an image panel.
+ */
+#}
+<section{{ attributes.addClass('wk-hero') }}>
+  <div class="wk-hero__glow" aria-hidden="true"></div>
+  <div class="wk-container wk-hero__inner">
+    <div class="wk-hero__copy">
+      <h1 class="wk-hero__title">{{ content.field_heading.0 }}</h1>
+      {% if content.field_subheading|render|trim %}
+        <p class="wk-hero__sub">{{ content.field_subheading.0 }}</p>
+      {% endif %}
+      {% if content.field_cta|render|trim %}
+        <div class="wk-hero__actions">{{ content.field_cta.0 }}</div>
+      {% endif %}
+    </div>
+    {% if content.field_image|render|trim %}
+      <div class="wk-hero__media">{{ content.field_image.0 }}</div>
+    {% endif %}
+  </div>
+</section>

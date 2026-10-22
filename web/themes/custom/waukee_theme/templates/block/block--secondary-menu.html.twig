@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Waukee navigation block. The title is visually hidden unless the block is
+ * set to show its title (used in the footer).
+ */
+#}
+{% set heading_id = attributes.id ~ '-menu'|clean_id %}
+<nav role="navigation" aria-labelledby="{{ heading_id }}"{{ attributes.addClass('wk-nav-block')|without('role', 'aria-labelledby') }}>
+  {% if label %}
+    <h2{{ title_attributes.addClass(configuration.label_display ? 'wk-nav-block__title' : 'visually-hidden').setAttribute('id', heading_id) }}>{{ label }}</h2>
+  {% else %}
+    <h2 class="visually-hidden" id="{{ heading_id }}">{{ configuration.label }}</h2>
+  {% endif %}
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</nav>

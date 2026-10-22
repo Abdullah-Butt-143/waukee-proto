@@ -1,0 +1,15 @@
+{#
+/**
+ * @file
+ * Basic page teaser as a card (used by the Card grid component).
+ */
+#}
+<article{{ attributes.addClass('wk-card', 'wk-card--page') }}>
+  <div class="wk-card__body">
+    <h3 class="wk-card__title"><a href="{{ url }}" rel="bookmark">{{ label }}</a></h3>
+    {% if content.body|render|trim %}
+      <div class="wk-card__text">{{ content.body.0 }}</div>
+    {% endif %}
+    <span class="wk-card__arrow" aria-hidden="true"></span>
+  </div>
+</article>

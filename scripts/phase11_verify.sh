@@ -25,7 +25,7 @@ printf '%-62s %s\n' "Inactive: no banner on any page" "$(sweep 0)"
 set_alert 1
 printf '%-62s %s\n' "Active: banner on all $(echo $pages | wc -w) pages (district + both schools)" "$(sweep 1)"
 curl -sk $base/ -o /tmp/h.html
-printf '%-62s %s\n' "Banner is above the header (full-width alert region)" "$(awk 'BEGIN{a=0;h=0} /wk-emergency-alert/ && !a {a=NR} /id="header"/ && !h {h=NR} END{print (a>0 && a<h) ? "yes" : "NO"}' /tmp/h.html)"
+printf '%-62s %s\n' "Banner is above the header (full-width alert region)" "$(awk 'BEGIN{a=0;h=0} /wk-emergency-alert/ && !a {a=NR} /class="wk-header"/ && !h {h=NR} END{print (a>0 && a<h) ? "yes" : "NO"}' /tmp/h.html)"
 printf '%-62s %s\n' "Banner has role=alert and a link to /closings" "$(grep -q 'role="alert"' /tmp/h.html && grep -q 'href="/closings"' /tmp/h.html && echo yes || echo NO)"
 set_alert 0
 printf '%-62s %s\n' "Deactivated: banner gone everywhere" "$(sweep 0)"

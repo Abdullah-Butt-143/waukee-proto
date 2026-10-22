@@ -1,112 +1,83 @@
 {#
 /**
  * @file
- * Waukee page template (copy of Olivero's page.html.twig).
+ * Waukee page template. Own markup (no Olivero header/layout wrappers):
+ * alert region, sticky header with audience navigation, quick links bar,
+ * main content (optional sidebar), footer.
  *
- * Differences from Olivero:
- * - page.alert: full-width region above the header.
- * - page.quick_links: quick links bar directly below the header.
- * Mobile navigation is Olivero's own (menu button + #header-nav), which holds
- * page.primary_menu (audience links) and page.secondary_menu.
+ * Regions: alert, header, primary_menu, secondary_menu, quick_links, hero,
+ * highlighted, breadcrumb, content_above, content, content_below, sidebar,
+ * footer_top, footer_bottom.
  */
 #}
+<div class="wk-page">
 
-<div id="page-wrapper" class="page-wrapper">
-  <div id="page">
+  {% if page.alert %}
+    <div class="alert-region" role="region" aria-label="{{ 'Site alerts'|t }}">
+      {{ page.alert }}
+    </div>
+  {% endif %}
 
-    {% if page.alert %}
-      <div class="alert-region" role="region" aria-label="{{ 'Site alerts'|t }}">
-        {{ page.alert }}
+  <header class="wk-header" data-wk-header>
+    <div class="wk-container wk-header__inner">
+      <div class="wk-header__brand">
+        {{ page.header }}
       </div>
-    {% endif %}
 
-    {% if page.header or page.primary_menu or page.secondary_menu %}
-      <header id="header" class="site-header" data-drupal-selector="site-header">
+      <button type="button" class="wk-header__toggle" aria-expanded="false" aria-controls="wk-nav">
+        <span class="wk-header__toggle-label">{{ 'Menu'|t }}</span>
+        <span class="wk-header__toggle-icon" aria-hidden="true"></span>
+      </button>
 
-        {# Gets fixed by JavaScript at wide widths. #}
-        <div class="site-header__fixable" data-drupal-selector="site-header-fixable">
-          <div class="site-header__initial">
-            <button class="sticky-header-toggle" data-drupal-selector="sticky-header-toggle" role="switch" aria-controls="site-header__inner" aria-label="{{ 'Sticky header'|t }}" aria-checked="false">
-              <span class="sticky-header-toggle__icon">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </button>
-          </div>
-
-          {# Needs to extend full width so box shadow will also extend. #}
-          <div id="site-header__inner" class="site-header__inner" data-drupal-selector="site-header-inner">
-            <div class="container site-header__inner__container">
-
-              {{ page.header }}
-
-              {% if page.primary_menu or page.secondary_menu %}
-                <div class="mobile-buttons" data-drupal-selector="mobile-buttons">
-                  <button class="mobile-nav-button" data-drupal-selector="mobile-nav-button" aria-label="{{ 'Main Menu'|t }}" aria-controls="header-nav" aria-expanded="false">
-                    <span class="mobile-nav-button__label">{{ 'Menu'|t }}</span>
-                    <span class="mobile-nav-button__icon"></span>
-                  </button>
-                </div>
-
-                <div id="header-nav" class="header-nav" data-drupal-selector="header-nav">
-                  {{ page.primary_menu }}
-                  {{ page.secondary_menu }}
-                </div>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </header>
-    {% endif %}
-
-    {% if page.quick_links %}
-      <div class="quick-links-bar">
-        {{ page.quick_links }}
-      </div>
-    {% endif %}
-
-    <div id="main-wrapper" class="layout-main-wrapper layout-container">
-      <div id="main" class="layout-main">
-        <div class="main-content">
-          <a id="main-content" tabindex="-1"></a>
-          {{ page.hero }}
-          <div class="main-content__container container">
-            {{ page.highlighted }}
-            {{ page.breadcrumb }}
-
-            {% if page.sidebar %}
-              <div class="sidebar-grid grid-full">
-                <main class="site-main">
-                  {{ page.content_above }}
-                  {{ page.content }}
-                </main>
-
-                {{ page.sidebar }}
-              </div>
-            {% else %}
-              <main>
-                {{ page.content_above }}
-                {{ page.content }}
-              </main>
-            {% endif %}
-            {{ page.content_below }}
-          </div>
-        </div>
-        <div class="social-bar">
-          {{ page.social }}
-        </div>
+      <div id="wk-nav" class="wk-header__nav">
+        <div class="wk-header__primary">{{ page.primary_menu }}</div>
+        <div class="wk-header__secondary">{{ page.secondary_menu }}</div>
       </div>
     </div>
+  </header>
 
-    <footer class="site-footer">
-      <div class="site-footer__inner container">
-        {{ page.footer_top }}
+  {% if page.quick_links %}
+    <div class="wk-quickbar">
+      <div class="wk-container">
+        {{ page.quick_links }}
+      </div>
+    </div>
+  {% endif %}
+
+  <main id="main-content" class="wk-main" tabindex="-1">
+    {{ page.hero }}
+    <div class="wk-container wk-main__inner{% if page.sidebar %} wk-main__inner--sidebar{% endif %}">
+      {% if page.highlighted or page.breadcrumb %}
+        <div class="wk-main__top">
+          {{ page.highlighted }}
+          {{ page.breadcrumb }}
+        </div>
+      {% endif %}
+      <div class="wk-main__content">
+        {{ page.content_above }}
+        {{ page.content }}
+        {{ page.content_below }}
+      </div>
+      {% if page.sidebar %}
+        <aside class="wk-sidebar" aria-label="{{ 'Sidebar'|t }}">
+          {{ page.sidebar }}
+        </aside>
+      {% endif %}
+    </div>
+  </main>
+
+  <footer class="wk-footer">
+    <div class="wk-container">
+      {% if page.footer_top %}
+        <div class="wk-footer__grid">
+          {{ page.footer_top }}
+        </div>
+      {% endif %}
+      <div class="wk-footer__bottom">
+        <p class="wk-footer__legal">&copy; {{ 'now'|date('Y') }} {{ 'Sample Community Schools. Prototype with sample content only.'|t }}</p>
         {{ page.footer_bottom }}
       </div>
-    </footer>
+    </div>
+  </footer>
 
-    <div class="overlay" data-drupal-selector="overlay"></div>
-
-  </div>
 </div>

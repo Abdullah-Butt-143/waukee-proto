@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Waukee menu: plain, accessible nested lists. Used for every menu
+ * (audience, account, intranet, quick links, footer).
+ */
+#}
+{% import _self as menus %}
+{{ menus.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+  {% import _self as menus %}
+  {% if items %}
+    <ul{{ attributes.addClass('wk-menu', 'wk-menu--level-' ~ (menu_level + 1)) }}>
+      {% for item in items %}
+        {%- set li_classes = ['wk-menu__item', item.in_active_trail ? 'is-active-trail', item.below ? 'has-children'] -%}
+        <li{{ item.attributes.addClass(li_classes) }}>
+          {{ link(item.title, item.url, {'class': ['wk-menu__link', item.in_active_trail ? 'is-active-trail']}) }}
+          {% if item.below %}
+            {{ menus.menu_links(item.below, create_attribute(), menu_level + 1) }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}

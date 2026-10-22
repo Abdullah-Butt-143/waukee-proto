@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" role="img" aria-label="Waukee Prototype">
+  <rect width="44" height="44" rx="12" fill="#5B2C83"/>
+  <circle cx="34" cy="10" r="5" fill="#C5E63A"/>
+  <path d="M9 15l5.5 15L22 17l7.5 13L35 15" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Event teaser: date badge (in the event's own timezone), title, time, place.
+ */
+#}
+{% set start = node.field_when.0.value %}
+{% set tz = node.field_when.0.timezone ?: 'America/Chicago' %}
+<article{{ attributes.addClass('wk-card', 'wk-card--event') }}>
+  {% if start %}
+    <div class="wk-event__date" aria-hidden="true">
+      <span class="wk-event__month">{{ start|format_date('custom', 'M', tz) }}</span>
+      <span class="wk-event__day">{{ start|format_date('custom', 'j', tz) }}</span>
+    </div>
+  {% endif %}
+  <div class="wk-card__body">
+    <h3 class="wk-card__title"><a href="{{ url }}" rel="bookmark">{{ label }}</a></h3>
+    <p class="wk-card__meta">
+      {%- if start %}{{ start|format_date('custom', 'l, g:i a', tz) }}{% endif -%}
+      {%- if node.field_location.value %} <span aria-hidden="true">&middot;</span> {{ node.field_location.value }}{% endif -%}
+    </p>
+  </div>
+</article>

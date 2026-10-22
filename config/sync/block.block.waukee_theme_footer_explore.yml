@@ -1,0 +1,25 @@
+uuid: f85c70bd-30fe-4bfb-9831-9b2c2e42b92c
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.audience
+  module:
+    - system
+  theme:
+    - waukee_theme
+id: waukee_theme_footer_explore
+theme: waukee_theme
+region: footer_top
+weight: 1
+provider: null
+plugin: 'system_menu_block:audience'
+settings:
+  id: 'system_menu_block:audience'
+  label: Explore
+  label_display: '1'
+  provider: system
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }
