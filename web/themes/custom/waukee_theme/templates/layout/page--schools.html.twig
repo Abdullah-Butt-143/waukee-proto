@@ -1,0 +1,457 @@
+{#
+/**
+ * @file
+ * Schools directory (/schools): the approved Tailwind design, rendered as-is.
+ * Search / grade / feeder filtering lives in js/schools-filter.js.
+ */
+#}
+{{ attach_library('waukee_theme/front') }}
+{{ attach_library('waukee_theme/schools') }}
+{% set total = schools.elementary|length + schools.middle|length + schools.transition|length + schools.high|length %}
+<div class="bg-background font-body-md text-body-md text-on-surface antialiased">
+{% include "@waukee_theme/includes/tw-header.html.twig" %}
+<main id="main-content" class="w-full pt-20 bg-background"><div class="flex flex-col w-full">
+<!-- District Hero & Directory Search Header -->
+<section class="relative w-full bg-primary-container text-on-primary py-16 lg:py-20 overflow-hidden">
+<div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-secondary-fixed-dim/15 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-24 -left-20 w-80 h-80 rounded-full bg-primary-fixed/10 blur-2xl pointer-events-none"></div>
+<div class="max-w-[1280px] mx-auto px-margin relative z-10 flex flex-col gap-6">
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-label-sm font-label-sm text-primary-fixed-dim/80">
+<a class="hover:text-accent-gold-bright transition-colors focus:outline-none focus:underline" href="/">Home</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span aria-current="page" class="text-on-primary font-semibold">Schools</span>
+</nav>
+<div class="max-w-3xl flex flex-col gap-3">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/20 text-accent-gold-bright text-label-sm font-label-sm w-fit">
+<span class="material-symbols-outlined text-[16px]">domain</span>
+<span>OUR {{ total }} LEARNING COMMUNITIES</span>
+</div>
+<h1 class="font-display-hero text-display-hero-mobile lg:text-display-hero text-on-primary tracking-tight font-extrabold leading-tight">
+          Our Schools
+        </h1>
+<p class="font-body-lg text-body-lg text-primary-fixed-dim/90 max-w-2xl leading-relaxed">
+          From nurturing neighborhood elementary environments to state-of-the-art high schools and specialized career academies, find the right community for your learner.
+        </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2 pt-6">
+<div class="bg-primary/50 backdrop-blur-md rounded-xl p-4 flex flex-col">
+<span class="font-label-sm text-label-sm text-accent-gold-bright uppercase tracking-wider">Elementary</span>
+<span class="font-headline-lg text-headline-lg text-on-primary font-bold">{{ schools.elementary|length }} Schools</span>
+<span class="font-body-sm text-body-sm text-primary-fixed-dim/70">Grades K–5</span>
+</div>
+<div class="bg-primary/50 backdrop-blur-md rounded-xl p-4 flex flex-col">
+<span class="font-label-sm text-label-sm text-accent-gold-bright uppercase tracking-wider">Middle</span>
+<span class="font-headline-lg text-headline-lg text-on-primary font-bold">{{ schools.middle|length }} Schools</span>
+<span class="font-body-sm text-body-sm text-primary-fixed-dim/70">Grades 6–8</span>
+</div>
+<div class="bg-primary/50 backdrop-blur-md rounded-xl p-4 flex flex-col">
+<span class="font-label-sm text-label-sm text-accent-gold-bright uppercase tracking-wider">9th Grade Campuses</span>
+<span class="font-headline-lg text-headline-lg text-on-primary font-bold">{{ schools.transition|length }} Centers</span>
+<span class="font-body-sm text-body-sm text-primary-fixed-dim/70">Dedicated Transition</span>
+</div>
+<div class="bg-primary/50 backdrop-blur-md rounded-xl p-4 flex flex-col">
+<span class="font-label-sm text-label-sm text-accent-gold-bright uppercase tracking-wider">Comprehensive HS</span>
+<span class="font-headline-lg text-headline-lg text-on-primary font-bold">{{ schools.high|length }} High Schools</span>
+<span class="font-body-sm text-body-sm text-primary-fixed-dim/70">Warriors &amp; Wolves</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Search, Tier Filter & Feeder Matrix -->
+{# Sticks below the fixed site header (utility bar 24px + main bar 80px). #}
+<section class="sticky top-[104px] z-30 bg-surface/95 backdrop-blur-md shadow-sm">
+<div class="max-w-[1280px] mx-auto px-margin py-4 flex flex-col gap-4">
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+<div class="relative flex-1 max-w-xl">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-muted">search</span>
+<input aria-label="Filter schools directory" class="w-full pl-12 pr-10 py-3 rounded-xl bg-surface-container-lowest text-on-surface font-body-md placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary shadow-sm text-sm" id="schoolSearchInput" placeholder="Search schools by name, mascot, grade, or address..." type="search"/>
+<button aria-label="Clear school search input" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-on-surface p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-primary" id="clearSearchBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<label class="sr-only" for="feederSelect">Filter by Feeder Zone</label>
+<div class="relative min-w-[210px]">
+<select class="w-full appearance-none bg-surface-container-lowest text-on-surface font-label-md text-label-md py-3 pl-4 pr-10 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer" id="feederSelect">
+<option value="all">All District Feeders</option>
+<option value="northwest">Northwest Feeder Zone</option>
+<option value="waukee">Waukee High Feeder Zone</option>
+<option value="district-wide">District-Wide Programs</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none">expand_more</span>
+</div>
+<a class="inline-flex items-center gap-2 bg-accent-purple-tint hover:bg-primary-fixed text-primary px-4 py-3 rounded-xl font-label-md text-label-md transition-all shadow-sm" href="#feederMapSection">
+<span class="material-symbols-outlined text-[18px]">alt_route</span>
+<span>Boundary &amp; Feeder Map</span>
+</a>
+</div>
+</div>
+<div aria-label="Grade level filters" class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none" id="tierFilterGroup" role="tablist">
+<button class="tier-pill active shrink-0 px-4 py-2 rounded-full font-label-md text-label-md bg-primary text-on-primary shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary" data-filter="all" type="button">
+          All Schools ({{ total }})
+        </button>
+<button class="tier-pill shrink-0 px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container hover:bg-surface-variant text-on-surface-variant transition-all focus:outline-none focus:ring-2 focus:ring-primary" data-filter="elementary" type="button">
+          Elementary (K–5)
+        </button>
+<button class="tier-pill shrink-0 px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container hover:bg-surface-variant text-on-surface-variant transition-all focus:outline-none focus:ring-2 focus:ring-primary" data-filter="middle" type="button">
+          Middle School (6–8)
+        </button>
+<button class="tier-pill shrink-0 px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container hover:bg-surface-variant text-on-surface-variant transition-all focus:outline-none focus:ring-2 focus:ring-primary" data-filter="transition" type="button">
+          9th Grade Campuses
+        </button>
+<button class="tier-pill shrink-0 px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container hover:bg-surface-variant text-on-surface-variant transition-all focus:outline-none focus:ring-2 focus:ring-primary" data-filter="high" type="button">
+          High Schools (10–12)
+        </button>
+<button class="tier-pill shrink-0 px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container hover:bg-surface-variant text-on-surface-variant transition-all focus:outline-none focus:ring-2 focus:ring-primary" data-filter="specialized" type="button">
+          Specialized &amp; Innovation
+        </button>
+</div>
+</div>
+</section>
+<!-- Main School Directory Content Body -->
+<div class="max-w-[1280px] mx-auto px-margin py-10 flex flex-col gap-16 w-full">
+<div class="flex items-center justify-between text-body-sm font-body-sm text-text-muted">
+<div aria-live="polite" id="filterResultLabel">Showing <strong class="text-on-surface font-semibold">{{ total }} of {{ total }}</strong> learning communities</div>
+<button class="text-primary hover:text-primary-container font-semibold underline hidden" id="resetAllFiltersBtn" type="button">Reset all filters</button>
+</div>
+<div class="hidden flex-col items-center justify-center text-center py-20 px-4 bg-surface-container-lowest rounded-2xl shadow-sm" id="noResultsState">
+<div class="w-16 h-16 rounded-full bg-accent-purple-tint flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined text-[32px]">search_off</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">No schools found</h3>
+<p class="font-body-md text-body-md text-text-muted max-w-md mt-2">
+        We couldn't find any learning community matching your current search query or feeder selection.
+      </p>
+<button class="mt-6 px-6 py-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-all shadow-sm" id="clearSearchFiltersAction" type="button">
+        Reset Directory Filters
+      </button>
+</div>
+<!-- Section A: High Schools (10-12) -->
+<section class="school-category-section flex flex-col gap-6" data-category="high" id="high-schools">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-accent-gold-bright flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">school</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight">High Schools (10–12)</h2>
+<p class="font-body-sm text-body-sm text-text-muted">Two comprehensive secondary communities preparing graduates for higher education and career paths.</p>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-accent-purple-tint text-primary font-label-sm text-label-sm font-semibold">{{ schools.high|length }} Campuses</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+{% for s in schools.high %}
+<article class="school-card group bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col" data-feeder="{{ s.feeder }}" data-name="{{ s.name }} {{ s.mascot }}" data-tier="high">
+<div class="relative h-64 overflow-hidden">
+<img alt="{{ s.name }} campus" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="{{ s.image }}"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
+<div class="absolute top-4 left-4 flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold shadow-sm">{{ s.badge }}</span>
+<span class="px-3 py-1 rounded-full bg-surface-base/90 backdrop-blur-sm text-primary font-label-sm text-label-sm font-semibold">Grades {{ s.grades }}</span>
+</div>
+<div class="absolute bottom-4 left-4 right-4 text-on-primary">
+<span class="text-label-sm font-label-sm text-accent-gold-bright uppercase tracking-wider">{{ s.feeder == 'waukee' ? 'Waukee High Feeder Zone' : 'Northwest Feeder Zone' }}</span>
+<h3 class="font-headline-md text-headline-md font-bold text-on-primary leading-tight">{{ s.name }}</h3>
+</div>
+</div>
+<div class="p-6 flex-1 flex flex-col justify-between gap-6">
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">location_on</span>
+<div>
+<span class="block font-label-sm text-label-sm text-text-muted">Campus Location</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">{{ s.address }}</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">groups</span>
+<div>
+<span class="block font-label-sm text-label-sm text-text-muted">Current Enrollment</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">{{ s.enrollment }}</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 bg-surface-subtle -mx-6 -mb-6 px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-status-success"></span>
+<span class="font-label-sm text-label-sm text-text-muted">Principal: {{ s.principal }}</span>
+</div>
+<a class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-container text-on-primary px-4 py-2 rounded-lg font-label-md text-label-md transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-primary" href="{{ s.url ?: '#' }}">
+<span>Explore School</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+{% endfor %}
+</div>
+</section>
+<!-- Section B: 9th Grade Transition Campuses -->
+<section class="school-category-section flex flex-col gap-6" data-category="transition" id="transition-campuses">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-accent-lime-tint text-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">flight_takeoff</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight">Dedicated 9th Grade Campuses</h2>
+<p class="font-body-sm text-body-sm text-text-muted">Specialized transition environments uniquely bridging middle school into comprehensive high school achievements.</p>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-accent-purple-tint text-primary font-label-sm text-label-sm font-semibold">{{ schools.transition|length }} Campuses</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+{% for s in schools.transition %}
+<article class="school-card bg-surface-container-lowest rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between" data-feeder="{{ s.feeder }}" data-name="{{ s.name }} 8-9" data-tier="transition">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="px-3 py-1 rounded-full bg-accent-purple-tint text-primary font-label-sm text-label-sm font-semibold">{{ s.feeder == 'waukee' ? 'Waukee High Feeder' : 'Northwest Feeder' }}</span>
+<span class="px-2.5 py-0.5 rounded-md bg-surface-muted text-text-muted text-label-sm font-medium">Grades {{ s.grades }}</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">{{ s.name }}</h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-2">
+              {{ s.summary }}
+            </p>
+<div class="mt-4 pt-4 flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span>{{ s.address }}</span>
+</div>
+{% if s.phone %}
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">call</span>
+<span>{{ s.phone }}</span>
+</div>
+{% endif %}
+</div>
+</div>
+<div class="mt-6 pt-4 flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted">Enrollment: {{ s.enrollment }}</span>
+<a class="inline-flex items-center gap-1 text-primary hover:text-primary-container font-label-md text-label-md font-semibold" href="{{ s.url ?: '#' }}">
+<span>{{ s.link_label }}</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+</article>
+{% endfor %}
+</div>
+</section>
+<!-- Section C: Middle Schools (6–8) -->
+<section class="school-category-section flex flex-col gap-6" data-category="middle" id="middle-schools">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">menu_book</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight">Middle Schools (6–8)</h2>
+<p class="font-body-sm text-body-sm text-text-muted">Dynamic learning communities fostering exploratory thinking, fine arts, and team collaboration.</p>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-accent-purple-tint text-primary font-label-sm text-label-sm font-semibold">{{ schools.middle|length }} Schools</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+{% for s in schools.middle %}
+<article class="school-card bg-surface-container-lowest rounded-2xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-feeder="{{ s.feeder }}" data-name="{{ s.name }}" data-tier="middle">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="text-label-sm font-label-sm font-semibold text-primary">{{ s.feeder == 'waukee' ? 'Waukee Feeder' : 'Northwest Feeder' }}</span>
+<span class="text-label-sm font-label-sm text-text-muted">Grades {{ s.grades }}</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface">{{ s.name }}</h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-2">{{ s.address }}</p>
+<p class="font-label-sm text-label-sm text-secondary font-semibold mt-1">Mascot: {{ s.mascot }}</p>
+</div>
+<div class="mt-6 pt-3 flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted">{{ s.enrollment }}</span>
+<a aria-label="Explore {{ s.name }}" class="p-2 rounded-lg bg-surface-muted hover:bg-accent-purple-tint text-primary transition-colors" href="{{ s.url ?: '#' }}">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</article>
+{% endfor %}
+</div>
+</section>
+<!-- Section D: Elementary Schools (K–5) -->
+<section class="school-category-section flex flex-col gap-6" data-category="elementary" id="elementary-schools">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">child_care</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight">Elementary Schools (K–5)</h2>
+<p class="font-body-sm text-body-sm text-text-muted">11 neighborhood elementary centers instilling curiosity, literacy, and community belonging.</p>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-accent-purple-tint text-primary font-label-sm text-label-sm font-semibold">{{ schools.elementary|length }} Schools</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+{% for s in schools.elementary %}
+<article class="school-card bg-surface-container-lowest rounded-2xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-feeder="{{ s.feeder }}" data-name="{{ s.name }} {{ s.mascot }}" data-tier="elementary">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm font-semibold">{{ s.feeder == 'waukee' ? 'Waukee Feeder' : 'Northwest Feeder' }}</span>
+<span class="text-label-sm font-label-sm text-text-muted">K–5</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface">{{ s.name }}</h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-1">{{ s.address }}</p>
+<div class="flex items-center gap-2 mt-3">
+<span class="material-symbols-outlined text-secondary text-[16px]">pets</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">{{ s.mascot }}</span>
+</div>
+</div>
+<div class="mt-5 pt-3 flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted">Principal: {{ s.principal }}</span>
+<a class="inline-flex items-center gap-1 text-primary hover:text-primary-container font-label-md text-label-md font-semibold" href="{{ s.url ?: '#' }}">
+<span>Explore</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+</article>
+{% endfor %}
+</div>
+</section>
+<!-- Section E: Specialized Centers & Career Innovation -->
+<section class="school-category-section flex flex-col gap-6" data-category="specialized" id="specialized-centers">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-accent-gold-bright flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">hub</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight">Specialized Centers &amp; Career Innovation</h2>
+<p class="font-body-sm text-body-sm text-text-muted">Experiential hubs, workplace-based career mentorships, and state-of-the-art regional facilities.</p>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-accent-purple-tint text-primary font-label-sm text-label-sm font-semibold">{{ schools.specialized|length }} Centers</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+{% for s in schools.specialized %}
+{% if s.image %}
+<article class="school-card group bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col" data-feeder="district-wide" data-name="{{ s.name }}" data-tier="specialized">
+<div class="relative h-44 overflow-hidden">
+<img alt="{{ s.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="{{ s.image }}"/>
+<span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold shadow-sm">{{ s.badge }}</span>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface">{{ s.name }}</h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-2">{{ s.summary }}</p>
+</div>
+<div class="mt-5 pt-3 flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted">District-Wide</span>
+<a class="inline-flex items-center gap-1 text-primary hover:text-primary-container font-label-md text-label-md font-semibold" href="{{ s.url ?: '#' }}">
+<span>{{ s.link_label }}</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+</div>
+</article>
+{% else %}
+<article class="school-card bg-surface-container-lowest rounded-2xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-feeder="district-wide" data-name="{{ s.name }}" data-tier="specialized">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="px-2.5 py-0.5 rounded-full bg-accent-purple-tint text-primary font-label-sm text-label-sm font-semibold">{{ s.badge }}</span>
+<span class="text-label-sm font-label-sm text-text-muted">{{ s.grades }}</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface">{{ s.name }}</h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-2">{{ s.summary }}</p>
+<div class="flex items-center gap-2 mt-4 font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span>{{ s.address }}</span>
+</div>
+</div>
+<div class="mt-5 pt-3 flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted">{{ s.grades }}</span>
+<a class="inline-flex items-center gap-1 text-primary hover:text-primary-container font-label-md text-label-md font-semibold" href="{{ s.url ?: '#' }}">
+<span>{{ s.link_label }}</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+</article>
+{% endif %}
+{% endfor %}
+</div>
+</section>
+<!-- Feeder Pattern Banner -->
+<section class="relative rounded-3xl bg-gradient-to-br from-primary-container via-primary-container to-primary text-on-primary overflow-hidden p-8 lg:p-12 scroll-mt-48" id="feederMapSection">
+<div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-accent-gold-bright/20 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-8 flex flex-col gap-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/20 text-accent-gold-bright text-label-sm font-label-sm font-bold uppercase tracking-wider w-fit">
+<span class="material-symbols-outlined text-[16px]">alt_route</span>
+<span>Feeder Pattern Architecture</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl-mobile lg:text-headline-xl text-on-primary font-bold tracking-tight">Find Your Attendance Boundary &amp; Feeder School</h2>
+<p class="font-body-md text-body-md text-on-primary/80 max-w-2xl">Waukee Community Schools operates two distinct secondary feeder tracks designed to preserve close-knit neighborhood communities as students advance from kindergarten through graduation.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+<div class="bg-primary/60 rounded-xl p-4">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-md text-label-md font-bold text-accent-gold-bright">Waukee High Feeder</span>
+<span class="font-label-sm text-label-sm text-on-primary/70 uppercase">Warriors Track</span>
+</div>
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-on-primary">
+<span>Elementary<br/>(K–5)</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+<span>WMS / SMS<br/>(6–7)</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+<span>Prairieview<br/>(8–9)</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+<span class="text-accent-gold-bright font-bold">Waukee<br/>HS</span>
+</div>
+</div>
+<div class="bg-primary/60 rounded-xl p-4">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-md text-label-md font-bold text-accent-gold-bright">Northwest High Feeder</span>
+<span class="font-label-sm text-label-sm text-on-primary/70 uppercase">Wolves Track</span>
+</div>
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-on-primary">
+<span>Elementary<br/>(K–5)</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+<span>NMS / TMS<br/>(6–7)</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+<span>Trailridge<br/>(8–9)</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+<span class="text-accent-gold-bright font-bold">Northwest<br/>HS</span>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 flex flex-col items-stretch lg:items-center gap-4">
+<a class="inline-flex items-center justify-center gap-2 bg-secondary-container hover:bg-accent-gold-bright text-on-secondary-container font-label-md text-label-md px-6 py-3 rounded-lg shadow-md transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">map</span>
+<span>Interactive Boundary Locator</span>
+</a>
+<a class="inline-flex items-center justify-center gap-2 text-on-primary hover:text-accent-gold-bright font-label-md text-label-md font-bold transition-colors" href="/transportation">
+<span class="material-symbols-outlined text-[18px]">directions_bus</span>
+<span>Bus Routes &amp; Transportation</span>
+</a>
+</div>
+</div>
+</section>
+<!-- District Campus Map -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between gap-4">
+<h2 class="font-headline-md text-headline-md text-primary font-bold tracking-tight">District Campuses Across Waukee, Urbandale &amp; West Des Moines</h2>
+<span class="font-label-sm text-label-sm text-text-muted shrink-0">Coverage Area: 64 Sq Miles</span>
+</div>
+<div class="relative h-80 rounded-2xl overflow-hidden shadow-sm bg-surface-container">
+<iframe class="absolute inset-0 w-full h-full border-0" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-93.95%2C41.54%2C-93.68%2C41.68&amp;layer=mapnik" title="Map of the Waukee Community School District area"></iframe>
+<div class="absolute inset-x-4 top-1/2 -translate-y-1/2 mx-auto max-w-md bg-surface-base/95 backdrop-blur-md rounded-xl shadow-lg p-4 flex items-center gap-3 pointer-events-none">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-accent-gold-bright flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">school</span>
+</div>
+<div>
+<span class="block font-title-md text-title-md font-bold text-primary">Waukee Community School District</span>
+<span class="block font-body-sm text-body-sm text-text-muted">Serving Dallas and Polk Counties with 19 comprehensive campuses</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+{% include "@waukee_theme/includes/tw-footer.html.twig" %}
+</div>

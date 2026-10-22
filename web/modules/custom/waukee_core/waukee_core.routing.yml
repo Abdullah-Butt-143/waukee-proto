@@ -5,3 +5,20 @@ waukee_core.schools:
     _title: 'Our Schools'
   requirements:
     _permission: 'access content'
+
+waukee_core.academics:
+  path: '/academics'
+  defaults:
+    _controller: '\Drupal\waukee_core\Controller\SchoolsController::staticPage'
+    _title: 'Academics'
+  requirements:
+    _permission: 'access content'
+
+waukee_core.school_detail:
+  path: '/schools/{school}'
+  defaults:
+    _controller: '\Drupal\waukee_core\Controller\SchoolsController::detail'
+    _title_callback: '\Drupal\waukee_core\Controller\SchoolsController::detailTitle'
+  requirements:
+    _permission: 'access content'
+    school: '[a-z0-9-]+'
