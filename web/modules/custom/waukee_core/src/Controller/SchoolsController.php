@@ -3,44 +3,56 @@
 namespace Drupal\waukee_core\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Lists the school groups as cards on /schools.
+ * /schools (directory) and /schools/{school} (one school's page).
+ *
+ * Both routes render an empty markup array: the actual HTML comes entirely
+ * from theme page templates (page--schools.html.twig and
+ * page--schools--detail.html.twig), fed by waukee_theme_preprocess_page().
+ * This controller only needs to provide the 404 and cache tags.
  */
 class SchoolsController extends ControllerBase {
 
   /**
-   * Builds the schools listing.
+   * /schools: the directory. Data is loaded in preprocess_page.
    */
   public function build(): array {
-    $storage = $this->entityTypeManager()->getStorage('group');
-    $ids = $storage->getQuery()
-      ->accessCheck(TRUE)
-      ->condition('type', 'school')
-      ->sort('label')
-      ->execute();
-    $schools = [];
-    $nodes = $this->entityTypeManager()->getStorage('node');
-    foreach ($storage->loadMultiple($ids) as $group) {
-      $value = fn(string $field) => $group->hasField($field) ? $group->get($field)->value : '';
-      // The school's site is its landing page (a Basic page titled like the
-      // school); fall back to the group page if there is none.
-      $landing = $nodes->loadByProperties(['type' => 'page', 'title' => $group->label(), 'status' => 1]);
-      $schools[] = [
-        'name' => $group->label(),
-        'url' => $landing ? reset($landing)->toUrl()->toString() : $group->toUrl()->toString(),
-        'grades' => $value('field_grades'),
-        'address' => $value('field_address'),
-        'phone' => $value('field_phone'),
-        'principal' => $value('field_principal'),
-        'summary' => $value('field_summary'),
-      ];
-    }
     return [
-      '#theme' => 'waukee_schools',
-      '#schools' => $schools,
+      '#markup' => '',
       '#cache' => ['tags' => ['group_list']],
     ];
+  }
+
+  /**
+   * /schools/{school}: one school's page.
+   */
+  public function detail(string $school): array {
+    $group = waukee_core_school_by_slug($school);
+    if (!$group) {
+      throw new NotFoundHttpException();
+    }
+    return [
+      '#markup' => '',
+      '#cache' => ['tags' => $group->getCacheTags()],
+    ];
+  }
+
+  /**
+   * Title callback for waukee_core.school_detail.
+   */
+  public function detailTitle(string $school): string {
+    $group = waukee_core_school_by_slug($school);
+    return $group ? (string) $group->label() : (string) $this->t('School');
+  }
+
+  /**
+   * Routes (e.g. /academics) whose markup lives entirely in a theme page
+   * template named for the route's path (e.g. page--academics.html.twig).
+   */
+  public function staticPage(): array {
+    return ['#markup' => ''];
   }
 
 }

@@ -9,7 +9,8 @@ global:
     - core/drupal
     - core/once
 
-# Homepage design (Tailwind mockup), attached only by page--front.html.twig.
+# Tailwind page designs (homepage, schools directory). Attaching it also
+# strips Olivero/waukee.css from the page (waukee_theme_css_alter()).
 front:
   css:
     theme:
@@ -21,3 +22,10 @@ front:
     https://cdn.tailwindcss.com: { type: external, minified: true }
     js/tailwind-config.js: {}
   header: true
+
+schools:
+  js:
+    js/schools-filter.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

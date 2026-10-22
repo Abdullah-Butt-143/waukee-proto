@@ -6,7 +6,9 @@
  */
 #}
 {{ attach_library('waukee_theme/front') }}
-<div class="bg-background font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full bg-primary-container text-on-primary py-space-xs"><div class="max-w-[1280px] mx-auto px-margin flex items-center justify-between font-label-sm text-label-sm"><div class="flex items-center gap-space-md"><span class="opacity-80">Waukee Community School District</span><span class="opacity-40">|</span><span class="opacity-80">Dedicated to Optimism & Excellence</span></div><div class="flex items-center gap-space-lg"><nav class="flex items-center gap-space-md" data-active-classes="text-secondary-fixed-dim font-bold underline"><a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" data-path="students" href="/students">Students</a><a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" data-path="parents" href="/families">Parents</a><a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" data-path="community" href="/community">Community</a><a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" data-path="staff-intranet" href="/user/login">Staff Intranet</a></nav><form action="/search" method="get" role="search" class="flex items-center bg-primary px-space-sm py-1 rounded-lg gap-space-xs"><span class="material-symbols-outlined text-label-sm text-on-primary">search</span><input name="keys" aria-label="Search district resources" class="bg-transparent text-label-sm text-on-primary placeholder:text-on-primary/60 focus:outline-none w-28 lg:w-36" placeholder="Search district..." type="text"/></form></div></div></div><div class="h-20 bg-surface/90 backdrop-blur-xl"><div class="max-w-[1280px] mx-auto px-margin h-full flex items-center justify-between"><a href="/" class="flex items-center gap-space-md"><div class="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center text-accent-gold-bright shadow-sm"><span class="material-symbols-outlined text-[28px]">school</span></div><div class="flex flex-col"><span class="font-title-md text-title-md text-primary font-bold tracking-tight uppercase leading-tight">Waukee</span><span class="font-label-sm text-label-sm text-secondary font-bold tracking-wider uppercase leading-none">Community Schools</span></div></a><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="text-primary font-bold bg-accent-purple-tint rounded-lg"><a aria-current="page" class="px-3 py-2 transition-colors text-primary font-bold bg-accent-purple-tint rounded-lg" data-path="home" href="/">Home</a><a class="px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="about" href="/district">About</a><a class="px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="schools" href="/schools">Schools</a><a class="px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="academics" href="/students/resources">Academics</a><a class="px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="enroll" href="/enrollment">Enroll</a><a class="px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="resources" href="/families">Resources</a><a class="px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="extracurriculars" href="/students/activities">Extracurriculars</a></nav><div class="flex items-center gap-space-md"><a class="inline-flex items-center justify-center bg-secondary-container hover:bg-accent-gold-bright text-on-secondary-container font-label-md text-label-md px-space-lg py-2.5 rounded-lg transition-all shadow-sm" data-path="enroll-now" href="/enrollment">Enroll Now</a><a href="/user" aria-label="Profile" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></a></div></div></div></header><main id="main-content" class="w-full pt-20 bg-background"><div class="flex flex-col w-full">{% if page.alert %}<div class="wk-front-alert" role="region" aria-label="{{ 'Site alerts'|t }}">{{ page.alert }}</div>{% endif %}
+<div class="bg-background font-body-md text-body-md text-on-surface antialiased">
+{% include "@waukee_theme/includes/tw-header.html.twig" %}
+<main id="main-content" class="w-full pt-20 bg-background"><div class="flex flex-col w-full">
 <!-- 1. HERO SECTION -->
 <section class="relative w-full min-h-[640px] lg:h-[720px] flex items-center justify-center overflow-hidden">
 <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 scale-105" data-alt="A grand aerial and frontal perspective of modern brick Waukee Community School campus building with lush manicured green lawns, autumn trees, and diverse students walking together carrying backpacks under a warm, inspiring sunny sky with subtle collegiate architectural details." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBjuGh62N7aIfuAEmcG0rWgbkLADsuVNGjXUOT71j0ur2rZmAktxgamnI-Nh92r9ik-myMxQwrXE8MII8MVKZ6fDoyZEuPx7_ng279sS-JaK7nth7J02dYLrT24aSsHFslsMsbPu_tHKKkfdcU0-X3m0P3FSXHhmmiNd2AIwDfa3uW35GwA447IrSOpjbqMsMY0R-q1e5Gwsw1aToKqO3zghSJv0kxngNxwR5PZUGgocMQiuP0ggM7d')"></div>
@@ -18,10 +20,10 @@
 <span>Welcome to Waukee Community School District</span>
 </div>
 <h1 class="font-display-hero text-display-hero text-on-primary font-extrabold max-w-4xl tracking-tight leading-tight drop-shadow-lg">
-        Empowering Futures, One Step at a Time
+        We Are Waukee
       </h1>
 <p class="font-body-lg text-body-lg text-on-primary/90 max-w-2xl mt-5 font-normal leading-relaxed drop-shadow-md">
-        Inspiring over 13,000 learners across 19 world-class facilities who feel valued, challenged, and prepared to embrace tomorrow’s opportunities.
+        At Waukee Community School District, we inspire learners who feel valued, challenged, and prepared to embrace tomorrow’s opportunities.
       </p>
 <div class="mt-8 flex flex-col sm:flex-row items-center gap-space-md">
 <a class="inline-flex items-center justify-center bg-secondary-container hover:bg-accent-gold-bright text-on-secondary-container font-label-md text-label-md px-9 py-3.5 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 tracking-wide uppercase font-bold" data-path="enroll-now" href="/enrollment">
@@ -29,14 +31,14 @@
           <span class="material-symbols-outlined ml-2 text-[20px]">arrow_forward</span>
 </a>
 </div>
-<div class="mt-12 w-full max-w-4xl bg-surface-base/95 backdrop-blur-md rounded-2xl p-3 shadow-xl grid grid-cols-2 sm:grid-cols-4 gap-2">
+<div class="mt-12 w-full max-w-5xl bg-surface-base/95 backdrop-blur-md rounded-2xl p-3 shadow-xl grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
 <a class="flex items-center justify-center gap-space-xs py-3 px-4 rounded-xl text-primary font-label-md text-label-md hover:bg-accent-purple-tint transition-colors duration-150 group" data-path="calendar" href="/calendar">
 <span class="material-symbols-outlined text-[20px] text-accent-gold-bright group-hover:scale-110 transition-transform">calendar_month</span>
-<span>District Calendar</span>
+<span>Calendar</span>
 </a>
 <a class="flex items-center justify-center gap-space-xs py-3 px-4 rounded-xl text-primary font-label-md text-label-md hover:bg-accent-purple-tint transition-colors duration-150 group" data-path="menus" href="/lunch-menus">
 <span class="material-symbols-outlined text-[20px] text-accent-gold-bright group-hover:scale-110 transition-transform">restaurant_menu</span>
-<span>Lunch Menus</span>
+<span>Menus</span>
 </a>
 <a class="flex items-center justify-center gap-space-xs py-3 px-4 rounded-xl text-primary font-label-md text-label-md hover:bg-accent-purple-tint transition-colors duration-150 group" data-path="powerschool" href="/families">
 <span class="material-symbols-outlined text-[20px] text-accent-gold-bright group-hover:scale-110 transition-transform">hub</span>
@@ -44,7 +46,15 @@
 </a>
 <a class="flex items-center justify-center gap-space-xs py-3 px-4 rounded-xl text-primary font-label-md text-label-md hover:bg-accent-purple-tint transition-colors duration-150 group" data-path="boundaries" href="/prospective-families/schools">
 <span class="material-symbols-outlined text-[20px] text-accent-gold-bright group-hover:scale-110 transition-transform">map</span>
-<span>Boundaries & Maps</span>
+<span>Boundaries</span>
+</a>
+<a class="flex items-center justify-center gap-space-xs py-3 px-4 rounded-xl text-primary font-label-md text-label-md hover:bg-accent-purple-tint transition-colors duration-150 group" data-path="directory" href="/staff-directory">
+<span class="material-symbols-outlined text-[20px] text-accent-gold-bright group-hover:scale-110 transition-transform">contacts</span>
+<span>Directory</span>
+</a>
+<a class="flex items-center justify-center gap-space-xs py-3 px-4 rounded-xl text-primary font-label-md text-label-md hover:bg-accent-purple-tint transition-colors duration-150 group" data-path="revtrak" href="#">
+<span class="material-symbols-outlined text-[20px] text-accent-gold-bright group-hover:scale-110 transition-transform">payments</span>
+<span>Revtrak</span>
 </a>
 </div>
 </div>
@@ -54,20 +64,20 @@
 <div class="max-w-[1280px] mx-auto px-margin">
 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x-0 md:divide-x md:divide-on-primary/15">
 <div class="flex flex-col items-center">
+<span class="font-display-hero text-headline-xl lg:text-display-hero text-accent-gold-bright font-extrabold tracking-tight">23.5</span>
+<span class="font-label-md text-label-md text-on-primary/80 mt-1 uppercase tracking-wider">Average ACT Composite Score</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-display-hero text-headline-xl lg:text-display-hero text-accent-gold-bright font-extrabold tracking-tight">50+</span>
+<span class="font-label-md text-label-md text-on-primary/80 mt-1 uppercase tracking-wider">National Merit Finalists Since 2010</span>
+</div>
+<div class="flex flex-col items-center">
 <span class="font-display-hero text-headline-xl lg:text-display-hero text-accent-gold-bright font-extrabold tracking-tight">98%</span>
 <span class="font-label-md text-label-md text-on-primary/80 mt-1 uppercase tracking-wider">Graduation Rate</span>
 </div>
 <div class="flex flex-col items-center">
-<span class="font-display-hero text-headline-xl lg:text-display-hero text-accent-gold-bright font-extrabold tracking-tight">23.5</span>
-<span class="font-label-md text-label-md text-on-primary/80 mt-1 uppercase tracking-wider">Average ACT Score</span>
-</div>
-<div class="flex flex-col items-center">
 <span class="font-display-hero text-headline-xl lg:text-display-hero text-accent-gold-bright font-extrabold tracking-tight">19</span>
-<span class="font-label-md text-label-md text-on-primary/80 mt-1 uppercase tracking-wider">Modern Facilities</span>
-</div>
-<div class="flex flex-col items-center">
-<span class="font-display-hero text-headline-xl lg:text-display-hero text-accent-gold-bright font-extrabold tracking-tight">50+</span>
-<span class="font-label-md text-label-md text-on-primary/80 mt-1 uppercase tracking-wider">National Merit Finalists</span>
+<span class="font-label-md text-label-md text-on-primary/80 mt-1 uppercase tracking-wider">District Buildings</span>
 </div>
 </div>
 </div>
@@ -79,59 +89,58 @@
 <div class="lg:col-span-6 flex flex-col items-start space-y-5">
 <div class="inline-flex items-center gap-space-xs text-primary font-label-md text-label-md font-bold uppercase tracking-wider">
 <span class="w-2.5 h-2.5 rounded-full bg-accent-gold-bright"></span>
-            Civic & Academic Leadership
+            We Are Waukee
           </div>
 <h2 class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight leading-tight">
-            Why Choose Waukee Community Schools
+            Why Waukee CSD?
           </h2>
 <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-            At Waukee CSD, we feel like a tight-knit community with the rich opportunities, facilities, and academic depth of one of Iowa’s premier, fastest-growing school districts. From our innovative APEX work-based learning to dedicated faculty and comprehensive arts and athletic programs, every student is known, challenged, and supported.
+            We are a leader in academics. We are a vibrant community. We are an exceptional place to learn, work, and thrive. We are Waukee.
           </p>
 <div class="w-full space-y-3 pt-2">
-<div class="flex items-center gap-space-sm p-3 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-start gap-space-sm p-3 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
 <div class="w-8 h-8 rounded-lg bg-primary-container text-accent-gold-bright flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="material-symbols-outlined text-[18px]">apartment</span>
 </div>
-<div class="font-label-md text-label-md font-bold text-primary tracking-wide uppercase">
-                Top-Tier Academic Excellence (23.5 Avg ACT, 98% Grad Rate)
-              </div>
+<div>
+<div class="font-label-md text-label-md font-bold text-primary tracking-wide uppercase">World Class Facilities</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Our District features 19 buildings with modern, well-maintained facilities. We prioritize continued improvements, up-to-date technology, and welcoming spaces to offer an exceptional educational environment for our students.</p>
+<a class="mt-1 inline-flex items-center gap-1 font-label-sm text-label-sm text-primary font-bold hover:text-secondary" href="/schools">Explore our schools <span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
 </div>
-<div class="flex items-center gap-space-sm p-3 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+</div>
+<div class="flex items-start gap-space-sm p-3 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
 <div class="w-8 h-8 rounded-lg bg-primary-container text-accent-gold-bright flex items-center justify-center shrink-0">
 <span class="material-symbols-outlined text-[18px]">workspace_premium</span>
 </div>
-<div class="font-label-md text-label-md font-bold text-primary tracking-wide uppercase">
-                Nationally Recognized Work-Based Learning (Waukee APEX)
-              </div>
+<div>
+<div class="font-label-md text-label-md font-bold text-primary tracking-wide uppercase">Work-Based Learning</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">We ensure our graduates will succeed in college, the workplace, and life. Three-quarters of our graduating class participate in work-based learning through our Waukee APEX program, career services, internships, and more.</p>
+<a class="mt-1 inline-flex items-center gap-1 font-label-sm text-label-sm text-primary font-bold hover:text-secondary" href="/pathways/apex">Prepare for the future <span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
 </div>
-<div class="flex items-center gap-space-sm p-3 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+</div>
+<div class="flex items-start gap-space-sm p-3 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
 <div class="w-8 h-8 rounded-lg bg-primary-container text-accent-gold-bright flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-[18px]">sports_kabaddi</span>
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
 </div>
-<div class="font-label-md text-label-md font-bold text-primary tracking-wide uppercase">
-                Comprehensive Athletics & Activities (Warriors & Wolves)
-              </div>
+<div>
+<div class="font-label-md text-label-md font-bold text-primary tracking-wide uppercase">Innovation</div>
+<a class="mt-1 inline-flex items-center gap-1 font-label-sm text-label-sm text-primary font-bold hover:text-secondary" href="/prospective-families/why-us">Learn more about us <span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
 </div>
 </div>
-<div class="pt-4">
-<a class="inline-flex items-center justify-center bg-secondary-container hover:bg-accent-gold-bright text-on-secondary-container font-label-md text-label-md px-8 py-3 rounded-lg shadow-md transition-all duration-200 transform hover:-translate-y-0.5 uppercase font-bold" data-path="about" href="/district">
-              Explore Our District
-              <span class="material-symbols-outlined ml-2 text-[20px]">chevron_right</span>
-</a>
 </div>
 </div>
 <div class="lg:col-span-6 relative">
 <div class="relative w-full h-[460px] rounded-3xl overflow-hidden shadow-2xl">
 <div class="w-full h-full bg-cover bg-center transition-transform duration-500 hover:scale-105" data-alt="An expressive, smiling high school student with glasses in a vibrant modern Waukee classroom, actively collaborating with peers while an enthusiastic teacher instructs in the soft-focus background, capturing optimism, diversity, and academic engagement." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuApAqXKDEBRyJZuMLi3x0gEFANYCoH6mhoKWEd-VuAIA48PyxbvBMoMmcxNEmTEOIWeA8nBxFUHXIPjUKyGAKVZ0-TJJv5mi2WI8Z_70BQ8wltRfNCJJuroEVs4_5xGO9pKF74Z6Z55Y5LYtSSjRKYynPIsior4P_tQQi6wTFhuM8OUeFHx5Fq7r5jrIiiMNonj-WOrTl_6cQARAXBbxpJskoR8MeiKYjOt365VZUULYNCsgKg_nxn4')"></div>
 <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
-<div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-surface-base/90 backdrop-blur-md shadow-lg flex items-center justify-between">
+<div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-surface-base/90 backdrop-blur-md shadow-lg flex items-center justify-between gap-3">
 <div>
-<span class="block font-label-sm text-label-sm uppercase font-bold text-secondary">Student Highlight</span>
-<span class="block font-title-md text-title-md font-bold text-primary">Nurturing curiosity & leadership every day</span>
+<span class="block font-body-md text-body-md font-bold text-primary">“Had I not gone to Waukee, I don’t think I would be where I’m at now. It’s an amazing school that shaped me into the person I am today.”</span>
+<span class="block font-label-sm text-label-sm uppercase font-bold text-secondary mt-2">Drew, WHS Class of 2018</span>
 </div>
-<div class="w-10 h-10 rounded-full bg-primary text-accent-gold-bright flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-[20px]">psychology</span>
-</div>
+<a href="/community/news" aria-label="Read Drew's Story" class="w-10 h-10 rounded-full bg-primary text-accent-gold-bright flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">format_quote</span>
+</a>
 </div>
 </div>
 </div>
@@ -315,10 +324,10 @@
 <div class="flex items-center justify-between mb-6">
 <div>
 <span class="font-label-md text-label-md text-secondary uppercase font-bold tracking-wider">Spotlights & Stories</span>
-<h2 class="font-headline-lg text-headline-lg text-primary font-bold">Latest District News</h2>
+<h2 class="font-headline-lg text-headline-lg text-primary font-bold">Waukee CSD News</h2>
 </div>
 <a class="font-label-md text-label-md text-primary hover:text-secondary font-bold inline-flex items-center gap-1" data-path="news" href="/community/news">
-              All District News <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+              All News <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
 </a>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -330,17 +339,13 @@
 <div>
 <div class="flex items-center gap-2 mb-2">
 <span class="px-2.5 py-0.5 rounded-full bg-accent-lime-tint text-tertiary-container font-label-sm text-label-sm font-semibold">Recognition</span>
-<span class="text-on-surface-variant font-label-sm text-label-sm">September 28, 2026</span>
 </div>
 <h3 class="font-title-md text-title-md font-bold text-primary group-hover:text-secondary transition-colors leading-snug">
                     Waukee CSD Named One of Iowa’s Top Workplaces for 2026
                   </h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-2 line-clamp-2">
-                    For the fifth consecutive year, employees and educators selected Waukee Community Schools for outstanding school culture, visionary leadership, and staff development.
-                  </p>
 </div>
 <a class="mt-4 font-label-md text-label-md text-primary font-bold inline-flex items-center gap-1" data-path="news-article-1" href="/community/news">
-                  Read Full Story <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                  Read more <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
 </a>
 </div>
 </div>
@@ -350,18 +355,14 @@
 <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Academic students in the school library holding certificates and congratulatory letters for National Merit Scholarship recognition." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3xDpIRS0sks7rl6PbDP1cboifka9dDPm1ySn3TuK_6akUSwZbIwy5Brsof0GY44nVHrRHnPGDmsPwRBMYR4cno0g68nc1wZK-POhvAYDu7-Eg80ruuXuKKBho97WMXVOjcaG_-mese9yMn--K6YfP_JknyizBsK79mdNvOMrx-P1AR_DF4sQuc0Z64Rpanf6MQkWgdPL-GQ5Hx1nZhvIIt6GqnuAf2RwsKa3H-3kjk-TA6StJFRhR')"></div>
 </div>
 <div class="flex items-center gap-2 mb-1.5">
-<span class="px-2 py-0.5 rounded-full bg-accent-purple-tint text-primary font-label-sm text-label-sm font-semibold">Academics</span>
-<span class="text-on-surface-variant font-label-sm text-label-sm">October 14, 2026</span>
+<span class="px-2 py-0.5 rounded-full bg-accent-purple-tint text-primary font-label-sm text-label-sm font-semibold">Community</span>
 </div>
 <h3 class="font-title-md text-title-md font-bold text-primary group-hover:text-secondary transition-colors line-clamp-2">
-                  Record 18 Waukee Seniors Named National Merit Semifinalists
+                  Meet Your September 2026 Making a Difference Nominees
                 </h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5 line-clamp-2">
-                  Demonstrating exemplary test scores, academic endurance, and community leadership across both district high schools.
-                </p>
 </div>
 <a class="mt-4 font-label-md text-label-md text-primary font-bold inline-flex items-center gap-1" data-path="news-article-2" href="/community/news">
-                Read Article <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                Read more <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
 </a>
 </div>
 <div class="bg-surface-base rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col justify-between p-5">
@@ -371,17 +372,13 @@
 </div>
 <div class="flex items-center gap-2 mb-1.5">
 <span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">Alumni Spotlight</span>
-<span class="text-on-surface-variant font-label-sm text-label-sm">October 8, 2026</span>
 </div>
 <h3 class="font-title-md text-title-md font-bold text-primary group-hover:text-secondary transition-colors line-clamp-2">
-                  WHS Alum Brings Athletic and Community Passion to National Spotlight
+                  WHS Alum Brings His Talents to Banana Ball
                 </h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5 line-clamp-2">
-                  Drew, Class of 2018, credits Waukee educators and coaches with instilling resilience, joy, and civic teamwork.
-                </p>
 </div>
 <a class="mt-4 font-label-md text-label-md text-primary font-bold inline-flex items-center gap-1" data-path="news-article-3" href="/community/news">
-                Read Article <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                Read more <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
 </a>
 </div>
 </div>
@@ -390,10 +387,10 @@
 <div class="flex items-center justify-between mb-6">
 <div>
 <span class="font-label-md text-label-md text-secondary uppercase font-bold tracking-wider">Schedule</span>
-<h2 class="font-headline-lg text-headline-lg text-primary font-bold">Upcoming Events</h2>
+<h2 class="font-headline-lg text-headline-lg text-primary font-bold">Featured Events</h2>
 </div>
 <a class="font-label-md text-label-md text-primary hover:text-secondary font-bold inline-flex items-center gap-1" data-path="calendar" href="/calendar">
-              Calendar <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+              All Events <span class="material-symbols-outlined text-[18px]">calendar_today</span>
 </a>
 </div>
 <div class="bg-surface-base rounded-2xl p-4 shadow-md space-y-3">
@@ -405,7 +402,7 @@
 <div class="min-w-0">
 <h4 class="font-title-md text-title-md font-bold text-primary truncate group-hover:text-secondary transition-colors">End of Term 1</h4>
 <p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
-<span class="material-symbols-outlined text-[14px]">schedule</span> All District Buildings
+<span class="material-symbols-outlined text-[14px]">schedule</span> All Day
                 </p>
 </div>
 </div>
@@ -415,21 +412,33 @@
 <span class="font-headline-sm text-headline-sm font-extrabold leading-tight">26</span>
 </div>
 <div class="min-w-0">
-<h4 class="font-title-md text-title-md font-bold text-primary truncate group-hover:text-secondary transition-colors">No School / Teacher Work Day</h4>
+<h4 class="font-title-md text-title-md font-bold text-primary truncate group-hover:text-secondary transition-colors">No School/Teacher Work Day</h4>
 <p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
-<span class="material-symbols-outlined text-[14px]">schedule</span> All Day • Staff In-Service
+<span class="material-symbols-outlined text-[14px]">schedule</span> All Day
+                </p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-xl hover:bg-surface-container transition-colors group cursor-pointer">
+<div class="w-14 h-14 rounded-xl bg-primary text-on-primary flex flex-col items-center justify-center shrink-0 shadow-sm group-hover:bg-accent-gold-bright group-hover:text-primary transition-colors">
+<span class="font-label-sm text-label-sm font-bold uppercase leading-none">OCT</span>
+<span class="font-headline-sm text-headline-sm font-extrabold leading-tight">27</span>
+</div>
+<div class="min-w-0">
+<h4 class="font-title-md text-title-md font-bold text-primary truncate group-hover:text-secondary transition-colors">Beginning of Term 2</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">schedule</span> All Day
                 </p>
 </div>
 </div>
 <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-surface-container transition-colors group cursor-pointer">
 <div class="w-14 h-14 rounded-xl bg-primary text-on-primary flex flex-col items-center justify-center shrink-0 shadow-sm group-hover:bg-accent-gold-bright group-hover:text-primary transition-colors">
 <span class="font-label-sm text-label-sm font-bold uppercase leading-none">NOV</span>
-<span class="font-headline-sm text-headline-sm font-extrabold leading-tight">08</span>
+<span class="font-headline-sm text-headline-sm font-extrabold leading-tight">8</span>
 </div>
 <div class="min-w-0">
-<h4 class="font-title-md text-title-md font-bold text-primary truncate group-hover:text-secondary transition-colors">Diwali Community Celebration</h4>
+<h4 class="font-title-md text-title-md font-bold text-primary truncate group-hover:text-secondary transition-colors">Diwali</h4>
 <p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
-<span class="material-symbols-outlined text-[14px]">schedule</span> Waukee Fieldhouse • 6:00 PM
+<span class="material-symbols-outlined text-[14px]">schedule</span> All Day
                 </p>
 </div>
 </div>
@@ -441,7 +450,7 @@
 <div class="min-w-0">
 <h4 class="font-title-md text-title-md font-bold text-primary truncate group-hover:text-secondary transition-colors">Thanksgiving Meal in Cafeterias</h4>
 <p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
-<span class="material-symbols-outlined text-[14px]">restaurant</span> All School Cafeterias
+<span class="material-symbols-outlined text-[14px]">schedule</span> All Day • <span class="material-symbols-outlined text-[14px]">location_on</span> All School Cafeterias
                 </p>
 </div>
 </div>
@@ -451,26 +460,12 @@
 <span class="font-headline-sm text-headline-sm font-extrabold leading-tight">25</span>
 </div>
 <div class="min-w-0">
-<h4 class="font-title-md text-title-md font-bold text-primary truncate group-hover:text-secondary transition-colors">Thanksgiving Break - No School</h4>
+<h4 class="font-title-md text-title-md font-bold text-primary truncate group-hover:text-secondary transition-colors">Thanksgiving Break – No School</h4>
 <p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
-<span class="material-symbols-outlined text-[14px]">event_busy</span> Nov 25 – Nov 29 • District Wide
+<span class="material-symbols-outlined text-[14px]">schedule</span> All Day
                 </p>
 </div>
 </div>
-</div>
-<div class="mt-6 p-4 rounded-2xl bg-accent-purple-tint flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-xl bg-primary text-accent-gold-bright flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-[20px]">shield</span>
-</div>
-<div>
-<span class="block font-label-md text-label-md font-bold text-primary">Safety & Support Tip Line</span>
-<span class="block font-label-sm text-label-sm text-on-surface-variant">Confidential 24/7 reporting</span>
-</div>
-</div>
-<a class="font-label-sm text-label-sm bg-primary text-on-primary px-3 py-1.5 rounded-lg font-bold hover:bg-primary-container transition-colors" data-path="safety-report" href="/families">
-              Report
-            </a>
 </div>
 </div>
 </div>
@@ -484,10 +479,10 @@
 <div class="text-center max-w-3xl mx-auto mb-10">
 <span class="font-label-md text-label-md text-accent-gold-bright uppercase font-bold tracking-widest">Strategic Vision</span>
 <h2 class="font-headline-xl text-headline-xl text-on-primary font-bold mt-1">
-          Portrait of a Waukee Graduate
+          Portrait of a Graduate
         </h2>
 <p class="font-body-md text-body-md text-on-primary/80 mt-2">
-          Six foundational competencies instilled across every grade, classroom, and school community experience.
+          Our graduates will be prepared with the knowledge and skills necessary for their future success.
         </p>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -496,50 +491,46 @@
 <span class="material-symbols-outlined text-[20px]">auto_stories</span>
 </div>
 <h4 class="font-label-md text-label-md font-bold text-on-primary">Academics</h4>
-<p class="font-label-sm text-label-sm text-on-primary/70 mt-1">Knowledge & mastery</p>
 </div>
 <div class="p-4 rounded-xl bg-surface-base/10 backdrop-blur-md text-center hover:bg-surface-base/20 transition-all cursor-default">
 <div class="w-10 h-10 mx-auto rounded-full bg-accent-gold-bright text-primary flex items-center justify-center mb-3 font-bold">
 <span class="material-symbols-outlined text-[20px]">trending_up</span>
 </div>
-<h4 class="font-label-md text-label-md font-bold text-on-primary">Future-Ready</h4>
-<p class="font-label-sm text-label-sm text-on-primary/70 mt-1">Adaptability & tech</p>
+<h4 class="font-label-md text-label-md font-bold text-on-primary">Future-Ready Skills</h4>
 </div>
 <div class="p-4 rounded-xl bg-surface-base/10 backdrop-blur-md text-center hover:bg-surface-base/20 transition-all cursor-default">
 <div class="w-10 h-10 mx-auto rounded-full bg-accent-gold-bright text-primary flex items-center justify-center mb-3 font-bold">
 <span class="material-symbols-outlined text-[20px]">lightbulb</span>
 </div>
 <h4 class="font-label-md text-label-md font-bold text-on-primary">Inquiry</h4>
-<p class="font-label-sm text-label-sm text-on-primary/70 mt-1">Critical reasoning</p>
 </div>
 <div class="p-4 rounded-xl bg-surface-base/10 backdrop-blur-md text-center hover:bg-surface-base/20 transition-all cursor-default">
 <div class="w-10 h-10 mx-auto rounded-full bg-accent-gold-bright text-primary flex items-center justify-center mb-3 font-bold">
 <span class="material-symbols-outlined text-[20px]">favorite</span>
 </div>
 <h4 class="font-label-md text-label-md font-bold text-on-primary">Wellness</h4>
-<p class="font-label-sm text-label-sm text-on-primary/70 mt-1">Lifelong health</p>
 </div>
 <div class="p-4 rounded-xl bg-surface-base/10 backdrop-blur-md text-center hover:bg-surface-base/20 transition-all cursor-default">
 <div class="w-10 h-10 mx-auto rounded-full bg-accent-gold-bright text-primary flex items-center justify-center mb-3 font-bold">
 <span class="material-symbols-outlined text-[20px]">groups</span>
 </div>
 <h4 class="font-label-md text-label-md font-bold text-on-primary">Connection</h4>
-<p class="font-label-sm text-label-sm text-on-primary/70 mt-1">Community bonding</p>
 </div>
 <div class="p-4 rounded-xl bg-surface-base/10 backdrop-blur-md text-center hover:bg-surface-base/20 transition-all cursor-default">
 <div class="w-10 h-10 mx-auto rounded-full bg-accent-gold-bright text-primary flex items-center justify-center mb-3 font-bold">
 <span class="material-symbols-outlined text-[20px]">rocket_launch</span>
 </div>
-<h4 class="font-label-md text-label-md font-bold text-on-primary">Beyond High School</h4>
-<p class="font-label-sm text-label-sm text-on-primary/70 mt-1">Clear roadmap</p>
+<h4 class="font-label-md text-label-md font-bold text-on-primary">Plan Beyond High School</h4>
 </div>
 </div>
 <div class="text-center mt-8">
 <a class="inline-flex items-center justify-center bg-secondary-container hover:bg-accent-gold-bright text-on-secondary-container font-label-md text-label-md px-8 py-3 rounded-lg shadow-md transition-all uppercase font-bold" data-path="portrait-of-a-graduate" href="/community/board-of-education">
-          View Full Strategic Plan
+          View Our Strategic Plan
         </a>
 </div>
 </div>
 </section>
 </div>
-</main><footer class="w-full bg-surface-container-low mt-space-xl"><div class="max-w-[1280px] mx-auto px-margin py-space-xl"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-xl pb-space-lg"><div class="flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm mb-space-xs"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-accent-gold-bright"><span class="material-symbols-outlined text-[20px]">school</span></div><span class="font-title-md text-title-md text-primary font-bold">Waukee CSD</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">District Administration Office</p><p class="font-body-sm text-body-sm text-on-surface-variant">560 SE University Ave<br/>Waukee, IA 50263</p><p class="font-body-sm text-body-sm text-on-surface-variant">Phone: 515-987-5161</p></div><div class="flex flex-col gap-space-xs"><span class="font-label-md text-label-md text-primary font-bold uppercase mb-space-xs">Quick Links</span><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="schools" href="/schools">District Schools Directory</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="academics" href="/students/resources">Curriculum & Academics</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="extracurriculars" href="/students/activities">Athletics & Fine Arts</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="resources" href="/calendar">Calendars & Lunch Menus</a></div><div class="flex flex-col gap-space-xs"><span class="font-label-md text-label-md text-primary font-bold uppercase mb-space-xs">Portals & Support</span><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="students" href="/students">Student Portal</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="parents" href="/families">Parent Resources (PowerSchool)</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="staff-intranet" href="/user/login">Staff Intranet Access</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="facility-rental" href="/community/facility-rental">Facility Rentals</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="volunteer-hours" href="/students/volunteer-hours">Student Volunteer Hours</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="accessibility" href="#">WCAG 2.2 AA Accessibility</a></div><div class="flex flex-col gap-space-sm"><span class="font-label-md text-label-md text-primary font-bold uppercase mb-space-xs">Connect With Us</span><p class="font-body-sm text-body-sm text-on-surface-variant">Follow our district stories, student successes, and community notices.</p><div class="flex items-center gap-space-sm"><a aria-label="District News" class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors" href="/community/news"><span class="material-symbols-outlined text-[20px]">feed</span></a><a aria-label="District Notifications" class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors" href="/closings"><span class="material-symbols-outlined text-[20px]">campaign</span></a><a aria-label="District Media" class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">podcasts</span></a><a aria-label="Email Notifications" class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">mail</span></a></div></div></div><div class="pt-space-md flex flex-col md:flex-row items-center justify-between text-on-surface-variant font-label-sm text-label-sm gap-space-sm"><p>© 2025 Waukee Community School District. All rights reserved.</p><div class="flex items-center gap-space-md"><a class="hover:text-primary underline transition-colors" data-path="accessibility" href="#">Accessibility Statement (WCAG 2.2 AA)</a><a class="hover:text-primary transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a><a class="hover:text-primary transition-colors" data-path="terms-of-use" href="#">Terms of Use</a></div></div></div></footer></div>
+</main>
+{% include "@waukee_theme/includes/tw-footer.html.twig" %}
+</div>

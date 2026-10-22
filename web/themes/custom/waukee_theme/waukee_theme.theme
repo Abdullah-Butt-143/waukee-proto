@@ -12,7 +12,8 @@ use Drupal\Core\Url;
 /**
  * Implements hook_css_alter().
  *
- * The homepage is a Tailwind design; Olivero's and the theme's own global
+ * Pages using the Tailwind designs (homepage, /schools) attach
+ * waukee_theme/front; Olivero's and the theme's own global
  * stylesheets would override it. Keyed on the attached library (not the
  * route) because the asset resolver caches results per library set.
  */
@@ -28,67 +29,31 @@ function waukee_theme_css_alter(array &$css, AttachedAssetsInterface $assets, La
 }
 
 /**
+ * Implements hook_theme_suggestions_page_alter().
+ *
+ * /schools/{school} is one route for every school; map it to a single
+ * suggestion here instead of a suggestion per slug (which is what Drupal's
+ * default path-based suggestions would otherwise produce).
+ */
+function waukee_theme_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  if (\Drupal::routeMatch()->getRouteName() === 'waukee_core.school_detail') {
+    $suggestions[] = 'page__schools__detail';
+  }
+}
+
+/**
  * Implements hook_preprocess_page().
  *
- * Gives logged-in users a visible "account bar" in the site header. Only the
- * links the current user may use are shown (editors: Add page, Content;
- * publishers: also Scheduled; administrators: Admin).
+ * Loads the data these Tailwind-design page templates render, since the
+ * controllers behind them return empty markup (see SchoolsController).
  */
 function waukee_theme_preprocess_page(array &$variables) {
-  $variables['#cache']['contexts'][] = 'user.permissions';
-  $variables['#cache']['contexts'][] = 'user';
-  $account = \Drupal::currentUser();
-  $variables['wk_intranet_url'] = '/user/login';
-  if ($account->isAnonymous()) {
-    $variables['wk_account_links'] = [];
-    return;
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name === 'waukee_core.schools') {
+    $variables['schools'] = waukee_core_schools_by_tier();
   }
-  // School editors create content inside their school (group) so the school
-  // owns it; everyone else uses the standalone node forms.
-  $candidates = [];
-  $schools = [];
-  foreach (\Drupal::service('group.membership_loader')->loadByUser($account) as $membership) {
-    $group = $membership->getGroup();
-    if ($group->bundle() === 'school') {
-      $schools[] = $group;
-    }
+  elseif ($route_name === 'waukee_core.school_detail') {
+    $group = waukee_core_school_by_slug(\Drupal::routeMatch()->getParameter('school'));
+    $variables['school'] = $group ? waukee_core_school_data($group) : NULL;
   }
-  if ($schools) {
-    foreach ($schools as $group) {
-      $suffix = count($schools) > 1 ? ' (' . $group->label() . ')' : '';
-      foreach (['page' => t('Add page'), 'news' => t('Add news')] as $bundle => $label) {
-        $candidates[] = [$label . $suffix, 'entity.group_relationship.create_form', ['group' => $group->id(), 'plugin_id' => 'group_node:' . $bundle]];
-      }
-    }
-  }
-  else {
-    $candidates[] = [t('Add page'), 'node.add', ['node_type' => 'page']];
-    $candidates[] = [t('Add news'), 'node.add', ['node_type' => 'news']];
-  }
-  $candidates = array_merge($candidates, [
-    [t('Content'), 'system.admin_content', []],
-    [t('Scheduled'), 'view.scheduler_scheduled_content.overview', []],
-    [t('Admin'), 'system.admin', []],
-  ]);
-  $links = [];
-  foreach ($candidates as [$title, $route, $params]) {
-    $url = Url::fromRoute($route, $params);
-    if ($url->access($account)) {
-      $links[] = ['title' => $title, 'url' => $url->toString()];
-    }
-  }
-  // Intranet pages (staff only): shown only to users who may open them.
-  $variables['wk_intranet_url'] = '/user/login';
-  foreach ([[t('Announcements'), '/intranet/announcements'], [t('Documents'), '/intranet/documents'], [t('Staff directory'), '/intranet/staff-directory']] as [$title, $path]) {
-    $url = Url::fromUserInput($path);
-    if ($url->isRouted() && $url->access($account)) {
-      $links[] = ['title' => $title, 'url' => $url->toString()];
-      $variables['wk_intranet_url'] = '/intranet/announcements';
-    }
-  }
-  $my_account = Url::fromRoute('entity.user.canonical', ['user' => $account->id()]);
-  $links[] = ['title' => t('My account'), 'url' => $my_account->toString()];
-  $variables['wk_account_links'] = $links;
-  $variables['wk_account_name'] = $account->getDisplayName();
-  $variables['wk_logout_url'] = Url::fromRoute('user.logout')->toString();
 }
