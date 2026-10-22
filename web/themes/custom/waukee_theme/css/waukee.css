@@ -1170,3 +1170,79 @@ td a:hover { text-decoration: underline; }
 .wk-main .layout:has(.wk-split, .wk-section) { margin-block: 0; }
 .wk-main__inner:has(.wk-hero) { padding-bottom: 0; }
 .wk-main__inner:has(.wk-hero) + * , .wk-main:has(.wk-hero) ~ .wk-footer { margin-top: 0; }
+
+/* ==========================================================================
+   Site header (templates/layout/site-header.html.twig): the home page header
+   on every inner page. Mirrors the Tailwind markup of page--front.html.twig.
+   ========================================================================== */
+.wk-sh { position: sticky; top: 0; z-index: 50; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04); font-family: var(--wk-font); }
+.wk-sh__wrap { width: 100%; max-width: 80rem; margin-inline: auto; padding-inline: 2rem; box-sizing: border-box; }
+.wk-sh__top { background: #4b2e83; color: #fff; padding-block: 0.25rem; }
+.wk-sh__top-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; line-height: 1rem; }
+.wk-sh__tagline { display: flex; align-items: center; gap: 1rem; margin: 0; opacity: 0.8; }
+.wk-sh__divider { opacity: 0.5; }
+.wk-sh__top-right { display: flex; align-items: center; gap: 1.5rem; }
+.wk-sh__audience { display: flex; align-items: center; gap: 1rem; }
+.wk-sh__audience a { color: #fff; text-decoration: none; transition: color 0.15s ease; }
+.wk-sh__audience a:hover, .wk-sh__audience a:focus-visible { color: #fdba45; }
+.wk-sh__audience--mobile { display: none; }
+.wk-sh__search { display: flex; align-items: center; gap: 0.5rem; margin: 0; padding: 0.25rem 0.5rem; background: #34146c; border-radius: 0.5rem; }
+.wk-sh__search svg { width: 0.9rem; height: 0.9rem; color: #fff; flex: none; }
+.wk-sh__search input { width: 9rem; padding: 0; border: 0; background: transparent; color: #fff; font: inherit; }
+.wk-sh__search input::placeholder { color: rgba(255, 255, 255, 0.6); }
+.wk-sh__search input:focus { outline: none; }
+.wk-sh__search:focus-within { box-shadow: 0 0 0 2px #fdba45; }
+
+.wk-sh__main { height: 5rem; background: rgba(249, 249, 255, 0.92); backdrop-filter: blur(16px); }
+.wk-sh__main-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.wk-sh__brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; flex: none; }
+.wk-sh__logo { display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 0.75rem; background: #4b2e83; color: #F2A900; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
+.wk-sh__logo svg { width: 1.75rem; height: 1.75rem; }
+.wk-sh__brand-text { display: flex; flex-direction: column; }
+.wk-sh__brand-name { color: #34146c; font-size: 1.125rem; line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; text-transform: uppercase; }
+.wk-sh__brand-sub { color: #7f5700; font-size: 0.75rem; line-height: 1; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+.wk-sh__nav { display: flex; align-items: center; gap: 1.5rem; min-width: 0; }
+.wk-sh__links { display: flex; align-items: center; gap: 0.25rem; }
+.wk-sh__links a { padding: 0.5rem 0.75rem; border-radius: 0.5rem; color: #494551; font-size: 0.875rem; line-height: 1.25rem; font-weight: 600; letter-spacing: 0.01em; text-decoration: none; white-space: nowrap; transition: color 0.15s ease, background 0.15s ease; }
+.wk-sh__links a:hover, .wk-sh__links a:focus-visible { color: #34146c; }
+.wk-sh__links a.is-active { color: #34146c; font-weight: 700; background: #F3EBF9; }
+.wk-sh__actions { display: flex; align-items: center; gap: 1rem; }
+.wk-sh__enroll { display: inline-flex; align-items: center; justify-content: center; padding: 0.625rem 1.5rem; border-radius: 0.5rem; background: #fdba45; color: #6f4b00; font-size: 0.875rem; line-height: 1.25rem; font-weight: 600; letter-spacing: 0.01em; text-decoration: none; white-space: nowrap; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08); transition: background 0.15s ease; }
+.wk-sh__enroll:hover, .wk-sh__enroll:focus-visible { background: #F2A900; color: #6f4b00; }
+.wk-sh__profile { display: flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; border-radius: 50%; background: #34146c; color: #fff; }
+.wk-sh__profile svg { width: 1.15rem; height: 1.15rem; }
+.wk-sh a:focus-visible, .wk-sh button:focus-visible { outline: 3px solid #F2A900; outline-offset: 2px; }
+
+.wk-sh__toggle { display: none; align-items: center; gap: 0.6rem; padding: 0.55rem 0.9rem; border: 1px solid #cbc4d2; border-radius: 0.5rem; background: #fff; color: #34146c; font: inherit; font-size: 0.875rem; font-weight: 700; cursor: pointer; }
+.wk-sh__toggle-icon, .wk-sh__toggle-icon::before, .wk-sh__toggle-icon::after { display: block; width: 1.1rem; height: 2px; background: currentColor; border-radius: 2px; transition: transform 0.2s ease, background 0.2s ease; }
+.wk-sh__toggle-icon { position: relative; }
+.wk-sh__toggle-icon::before, .wk-sh__toggle-icon::after { content: ""; position: absolute; left: 0; }
+.wk-sh__toggle-icon::before { top: -6px; }
+.wk-sh__toggle-icon::after { top: 6px; }
+.wk-sh.is-open .wk-sh__toggle-icon { background: transparent; }
+.wk-sh.is-open .wk-sh__toggle-icon::before { transform: translateY(6px) rotate(45deg); }
+.wk-sh.is-open .wk-sh__toggle-icon::after { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 79.99rem) {
+  .wk-sh__wrap { padding-inline: clamp(1rem, 4vw, 2rem); }
+  .wk-sh__toggle { display: inline-flex; }
+  .wk-sh__tagline { display: none; }
+  .wk-sh__top-inner { justify-content: flex-end; }
+  .wk-sh__top .wk-sh__audience { display: none; }
+  .wk-sh__nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0.75rem;
+    padding: 1rem clamp(1rem, 4vw, 2rem) 1.5rem; background: #fff;
+    border-bottom: 1px solid #e2e8f0; box-shadow: 0 18px 30px rgba(42, 18, 64, 0.12);
+    max-height: calc(100vh - 7rem); overflow-y: auto;
+  }
+  .wk-sh.is-open .wk-sh__nav { display: flex; }
+  .wk-sh__links { flex-direction: column; align-items: stretch; }
+  .wk-sh__links a { padding: 0.8rem 1rem; font-size: 1rem; }
+  .wk-sh__audience--mobile { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; padding: 0.75rem 1rem; border-top: 1px solid #e2e8f0; }
+  .wk-sh__audience--mobile a { color: #494551; font-size: 0.9rem; font-weight: 600; }
+  .wk-sh__actions { justify-content: space-between; }
+  .wk-sh__enroll { flex: 1; }
+}
+.wk-sh .wk-sh__search { margin: 0; padding: 0.25rem 0.5rem; min-height: 0; line-height: 1rem; }
+.wk-sh .wk-sh__search input[type="text"] { height: 1rem; min-height: 0; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; color: #fff; font: inherit; font-size: 0.75rem; line-height: 1rem; }

@@ -2,7 +2,7 @@
 /**
  * @file
  * Waukee page template. Own markup (no Olivero header/layout wrappers):
- * alert region, sticky header with audience navigation, quick links bar,
+ * alert region, shared site header (site-header.html.twig), quick links bar,
  * main content (optional sidebar), footer.
  *
  * Regions: alert, header, primary_menu, secondary_menu, quick_links, hero,
@@ -18,34 +18,7 @@
     </div>
   {% endif %}
 
-  {% if page.secondary_menu %}
-    <div class="wk-utility-bar">
-      <div class="wk-container wk-utility-bar__inner">
-        <span class="wk-utility-bar__tagline">{{ 'Waukee Community School District'|t }}</span>
-        <div class="wk-utility-bar__menu">{{ page.secondary_menu }}</div>
-      </div>
-    </div>
-  {% endif %}
-
-  <header class="wk-header" data-wk-header>
-    <div class="wk-container wk-header__inner">
-      <div class="wk-header__brand">
-        {{ page.header }}
-      </div>
-
-      <div class="wk-header__right">
-        <div id="wk-nav" class="wk-header__nav">
-          <div class="wk-header__primary">{{ page.primary_menu }}</div>
-          <a href="/enrollment" class="wk-header__enroll">{{ 'Enroll Now'|t }}</a>
-        </div>
-
-        <button type="button" class="wk-header__toggle" aria-expanded="false" aria-controls="wk-nav">
-          <span class="wk-header__toggle-label">{{ 'Menu'|t }}</span>
-          <span class="wk-header__toggle-icon" aria-hidden="true"></span>
-        </button>
-      </div>
-    </div>
-  </header>
+  {% include '@waukee_theme/layout/site-header.html.twig' %}
 
   <main id="main-content" class="wk-main" tabindex="-1">
     {{ page.hero }}

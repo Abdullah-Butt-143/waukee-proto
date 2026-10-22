@@ -7,9 +7,9 @@
 
   Drupal.behaviors.waukeeHeader = {
     attach: function (context) {
-      once('wk-header', '[data-wk-header]', context).forEach(function (header) {
-        var toggle = header.querySelector('.wk-header__toggle');
-        var nav = header.querySelector('.wk-header__nav');
+      once('wk-header', '[data-wk-sh]', context).forEach(function (header) {
+        var toggle = header.querySelector('.wk-sh__toggle');
+        var nav = header.querySelector('.wk-sh__nav');
         if (!toggle || !nav) {
           return;
         }
@@ -32,7 +32,7 @@
         });
 
         // Reset when the window becomes wide again.
-        window.matchMedia('(min-width: 75rem)').addEventListener('change', function (e) {
+        window.matchMedia('(min-width: 80rem)').addEventListener('change', function (e) {
           if (e.matches) {
             setOpen(false);
           }

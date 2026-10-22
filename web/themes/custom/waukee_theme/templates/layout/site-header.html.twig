@@ -1,0 +1,89 @@
+{#
+/**
+ * @file
+ * Site header shared by every page except the front page (which carries the
+ * same design as part of its Tailwind markup in page--front.html.twig).
+ * Keep the links and labels in both files in step.
+ *
+ * Utility bar (audience links + search) over the main bar (brand, primary
+ * navigation, Enroll Now, account). Below 80rem the primary navigation
+ * collapses into the Menu button.
+ */
+#}
+{% set current = path('<current>') %}
+{% set nav = [
+  {label: 'Home', href: '/'},
+  {label: 'About', href: '/district'},
+  {label: 'Schools', href: '/schools'},
+  {label: 'Academics', href: '/students/resources'},
+  {label: 'Enroll', href: '/enrollment'},
+  {label: 'Resources', href: '/families'},
+  {label: 'Extracurriculars', href: '/students/activities'},
+] %}
+{% set audience = [
+  {label: 'Students', href: '/students'},
+  {label: 'Parents', href: '/families'},
+  {label: 'Community', href: '/community'},
+  {label: 'Staff Intranet', href: '/user/login'},
+] %}
+<header class="wk-sh" data-wk-sh>
+  <div class="wk-sh__top">
+    <div class="wk-sh__wrap wk-sh__top-inner">
+      <p class="wk-sh__tagline">
+        <span>{{ 'Waukee Community School District'|t }}</span>
+        <span class="wk-sh__divider" aria-hidden="true">|</span>
+        <span>{{ 'Dedicated to Optimism & Excellence'|t }}</span>
+      </p>
+      <div class="wk-sh__top-right">
+        <nav class="wk-sh__audience" aria-label="{{ 'Audiences'|t }}">
+          {% for item in audience %}
+            <a href="{{ item.href }}">{{ item.label|t }}</a>
+          {% endfor %}
+        </nav>
+        <form class="wk-sh__search" action="/search" method="get" role="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg>
+          <input type="text" name="keys" placeholder="{{ 'Search district...'|t }}" aria-label="{{ 'Search district resources'|t }}">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk-sh__main">
+    <div class="wk-sh__wrap wk-sh__main-inner">
+      <a href="/" class="wk-sh__brand" aria-label="{{ 'Waukee Community Schools home'|t }}">
+        <span class="wk-sh__logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3zM5 13.2v4L12 21l7-3.8v-4L12 17l-7-3.8z"/></svg>
+        </span>
+        <span class="wk-sh__brand-text">
+          <span class="wk-sh__brand-name">Waukee</span>
+          <span class="wk-sh__brand-sub">Community Schools</span>
+        </span>
+      </a>
+
+      <button type="button" class="wk-sh__toggle" aria-expanded="false" aria-controls="wk-sh-nav">
+        <span class="wk-sh__toggle-label">{{ 'Menu'|t }}</span>
+        <span class="wk-sh__toggle-icon" aria-hidden="true"></span>
+      </button>
+
+      <div id="wk-sh-nav" class="wk-sh__nav">
+        <nav class="wk-sh__links" aria-label="{{ 'Main'|t }}">
+          {% for item in nav %}
+            {% set active = (item.href == '/') ? (current == '/' or current == '/home') : (current == item.href or current starts with item.href ~ '/') %}
+            <a href="{{ item.href }}"{% if active %} class="is-active" aria-current="page"{% endif %}>{{ item.label|t }}</a>
+          {% endfor %}
+        </nav>
+        <nav class="wk-sh__audience wk-sh__audience--mobile" aria-label="{{ 'Audiences'|t }}">
+          {% for item in audience %}
+            <a href="{{ item.href }}">{{ item.label|t }}</a>
+          {% endfor %}
+        </nav>
+        <div class="wk-sh__actions">
+          <a href="/enrollment" class="wk-sh__enroll">{{ 'Enroll Now'|t }}</a>
+          <a href="/user" class="wk-sh__profile" aria-label="{{ logged_in ? 'My account'|t : 'Log in'|t }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-3.3 0-8 1.7-8 5v1h16v-1c0-3.3-4.7-5-8-5z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
