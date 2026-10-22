@@ -1,0 +1,281 @@
+uuid: 5c8e291c-ad94-4a24-af05-8f5c8ae1d871
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.content
+    - taxonomy.vocabulary.school
+  module:
+    - search_api
+    - user
+id: search
+label: Search
+module: search_api
+description: ''
+tag: ''
+base_table: search_api_index_content
+base_field: search_api_id
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: Search
+      fields:
+        title:
+          id: title
+          table: search_api_index_content
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          label: ''
+          element_type: h3
+          element_label_colon: false
+          link_to_item: true
+          use_highlighting: false
+          multi_type: separator
+          multi_separator: ', '
+        type:
+          id: type
+          table: search_api_index_content
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          label: ''
+          element_label_colon: false
+          multi_type: separator
+          multi_separator: ', '
+        search_api_excerpt:
+          id: search_api_excerpt
+          table: search_api_index_content
+          field: search_api_excerpt
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_excerpt
+          label: ''
+          element_label_colon: false
+      pager:
+        type: mini
+        options:
+          offset: 0
+          items_per_page: 10
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Search
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: search_api_none
+        options: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          plugin_id: text_custom
+          empty: true
+          content: 'Enter words to search for, or choose a content type or school.'
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_content
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+          exposed: false
+      filters:
+        search_api_fulltext:
+          id: search_api_fulltext
+          table: search_api_index_content
+          field: search_api_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_fulltext
+          operator: and
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: keys_op
+            label: Search
+            description: ''
+            use_operator: false
+            operator: keys_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: keys
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          parse_mode: terms
+          min_length: null
+          fields: {  }
+        type:
+          id: type
+          table: search_api_index_content
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: type_op
+            label: 'Content type'
+            description: ''
+            use_operator: false
+            operator: type_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: type
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        school:
+          id: field_school
+          table: search_api_index_content
+          field: field_school
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_term
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: school_op
+            label: School
+            description: ''
+            use_operator: false
+            operator: school_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: school
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          vid: school
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
+      style:
+        type: default
+        options:
+          row_class: wk-feed__item
+      row:
+        type: fields
+        options: {  }
+      query:
+        type: search_api_query
+        options:
+          bypass_access: false
+          skip_access: false
+          preserve_facet_query_args: false
+      use_ajax: false
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:search_api.index.content'
+        - 'search_api_list:content'
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: search
+      menu:
+        type: none
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:search_api.index.content'
+        - 'search_api_list:content'

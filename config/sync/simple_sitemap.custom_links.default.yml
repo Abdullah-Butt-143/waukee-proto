@@ -5,3 +5,19 @@ links:
     path: /
     priority: '1.0'
     changefreq: daily
+  -
+    path: /calendar
+    priority: '0.8'
+    changefreq: daily
+  -
+    path: /events
+    priority: '0.7'
+    changefreq: daily
+  -
+    path: /lunch-menus
+    priority: '0.6'
+    changefreq: daily
+  -
+    path: /staff-directory
+    priority: '0.4'
+    changefreq: daily

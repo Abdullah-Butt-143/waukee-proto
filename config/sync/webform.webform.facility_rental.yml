@@ -1,0 +1,408 @@
+uuid: c3a2f77c-d904-4d69-a931-8c8b7f4a4783
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 0
+template: false
+archive: false
+id: facility_rental
+title: 'Facility rental request'
+description: 'Request a school room or field for a community event. (Sample form for the prototype.)'
+categories: {  }
+elements: |-
+  contact:
+    '#type': fieldset
+    '#title': 'Your contact details'
+    name:
+      '#type': textfield
+      '#title': 'Full name'
+      '#required': true
+    organization:
+      '#type': textfield
+      '#title': Organization
+    email:
+      '#type': email
+      '#title': Email
+      '#required': true
+    phone:
+      '#type': tel
+      '#title': Phone
+  event:
+    '#type': fieldset
+    '#title': 'Your event'
+    school:
+      '#type': select
+      '#title': School
+      '#options':
+        elementary: 'Sample Elementary'
+        high: 'Sample High School'
+      '#empty_option': '- Select a school -'
+      '#required': true
+    room:
+      '#type': select
+      '#title': 'Room or facility'
+      '#options':
+        gym: Gymnasium
+        auditorium: Auditorium
+        cafeteria: Cafeteria
+        classroom: Classroom
+        field: 'Athletic field'
+      '#empty_option': '- Select a room -'
+      '#required': true
+    event_date:
+      '#type': date
+      '#title': 'Event date'
+      '#required': true
+    start_time:
+      '#type': webform_time
+      '#title': 'Start time'
+      '#required': true
+    end_time:
+      '#type': webform_time
+      '#title': 'End time'
+      '#required': true
+    attendees:
+      '#type': number
+      '#title': 'Expected attendees'
+      '#min': 1
+      '#required': true
+  room_options:
+    '#type': fieldset
+    '#title': 'Room options'
+    '#description': 'These questions depend on the room you picked.'
+    auditorium_stage:
+      '#type': checkbox
+      '#title': 'We need stage and lighting setup'
+      '#states':
+        visible:
+          ':input[name="room"]':
+            value: auditorium
+    auditorium_seating:
+      '#type': radios
+      '#title': 'Seating layout'
+      '#options':
+        theater: Theater
+        banquet: Banquet
+      '#states':
+        visible:
+          ':input[name="room"]':
+            value: auditorium
+        required:
+          ':input[name="room"]':
+            value: auditorium
+    cafeteria_kitchen:
+      '#type': checkbox
+      '#title': 'We need kitchen access'
+      '#states':
+        visible:
+          ':input[name="room"]':
+            value: cafeteria
+    cafeteria_tables:
+      '#type': number
+      '#title': 'Number of tables needed'
+      '#min': 0
+      '#states':
+        visible:
+          ':input[name="room"]':
+            value: cafeteria
+    gym_equipment:
+      '#type': checkboxes
+      '#title': 'Gym equipment'
+      '#options':
+        bleachers: 'Open bleachers'
+        scoreboard: Scoreboard
+        sound: 'Sound system'
+      '#states':
+        visible:
+          ':input[name="room"]':
+            value: gym
+    classroom_av:
+      '#type': checkbox
+      '#title': 'We need a projector and screen'
+      '#states':
+        visible:
+          ':input[name="room"]':
+            value: classroom
+    field_lights:
+      '#type': checkbox
+      '#title': 'We need field lights (evening event)'
+      '#states':
+        visible:
+          ':input[name="room"]':
+            value: field
+  notes:
+    '#type': textarea
+    '#title': 'Anything else we should know?'
+  agreement:
+    '#type': checkbox
+    '#title': 'I have read and agree to the facility use policy.'
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: both
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: true
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_file_limit_message: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: message
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: 'Thank you. Your facility request was received and the facilities office will contact you within two business days.'
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email_office:
+    id: email
+    handler_id: email_office
+    label: 'Email to facilities office'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: facilities@example.test
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: noreply@waukee-proto.test
+      from_options: {  }
+      from_name: 'Waukee Prototype'
+      reply_to: '[webform_submission:values:email:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Facility rental request: [webform_submission:values:room]'
+      body: |-
+        <p>A new request was submitted.</p>
+        [webform_submission:values]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      langcode: ''
+      parameters: {  }
+      debug: false
+  email_confirmation:
+    id: email
+    handler_id: email_confirmation
+    label: 'Confirmation to submitter'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: noreply@waukee-proto.test
+      from_options: {  }
+      from_name: 'Waukee Prototype'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'We received your facility request'
+      body: |-
+        <p>Thank you for your facility rental request. A copy of your answers is below.</p>
+        [webform_submission:values]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      langcode: ''
+      parameters: {  }
+      debug: false
+variants: {  }

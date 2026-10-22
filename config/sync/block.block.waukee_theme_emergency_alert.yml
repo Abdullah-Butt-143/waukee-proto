@@ -1,0 +1,20 @@
+uuid: 18ec6c1e-fbcd-4836-9469-1696d2a707e6
+langcode: en
+status: true
+dependencies:
+  module:
+    - waukee_core
+  theme:
+    - waukee_theme
+id: waukee_theme_emergency_alert
+theme: waukee_theme
+region: alert
+weight: -10
+provider: null
+plugin: waukee_emergency_alert
+settings:
+  id: waukee_emergency_alert
+  label: 'Emergency alert'
+  label_display: ''
+  provider: waukee_core
+visibility: {  }

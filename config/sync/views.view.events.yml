@@ -4,11 +4,14 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.storage.node.field_when
     - node.type.event
   module:
+    - fullcalendar_view
     - node
     - smart_date
     - user
+    - waukee_core
 id: events
 label: Events
 module: views
@@ -126,6 +129,488 @@ display:
       max-age: -1
       contexts:
         - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  block_elementary:
+    id: block_elementary
+    display_title: 'Block: Sample Elementary'
+    display_plugin: block
+    position: 3
+    display_options:
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            event: event
+          group: 1
+        field_when_end_value:
+          id: field_when_end_value
+          table: node__field_when
+          field: field_when_end_value
+          relationship: none
+          plugin_id: date
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: now
+            type: offset
+          group: 1
+          exposed: false
+        waukee_school:
+          id: waukee_school
+          table: node_field_data
+          field: waukee_school
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: waukee_school
+          operator: '='
+          value: '2'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          include_district: true
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        filters: false
+        filter_groups: false
+      display_extenders: {  }
+      block_description: 'Events: Sample Elementary (+ district)'
+      block_category: 'Lists (Views)'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  block_high:
+    id: block_high
+    display_title: 'Block: Sample High School'
+    display_plugin: block
+    position: 4
+    display_options:
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            event: event
+          group: 1
+        field_when_end_value:
+          id: field_when_end_value
+          table: node__field_when
+          field: field_when_end_value
+          relationship: none
+          plugin_id: date
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: now
+            type: offset
+          group: 1
+          exposed: false
+        waukee_school:
+          id: waukee_school
+          table: node_field_data
+          field: waukee_school
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: waukee_school
+          operator: '='
+          value: '3'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          include_district: true
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        filters: false
+        filter_groups: false
+      display_extenders: {  }
+      block_description: 'Events: Sample High School (+ district)'
+      block_category: 'Lists (Views)'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  page_calendar:
+    id: page_calendar
+    display_title: Calendar
+    display_plugin: page
+    position: 6
+    display_options:
+      title: Calendar
+      fields:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+          label: ''
+          element_label_colon: false
+          type: string
+          settings:
+            link_to_entity: false
+        field_when:
+          id: field_when
+          table: node__field_when
+          field: field_when
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: field_when
+          plugin_id: field
+          label: When
+          element_label_colon: false
+          type: smartdate_default
+          settings:
+            timezone_override: ''
+            format: default
+            force_chronological: false
+            add_classes: false
+            time_wrapper: true
+            localize: false
+            parts:
+              - start
+              - end
+            join:
+              separator: to
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          multi_type: separator
+      pager:
+        type: none
+        options:
+          offset: 0
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      empty: {  }
+      sorts: {  }
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            event: event
+          group: 1
+        waukee_school:
+          id: waukee_school
+          table: node_field_data
+          field: waukee_school
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: waukee_school
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: School
+            description: ''
+            use_operator: false
+            operator: waukee_school_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: school
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          include_district: true
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: fullcalendar_view_display
+        options:
+          default_date_source: now
+          start: field_when
+          end: ''
+          title: title
+          left_buttons: 'prev,next today'
+          right_buttons: 'dayGridMonth,timeGridWeek,listMonth'
+          default_view: dayGridMonth
+          default_mobile_view: listMonth
+          nav_links: 1
+          updateAllowed: 0
+          updateConfirm: 0
+          dialogWindow: 0
+          openEntityInNewTab: 0
+          createEventLink: 0
+          dialogModal: false
+          dialogCanvas: false
+      row:
+        type: fields
+        options: {  }
+      defaults:
+        empty: false
+        pager: false
+        exposed_form: false
+        style: false
+        row: false
+        fields: false
+        sorts: false
+        filters: false
+        filter_groups: false
+      display_extenders: {  }
+      path: calendar
+      menu:
+        type: none
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_when'
+  page_list:
+    id: page_list
+    display_title: 'Events list'
+    display_plugin: page
+    position: 4
+    display_options:
+      title: Events
+      pager:
+        type: mini
+        options:
+          offset: 0
+          items_per_page: 10
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            event: event
+          group: 1
+        field_when_end_value:
+          id: field_when_end_value
+          table: node__field_when
+          field: field_when_end_value
+          relationship: none
+          plugin_id: date
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: now
+            type: offset
+          group: 1
+          exposed: false
+        waukee_school:
+          id: waukee_school
+          table: node_field_data
+          field: waukee_school
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: waukee_school
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: School
+            description: ''
+            use_operator: false
+            operator: waukee_school_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: school
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          include_district: true
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        pager: false
+        exposed_form: false
+        filters: false
+        filter_groups: false
+      display_extenders: {  }
+      path: events
+      menu:
+        type: none
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }

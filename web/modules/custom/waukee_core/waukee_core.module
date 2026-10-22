@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ * Waukee core helpers.
+ */
+
+use Drupal\Core\Render\BubbleableMetadata;
+
+/**
+ * Implements hook_token_info().
+ *
+ * Smart Date stores timestamps, which Token cannot format. These tokens give
+ * Schema.org Event markup proper ISO 8601 dates in the event's own timezone.
+ */
+function waukee_core_token_info() {
+  return [
+    'tokens' => [
+      'node' => [
+        'waukee-event-start' => [
+          'name' => t('Event start (ISO 8601)'),
+          'description' => t('Start of the first Event "When" value, e.g. 2026-11-04T19:00:00-06:00.'),
+        ],
+        'waukee-event-end' => [
+          'name' => t('Event end (ISO 8601)'),
+          'description' => t('End of the first Event "When" value.'),
+        ],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function waukee_core_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+  if ($type !== 'node' || empty($data['node']) || !$data['node']->hasField('field_when') || $data['node']->get('field_when')->isEmpty()) {
+    return $replacements;
+  }
+  $item = $data['node']->get('field_when')->first();
+  $timezone = new \DateTimeZone($item->timezone ?: date_default_timezone_get());
+  foreach ($tokens as $name => $original) {
+    $property = match ($name) {
+      'waukee-event-start' => 'value',
+      'waukee-event-end' => 'end_value',
+      default => NULL,
+    };
+    if ($property && $item->{$property}) {
+      $replacements[$original] = (new \DateTimeImmutable('@' . $item->{$property}))->setTimezone($timezone)->format('c');
+    }
+  }
+  return $replacements;
+}
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function waukee_core_views_data_alter(array &$data) {
+  $data['node_field_data']['waukee_school'] = [
+    'title' => t('School (includes district-wide)'),
+    'help' => t('Filter by school; items tagged "District (all schools)" match every school.'),
+    'filter' => [
+      'field' => 'nid',
+      'id' => 'waukee_school',
+    ],
+  ];
+}

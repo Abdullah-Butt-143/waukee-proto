@@ -1,0 +1,24 @@
+uuid: 7043b710-1aad-4af3-9f8e-2cfefc958324
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.lunch_menu
+  module:
+    - node
+id: node_lunch_menu
+label: 'Lunch menus'
+type: 'canonical_entities:node'
+pattern: '/lunch-menus/[node:title]'
+selection_criteria:
+  a4253ea0-b386-4405-a079-1a746b782f12:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      lunch_menu: lunch_menu
+    uuid: a4253ea0-b386-4405-a079-1a746b782f12
+selection_logic: and
+weight: -4
+relationships: {  }

@@ -66,8 +66,8 @@ $show('school = Sample High School', $titles('announcements', 'page_1', ['school
 
 echo "== Staff directory ==\n";
 $show('intranet, as teacher.staff, no filter', $titles('staff_directory', 'page_2', [], 'teacher.staff'));
-$show('intranet, q=jane', $titles('staff_directory', 'page_2', ['q' => 'jane'], 'teacher.staff'));
-$show('intranet, q=technician (job title)', $titles('staff_directory', 'page_2', ['q' => 'technician'], 'teacher.staff'));
+$show('intranet, q=jane', $titles('staff_directory', 'page_2', ['search' => 'jane'], 'teacher.staff'));
+$show('intranet, q=technician (job title)', $titles('staff_directory', 'page_2', ['search' => 'technician'], 'teacher.staff'));
 $show('intranet, department = Technology', $titles('staff_directory', 'page_2', ['department' => $tech], 'teacher.staff'));
 $show('intranet, school = Sample Elementary', $titles('staff_directory', 'page_2', ['school' => $elem], 'teacher.staff'));
 $show('intranet, department = Technology + school = Elementary', $titles('staff_directory', 'page_2', ['department' => $tech, 'school' => $elem], 'teacher.staff'));

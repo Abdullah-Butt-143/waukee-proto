@@ -15,6 +15,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - editoria11y
     - layout_builder
     - media
     - node
@@ -48,6 +49,7 @@ permissions:
   - 'view all revisions'
   - 'view announcement revisions'
   - 'view document revisions'
+  - 'view editoria11y checker'
   - 'view event revisions'
   - 'view job_posting revisions'
   - 'view latest version'

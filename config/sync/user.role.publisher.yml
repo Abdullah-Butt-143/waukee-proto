@@ -14,7 +14,9 @@ dependencies:
     - node.type.staff_profile
     - workflows.workflow.editorial
   module:
+    - block_content
     - content_moderation
+    - editoria11y
     - layout_builder
     - media
     - node
@@ -22,16 +24,19 @@ dependencies:
     - system
     - taxonomy
     - toolbar
+    - webform
 id: publisher
 label: Publisher
 weight: 5
 is_admin: false
 permissions:
   - 'access administration pages'
+  - 'access block library'
   - 'access content overview'
   - 'access media overview'
   - 'access taxonomy overview'
   - 'access toolbar'
+  - 'access webform overview'
   - 'configure editable page node layout overrides'
   - 'create and edit custom blocks'
   - 'create announcement content'
@@ -60,6 +65,7 @@ permissions:
   - 'edit any news content'
   - 'edit any page content'
   - 'edit any staff_profile content'
+  - 'edit any webform submission'
   - 'edit own announcement content'
   - 'edit own document content'
   - 'edit own event content'
@@ -68,6 +74,9 @@ permissions:
   - 'edit own news content'
   - 'edit own page content'
   - 'edit own staff_profile content'
+  - 'manage editoria11y results'
+  - 'mark as hidden in editoria11y'
+  - 'mark as ok in editoria11y'
   - 'revert announcement revisions'
   - 'revert document revisions'
   - 'revert event revisions'
@@ -85,7 +94,9 @@ permissions:
   - 'view all revisions'
   - 'view announcement revisions'
   - 'view any unpublished content'
+  - 'view any webform submission'
   - 'view document revisions'
+  - 'view editoria11y checker'
   - 'view event revisions'
   - 'view job_posting revisions'
   - 'view latest version'

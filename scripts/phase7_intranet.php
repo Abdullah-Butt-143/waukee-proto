@@ -188,7 +188,7 @@ if (!View::load('staff_directory')) {
   $combine = [
     'id' => 'combine', 'table' => 'views', 'field' => 'combine', 'relationship' => 'none', 'group_type' => 'group',
     'admin_label' => '', 'operator' => 'contains', 'value' => '', 'group' => 1, 'exposed' => TRUE,
-    'expose' => $expose('q', 'Name or job title'), 'plugin_id' => 'combine',
+    'expose' => $expose('search', 'Name or job title'), 'plugin_id' => 'combine',
     'fields' => ['title' => 'title', 'field_job_title' => 'field_job_title'],
   ];
   $visibility_public = [
@@ -348,3 +348,24 @@ $d->setComponent('field_expiry_date', ['type' => 'datetime_default', 'label' => 
 $d->save();
 
 echo "Phase 7 script complete.\n";
+
+// ---------------------------------------------------------------------------
+// Migration: "q" is a reserved Views exposed-filter name (it is silently
+// ignored on the URL). Rename the staff directory keyword filter to "search".
+// ---------------------------------------------------------------------------
+if ($view = View::load('staff_directory')) {
+  $changed = FALSE;
+  $displays = $view->get('display');
+  foreach ($displays as $id => &$display) {
+    if (isset($display['display_options']['filters']['combine']['expose']['identifier']) && $display['display_options']['filters']['combine']['expose']['identifier'] === 'q') {
+      $display['display_options']['filters']['combine']['expose']['identifier'] = 'search';
+      $changed = TRUE;
+    }
+  }
+  unset($display);
+  if ($changed) {
+    $view->set('display', $displays);
+    $view->save();
+    echo "staff_directory: keyword filter renamed q -> search\n";
+  }
+}

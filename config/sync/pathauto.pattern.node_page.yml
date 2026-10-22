@@ -1,0 +1,24 @@
+uuid: 13a7e4ac-b86e-42e6-8d7e-c577001420e5
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.page
+  module:
+    - node
+id: node_page
+label: 'Basic pages (new pages without an alias)'
+type: 'canonical_entities:node'
+pattern: '/[node:title]'
+selection_criteria:
+  69956fd1-f6c6-4f2a-bc6b-7a6d039b67fd:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      page: page
+    uuid: 69956fd1-f6c6-4f2a-bc6b-7a6d039b67fd
+selection_logic: and
+weight: -3
+relationships: {  }

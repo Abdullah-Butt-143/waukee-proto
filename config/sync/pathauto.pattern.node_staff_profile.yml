@@ -1,0 +1,24 @@
+uuid: 0f8ec06c-d23f-434b-8b64-0c761607188e
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.staff_profile
+  module:
+    - node
+id: node_staff_profile
+label: 'Staff profiles'
+type: 'canonical_entities:node'
+pattern: '/staff/[node:title]'
+selection_criteria:
+  fcc91bbe-771e-4270-bc26-2c68bf30e567:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      staff_profile: staff_profile
+    uuid: fcc91bbe-771e-4270-bc26-2c68bf30e567
+selection_logic: and
+weight: -8
+relationships: {  }

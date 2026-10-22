@@ -1,0 +1,8 @@
+uuid: 708f1e1f-fc94-408c-8a7c-e437b90ca4c5
+langcode: en
+status: true
+dependencies: {  }
+id: node__announcement
+label: 'Content: Announcement'
+tags:
+  robots: 'noindex, nofollow'

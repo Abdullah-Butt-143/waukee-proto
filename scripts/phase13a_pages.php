@@ -202,10 +202,18 @@ $events = [
   ['Parent-teacher conferences', 27, 16, [$elem, $high], 'Both schools'],
 ];
 foreach ($events as [$title, $days, $hour, $schools, $loc]) {
-  if ($find('event', $title)) {
+  // Times are District-local (Central), whatever the server timezone is.
+  $central = new \DateTimeZone('America/Chicago');
+  $start = (new \DateTimeImmutable('today', $central))->modify("+$days days")->setTime($hour, 0)->getTimestamp();
+  if ($existing = $find('event', $title)) {
+    $current = $existing->get('field_when')->first();
+    if ((int) $current->value !== $start) {
+      $existing->set('field_when', [['value' => $start, 'end_value' => $start + 5400, 'duration' => 90, 'timezone' => 'America/Chicago']]);
+      $existing->save();
+      echo "  event time fixed (Central): $title\n";
+    }
     continue;
   }
-  $start = strtotime(date('Y-m-d', strtotime("+$days days")) . " $hour:00:00");
   Node::create([
     'type' => 'event', 'title' => $title, 'uid' => 1, 'status' => 1, 'moderation_state' => 'published',
     'field_when' => [['value' => $start, 'end_value' => $start + 5400, 'duration' => 90, 'timezone' => 'America/Chicago']],

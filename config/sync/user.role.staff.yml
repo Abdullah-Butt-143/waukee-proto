@@ -2,7 +2,10 @@ uuid: da11c5b6-0f5a-4268-877e-24ccfed3fcda
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.staff_profile
   module:
+    - node
     - system
 id: staff
 label: Staff
@@ -10,3 +13,4 @@ weight: 7
 is_admin: false
 permissions:
   - 'access content'
+  - 'edit own staff_profile content'

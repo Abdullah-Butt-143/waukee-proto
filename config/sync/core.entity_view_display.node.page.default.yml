@@ -109,10 +109,13 @@ third_party_settings:
           - 'inline_block:callout'
           - 'inline_block:image_text'
           - 'inline_block:video_embed'
-          - 'inline_block:emergency_alert'
         'Lists (Views)':
           - 'views_block:news_feed-block_1'
           - 'views_block:events-block_1'
+          - 'views_block:news_feed-block_elementary'
+          - 'views_block:news_feed-block_high'
+          - 'views_block:events-block_elementary'
+          - 'views_block:events-block_high'
       restricted_categories:
         - Announcements
         - Group

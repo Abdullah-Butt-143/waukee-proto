@@ -1,0 +1,24 @@
+uuid: cc2163d6-4441-47f0-a28c-6fa6f09680c3
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.job_posting
+  module:
+    - node
+id: node_job_posting
+label: 'Job postings'
+type: 'canonical_entities:node'
+pattern: '/careers/jobs/[node:title]'
+selection_criteria:
+  a8198a22-9e61-418b-80b4-310e701f58d2:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      job_posting: job_posting
+    uuid: a8198a22-9e61-418b-80b4-310e701f58d2
+selection_logic: and
+weight: -6
+relationships: {  }

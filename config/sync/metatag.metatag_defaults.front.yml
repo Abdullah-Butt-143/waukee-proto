@@ -9,3 +9,9 @@ label: 'Front page'
 tags:
   canonical_url: '[site:url]'
   shortlink: '[site:url]'
+  title: '[site:name] | Schools, calendar, news and enrollment'
+  description: 'Sample Community Schools: enrollment, calendars, news, lunch menus, careers and community information for families, students and neighbors. (Prototype with sample content.)'
+  schema_organization_type: EducationalOrganization
+  schema_organization_name: '[site:name]'
+  schema_organization_url: '[site:url]'
+  schema_organization_description: 'A sample K-12 school district used to demonstrate a Drupal website and intranet.'
