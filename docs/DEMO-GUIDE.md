@@ -32,6 +32,8 @@ Pages, menu links and page-builder blocks live in the **database**, not in git. 
 
 **Account bar** (only when logged in, a thin dark strip above the header): "Signed in as <name>" plus buttons for what that person may do (see section 2). This is how editors and publishers find **Add page**, **Add news** and **Content**, since there is no admin toolbar on the public theme.
 
+**Logging out / switching role:** click **Log out** at the right end of the account bar. On the hand-built pages (`/`, `/schools`, school profiles, `/academics`) the purple top bar shows your name and **Log out** instead. Fallback: open `/user/logout`. You can also use a private window per role.
+
 **Emergency alert:** a lime banner that shows on **every page including the home page** when switched on (section 4).
 
 ---

@@ -48,6 +48,7 @@ function waukee_theme_theme_suggestions_page_alter(array &$suggestions, array $v
  * controllers behind them return empty markup (see SchoolsController).
  */
 function waukee_theme_preprocess_page(array &$variables) {
+  waukee_theme_account_links($variables);
   $route_name = \Drupal::routeMatch()->getRouteName();
   if ($route_name === 'waukee_core.schools') {
     $variables['schools'] = waukee_core_schools_by_tier();
@@ -56,4 +57,70 @@ function waukee_theme_preprocess_page(array &$variables) {
     $group = waukee_core_school_by_slug(\Drupal::routeMatch()->getParameter('school'));
     $variables['school'] = $group ? waukee_core_school_data($group) : NULL;
   }
+}
+
+/**
+ * Adds the logged-in account bar variables used by the site header.
+ *
+ * Only links the current user may use are included (editors: Add page, Add
+ * news; publishers: also Scheduled; admins: Admin; staff: intranet pages).
+ * Also sets wk_logout_url / wk_account_url for the Tailwind page headers.
+ */
+function waukee_theme_account_links(array &$variables): void {
+  $variables['#cache']['contexts'][] = 'user.permissions';
+  $variables['#cache']['contexts'][] = 'user';
+  $variables['wk_intranet_url'] = '/user/login';
+  $variables['wk_account_links'] = [];
+  $account = \Drupal::currentUser();
+  if ($account->isAnonymous()) {
+    return;
+  }
+  // School editors create content inside their school (group) so the school
+  // owns it; everyone else uses the standalone node forms.
+  $candidates = [];
+  $schools = [];
+  foreach (\Drupal::service('group.membership_loader')->loadByUser($account) as $membership) {
+    $group = $membership->getGroup();
+    if ($group->bundle() === 'school') {
+      $schools[] = $group;
+    }
+  }
+  if ($schools) {
+    foreach ($schools as $group) {
+      $suffix = count($schools) > 1 ? ' (' . $group->label() . ')' : '';
+      foreach (['page' => t('Add page'), 'news' => t('Add news')] as $bundle => $label) {
+        $candidates[] = [$label . $suffix, 'entity.group_relationship.create_form', ['group' => $group->id(), 'plugin_id' => 'group_node:' . $bundle]];
+      }
+    }
+  }
+  else {
+    $candidates[] = [t('Add page'), 'node.add', ['node_type' => 'page']];
+    $candidates[] = [t('Add news'), 'node.add', ['node_type' => 'news']];
+  }
+  $candidates = array_merge($candidates, [
+    [t('Content'), 'system.admin_content', []],
+    [t('Scheduled'), 'view.scheduler_scheduled_content.overview', []],
+    [t('Admin'), 'system.admin', []],
+  ]);
+  $links = [];
+  foreach ($candidates as [$title, $route, $params]) {
+    $url = Url::fromRoute($route, $params);
+    if ($url->access($account)) {
+      $links[] = ['title' => $title, 'url' => $url->toString()];
+    }
+  }
+  // Intranet pages (staff only): shown only to users who may open them.
+  foreach ([[t('Announcements'), '/intranet/announcements'], [t('Documents'), '/intranet/documents'], [t('Staff directory'), '/intranet/staff-directory']] as [$title, $path]) {
+    $url = Url::fromUserInput($path);
+    if ($url->isRouted() && $url->access($account)) {
+      $links[] = ['title' => $title, 'url' => $url->toString()];
+      $variables['wk_intranet_url'] = '/intranet/announcements';
+    }
+  }
+  $my_account = Url::fromRoute('entity.user.canonical', ['user' => $account->id()]);
+  $links[] = ['title' => t('My account'), 'url' => $my_account->toString()];
+  $variables['wk_account_links'] = $links;
+  $variables['wk_account_name'] = $account->getDisplayName();
+  $variables['wk_account_url'] = $my_account->toString();
+  $variables['wk_logout_url'] = Url::fromRoute('user.logout')->toString();
 }
