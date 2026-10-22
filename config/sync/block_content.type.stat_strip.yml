@@ -1,0 +1,8 @@
+uuid: 639d2388-494b-4c88-9cee-7aaef99229f6
+langcode: en
+status: true
+dependencies: {  }
+id: stat_strip
+label: 'Stat strip'
+revision: false
+description: 'Stat strip component.'

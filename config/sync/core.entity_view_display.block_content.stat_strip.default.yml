@@ -1,0 +1,23 @@
+uuid: ee5caf70-7c2c-49cc-9ed0-362411d03349
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.stat_strip
+    - field.field.block_content.stat_strip.field_items
+  module:
+    - text
+id: block_content.stat_strip.default
+targetEntityType: block_content
+bundle: stat_strip
+mode: default
+content:
+  field_items:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Basic page as a photo-overlay card (used by the Photo card grid
+ * component, e.g. "Explore Our Schools & Programs").
+ */
+#}
+<article{{ attributes.addClass('wk-schools__card') }}>
+  <a href="{{ url }}" class="wk-schools__card-link">
+    <div class="wk-schools__card-media">{{ content.field_image }}</div>
+    <div class="wk-schools__card-body">
+      <span class="wk-schools__card-title">{{ label }}</span>
+      <span class="wk-schools__card-arrow" aria-hidden="true"></span>
+    </div>
+  </a>
+</article>

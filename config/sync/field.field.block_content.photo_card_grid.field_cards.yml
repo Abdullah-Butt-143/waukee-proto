@@ -1,0 +1,24 @@
+uuid: e8f13c57-6e18-41d6-8220-b0c0116b28bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.photo_card_grid
+    - field.storage.block_content.field_cards
+    - node.type.page
+id: block_content.photo_card_grid.field_cards
+field_name: field_cards
+entity_type: block_content
+bundle: photo_card_grid
+label: 'Cards (schools & programs)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      page: page
+field_type: entity_reference

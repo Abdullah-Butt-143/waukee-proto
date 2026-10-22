@@ -1,0 +1,8 @@
+uuid: c14beb93-f6d2-4f99-9bd6-f9e1d5e8b69c
+langcode: en
+status: true
+dependencies: {  }
+id: competency_grid
+label: 'Competency grid'
+revision: false
+description: 'Competency grid component.'

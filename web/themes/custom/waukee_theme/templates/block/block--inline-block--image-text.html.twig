@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Image + text split section ("Why Choose Waukee Community Schools").
+ * field_image_position (left/right) controls which side the image sits on.
+ */
+#}
+{% set position = content.field_image_position['#items'] ? content.field_image_position['#items'].value : 'left' %}
+<section{{ attributes.addClass('wk-split', 'wk-split--' ~ position) }}>
+  <div class="wk-container wk-split__inner">
+    <div class="wk-split__text">
+      {% if content.field_heading|render|trim %}
+        <h2 class="wk-split__title">{{ content.field_heading.0 }}</h2>
+      {% endif %}
+      {% if content.field_body_text|render|trim %}
+        <div class="wk-split__body">{{ content.field_body_text.0 }}</div>
+      {% endif %}
+    </div>
+    {% if content.field_image|render|trim %}
+      <div class="wk-split__media">{{ content.field_image.0 }}</div>
+    {% endif %}
+  </div>
+</section>

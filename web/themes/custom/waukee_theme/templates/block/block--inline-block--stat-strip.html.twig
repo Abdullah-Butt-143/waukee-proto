@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Stat strip: full-bleed on-primary bar of key district numbers.
+ */
+#}
+<div class="wk-fullbleed">
+  <section{{ attributes.addClass('wk-stats') }}>
+    <div class="wk-container wk-stats__grid">
+      {% for item in content.field_items['#items'] %}
+        <div class="wk-stats__item">
+          <span class="wk-stats__value">{{ item.summary }}</span>
+          <span class="wk-stats__label">{{ item.value|striptags|trim }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
