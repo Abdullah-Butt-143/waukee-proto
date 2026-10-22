@@ -1,0 +1,19 @@
+uuid: 90da08f8-a078-40c9-8da1-d27f804399af
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.competency_grid
+    - field.storage.block_content.field_heading
+id: block_content.competency_grid.field_heading
+field_name: field_heading
+entity_type: block_content
+bundle: competency_grid
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

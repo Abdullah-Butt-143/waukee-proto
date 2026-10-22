@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Waukee theme hooks.
+ */
+
+use Drupal\Core\Asset\AttachedAssetsInterface;
+use Drupal\Core\Language\LanguageInterface;
+
+/**
+ * Implements hook_css_alter().
+ *
+ * The homepage is a Tailwind design; Olivero's and the theme's own global
+ * stylesheets would override it. Keyed on the attached library (not the
+ * route) because the asset resolver caches results per library set.
+ */
+function waukee_theme_css_alter(array &$css, AttachedAssetsInterface $assets, LanguageInterface $language) {
+  if (!in_array('waukee_theme/front', $assets->getLibraries(), TRUE)) {
+    return;
+  }
+  foreach (array_keys($css) as $key) {
+    if (str_contains($key, 'core/themes/olivero/') || str_contains($key, 'waukee_theme/css/waukee.css')) {
+      unset($css[$key]);
+    }
+  }
+}

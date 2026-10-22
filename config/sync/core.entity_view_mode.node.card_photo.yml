@@ -1,0 +1,11 @@
+uuid: 9debdb6a-38dd-4910-afbb-c7a885bb70f6
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.card_photo
+label: 'Card (photo)'
+description: null
+targetEntityType: node
+cache: true
