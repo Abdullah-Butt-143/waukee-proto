@@ -20,11 +20,15 @@ class SchoolsController extends ControllerBase {
       ->sort('label')
       ->execute();
     $schools = [];
+    $nodes = $this->entityTypeManager()->getStorage('node');
     foreach ($storage->loadMultiple($ids) as $group) {
       $value = fn(string $field) => $group->hasField($field) ? $group->get($field)->value : '';
+      // The school's site is its landing page (a Basic page titled like the
+      // school); fall back to the group page if there is none.
+      $landing = $nodes->loadByProperties(['type' => 'page', 'title' => $group->label(), 'status' => 1]);
       $schools[] = [
         'name' => $group->label(),
-        'url' => $group->toUrl()->toString(),
+        'url' => $landing ? reset($landing)->toUrl()->toString() : $group->toUrl()->toString(),
         'grades' => $value('field_grades'),
         'address' => $value('field_address'),
         'phone' => $value('field_phone'),

@@ -36,19 +36,40 @@ function waukee_theme_css_alter(array &$css, AttachedAssetsInterface $assets, La
  */
 function waukee_theme_preprocess_page(array &$variables) {
   $variables['#cache']['contexts'][] = 'user.permissions';
-  $variables['#cache']['contexts'][] = 'user.roles:authenticated';
+  $variables['#cache']['contexts'][] = 'user';
   $account = \Drupal::currentUser();
   if ($account->isAnonymous()) {
     $variables['wk_account_links'] = [];
     return;
   }
-  $candidates = [
-    [t('Add page'), 'node.add', ['node_type' => 'page']],
+  // School editors create content inside their school (group) so the school
+  // owns it; everyone else uses the standalone node forms.
+  $candidates = [];
+  $schools = [];
+  foreach (\Drupal::service('group.membership_loader')->loadByUser($account) as $membership) {
+    $group = $membership->getGroup();
+    if ($group->bundle() === 'school') {
+      $schools[] = $group;
+    }
+  }
+  if ($schools) {
+    foreach ($schools as $group) {
+      $suffix = count($schools) > 1 ? ' (' . $group->label() . ')' : '';
+      foreach (['page' => t('Add page'), 'news' => t('Add news')] as $bundle => $label) {
+        $candidates[] = [$label . $suffix, 'entity.group_relationship.create_form', ['group' => $group->id(), 'plugin_id' => 'group_node:' . $bundle]];
+      }
+    }
+  }
+  else {
+    $candidates[] = [t('Add page'), 'node.add', ['node_type' => 'page']];
+    $candidates[] = [t('Add news'), 'node.add', ['node_type' => 'news']];
+  }
+  $candidates = array_merge($candidates, [
     [t('Content'), 'system.admin_content', []],
     [t('Scheduled'), 'view.scheduler_scheduled_content.overview', []],
     [t('Admin'), 'system.admin', []],
     [t('My account'), 'entity.user.canonical', ['user' => $account->id()]],
-  ];
+  ]);
   $links = [];
   foreach ($candidates as [$title, $route, $params]) {
     $url = Url::fromRoute($route, $params);

@@ -117,6 +117,7 @@ third_party_settings:
           - 'views_block:news_feed-block_high'
           - 'views_block:events-block_elementary'
           - 'views_block:events-block_high'
+          - waukee_school_pages
       restricted_categories:
         - Announcements
         - Group
