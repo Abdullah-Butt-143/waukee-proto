@@ -12,3 +12,5 @@
 *.sql
 *.sql.gz
 !/snapshots/*.sql.gz
+node_modules/
+**/node_modules/
