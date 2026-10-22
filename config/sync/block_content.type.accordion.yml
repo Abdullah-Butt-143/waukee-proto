@@ -1,0 +1,8 @@
+uuid: 0b145be6-70c3-42d7-b42e-67f3b4c0ae93
+langcode: en
+status: true
+dependencies: {  }
+id: accordion
+label: Accordion
+revision: false
+description: 'Accordion component.'

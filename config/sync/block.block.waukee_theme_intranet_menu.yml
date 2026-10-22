@@ -1,0 +1,37 @@
+uuid: 3ec40453-e79b-4a3d-8bd3-32ef9bfbc0b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.intranet
+  module:
+    - system
+    - user
+  theme:
+    - waukee_theme
+id: waukee_theme_intranet_menu
+theme: waukee_theme
+region: secondary_menu
+weight: -5
+provider: null
+plugin: 'system_menu_block:intranet'
+settings:
+  id: 'system_menu_block:intranet'
+  label: Intranet
+  label_display: ''
+  provider: system
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      staff: staff
+      school_editor: school_editor
+      publisher: publisher
+      district_admin: district_admin
+      administrator: administrator

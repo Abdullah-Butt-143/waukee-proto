@@ -1,0 +1,8 @@
+uuid: d8d995a7-ae0f-49d5-bff2-99aa9312c648
+langcode: en
+status: true
+dependencies: {  }
+id: audience_pathways
+label: 'Audience pathways'
+revision: false
+description: 'Audience pathways component.'

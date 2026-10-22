@@ -1,0 +1,23 @@
+uuid: d13496b5-b8a1-4eb4-af8a-9bab94c9a087
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.emergency_alert
+    - field.storage.block_content.field_active
+id: block_content.emergency_alert.field_active
+field_name: field_active
+entity_type: block_content
+bundle: emergency_alert
+label: Active
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Active
+  off_label: Inactive
+field_type: boolean

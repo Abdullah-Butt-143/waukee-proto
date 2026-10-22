@@ -1,0 +1,8 @@
+uuid: bd62a6bd-22de-4e8b-b62f-0ce46cc39cab
+langcode: en
+status: true
+dependencies: {  }
+id: image_text
+label: 'Image + text'
+revision: false
+description: 'Image + text component.'

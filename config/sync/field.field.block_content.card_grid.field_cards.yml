@@ -1,0 +1,28 @@
+uuid: ce2e476d-ba95-426a-b82a-7ffe837ec660
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.card_grid
+    - field.storage.block_content.field_cards
+    - node.type.event
+    - node.type.news
+    - node.type.page
+id: block_content.card_grid.field_cards
+field_name: field_cards
+entity_type: block_content
+bundle: card_grid
+label: 'Cards (content to feature)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      page: page
+      news: news
+      event: event
+field_type: entity_reference

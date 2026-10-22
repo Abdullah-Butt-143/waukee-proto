@@ -1,0 +1,8 @@
+uuid: dd54b7c0-d916-4a4f-a1a3-3d9d16c6c552
+langcode: en
+status: true
+dependencies: {  }
+id: emergency_alert
+label: 'Emergency alert'
+revision: false
+description: 'Emergency alert component.'

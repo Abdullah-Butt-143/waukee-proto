@@ -1,0 +1,22 @@
+uuid: 807b9264-dcd6-4ab8-a391-3ffe29be8dfa
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.emergency_alert
+    - field.storage.block_content.field_message
+  module:
+    - text
+id: block_content.emergency_alert.field_message
+field_name: field_message
+entity_type: block_content
+bundle: emergency_alert
+label: Message
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

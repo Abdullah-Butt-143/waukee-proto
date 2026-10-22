@@ -1,0 +1,8 @@
+uuid: dc1cd9ad-8278-42e4-bcae-8d37af63902a
+langcode: en
+status: true
+dependencies: {  }
+id: hero
+label: Hero
+revision: false
+description: 'Hero component.'

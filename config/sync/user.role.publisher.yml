@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_display.node.page.default
     - node.type.announcement
     - node.type.document
     - node.type.event
@@ -14,6 +15,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - layout_builder
     - media
     - node
     - scheduler
@@ -30,6 +32,8 @@ permissions:
   - 'access media overview'
   - 'access taxonomy overview'
   - 'access toolbar'
+  - 'configure editable page node layout overrides'
+  - 'create and edit custom blocks'
   - 'create announcement content'
   - 'create document content'
   - 'create event content'

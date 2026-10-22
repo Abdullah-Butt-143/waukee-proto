@@ -1,0 +1,8 @@
+uuid: 38985dee-4674-4c86-ae73-16832cdf9bcf
+langcode: en
+status: true
+dependencies: {  }
+id: intranet
+label: Intranet
+description: 'Staff intranet navigation. Only shown to staff roles.'
+locked: false

@@ -6,44 +6,138 @@ dependencies:
     - field.field.node.page.body
     - field.field.node.page.field_owner
     - field.field.node.page.field_review_date
+    - field.field.node.page.layout_builder__layout
     - node.type.page
   module:
-    - datetime
-    - text
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
     - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          02ccddc6-9f84-4e94-ae26-d2f1e6c7b06f:
+            uuid: 02ccddc6-9f84-4e94-ae26-d2f1e6c7b06f
+            region: content
+            configuration:
+              id: 'extra_field_block:node:page:content_moderation_control'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 0
+            additional: {  }
+          46e2716d-f367-49f2-84f8-2c985837d8a9:
+            uuid: 46e2716d-f367-49f2-84f8-2c985837d8a9
+            region: content
+            configuration:
+              id: 'field_block:node:page:field_owner'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: false
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          cd46cc51-46b4-4798-be68-0057987defbb:
+            uuid: cd46cc51-46b4-4798-be68-0057987defbb
+            region: content
+            configuration:
+              id: 'field_block:node:page:field_review_date'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          ce0c9cce-ef97-41a4-a964-04239ca6f4b2:
+            uuid: ce0c9cce-ef97-41a4-a964-04239ca6f4b2
+            region: content
+            configuration:
+              id: 'extra_field_block:node:page:links'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 3
+            additional: {  }
+          04cbf145-e234-4eae-b4ca-817a502513c4:
+            uuid: 04cbf145-e234-4eae-b4ca-817a502513c4
+            region: content
+            configuration:
+              id: 'field_block:node:page:body'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+        third_party_settings: {  }
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts:
+        - layout_onecol
+        - layout_twocol_section
+        - layout_threecol_section
+      allowlisted_blocks:
+        'Inline blocks':
+          - 'inline_block:hero'
+          - 'inline_block:card_grid'
+          - 'inline_block:audience_pathways'
+          - 'inline_block:quick_links'
+          - 'inline_block:accordion'
+          - 'inline_block:callout'
+          - 'inline_block:image_text'
+          - 'inline_block:video_embed'
+          - 'inline_block:emergency_alert'
+        'Lists (Views)':
+          - 'views_block:news_feed-block_1'
+          - 'views_block:events-block_1'
+      restricted_categories:
+        - Announcements
+        - Group
+        - Help
+        - 'Content fields'
+        - Navigation
+        - 'Menus (Navigation)'
+        - System
+        - Menus
+        - Forms
+        - Webform
+        - Editoria11y
+        - User
+        - core
+        - Block
 id: node.page.default
 targetEntityType: node
 bundle: page
 mode: default
-content:
-  body:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 101
-    region: content
-  field_owner:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: false
-    third_party_settings: {  }
-    weight: 20
-    region: content
-  field_review_date:
-    type: datetime_default
-    label: above
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 21
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 100
-    region: content
+content: {  }
 hidden:
+  body: true
+  content_moderation_control: true
+  field_owner: true
+  field_review_date: true
+  layout_builder__layout: true
+  links: true
   search_api_excerpt: true

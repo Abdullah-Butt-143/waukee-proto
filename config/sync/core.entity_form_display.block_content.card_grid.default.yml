@@ -1,0 +1,40 @@
+uuid: be623738-ccdf-4ad0-ae85-1cd1314d0cbe
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.card_grid
+    - field.field.block_content.card_grid.field_cards
+    - field.field.block_content.card_grid.field_heading
+id: block_content.card_grid.default
+targetEntityType: block_content
+bundle: card_grid
+mode: default
+content:
+  field_cards:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_heading:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

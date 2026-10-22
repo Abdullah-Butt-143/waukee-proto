@@ -1,0 +1,38 @@
+uuid: 60631950-3f37-4fee-ad42-82d885a80616
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.quick_links
+    - field.field.block_content.quick_links.field_heading
+    - field.field.block_content.quick_links.field_links
+  module:
+    - link
+id: block_content.quick_links.default
+targetEntityType: block_content
+bundle: quick_links
+mode: default
+content:
+  field_heading:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_links:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

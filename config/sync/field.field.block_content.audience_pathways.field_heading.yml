@@ -1,0 +1,19 @@
+uuid: 6fe8674c-676f-4c0f-a0ca-a9820be8d629
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.audience_pathways
+    - field.storage.block_content.field_heading
+id: block_content.audience_pathways.field_heading
+field_name: field_heading
+entity_type: block_content
+bundle: audience_pathways
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,19 @@
+uuid: bfefd3b2-f6c8-4752-af7b-5babc8f0d36e
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.video_embed
+    - field.storage.block_content.field_caption
+id: block_content.video_embed.field_caption
+field_name: field_caption
+entity_type: block_content
+bundle: video_embed
+label: 'Caption / transcript link'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

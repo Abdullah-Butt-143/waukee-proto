@@ -1,0 +1,8 @@
+uuid: e8da2a91-f60f-43b5-b32c-2ca92b2fd8ff
+langcode: en
+status: true
+dependencies: {  }
+id: quick_links
+label: 'Quick links'
+revision: false
+description: 'Quick links component.'

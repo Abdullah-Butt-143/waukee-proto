@@ -1,0 +1,7 @@
+name: Waukee core
+type: module
+description: 'Small helpers for the Waukee prototype: accordion field formatter and shared site code.'
+package: Waukee
+core_version_requirement: ^11
+dependencies:
+  - drupal:text

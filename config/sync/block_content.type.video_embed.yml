@@ -1,0 +1,8 @@
+uuid: ee8b420d-c36a-4dbc-93a9-f680612832a5
+langcode: en
+status: true
+dependencies: {  }
+id: video_embed
+label: 'Video embed'
+revision: false
+description: 'Video embed component.'

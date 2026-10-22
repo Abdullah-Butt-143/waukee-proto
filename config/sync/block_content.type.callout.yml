@@ -1,0 +1,8 @@
+uuid: efebc37a-edad-423c-a585-d3d5c146ff7b
+langcode: en
+status: true
+dependencies: {  }
+id: callout
+label: Callout
+revision: false
+description: 'Callout component.'

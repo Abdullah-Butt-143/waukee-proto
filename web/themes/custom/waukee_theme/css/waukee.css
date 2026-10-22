@@ -195,3 +195,196 @@ a {
 a:hover {
   color: var(--wk-purple-deep);
 }
+
+/* ===================================================================
+ * Layout Builder components (Phase 6)
+ * Inline blocks render with class .block-inline-blockTYPE.
+ * =================================================================== */
+.block-inline-blockhero,
+.block-inline-blockcallout,
+.block-inline-blockimage-text,
+.block-inline-blockcard-grid,
+.block-inline-blockaudience-pathways,
+.block-inline-blockquick-links,
+.block-inline-blockaccordion,
+.block-inline-blockvideo-embed {
+  margin-block: 2rem;
+}
+
+/* Hero: deep purple panel, white text (14:1). */
+.block-inline-blockhero {
+  position: relative;
+  padding: 3rem 2rem;
+  background: var(--wk-purple-deep);
+  color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.block-inline-blockhero .field--name-field-heading {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+.block-inline-blockhero .field--name-field-subheading {
+  margin-top: 0.75rem;
+  font-size: 1.25rem;
+}
+.block-inline-blockhero .field--name-field-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+  z-index: 0;
+}
+.block-inline-blockhero .field--name-field-heading,
+.block-inline-blockhero .field--name-field-subheading,
+.block-inline-blockhero .field--name-field-cta {
+  position: relative;
+  z-index: 1;
+}
+.block-inline-blockhero .field--name-field-cta a {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--wk-lime);
+  color: var(--wk-purple-ink);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 999px;
+}
+.block-inline-blockhero .field--name-field-cta a:hover,
+.block-inline-blockhero .field--name-field-cta a:focus {
+  background: #fff;
+}
+
+/* Headings in components. */
+.block-inline-blockcard-grid .field--name-field-heading,
+.block-inline-blockaudience-pathways .field--name-field-heading,
+.block-inline-blockquick-links .field--name-field-heading,
+.block-inline-blockaccordion .field--name-field-heading,
+.block-inline-blockcallout .field--name-field-heading,
+.block-inline-blockimage-text .field--name-field-heading,
+.block-inline-blockvideo-embed .field--name-field-heading {
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--wk-purple-deep);
+}
+
+/* Card grid. */
+.block-inline-blockcard-grid .field--name-field-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+}
+.block-inline-blockcard-grid .field--name-field-cards > .field__item > article {
+  height: 100%;
+  padding: 1.25rem;
+  background: var(--wk-grey-bg);
+  border-top: 4px solid var(--wk-purple);
+  border-radius: 6px;
+}
+
+/* Audience pathways + quick links: large tiles. */
+.block-inline-blockaudience-pathways .field--name-field-links,
+.block-inline-blockquick-links .field--name-field-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1rem;
+}
+.block-inline-blockaudience-pathways .field--name-field-links a,
+.block-inline-blockquick-links .field--name-field-links a {
+  display: flex;
+  align-items: center;
+  min-height: 5rem;
+  padding: 1rem 1.25rem;
+  background: var(--wk-purple);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 6px;
+}
+.block-inline-blockquick-links .field--name-field-links a {
+  background: var(--wk-lime);
+  color: var(--wk-purple-ink);
+}
+.block-inline-blockaudience-pathways .field--name-field-links a:hover,
+.block-inline-blockaudience-pathways .field--name-field-links a:focus {
+  background: var(--wk-purple-deep);
+}
+.block-inline-blockquick-links .field--name-field-links a:hover,
+.block-inline-blockquick-links .field--name-field-links a:focus {
+  background: var(--wk-purple-deep);
+  color: #fff;
+}
+
+/* Accordion (native <details>). */
+.wk-accordion {
+  border: 1px solid var(--color--gray-90);
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  background: #fff;
+}
+.wk-accordion summary {
+  padding: 0.9rem 1.1rem;
+  min-height: 44px;
+  font-weight: 700;
+  color: var(--wk-purple-deep);
+  cursor: pointer;
+}
+.wk-accordion[open] summary {
+  background: var(--wk-purple-tint);
+}
+.wk-accordion__body {
+  padding: 1rem 1.1rem;
+}
+
+/* Callout. */
+.block-inline-blockcallout {
+  padding: 1.25rem 1.5rem;
+  border-left: 6px solid var(--wk-purple);
+  background: var(--wk-purple-tint);
+  color: var(--wk-purple-ink);
+  border-radius: 4px;
+}
+.block-inline-blockcallout .field--name-field-style {
+  display: none;
+}
+
+/* Image + text. */
+.block-inline-blockimage-text {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+@media (min-width: 43.75rem) {
+  .block-inline-blockimage-text {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.block-inline-blockimage-text .field--name-field-image-position {
+  display: none;
+}
+.block-inline-blockimage-text img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* Video embed: responsive. */
+.block-inline-blockvideo-embed iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+}
+
+/* Views feeds. */
+.wk-feed__item {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color--gray-90);
+}

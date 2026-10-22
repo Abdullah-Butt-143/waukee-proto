@@ -1,0 +1,24 @@
+uuid: ddb8d0bd-dae7-4a81-8726-8fcfc7fd5670
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero
+    - field.storage.block_content.field_image
+    - media.type.image
+id: block_content.hero.field_image
+field_name: field_image
+entity_type: block_content
+bundle: hero
+label: 'Background image'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+field_type: entity_reference

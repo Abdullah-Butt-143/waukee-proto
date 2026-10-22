@@ -1,0 +1,38 @@
+uuid: ec18be3c-bf33-4de6-b661-07e7c1fdc797
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.audience_pathways
+    - field.field.block_content.audience_pathways.field_heading
+    - field.field.block_content.audience_pathways.field_links
+  module:
+    - link
+id: block_content.audience_pathways.default
+targetEntityType: block_content
+bundle: audience_pathways
+mode: default
+content:
+  field_heading:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_links:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

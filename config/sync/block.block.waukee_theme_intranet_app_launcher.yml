@@ -1,0 +1,42 @@
+uuid: b162684c-b601-4f25-bcfd-586f8abf7ba4
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:app_launcher:7bc29162-ee8a-4b0e-9fe8-d647836b998d'
+  module:
+    - block_content
+    - system
+    - user
+  theme:
+    - waukee_theme
+id: waukee_theme_intranet_app_launcher
+theme: waukee_theme
+region: sidebar
+weight: 0
+provider: null
+plugin: 'block_content:7bc29162-ee8a-4b0e-9fe8-d647836b998d'
+settings:
+  id: 'block_content:7bc29162-ee8a-4b0e-9fe8-d647836b998d'
+  label: Apps
+  label_display: visible
+  provider: block_content
+  view_mode: default
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      staff: staff
+      school_editor: school_editor
+      publisher: publisher
+      district_admin: district_admin
+      administrator: administrator
+  request_path:
+    id: request_path
+    negate: false
+    pages: |-
+      /intranet
+      /intranet/*

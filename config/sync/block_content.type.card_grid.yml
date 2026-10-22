@@ -1,0 +1,8 @@
+uuid: 313a7ff4-d1e7-4889-97d1-441f2ce46c9f
+langcode: en
+status: true
+dependencies: {  }
+id: card_grid
+label: 'Card grid'
+revision: false
+description: 'Card grid component.'

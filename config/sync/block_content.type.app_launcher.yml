@@ -1,0 +1,8 @@
+uuid: 64b082e3-1d63-49a0-b421-5da1940933e4
+langcode: en
+status: true
+dependencies: {  }
+id: app_launcher
+label: 'App launcher'
+revision: false
+description: 'Grid of links to staff applications.'

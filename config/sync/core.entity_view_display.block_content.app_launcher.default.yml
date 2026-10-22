@@ -1,0 +1,28 @@
+uuid: 45ac41f1-f0af-402d-97f9-317bfb690269
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.app_launcher
+    - field.field.block_content.app_launcher.field_links
+  module:
+    - link
+id: block_content.app_launcher.default
+targetEntityType: block_content
+bundle: app_launcher
+mode: default
+content:
+  field_links:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: noopener
+      target: _blank
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,40 @@
+uuid: 736bcdd2-a317-4d26-a9c1-ae85ea318836
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.audience_pathways
+    - field.field.block_content.audience_pathways.field_heading
+    - field.field.block_content.audience_pathways.field_links
+  module:
+    - link
+id: block_content.audience_pathways.default
+targetEntityType: block_content
+bundle: audience_pathways
+mode: default
+content:
+  field_heading:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_links:
+    type: link_default
+    weight: 1
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }
