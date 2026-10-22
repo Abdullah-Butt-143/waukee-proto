@@ -2,6 +2,8 @@ uuid: 9a15039a-8889-4ed7-ae98-bceeee58edb4
 langcode: en
 status: true
 dependencies:
+  module:
+    - system
   theme:
     - waukee_theme
 _core:
@@ -17,4 +19,8 @@ settings:
   label: 'Page title'
   label_display: '0'
   provider: core
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: '<front>'
