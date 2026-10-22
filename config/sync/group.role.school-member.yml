@@ -1,0 +1,30 @@
+uuid: cf9822dc-c34b-4603-a8aa-130f7f5c6cfd
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.school
+    - user.role.authenticated
+id: school-member
+label: Member
+weight: 0
+admin: false
+scope: insider
+global_role: authenticated
+group_type: school
+permissions:
+  - 'view group'
+  - 'view group_node:announcement entity'
+  - 'view group_node:announcement relationship'
+  - 'view group_node:document entity'
+  - 'view group_node:document relationship'
+  - 'view group_node:event entity'
+  - 'view group_node:event relationship'
+  - 'view group_node:lunch_menu entity'
+  - 'view group_node:lunch_menu relationship'
+  - 'view group_node:news entity'
+  - 'view group_node:news relationship'
+  - 'view group_node:page entity'
+  - 'view group_node:page relationship'
+  - 'view group_node:staff_profile entity'
+  - 'view group_node:staff_profile relationship'

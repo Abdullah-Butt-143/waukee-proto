@@ -1,0 +1,17 @@
+uuid: f35448d3-36c0-492d-a5a3-6e613824e1c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.intranet
+    - node.type.news
+  module:
+    - gnode
+    - node
+id: intranet-group_node-news
+group_type: intranet
+content_plugin: 'group_node:news'
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1
+  use_creation_wizard: false

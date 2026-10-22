@@ -1,0 +1,11 @@
+uuid: 6b755781-9894-4552-bb0f-ba58c13fd37f
+langcode: en
+status: true
+dependencies: {  }
+id: school
+label: School
+description: 'A school site. Content belongs to one school.'
+new_revision: true
+creator_membership: false
+creator_wizard: true
+creator_roles: {  }

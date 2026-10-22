@@ -32,6 +32,7 @@
         "drupal/metatag": "^2.2",
         "drupal/openid_connect": "^1.6",
         "drupal/pathauto": "^1.15",
+        "drupal/permissions_by_term": "^3.1",
         "drupal/redirect": "^1.13",
         "drupal/scheduler": "^2.3",
         "drupal/scheduler_content_moderation_integration": "^3.0",

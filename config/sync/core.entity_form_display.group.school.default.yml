@@ -1,0 +1,43 @@
+uuid: beecb8ef-1b66-4d7d-8479-972d5154b3d4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.group.school.field_school
+    - group.type.school
+  module:
+    - path
+id: group.school.default
+targetEntityType: group
+bundle: school
+mode: default
+content:
+  field_school:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  label:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 120
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  uid: true

@@ -1,0 +1,57 @@
+uuid: e4322169-4f60-4d88-9a92-ec8e4037b4ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.intranet
+    - user.role.district_admin
+id: intranet-district_admin
+label: 'District admin'
+weight: 20
+admin: false
+scope: outsider
+global_role: district_admin
+group_type: intranet
+permissions:
+  - 'create group_node:announcement entity'
+  - 'create group_node:announcement relationship'
+  - 'create group_node:document entity'
+  - 'create group_node:document relationship'
+  - 'create group_node:news entity'
+  - 'create group_node:news relationship'
+  - 'create group_node:page entity'
+  - 'create group_node:page relationship'
+  - 'create group_node:staff_profile entity'
+  - 'create group_node:staff_profile relationship'
+  - 'delete own group_node:announcement entity'
+  - 'delete own group_node:document entity'
+  - 'delete own group_node:news entity'
+  - 'delete own group_node:page entity'
+  - 'delete own group_node:staff_profile entity'
+  - 'update any group_node:announcement entity'
+  - 'update any group_node:document entity'
+  - 'update any group_node:news entity'
+  - 'update any group_node:page entity'
+  - 'update any group_node:staff_profile entity'
+  - 'update own group_node:announcement entity'
+  - 'update own group_node:document entity'
+  - 'update own group_node:news entity'
+  - 'update own group_node:page entity'
+  - 'update own group_node:staff_profile entity'
+  - 'view group'
+  - 'view group_membership relationship'
+  - 'view group_node:announcement entity'
+  - 'view group_node:announcement relationship'
+  - 'view group_node:document entity'
+  - 'view group_node:document relationship'
+  - 'view group_node:news entity'
+  - 'view group_node:news relationship'
+  - 'view group_node:page entity'
+  - 'view group_node:page relationship'
+  - 'view group_node:staff_profile entity'
+  - 'view group_node:staff_profile relationship'
+  - 'view unpublished group_node:announcement entity'
+  - 'view unpublished group_node:document entity'
+  - 'view unpublished group_node:news entity'
+  - 'view unpublished group_node:page entity'
+  - 'view unpublished group_node:staff_profile entity'

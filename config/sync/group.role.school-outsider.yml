@@ -1,0 +1,28 @@
+uuid: e5d81cf3-9a04-4453-ba75-9756dd65e062
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.school
+    - user.role.authenticated
+id: school-outsider
+label: Outsider
+weight: 0
+admin: false
+scope: outsider
+global_role: authenticated
+group_type: school
+permissions:
+  - 'view group'
+  - 'view group_node:announcement entity'
+  - 'view group_node:announcement relationship'
+  - 'view group_node:document entity'
+  - 'view group_node:document relationship'
+  - 'view group_node:event entity'
+  - 'view group_node:event relationship'
+  - 'view group_node:lunch_menu entity'
+  - 'view group_node:lunch_menu relationship'
+  - 'view group_node:news entity'
+  - 'view group_node:news relationship'
+  - 'view group_node:page entity'
+  - 'view group_node:page relationship'

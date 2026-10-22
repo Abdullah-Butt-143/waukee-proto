@@ -1,0 +1,24 @@
+uuid: 914b5a2f-d184-4c1d-9dfb-737842ed2658
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.school
+    - user.role.anonymous
+id: school-anonymous
+label: Anonymous
+weight: 0
+admin: false
+scope: outsider
+global_role: anonymous
+group_type: school
+permissions:
+  - 'view group'
+  - 'view group_node:event entity'
+  - 'view group_node:event relationship'
+  - 'view group_node:lunch_menu entity'
+  - 'view group_node:lunch_menu relationship'
+  - 'view group_node:news entity'
+  - 'view group_node:news relationship'
+  - 'view group_node:page entity'
+  - 'view group_node:page relationship'

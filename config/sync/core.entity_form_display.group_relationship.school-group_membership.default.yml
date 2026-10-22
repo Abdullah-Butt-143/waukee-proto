@@ -1,0 +1,38 @@
+uuid: 56a949b3-a700-42e8-9870-33a1e1680961
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.group_relationship.school-group_membership.group_roles
+    - group.relationship_type.school-group_membership
+  module:
+    - path
+id: group_relationship.school-group_membership.default
+targetEntityType: group_relationship
+bundle: school-group_membership
+mode: default
+content:
+  entity_id:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  group_roles:
+    type: options_buttons
+    weight: 31
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  uid: true

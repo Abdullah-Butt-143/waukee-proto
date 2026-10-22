@@ -1,0 +1,17 @@
+uuid: 5a3efb82-f57b-4276-8866-8ae4556b1467
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.school
+    - node.type.document
+  module:
+    - gnode
+    - node
+id: school-group_node-document
+group_type: school
+content_plugin: 'group_node:document'
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1
+  use_creation_wizard: false

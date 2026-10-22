@@ -47,6 +47,7 @@ module:
   page_cache: 0
   path: 0
   path_alias: 0
+  permissions_by_term: 0
   redirect: 0
   scheduler: 0
   scheduler_content_moderation_integration: 0

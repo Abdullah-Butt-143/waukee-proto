@@ -1,0 +1,27 @@
+uuid: 33900168-831a-40ef-8b08-90ebbf94edb2
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.intranet
+    - user.role.authenticated
+id: intranet-member
+label: Member
+weight: 0
+admin: false
+scope: insider
+global_role: authenticated
+group_type: intranet
+permissions:
+  - 'view group'
+  - 'view group_membership relationship'
+  - 'view group_node:announcement entity'
+  - 'view group_node:announcement relationship'
+  - 'view group_node:document entity'
+  - 'view group_node:document relationship'
+  - 'view group_node:news entity'
+  - 'view group_node:news relationship'
+  - 'view group_node:page entity'
+  - 'view group_node:page relationship'
+  - 'view group_node:staff_profile entity'
+  - 'view group_node:staff_profile relationship'
