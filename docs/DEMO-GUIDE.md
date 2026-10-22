@@ -20,7 +20,7 @@ Site: `https://waukee-proto.ddev.site` (runs on the presenter's laptop via DDEV;
 
 ### Rebuilding on a fresh clone
 
-Pages, menu links and page-builder blocks live in the **database**, not in git. On a fresh clone run `ddev drush cim -y`, then these scripts in order (all re-runnable): `phase1` … `phase13b`, `phase14_design`, `phase14_images`, `phase15_schools`, `phase15b_menu`, `phase16_homepage`, `phase16_about`, `phase17_news`, **`phase17_schools_data`** (creates the school fields and the 22 schools; **needed or `/schools` crashes**), `phase20_form_links`, `phase21_school_pages` (all in `scripts/`, run with `ddev drush php:script scripts/<name>.php`). If page-builder pages ever render **empty**, run `scripts/phase19_repair_layouts.php` (rebuilds deleted blocks) and `scripts/phase16_about.php`.
+Pages, menu links and page-builder blocks live in the **database**, not in git. On a fresh clone run `ddev drush cim -y`, then these scripts in order (all re-runnable): `phase1` … `phase13b`, `phase14_design`, `phase14_images`, `phase15_schools`, `phase15b_menu`, `phase16_homepage`, `phase16_about`, `phase17_news`, **`phase17_schools_data`** (creates the school fields and the 22 schools; **needed or `/schools` crashes**), `phase20_form_links`, `phase21_school_pages`, `phase22_enroll` (all in `scripts/`, run with `ddev drush php:script scripts/<name>.php`). If page-builder pages ever render **empty**, run `scripts/phase19_repair_layouts.php` (rebuilds deleted blocks) and `scripts/phase16_about.php`.
 
 ---
 
@@ -65,7 +65,7 @@ Do these in order. Each step says **who is logged in** and **what to click**.
 
 ### Step 1: Public tour (3 min, logged out / private window)
 1. Open `/`. Point out the header, hero, stat strip, "Why choose" section, school/program cards.
-2. Hover **About** in the header to show the About menu and quick links. Shrink the window below 1280 px wide: the **Menu** button appears. Click it.
+2. Hover **About** in the header to show the About menu and quick links. Click **Enroll Now** (or **Enroll**): `/enrollment` is a designed page with a four-step band, "what you will need", an FAQ accordion, helpful pages and a help box. Shrink the window below 1280 px wide: the **Menu** button appears. Click it.
 3. Click **Schools** in the header → `/schools`: the district directory of **22 schools** grouped by level (high schools, 9th-grade campuses, middle, elementary, specialized centers) with a filter. Click **Explore** on **Waukee High School** → `/schools/waukee-high-school`: a full profile (principal's message, leadership team, bell schedule, news, family resources). Other schools (for example `/schools/brookview-elementary`) show a shorter profile built from the same data.
    Then open `/schools/sample-elementary`: the **school site** used for the editor demo (the school's own news **plus District items**, events, and a **Pages from Sample Elementary** list). It is reached by address or from the editor flow; it is not one of the 22 directory cards.
 4. Click **About** → `/district`: hero, stat strip, "Our story", photo cards (Mission and vision, Superintendent, Strategic plan, District facts, Board of Education, Our schools), "What We Value".
@@ -84,7 +84,7 @@ Reach them from the header: hover **About** → **Quick links** → **Facility r
 5. **Volunteer hours** (`/students/volunteer-hours`): choose activity **Other** → a required "describe the activity" box appears. Hours must be 0.25 to 24 (try 99).
 
 ### Step 4: Editor builds and submits (5 min, `school.editor`)
-1. Log in. The **account bar** shows **Add page** and **Add news**.
+1. Open `/user/login` (the account icon in the header), log in as `school.editor`. The **account bar** shows **Add page** and **Add news**.
 2. Click **Add page** (goes to `/group/2/content/create/group_node:page`, i.e. inside **Sample Elementary**). Enter a title such as "Field day information". The **Change to** state stays **Draft**. Click **Save**.
 3. On the new page click the **Layout** tab (page builder). **Add section** → one column → **Add block**. The list shows only the approved components: Hero, Card grid, Audience pathways, Quick links, Accordion, Callout, Image + text, Video embed, the News/Events feeds and **School pages list**. Add a **Callout** and a **Hero**, fill them in, click **Save layout**.
 4. **Accessibility checker:** the Editoria11y button (bottom right of the page) counts issues. Skip a heading level in a Callout (H2 then H4) or use a link text like "click here": it flags it; fix it and it clears.
@@ -140,8 +140,10 @@ Nothing is public until a publisher moves it to **Published** (editors can only 
 | `/schools/sample-elementary` · `/schools/sample-high-school` | The two sample school "sites" used for the editor/group demo: own news/events + District items + pages list. Not in the 22-school directory. |
 | `/district` | About the District. Sub-pages: `/district/mission-vision`, `/district/superintendent`, `/district/strategic-plan`, `/district/facts`. |
 | `/news` | News list with School filter. |
+| `/enrollment` | Designed enrollment page (hero, 4 steps, documents needed, FAQ, helpful pages, help box). |
+| `/user/login` · `/user/password` | Two-panel login and password-reset pages with the shared header and footer. |
 | `/families` · `/prospective-families` · `/students` · `/careers` · `/community` | Section pages: callout + card grid of sub-pages. |
-| `/enrollment` · `/transportation` · `/families/nutrition` · `/families/health-services` · `/closings` | Family pages. |
+| `/transportation` · `/families/nutrition` · `/families/health-services` · `/closings` | Family pages. |
 | `/prospective-families/why-us` · `/prospective-families/schools` · `/prospective-families/enroll` | Prospective families. |
 | `/students/activities` · `/students/resources` · **`/students/volunteer-hours`** | Students (volunteer form). |
 | `/careers/benefits` · `/careers/jobs` | Careers (jobs page is plain text, see limits). |

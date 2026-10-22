@@ -36,8 +36,13 @@ function waukee_theme_css_alter(array &$css, AttachedAssetsInterface $assets, La
  * default path-based suggestions would otherwise produce).
  */
 function waukee_theme_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-  if (\Drupal::routeMatch()->getRouteName() === 'waukee_core.school_detail') {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name === 'waukee_core.school_detail') {
     $suggestions[] = 'page__schools__detail';
+  }
+  // Login, password reset and registration share one two-panel design.
+  if (in_array($route_name, ['user.login', 'user.pass', 'user.register'], TRUE)) {
+    $suggestions[] = 'page__user__login';
   }
 }
 

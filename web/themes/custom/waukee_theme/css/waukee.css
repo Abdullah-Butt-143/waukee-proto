@@ -1261,3 +1261,80 @@ td a:hover { text-decoration: underline; }
 .wk-school-pages a { display: block; padding: 0.75rem 1rem; background: var(--wk-surface); border: 1px solid var(--wk-line); border-radius: 12px; font-weight: 700; color: var(--wk-purple-ink); text-decoration: none; }
 .wk-school-pages a:hover, .wk-school-pages a:focus-visible { border-color: var(--wk-purple); color: var(--wk-purple); }
 .block-waukee-school-pages .block__title, .wk-school-pages + .item-list__title { margin: 0; }
+
+/* ==========================================================================
+   Login / password reset / register (templates/layout/page--user--login)
+   ========================================================================== */
+.wk-auth { background: var(--wk-surface); padding: 3rem 0 4.5rem; }
+.wk-auth__box {
+  display: grid;
+  width: min(68rem, calc(100% - 2rem));
+  margin-inline: auto;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: var(--wk-shadow-lg);
+}
+@media (min-width: 56rem) { .wk-auth__box { grid-template-columns: 5fr 6fr; } }
+.wk-auth__panel {
+  position: relative;
+  overflow: hidden;
+  padding: 2.5rem clamp(1.5rem, 4vw, 3rem);
+  background: linear-gradient(150deg, #2a1240 0%, #4b2e83 62%, #6b4ea4 100%);
+  color: #fff;
+}
+.wk-auth__panel::after {
+  content: "";
+  position: absolute;
+  right: -3.5rem;
+  bottom: -3.5rem;
+  width: 14rem;
+  height: 14rem;
+  border-radius: 50%;
+  background: #F2A900;
+  opacity: 0.9;
+}
+.wk-auth__panel > * { position: relative; z-index: 1; }
+.wk-auth__badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fdba45;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.wk-auth__headline { margin: 1.25rem 0 0.75rem; color: #fff; font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.1; }
+.wk-auth__lead { margin: 0 0 1.5rem; max-width: 26rem; color: rgba(255, 255, 255, 0.88); font-size: 1.05rem; line-height: 1.55; }
+.wk-auth__list { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 0.7rem; max-width: 26rem; }
+.wk-auth__list li { position: relative; padding-left: 1.9rem; color: #fff; font-weight: 600; line-height: 1.4; }
+.wk-auth__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: #fdba45 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%233c1a5b' d='M9.5 16.2 5.3 12l-1.4 1.4 5.6 5.6L20.1 8.4 18.7 7z'/%3E%3C/svg%3E") center / 0.8rem no-repeat;
+}
+.wk-auth__note { margin: 0; max-width: 17rem; color: rgba(255, 255, 255, 0.75); font-size: 0.9rem; line-height: 1.5; }
+
+.wk-auth__card { padding: 2.5rem clamp(1.5rem, 4vw, 3rem); }
+.wk-auth__title { margin: 0 0 0.35rem; font-size: 1.9rem; line-height: 1.15; color: var(--wk-purple-ink); }
+.wk-auth__intro { margin: 0 0 1rem; color: var(--wk-soft); }
+.wk-auth__messages:empty { display: none; }
+.wk-auth__messages nav.tabs, .wk-auth__messages .tabs, .wk-auth__messages .tabs-wrapper, .wk-auth__messages .block-local-tasks-block { display: none; }
+.wk-auth__form .form-item, .wk-auth__form .form-wrapper { margin-block: 1rem; }
+.wk-auth__form input[type="text"], .wk-auth__form input[type="password"], .wk-auth__form input[type="email"] { width: 100%; max-width: none; box-sizing: border-box; }
+.wk-auth__form .form-actions { margin: 1.5rem 0 0; display: block; }
+.wk-auth__form .form-submit, .wk-auth__form input[type="submit"] { width: 100%; margin: 0; box-sizing: border-box; justify-content: center; text-align: center; padding-block: 0.9rem; font-size: 1.05rem; }
+.wk-auth__form .description, .wk-auth__form .form-item__description { color: var(--wk-soft); font-size: 0.9rem; }
+.wk-auth__links { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; margin: 1.5rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--wk-line); font-size: 0.95rem; }
+.wk-auth__links a { color: var(--wk-purple); font-weight: 700; text-decoration: none; }
+.wk-auth__links a:hover, .wk-auth__links a:focus-visible { text-decoration: underline; }
+@media (max-width: 55.99rem) {
+  .wk-auth__panel::after { width: 9rem; height: 9rem; right: -2.5rem; bottom: -2.5rem; opacity: 0.35; }
+}
