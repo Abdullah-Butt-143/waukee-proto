@@ -243,3 +243,44 @@ function waukee_core_ensure_school_term(GroupInterface $group): void {
 function waukee_core_group_insert(GroupInterface $group) {
   waukee_core_ensure_school_term($group);
 }
+
+/**
+ * School names and links for the header "Schools" menu, in two columns.
+ *
+ * Left column: high schools, 9th-grade campuses, middle schools, specialized
+ * centers. Right column: elementary schools. Only schools with a tier and a
+ * slug are listed. Cached until a group changes.
+ */
+function waukee_core_schools_menu(): array {
+  $cid = 'waukee_core:schools_menu';
+  if ($cached = \Drupal::cache()->get($cid)) {
+    return $cached->data;
+  }
+  $labels = [
+    'high' => 'High Schools',
+    'transition' => '9th Grade Campuses',
+    'middle' => 'Middle Schools',
+    'specialized' => 'Specialized Centers',
+    'elementary' => 'Elementary Schools',
+  ];
+  $storage = \Drupal::entityTypeManager()->getStorage('group');
+  $ids = $storage->getQuery()->accessCheck(TRUE)
+    ->condition('type', 'school')->exists('field_tier')->exists('field_slug')->sort('label')->execute();
+  $byTier = array_fill_keys(array_keys($labels), []);
+  foreach ($storage->loadMultiple($ids) as $group) {
+    $tier = $group->get('field_tier')->value;
+    if (isset($byTier[$tier])) {
+      $byTier[$tier][] = [
+        'name' => $group->label(),
+        'url' => Url::fromRoute('waukee_core.school_detail', ['school' => $group->get('field_slug')->value])->toString(),
+      ];
+    }
+  }
+  $section = fn(string $tier) => ['label' => $labels[$tier], 'items' => $byTier[$tier]];
+  $menu = [
+    'left' => array_values(array_filter(array_map($section, ['high', 'transition', 'middle', 'specialized']), fn($s) => $s['items'])),
+    'right' => array_values(array_filter(array_map($section, ['elementary']), fn($s) => $s['items'])),
+  ];
+  \Drupal::cache()->set($cid, $menu, \Drupal\Core\Cache\Cache::PERMANENT, ['group_list']);
+  return $menu;
+}
