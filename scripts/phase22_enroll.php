@@ -3,9 +3,12 @@
 /**
  * @file
  * Phase 22: designed Enrollment page (/enrollment), built from the same page
- * builder components as the About page: hero, steps band, "what you need"
- * split, FAQ accordion, helpful-pages cards, help callout. The layout is
- * rebuilt on every run. Sample content only.
+ * builder components as the About page: hero, steps band, required-documents
+ * accordion, timeline split, helpful-pages cards, help callout. The layout is
+ * rebuilt on every run. Wording is taken verbatim from the real
+ * waukeeschools.org/enroll page (scraped 2026-10-23); the Required Documents
+ * accordion only exposed its header labels on that page (bodies were
+ * collapsed), so those descriptions are a generic placeholder, not real copy.
  *
  * Needs: competency_grid block type (phase 16 homepage config), sample images
  * (phase16_about.php creates sample-why-choose).
@@ -19,7 +22,6 @@ use Drupal\layout_builder\SectionComponent;
 $etm = \Drupal::entityTypeManager();
 $uuid = \Drupal::service('uuid');
 $usage = \Drupal::service('inline_block.usage');
-$sample = ' This is sample content for the prototype; no real District data.';
 
 $find = function (string $title) use ($etm) {
   $n = $etm->getStorage('node')->loadByProperties(['type' => 'page', 'title' => $title]);
@@ -56,49 +58,65 @@ $one = function (string $bundle, array $values) use ($uuid, $usage, $node) {
   ], ['weight' => 0]));
 };
 
-$node->set('body', ['value' => '<p>How to enroll a student in Sample Community Schools: check your attendance area, gather your documents, submit the registration form and visit your school office.' . $sample . '</p>', 'format' => 'basic_html']);
+$node->set('body', ['value' => '<p>Welcome to Waukee Community School District! Our students have all the opportunities of a large district and the small-town feel of a close, supportive community. We\'re excited to welcome your family and help your child succeed. Find everything you need below to get started.</p>', 'format' => 'basic_html']);
 $node->set('layout_builder__layout', [
   $one('hero', [
-    'field_heading' => 'Enroll in Sample Community Schools',
-    'field_subheading' => 'Four simple steps to get your student registered, from checking your school to your first visit.',
+    'field_heading' => 'Enroll Now',
+    'field_subheading' => 'Now enrolling for the 2026-27 school year! Enrollment for 2027-28 school year begins in January 2027.',
     'field_image' => $media('sample-hero'),
-    'field_cta' => ['uri' => 'internal:/schools', 'title' => 'Find your school'],
+    'field_cta' => ['uri' => 'internal:/schools', 'title' => 'Find my school'],
   ]),
   $one('competency_grid', [
-    'field_heading' => 'Enrollment in four steps',
+    'field_heading' => 'Ready to Enroll?',
     'field_items' => $items([
-      '1. Check your area' => 'Find the school that serves your address.',
-      '2. Gather documents' => 'Proof of residency and immunization records.',
-      '3. Submit the form' => 'Complete the registration form online or on paper.',
-      '4. Visit your school' => 'Meet the office team and schedule a tour.',
+      'Step 1: Gather Your Documents' => 'Before you begin, gather the required documents listed below. You will be asked to submit these documents as part of the pre-enrollment application.',
+      'Step 2: Pre-Enroll Your Student' => 'Complete the online pre-enrollment application and upload your required documents.',
+      'Step 3: Complete Enrollment' => 'After our team reviews your pre-enrollment form and verifies your student\'s age and residency, you will receive an email (typically within 3-5 business days) with a link to complete enrollment. The enrollment form will ask for emergency contacts, allergy and health information, and other important details that will help us support your student.',
+    ]),
+  ]),
+  $one('accordion', [
+    'field_heading' => 'Required Documents',
+    'field_items' => $items([
+      'Proof of Residency (Required)' => 'Details available during pre-enrollment.',
+      'Immunization Record (Required)' => 'Details available during pre-enrollment.',
+      'Open Enrollment Application (If Applicable)' => 'Details available during pre-enrollment.',
+      'Health Screening Documents (Requested)' => 'Details available during pre-enrollment.',
     ]),
   ]),
   $one('image_text', [
-    'field_heading' => 'What you will need',
+    'field_heading' => 'Enrollment Timeline',
     'field_body_text' => ['format' => 'basic_html', 'value' =>
-      '<p>Have these ready before you start. Your school office can help if something is missing.' . $sample . '</p>'
-      . '<ul><li>Proof of residency (a recent utility bill or lease)</li><li>Student birth certificate or other proof of age</li><li>Immunization records</li><li>Records from the previous school, if any</li><li>Parent or guardian photo ID</li></ul>'
-      . '<p><a href="/documents/enrollment-form-sample">Open the enrollment form (sample)</a></p>'],
+      '<p>Here are important dates and next steps as your family prepares for the school year.</p>'
+      . '<ul>'
+      . '<li>January: New student enrollment opens</li>'
+      . '<li>January: Kindergarten Signing Day</li>'
+      . '<li>March 1: Open enrollment deadline for incoming grades 1-12</li>'
+      . '<li>Spring: Registration opens for Beyond the Bell child care</li>'
+      . '<li>April: Preschool Parent Information Night</li>'
+      . '<li>May or August: Intro to Kindergarten Night &mdash; Dates vary by school</li>'
+      . '<li>July: Applications open for free or reduced-price meals</li>'
+      . '<li>August: Preschool home visits</li>'
+      . '<li>Shortly before school begins: Middle school/high school orientations (for 6th graders, 10th graders, and students who are new to Waukee CSD)</li>'
+      . '<li>Shortly before school begins: Back-to-School Open House (all schools)</li>'
+      . '<li>Late August: First day of school (preschool starts a week later than TK-12)</li>'
+      . '<li>Sept. 1: Open enrollment deadline for incoming TK and kindergarten students</li>'
+      . '</ul>'],
     'field_image' => $media('sample-why-choose'),
     'field_image_position' => 'left',
   ]),
-  $one('accordion', [
-    'field_heading' => 'Common questions',
-    'field_items' => $items([
-      'Who can enroll?' => 'Any student who lives within the district boundaries can enroll. Families outside the boundaries should contact the district office about open enrollment.',
-      'When can I enroll?' => 'Registration is open all year. Enroll early in the spring for the best chance of getting your first choice of start date and schedule.',
-      'Does enrollment cost anything?' => 'Enrolling is free. Some activities, lunches and supplies have separate fees; free and reduced-price meal applications are available.',
-      'My student has special needs. What should I do?' => 'Tell the school office when you enroll so the team can plan supports in advance. See Special Education and Health Services for more.',
-      'How do I change schools later?' => 'Contact your current school office and the district office. They will guide you through the transfer steps.',
-    ]),
-  ]),
   $one('card_grid', [
-    'field_heading' => 'Helpful next steps',
+    'field_heading' => 'Explore Waukee CSD',
     'field_cards' => $cards(['Our schools', 'Transportation', 'Nutrition', 'Health Services']),
   ]),
   $one('callout', [
-    'field_heading' => 'Need help enrolling?',
-    'field_body_text' => ['format' => 'basic_html', 'value' => '<p>Call the District Administration Office at 515-987-5161 or visit 560 SE University Ave, Waukee, IA 50263. We are happy to walk you through every step.' . $sample . '</p>'],
+    'field_heading' => "We're Here to Help",
+    'field_body_text' => ['format' => 'basic_html', 'value' =>
+      '<p>We know enrollment can come with questions, and our team is here to make the process as easy as possible. Please contact us or stop by the District Office. We look forward to welcoming your family to Waukee CSD!</p>'
+      . '<p><strong>Enrollment Services Department</strong><br>'
+      . '<a href="mailto:enrollment@waukeeschools.org">enrollment@waukeeschools.org</a><br>'
+      . '515-987-2706</p>'
+      . '<p>Visit us Monday&ndash;Friday from 7:30 a.m.&ndash;4:30 p.m.</p>'
+      . '<p>Waukee CSD District Office<br>560 SE University Avenue<br>Waukee, Iowa</p>'],
     'field_style' => 'info',
   ]),
 ]);

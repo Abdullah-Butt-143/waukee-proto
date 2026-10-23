@@ -34,7 +34,7 @@ const SLUG_ALIASES = [
   'timberline-middle-school' => 'timberline-middle',
 ];
 
-$jsonPath = '/var/www/html/scripts/migration/output/schools.json';
+$jsonPath = __DIR__ . '/migration/output/schools.json';
 if (!file_exists($jsonPath)) {
   echo "Not found: $jsonPath\n";
   echo "Run the scraper first: node scripts/migration/scrape-schools.mjs\n";

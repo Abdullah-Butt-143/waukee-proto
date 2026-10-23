@@ -1,0 +1,532 @@
+{#
+/**
+ * @file
+ * /enrollment in the homepage design. Hardcoded, like the Waukee High School
+ * detail page: wording is from waukeeschools.org/enroll (scraped 2026-10-23)
+ * plus the user-supplied Tailwind mockup for this page. Images are the
+ * mockup's own Stitch-generated lh3.googleusercontent.com/aida-public URLs
+ * (same convention as page--front.html.twig); they may expire.
+ */
+#}
+{{ attach_library('waukee_theme/front') }}
+<div class="bg-background font-body-md text-body-md text-on-surface antialiased">
+{% include "@waukee_theme/includes/tw-header.html.twig" %}
+<main id="main-content" class="w-full pt-20 bg-background">{% include '@waukee_theme/includes/tw-alert.html.twig' %}<div class="flex flex-col w-full">
+
+<div class="w-full bg-surface-container-low py-space-sm shadow-sm">
+<div class="max-w-[1280px] mx-auto px-margin flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<nav aria-label="Breadcrumb" class="flex items-center gap-space-xs">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="/">
+<span class="material-symbols-outlined text-[16px]">home</span>
+<span>Home</span>
+</a>
+<span class="opacity-40">/</span>
+<span class="text-primary font-bold">New Student Enrollment</span>
+</nav>
+<div class="hidden sm:flex items-center gap-space-xs text-secondary font-semibold">
+<span class="material-symbols-outlined text-[16px]">support_agent</span>
+<span>Enrollment Help Desk: 515-987-2706</span>
+</div>
+</div>
+</div>
+
+<section class="relative w-full bg-gradient-to-br from-primary via-primary-container to-[#1a0736] text-on-primary overflow-hidden py-16 lg:py-24">
+<div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-secondary-container/10 blur-3xl pointer-events-none"></div>
+<div class="absolute left-1/4 -bottom-32 w-[600px] h-[600px] rounded-full bg-accent-purple-tint/5 blur-3xl pointer-events-none"></div>
+<div class="max-w-[1280px] mx-auto px-margin relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<div class="inline-flex items-center gap-2 self-start px-3.5 py-1.5 rounded-full bg-surface-base/10 backdrop-blur-md text-secondary-fixed-dim text-label-sm font-label-sm shadow-sm">
+<span class="w-2 h-2 rounded-full bg-accent-gold-bright animate-pulse"></span>
+<span>2026-2027 Registration Open</span>
+</div>
+<h1 class="font-display-hero text-display-hero font-extrabold tracking-tight leading-tight text-text-on-dark">Enroll Now</h1>
+<p class="font-body-lg text-body-lg text-on-primary/90 max-w-xl leading-relaxed">Now enrolling for the <span class="font-bold text-accent-gold-bright">2026-27 school year</span>! Enrollment for the 2027-28 school year begins in January 2027. Discover why thousands of families choose Waukee Community Schools.</p>
+<div class="flex flex-wrap items-center gap-space-md pt-space-sm">
+<a class="inline-flex items-center justify-center gap-2 bg-secondary-container hover:bg-accent-gold-bright text-on-secondary-container font-label-md text-label-md px-7 py-3.5 rounded-xl font-bold shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5" href="/schools">
+<span>Find my school</span>
+<span class="material-symbols-outlined text-[18px]">search</span>
+</a>
+<a class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-text-on-dark font-label-md text-label-md px-7 py-3.5 rounded-xl font-semibold backdrop-blur-md shadow-sm transition-all duration-200" href="https://registration.powerschool.com/family/Login?ReturnUrl=http%3A%2F%2Fregistration.powerschool.com%2Ffamily%2Fdirectaction&amp;AutoLogOut=False" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+<span>Start Online Application</span>
+</a>
+</div>
+<div class="grid grid-cols-3 gap-space-md pt-6 mt-4 border-t border-white/10 max-w-lg">
+<div>
+<p class="font-headline-sm text-headline-sm font-bold text-accent-gold-bright">19</p>
+<p class="font-label-sm text-label-sm text-on-primary/75">Premier Campuses</p>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm font-bold text-accent-gold-bright">98.4%</p>
+<p class="font-label-sm text-label-sm text-on-primary/75">Graduation Rate</p>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm font-bold text-accent-gold-bright">13,000+</p>
+<p class="font-label-sm text-label-sm text-on-primary/75">Enrolled Learners</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="relative mx-auto max-w-md lg:max-w-none">
+<div class="absolute -inset-2 bg-gradient-to-r from-accent-gold-bright/30 to-surface-tint/30 rounded-3xl blur-xl opacity-75"></div>
+<div class="relative bg-surface-base p-2.5 rounded-3xl shadow-xl overflow-hidden">
+<img class="w-full h-[360px] sm:h-[420px] object-cover rounded-2xl" alt="A focused elementary school student happily using an educational digital tablet alongside a smiling supportive teacher and parent in a brightly lit, modern classroom at Waukee School District" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSvis2pZl2xF0t6vwghwIkjkE9mllR3g6ad0zzjeqXvoTFOcpC6i1OcssSNWmQZiCvXM91dogqYtyqE_NHnZAF0GWjPRLCadJloYNXyJqnJiX4Q4qZ6qJ-yEWBZ_zO4eQPIU76LVHVfwAKovE3LkLTpiTFEz5yBuHalTwPQkpHFj-0uDN7BDnSVr-ryxiLyziQh5Zs4xxuUy6VzmSCgD8in5jGnzxDX4glrnzyNw24-o01U7coYCRU"/>
+<div class="absolute bottom-6 left-6 right-6 bg-primary/85 backdrop-blur-md text-on-primary p-4 rounded-xl shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[20px]">laptop_mac</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold leading-tight">1:1 Device Program</p>
+<p class="font-label-sm text-label-sm text-on-primary/80">Equipping every student for future success</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="w-full py-16 bg-surface-subtle" id="steps">
+<div class="max-w-[1280px] mx-auto px-margin">
+<div class="text-center max-w-2xl mx-auto mb-12">
+<span class="inline-block px-3 py-1 rounded-full bg-accent-purple-tint text-primary font-label-sm text-label-sm uppercase tracking-wider mb-2 font-bold">Step-by-Step Guidance</span>
+<h2 class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight">Ready to Enroll?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Our streamlined 3-step workflow guarantees quick verification and a seamless transition for your family.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg relative">
+<div class="hidden md:block absolute top-1/2 left-16 right-16 h-1 bg-surface-variant -translate-y-8 z-0"></div>
+<div class="relative z-10 bg-surface-base rounded-2xl p-space-lg shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+<div class="flex flex-col">
+<div class="flex items-center justify-between mb-4">
+<span class="w-12 h-12 rounded-xl bg-accent-purple-tint text-primary font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm group-hover:scale-105 transition-transform">1</span>
+<span class="px-3 py-1 rounded-full bg-accent-lime-tint text-on-tertiary-container font-label-sm text-label-sm font-semibold">Prep Phase</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary font-bold mb-2">Step 1: Gather Your Documents</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Before you begin, gather the required documents listed below. You will be asked to submit these documents as part of the pre-enrollment application. Having scans or clear mobile photos ready will make submission simple.</p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container flex items-center justify-between text-primary font-label-sm text-label-sm">
+<span class="flex items-center gap-1 font-semibold"><span class="material-symbols-outlined text-[16px]">folder_open</span>Checklist ready</span>
+<a class="hover:underline text-secondary font-bold" href="#documents">View documents &darr;</a>
+</div>
+</div>
+<div class="relative z-10 bg-surface-base rounded-2xl p-space-lg shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+<div class="flex flex-col">
+<div class="flex items-center justify-between mb-4">
+<span class="w-12 h-12 rounded-xl bg-secondary-container text-on-secondary-container font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm group-hover:scale-105 transition-transform">2</span>
+<span class="px-3 py-1 rounded-full bg-accent-purple-tint text-primary font-label-sm text-label-sm font-semibold">Online Form ~15 Mins</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary font-bold mb-2">Step 2: Pre-Enroll Your Student</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Complete the secure online pre-enrollment application and upload your required documents. The intuitive portal saves your progress automatically so you can resume at any time.</p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container flex items-center justify-between text-primary font-label-sm text-label-sm">
+<span class="flex items-center gap-1 font-semibold"><span class="material-symbols-outlined text-[16px]">lock</span>Encrypted portal</span>
+<a class="hover:underline text-secondary font-bold" href="https://registration.powerschool.com/family/Login?ReturnUrl=http%3A%2F%2Fregistration.powerschool.com%2Ffamily%2Fdirectaction&amp;AutoLogOut=False" rel="noopener noreferrer" target="_blank">Start form &rarr;</a>
+</div>
+</div>
+<div class="relative z-10 bg-surface-base rounded-2xl p-space-lg shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+<div class="flex flex-col">
+<div class="flex items-center justify-between mb-4">
+<span class="w-12 h-12 rounded-xl bg-primary-container text-on-primary font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm group-hover:scale-105 transition-transform">3</span>
+<span class="px-3 py-1 rounded-full bg-surface-container-high text-status-info font-label-sm text-label-sm font-semibold">Verification &amp; Welcome</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary font-bold mb-2">Step 3: Complete Enrollment</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">After our team reviews your pre-enrollment form and verifies your student's age and residency, you will receive an email (typically within 3-5 business days) with a link to complete enrollment. The final form captures emergency contacts, health information, and personalized learning needs.</p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container flex items-center justify-between text-primary font-label-sm text-label-sm">
+<span class="flex items-center gap-1 font-semibold"><span class="material-symbols-outlined text-[16px]">verified</span>3-5 Day turnaround</span>
+<span class="text-on-surface-variant">Step complete</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="w-full py-16 bg-surface-base" id="documents">
+<div class="max-w-[1280px] mx-auto px-margin">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-surface-container">
+<div>
+<span class="text-secondary font-bold font-label-md text-label-md uppercase tracking-wider">Preparation Guide</span>
+<h2 class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight mt-1">Required Documents</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-1">Please prepare digital scans or clear photographs in PDF, JPEG, or PNG format (max file size 15MB per file).</p>
+</div>
+</div>
+<div class="space-y-4 max-w-4xl">
+<details class="group bg-surface-subtle rounded-2xl transition-all duration-200 overflow-hidden" open>
+<summary class="flex items-center justify-between p-space-lg cursor-pointer select-none bg-surface-subtle hover:bg-surface-container-low transition-colors list-none">
+<div class="flex items-center gap-space-md">
+<span class="w-9 h-9 rounded-lg bg-primary-container text-accent-gold-bright flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[20px]">home_pin</span></span>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Proof of Residency</h3>
+<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-error-container text-error uppercase">Required</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Must verify family resides within Waukee CSD district boundaries.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-space-lg pb-space-lg pt-2 text-on-surface-variant font-body-sm text-body-sm space-y-3">
+<p>Please upload at least <strong>one</strong> of the following approved documents dated within the last 60 days:</p>
+<ul class="list-disc pl-5 space-y-1">
+<li>Homeowner deed, property tax statement, or current mortgage statement.</li>
+<li>Signed lease or rental agreement showing all occupants, landlord signature, and valid term dates.</li>
+<li>Recent utility bill (electric, water, or gas) showing resident name and service address (cable/cell bills are not accepted).</li>
+<li>Approved Waukee CSD Residency Affidavit (if currently co-residing with another district resident).</li>
+</ul>
+</div>
+</details>
+<details class="group bg-surface-subtle rounded-2xl transition-all duration-200 overflow-hidden">
+<summary class="flex items-center justify-between p-space-lg cursor-pointer select-none bg-surface-subtle hover:bg-surface-container-low transition-colors list-none">
+<div class="flex items-center gap-space-md">
+<span class="w-9 h-9 rounded-lg bg-primary-container text-accent-gold-bright flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[20px]">vaccines</span></span>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Immunization Record</h3>
+<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-error-container text-error uppercase">Required</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Official Iowa Department of Public Health Immunization Certificate.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-space-lg pb-space-lg pt-2 text-on-surface-variant font-body-sm text-body-sm space-y-3">
+<p>Per Iowa Code Chapter 139A, an official Certificate of Immunization or an Iowa Provisional Certificate must be presented on or before the first day of attendance.</p>
+<div class="bg-surface-base p-4 rounded-xl flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary-container mt-0.5">info</span>
+<div>
+<p class="font-semibold text-on-surface">Medical &amp; Religious Exemptions</p>
+<p class="text-xs">Exemption certificates must be notarized or validated by a licensed physician using state-approved Iowa forms.</p>
+</div>
+</div>
+</div>
+</details>
+<details class="group bg-surface-subtle rounded-2xl transition-all duration-200 overflow-hidden">
+<summary class="flex items-center justify-between p-space-lg cursor-pointer select-none bg-surface-subtle hover:bg-surface-container-low transition-colors list-none">
+<div class="flex items-center gap-space-md">
+<span class="w-9 h-9 rounded-lg bg-surface-container text-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[20px]">swap_horiz</span></span>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Open Enrollment Application</h3>
+<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-surface-container text-on-surface-variant uppercase">If Applicable</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">For families who reside outside Waukee CSD district boundaries.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-space-lg pb-space-lg pt-2 text-on-surface-variant font-body-sm text-body-sm space-y-3">
+<p>Iowa state open enrollment laws permit students to apply to attend school in an adjacent public district without paying tuition:</p>
+<ul class="list-disc pl-5 space-y-1">
+<li><strong>March 1 Deadline:</strong> For incoming students in grades 1 through 12.</li>
+<li><strong>September 1 Deadline:</strong> For incoming transitional kindergarten (TK) and kindergarten students.</li>
+</ul>
+</div>
+</details>
+<details class="group bg-surface-subtle rounded-2xl transition-all duration-200 overflow-hidden">
+<summary class="flex items-center justify-between p-space-lg cursor-pointer select-none bg-surface-subtle hover:bg-surface-container-low transition-colors list-none">
+<div class="flex items-center gap-space-md">
+<span class="w-9 h-9 rounded-lg bg-surface-container text-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[20px]">medical_services</span></span>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Health Screening Documents</h3>
+<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-accent-lime-tint text-on-tertiary-container uppercase">Requested</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">State-mandated dental and vision screening forms for specific grade levels.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-space-lg pb-space-lg pt-2 text-on-surface-variant font-body-sm text-body-sm space-y-3">
+<p>The Iowa Department of Public Health requires dental and vision screenings for students entering specific benchmarks:</p>
+<ul class="list-disc pl-5 space-y-1">
+<li><strong>Kindergarten:</strong> Dental certificate completed between ages 3 and 6, and vision screening proof.</li>
+<li><strong>9th Grade:</strong> Dental certificate completed within the prior year.</li>
+<li><strong>Athletics (7-12):</strong> Current Iowa athletic physical evaluation form valid for 13 calendar months.</li>
+</ul>
+</div>
+</details>
+</div>
+</div>
+</section>
+
+<section class="w-full py-16 bg-surface-container-low">
+<div class="max-w-[1280px] mx-auto px-margin">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<div class="lg:col-span-7">
+<div class="mb-8">
+<span class="text-secondary font-bold font-label-md text-label-md uppercase tracking-wider">Year-Round Roadmap</span>
+<h2 class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight mt-1">Enrollment Timeline</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Here are important dates and next steps as your family prepares for the upcoming school year.</p>
+</div>
+<div class="relative pl-6 space-y-6 before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-primary-container/20">
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-1.5 w-6 h-6 rounded-full bg-primary flex items-center justify-center text-accent-gold-bright shadow-sm"><span class="material-symbols-outlined text-[14px]">event_available</span></div>
+<div class="bg-surface-base p-4 rounded-xl shadow-sm w-full">
+<span class="text-xs font-bold uppercase tracking-wider text-secondary">January</span>
+<h4 class="font-title-md text-title-md text-primary font-bold mt-0.5">New student enrollment opens</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">District opens pre-enrollment application for all prospective TK through 12th grade learners.</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-1.5 w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[14px]">celebration</span></div>
+<div class="bg-surface-base p-4 rounded-xl shadow-sm w-full">
+<span class="text-xs font-bold uppercase tracking-wider text-secondary">January</span>
+<h4 class="font-title-md text-title-md text-primary font-bold mt-0.5">Kindergarten Signing Day</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Celebrate your future Warrior! Welcome events hosted across all neighborhood elementary centers.</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-1.5 w-6 h-6 rounded-full bg-surface-container text-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[14px]">flag</span></div>
+<div class="bg-surface-base p-4 rounded-xl shadow-sm w-full">
+<span class="text-xs font-bold uppercase tracking-wider text-secondary">March 1</span>
+<h4 class="font-title-md text-title-md text-primary font-bold mt-0.5">Open enrollment deadline for incoming grades 1-12</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Strict state deadline for non-resident application submissions.</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-1.5 w-6 h-6 rounded-full bg-surface-container text-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[14px]">search_off</span></div>
+<div class="bg-surface-base p-4 rounded-xl shadow-sm w-full">
+<span class="text-xs font-bold uppercase tracking-wider text-secondary">Spring</span>
+<h4 class="font-title-md text-title-md text-primary font-bold mt-0.5">Registration opens for Beyond the Bell child care</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Enriching before- and after-school child care programs for working parents.</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-1.5 w-6 h-6 rounded-full bg-surface-container text-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[14px]">info</span></div>
+<div class="bg-surface-base p-4 rounded-xl shadow-sm w-full">
+<span class="text-xs font-bold uppercase tracking-wider text-secondary">April</span>
+<h4 class="font-title-md text-title-md text-primary font-bold mt-0.5">Preschool Parent Information Night</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Curriculum overviews, tuition subsidy guidelines, and daily schedule orientation.</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-1.5 w-6 h-6 rounded-full bg-surface-container text-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[14px]">meeting_room</span></div>
+<div class="bg-surface-base p-4 rounded-xl shadow-sm w-full">
+<span class="text-xs font-bold uppercase tracking-wider text-secondary">May or August</span>
+<h4 class="font-title-md text-title-md text-primary font-bold mt-0.5">Intro to Kindergarten Night &mdash; Dates vary by school</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Meet school principals, tour homerooms, and hop on a mock school bus.</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-1.5 w-6 h-6 rounded-full bg-surface-container text-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[14px]">restaurant</span></div>
+<div class="bg-surface-base p-4 rounded-xl shadow-sm w-full">
+<span class="text-xs font-bold uppercase tracking-wider text-secondary">July</span>
+<h4 class="font-title-md text-title-md text-primary font-bold mt-0.5">Applications open for free or reduced-price meals</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Confidential online meal assistance applications open for the school year.</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-1.5 w-6 h-6 rounded-full bg-surface-container text-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[14px]">family_restroom</span></div>
+<div class="bg-surface-base p-4 rounded-xl shadow-sm w-full">
+<span class="text-xs font-bold uppercase tracking-wider text-secondary">August</span>
+<h4 class="font-title-md text-title-md text-primary font-bold mt-0.5">Preschool home visits</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Individual educator visits to welcome little ones and answer family questions.</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-1.5 w-6 h-6 rounded-full bg-surface-container text-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[14px]">explore</span></div>
+<div class="bg-surface-base p-4 rounded-xl shadow-sm w-full">
+<span class="text-xs font-bold uppercase tracking-wider text-secondary">Shortly Before School Begins</span>
+<h4 class="font-title-md text-title-md text-primary font-bold mt-0.5">Middle school/high school orientations</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Dedicated campus orientations for 6th graders, 10th graders, and new students.</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-1.5 w-6 h-6 rounded-full bg-surface-container text-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[14px]">door_open</span></div>
+<div class="bg-surface-base p-4 rounded-xl shadow-sm w-full">
+<span class="text-xs font-bold uppercase tracking-wider text-secondary">Shortly Before School Begins</span>
+<h4 class="font-title-md text-title-md text-primary font-bold mt-0.5">Back-to-School Open House (all schools)</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Drop off classroom supplies, locate student lockers, and meet classroom teachers.</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-1.5 w-6 h-6 rounded-full bg-primary flex items-center justify-center text-accent-gold-bright shadow-sm"><span class="material-symbols-outlined text-[14px]">school</span></div>
+<div class="bg-surface-base p-4 rounded-xl shadow-sm w-full">
+<span class="text-xs font-bold uppercase tracking-wider text-secondary">Late August</span>
+<h4 class="font-title-md text-title-md text-primary font-bold mt-0.5">First day of school</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Official start for TK-12 students (Preschool officially starts one week later).</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-1.5 w-6 h-6 rounded-full bg-surface-container text-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[14px]">event_note</span></div>
+<div class="bg-surface-base p-4 rounded-xl shadow-sm w-full">
+<span class="text-xs font-bold uppercase tracking-wider text-secondary">Sept. 1</span>
+<h4 class="font-title-md text-title-md text-primary font-bold mt-0.5">Open enrollment deadline for incoming TK &amp; Kindergarten</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Final statutory state cutoff for kindergarten boundary exceptions.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 lg:sticky lg:top-28">
+<div class="bg-surface-base rounded-3xl p-4 shadow-xl overflow-hidden flex flex-col gap-4">
+<div class="relative rounded-2xl overflow-hidden">
+<img class="w-full h-[400px] object-cover" alt="Group of diverse preschool and kindergarten children laughing and painting together outdoors on a sun-dappled grassy school lawn with colorful finger paint tables and caring teachers assisting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2rV-YO3XEwTb4G4q1YO_HjLMN0roD17GZuYw0B3f0vwAr9C-dzGtaGqdkRSTbu1964L_vNyXaRtXOhU107YzIPoeR2hZe5NtI89OtJ8zAvYkrm5gyM2yPrWK72rbUP6-EYBAwf2gjXTNc5rjHvSLWFAGAV-w4Rss_DOdNmzIUM7QxHoQuF24n3xKbZgcSUvlyZ714zETmjDRp7qjKtIeiDPNc_SR6AWTSgDUX6v-wY_6W_mUN2H0t"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent flex flex-col justify-end p-6 text-on-primary">
+<span class="px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold w-fit mb-2">Community &amp; Belonging</span>
+<h3 class="font-headline-sm text-headline-sm font-bold leading-snug">Every child finds their spark at Waukee</h3>
+</div>
+</div>
+<div class="p-4 bg-accent-purple-tint rounded-2xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary text-accent-gold-bright flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[26px]">groups</span></div>
+<div>
+<p class="font-title-md text-title-md text-primary font-bold">19 Modern Facilities</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Designed for collaborative, inquiry-based learning across Dallas &amp; Polk Counties.</p>
+</div>
+</div>
+<div class="p-4 bg-surface-container rounded-2xl flex items-center justify-between">
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Need help planning visits?</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Schedule a building tour with admissions</p>
+</div>
+<button class="px-4 py-2 bg-primary hover:bg-primary-container text-on-primary rounded-lg font-label-sm text-label-sm font-bold transition-colors" type="button">Tour Info</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="w-full py-16 bg-surface-base">
+<div class="max-w-[1280px] mx-auto px-margin">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+<div>
+<span class="text-secondary font-bold font-label-md text-label-md uppercase tracking-wider">District Essentials</span>
+<h2 class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight mt-1">Explore Waukee CSD</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Access critical family resources, boundaries, busing schedules, and health guidelines.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+<a class="group bg-surface-subtle hover:bg-surface-container-low p-space-lg rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between" href="/schools">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform"><span class="material-symbols-outlined text-[24px]">apartment</span></div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold group-hover:text-primary-container transition-colors">Our schools</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed">Find your neighborhood school. Review interactive district boundary maps and campus schedules.</p>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container flex items-center gap-2 text-secondary font-bold font-label-md text-label-md">
+<span>Explore Boundary Maps</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+<a class="group bg-surface-subtle hover:bg-surface-container-low p-space-lg rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between" href="/transportation">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform"><span class="material-symbols-outlined text-[24px]">directions_bus</span></div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold group-hover:text-primary-container transition-colors">Transportation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed">Bus routes, pick-up times, stop finder, and how to report a missed bus. Learn more about state mileage eligibility guidelines.</p>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container flex items-center gap-2 text-secondary font-bold font-label-md text-label-md">
+<span>View Bus Routes &amp; Tracking</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+<a class="group bg-surface-subtle hover:bg-surface-container-low p-space-lg rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between" href="/families/nutrition">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl bg-accent-lime-tint text-on-tertiary-container flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform"><span class="material-symbols-outlined text-[24px]">restaurant_menu</span></div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold group-hover:text-primary-container transition-colors">Nutrition</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed">Daily fresh menus, allergy management guidelines, breakfast programs, and confidential free and reduced-price meal applications.</p>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container flex items-center gap-2 text-secondary font-bold font-label-md text-label-md">
+<span>Browse Menus &amp; Accounts</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+<a class="group bg-surface-subtle hover:bg-surface-container-low p-space-lg rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between" href="/families/health-services">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest text-primary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform"><span class="material-symbols-outlined text-[24px]">health_and_safety</span></div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold group-hover:text-primary-container transition-colors">Health Services</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed">Dedicated school nurses, medication administration forms, immunization state compliance, and student illness protocols.</p>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container flex items-center gap-2 text-secondary font-bold font-label-md text-label-md">
+<span>Access Nurse Directory &amp; Forms</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+
+<section class="w-full pb-16 pt-6 bg-surface-base">
+<div class="max-w-[1280px] mx-auto px-margin">
+<div class="bg-accent-purple-tint rounded-3xl p-8 lg:p-12 shadow-sm relative overflow-hidden">
+<div class="absolute -right-16 -bottom-16 w-64 h-64 rounded-full bg-primary/5 pointer-events-none"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10 items-center">
+<div class="lg:col-span-7 flex flex-col gap-4">
+<div class="flex items-center gap-2 text-primary font-bold">
+<span class="material-symbols-outlined text-[24px]">contact_support</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Family Support</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight">We're Here to Help</h2>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">We know enrollment can come with questions, and our dedicated team is here to make the process as easy and transparent as possible. Please contact us or stop by the District Administration Office. We look forward to welcoming your family to Waukee CSD!</p>
+<div class="flex flex-wrap items-center gap-3 pt-2">
+<a class="inline-flex items-center gap-2 bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md px-5 py-3 rounded-xl font-bold shadow-sm transition-colors" href="tel:5159872706">
+<span class="material-symbols-outlined text-[18px]">phone</span>
+<span>Call 515-987-2706</span>
+</a>
+<a class="inline-flex items-center gap-2 bg-surface-base hover:bg-surface-subtle text-primary font-label-md text-label-md px-5 py-3 rounded-xl font-bold shadow-sm transition-colors" href="mailto:enrollment@waukeeschools.org">
+<span class="material-symbols-outlined text-[18px]">email</span>
+<span>Email Our Team</span>
+</a>
+<a class="inline-flex items-center gap-2 bg-transparent text-primary hover:text-primary-container font-label-md text-label-md px-4 py-3 font-semibold transition-colors" href="https://maps.google.com/?q=560+SE+University+Avenue,+Waukee,+Iowa+50263" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[18px]">directions</span>
+<span>Get Directions</span>
+</a>
+</div>
+</div>
+<div class="lg:col-span-5 bg-surface-base rounded-2xl p-6 lg:p-8 shadow-sm">
+<div class="flex items-center justify-between pb-4 border-b border-surface-container">
+<div>
+<h4 class="font-title-md text-title-md text-primary font-bold">Enrollment Services Department</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">District Administration Office</p>
+</div>
+<span class="w-10 h-10 rounded-full bg-accent-purple-tint flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[20px]">badge</span></span>
+</div>
+<div class="space-y-4 pt-4 text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">mail</span>
+<div>
+<span class="block text-xs uppercase font-bold text-on-surface">Email Address</span>
+<a class="text-primary hover:underline font-semibold" href="mailto:enrollment@waukeeschools.org">enrollment@waukeeschools.org</a>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">call</span>
+<div>
+<span class="block text-xs uppercase font-bold text-on-surface">Direct Phone</span>
+<p class="font-semibold text-on-surface">515-987-2706</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">schedule</span>
+<div>
+<span class="block text-xs uppercase font-bold text-on-surface">Office Hours</span>
+<p class="text-on-surface">Monday - Friday: 7:30 a.m. - 4:30 p.m.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">location_on</span>
+<div>
+<span class="block text-xs uppercase font-bold text-on-surface">Physical Location</span>
+<p class="text-on-surface">Waukee CSD District Office<br/>560 SE University Avenue<br/>Waukee, Iowa 50263</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+</div></main>
+{% include "@waukee_theme/includes/tw-footer.html.twig" %}
+</div>
