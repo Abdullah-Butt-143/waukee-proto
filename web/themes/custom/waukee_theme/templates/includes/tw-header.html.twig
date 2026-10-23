@@ -45,6 +45,65 @@
   {label: 'Resources', href: '/families', key: 'resources'},
   {label: 'Extracurriculars', href: '/students/activities', key: 'extracurriculars'},
 ] %}
+{% set static_menus = {
+  academics: [
+    {label: 'Accommodations & Support', href: '/academics/accommodations-support'},
+    {label: 'Advanced Learning', href: '/academics/advanced-learning'},
+    {label: 'Assessment', href: '/academics/assessment'},
+    {label: 'Career Preparation', href: '/academics/career-preparation'},
+    {label: 'Curriculum', href: '/academics/curriculum'},
+    {label: 'High School Counseling', href: '/academics/high-school-counseling'},
+    {label: 'Instruction', href: '/academics/instruction'},
+    {label: 'Library & Media Services', href: '/academics/library-media-services'},
+    {label: 'Schedule Change Requests', href: '/academics/schedule-change-requests'},
+    {label: 'Seal of Biliteracy', href: '/academics/seal-of-biliteracy'},
+    {label: 'Student Course Descriptions', href: '/academics/student-course-descriptions'},
+  ],
+  resources: [
+    {label: 'Address Changes', href: '/families/address-changes'},
+    {label: 'Bus Transportation', href: '/transportation'},
+    {label: 'Community Resources', href: '/community'},
+    {label: 'District Apps & Platforms', href: '/families/district-apps-platforms'},
+    {label: 'Facility Rentals', href: '/community/facility-rental'},
+    {label: 'Fees', href: '/families/fees'},
+    {label: 'Free & Reduced Meals', href: '/families/free-reduced-meals'},
+    {label: 'Handbooks & Policies', href: '/families/handbooks-policies'},
+    {label: 'Illness Guidelines', href: '/families/illness-guidelines'},
+    {label: 'Menus & Classroom Treats', href: '/lunch-menus'},
+    {label: 'Password Reset Portal', href: '/families/password-reset'},
+    {label: 'Public Record Request', href: '/families/public-record-request'},
+    {label: 'Student Parking & Permits', href: '/students/parking-permits'},
+    {label: 'Submitting Absences', href: '/families/submitting-absences'},
+    {label: 'Support for Bullying', href: '/families/support-for-bullying'},
+    {label: 'Transcript Request', href: '/families/transcript-request'},
+    {label: 'Waukee Backpack', href: '/families/waukee-backpack'},
+  ],
+  extracurriculars: [
+    {label: 'Athletics', href: '/students/activities/athletics'},
+    {label: 'Camps & Clinics', href: '/students/activities/camps-clinics'},
+    {label: 'Clubs & Organizations', href: '/students/activities/clubs-organizations'},
+    {label: 'Leadership Opportunities', href: '/students/activities/leadership-opportunities'},
+    {label: 'Performing Arts', href: '/students/activities/performing-arts'},
+    {label: 'Publications', href: '/students/activities/publications'},
+    {label: 'Silver Cord', href: '/students/activities/silver-cord'},
+    {label: 'Swimming & Diving', href: '/students/activities/swimming-diving'},
+  ],
+} %}
+{% set enroll_links = [
+  {label: 'New Student Enrollment', href: '/enrollment/new-student'},
+  {label: 'Returning Student Enrollment', href: '/enrollment/returning-student'},
+  {label: 'About Our Programs', href: '/enrollment/programs'},
+  {label: 'Post-Enrollment Parent Guide', href: '/enrollment/parent-guide'},
+] %}
+{% set enroll_quick_links = [
+  {label: 'Child Care', href: '/enrollment/child-care'},
+  {label: 'Fees', href: '/families/fees'},
+  {label: 'Menus & Treats', href: '/lunch-menus'},
+  {label: 'Proof of Residency', href: '/enrollment/proof-of-residency'},
+  {label: 'School Supplies', href: '/enrollment/school-supplies'},
+  {label: 'Bus Transportation', href: '/transportation'},
+] %}
+{% set static_menu_position = {resources: 'left-0', extracurriculars: 'right-0'} %}
 {% set active_classes = 'text-primary font-bold bg-accent-purple-tint rounded-lg' %}
 {% set link_classes = 'px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors' %}
 {% set about_active = current starts with '/district' %}
@@ -105,22 +164,219 @@
         </div>
         {% for item in nav %}
           {% set active = current == item.href or current starts with item.href ~ '/' %}
-          {% if item.key == 'schools' and wk_schools_menu.left %}
-          <div class="relative group">
+          {% if item.key == 'schools' and wk_schools_menu.tiers %}
+          {% set wsm = wk_schools_menu %}
+          <div class="relative group" data-wk-mega="schools">
             <a class="{{ link_classes }} inline-flex items-center gap-1{{ active ? ' ' ~ active_classes }}" data-path="{{ item.key }}" href="{{ item.href }}" aria-haspopup="true"{% if active %} aria-current="page"{% endif %}>{{ item.label }}<span class="material-symbols-outlined text-[18px]" aria-hidden="true">expand_more</span></a>
             <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 absolute left-0 top-full pt-2 z-50 transition-opacity">
-              <div class="w-[34rem] bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant p-space-md grid grid-cols-2 gap-space-md">
-                {% for column in [wk_schools_menu.left, wk_schools_menu.right] %}
-                <div class="flex flex-col">
-                  {% for section in column %}
-                    <span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider px-3 pb-space-xs">{{ section.label }}</span>
-                    {% for school in section.items %}
-                      <a class="block px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-accent-purple-tint hover:text-primary font-label-md text-label-md transition-colors" href="{{ school.url }}">{{ school.name }}</a>
-                    {% endfor %}
-                  {% endfor %}
-                  {% if loop.last %}<a class="block px-3 py-1.5 rounded-lg text-primary hover:bg-accent-purple-tint font-label-md text-label-md font-bold transition-colors" href="/schools">{{ 'View all schools'|t }}</a>{% endif %}
+              <div class="w-[68rem] max-w-[92vw] bg-surface-container-lowest rounded-2xl shadow-xl border border-outline-variant p-space-lg">
+                <!-- Utility strip: search + quick actions -->
+                <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md pb-space-md mb-space-md bg-surface-container-low rounded-xl p-space-sm">
+                  <div class="relative flex-1 max-w-2xl">
+                    <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted text-[20px]" aria-hidden="true">search</span>
+                    <input class="w-full pl-11 pr-3 py-2.5 bg-surface-container-lowest rounded-xl font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary shadow-sm placeholder:text-text-muted" data-wk-mega-search placeholder="{{ 'Search schools by name, mascot, grade, or address...'|t }}" type="text"/>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-space-sm">
+                    <a class="inline-flex items-center gap-space-xs px-space-md py-2.5 bg-accent-purple-tint text-primary font-label-md text-label-md rounded-xl hover:bg-primary-fixed transition-all font-bold shadow-sm" href="/schools#feederMapSection">
+                      <span class="material-symbols-outlined text-[20px] text-accent-gold-bright" aria-hidden="true">map</span>{{ 'Boundary & Feeder Map'|t }}
+                    </a>
+                    <a class="inline-flex items-center gap-space-xs px-space-md py-2.5 bg-surface-container text-on-surface font-label-md text-label-md rounded-xl hover:bg-surface-container-high transition-all" href="/transportation">
+                      <span class="material-symbols-outlined text-[18px] text-secondary" aria-hidden="true">directions_bus</span>{{ 'Bus Routes'|t }}
+                    </a>
+                  </div>
                 </div>
-                {% endfor %}
+                <!-- Tier filter chips -->
+                <div class="flex items-center gap-space-xs overflow-x-auto pb-space-sm mb-space-md" data-wk-mega-chips role="tablist">
+                  <button class="wk-mega-chip active shrink-0 px-space-md py-1.5 rounded-full font-label-sm text-label-sm font-bold bg-primary text-on-primary shadow-sm transition-all" data-filter="all" type="button">{{ 'All Schools (@count)'|t({'@count': wsm.total}) }}</button>
+                  {% for tier in ['elementary', 'middle', 'transition', 'high', 'specialized'] %}
+                    {% if wsm.tiers[tier].count %}
+                    <button class="wk-mega-chip shrink-0 px-space-md py-1.5 rounded-full font-label-sm text-label-sm font-semibold bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-filter="{{ tier }}" type="button">{{ wsm.tiers[tier].label }} <span class="font-normal text-text-muted">({{ wsm.tiers[tier].count }})</span></button>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+                <!-- 4-column directory grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-space-lg">
+                  <!-- Col 1: High Schools, 9th Grade, Innovation -->
+                  <div class="lg:col-span-3 flex flex-col gap-space-md">
+                    {% if wsm.tiers.high.count %}
+                    <div class="wk-mega-group flex flex-col" data-tier="high">
+                      <div class="flex items-center justify-between pb-space-xs mb-space-xs">
+                        <div class="flex items-center gap-space-xs"><span class="w-2.5 h-2.5 rounded-full bg-primary"></span><h5 class="font-label-md text-label-md font-bold text-primary uppercase tracking-wide">{{ wsm.tiers.high.label }}</h5></div>
+                        <span class="font-label-sm text-label-sm text-text-muted">{{ 'Campuses'|t }}</span>
+                      </div>
+                      <div class="flex flex-col gap-space-xs">
+                        {% for s in wsm.tiers.high.items %}
+                          <a class="wk-mega-link group/card block p-space-sm rounded-xl hover:bg-surface-container-low transition-all" data-search="{{ (s.name ~ ' ' ~ s.mascot ~ ' ' ~ s.address)|lower }}" href="{{ s.url ?: '#' }}">
+                            <div class="flex items-start justify-between gap-space-xs">
+                              <div>
+                                <div class="font-title-md text-title-md font-bold text-on-surface group-hover/card:text-primary transition-colors">{{ s.name }}</div>
+                                {% if s.badge %}<div class="font-label-sm text-label-sm text-secondary font-medium">{{ s.badge }}</div>{% endif %}
+                                {% if s.address %}<div class="font-body-sm text-body-sm text-text-muted">{{ s.address }}</div>{% endif %}
+                              </div>
+                              {% if s.grades %}<span class="shrink-0 px-2 py-0.5 rounded-full bg-accent-purple-tint text-primary font-label-sm text-label-sm font-semibold">{{ s.grades }}</span>{% endif %}
+                            </div>
+                          </a>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% if wsm.tiers.transition.count %}
+                    <div class="wk-mega-group flex flex-col pt-space-sm border-t border-outline-variant" data-tier="transition">
+                      <div class="flex items-center justify-between pb-space-xs mb-space-xs">
+                        <div class="flex items-center gap-space-xs"><span class="w-2.5 h-2.5 rounded-full bg-secondary"></span><h5 class="font-label-md text-label-md font-bold text-secondary uppercase tracking-wide">{{ wsm.tiers.transition.label }}</h5></div>
+                      </div>
+                      <div class="flex flex-col gap-space-xs">
+                        {% for s in wsm.tiers.transition.items %}
+                          <a class="wk-mega-link block p-space-sm rounded-xl hover:bg-surface-container-low transition-all" data-search="{{ (s.name ~ ' ' ~ s.address)|lower }}" href="{{ s.url ?: '#' }}">
+                            <div class="font-title-md text-title-md font-bold text-on-surface group-hover:text-primary transition-colors">{{ s.name }}</div>
+                            <div class="font-body-sm text-body-sm text-text-muted">{{ s.address }}{% if s.feeder %} &bull; {{ s.feeder == 'waukee' ? 'Serves WHS Feeder'|t : 'Serves NWHS Feeder'|t }}{% endif %}</div>
+                          </a>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% if wsm.tiers.specialized.count %}
+                    <div class="wk-mega-group p-space-sm rounded-xl bg-surface-container-low" data-tier="specialized">
+                      <div class="font-label-sm text-label-sm font-bold text-primary uppercase mb-1 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[16px] text-accent-gold-bright" aria-hidden="true">psychology</span>{{ 'Innovation & Centers'|t }}
+                      </div>
+                      <ul class="font-body-sm text-body-sm space-y-1 text-on-surface-variant">
+                        {% for s in wsm.tiers.specialized.items %}
+                          <li>
+                            <a class="wk-mega-link hover:text-primary font-medium cursor-pointer flex items-center justify-between gap-2" data-search="{{ (s.name ~ ' ' ~ s.badge)|lower }}" href="{{ s.url ?: '#' }}">
+                              <span>{{ s.name }}</span>
+                              {% if s.grades %}<span class="text-label-sm text-text-muted shrink-0">{{ s.grades }}</span>{% endif %}
+                            </a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    {% endif %}
+                  </div>
+                  <!-- Col 2: Middle Schools -->
+                  <div class="lg:col-span-3 wk-mega-group flex flex-col gap-space-md" data-tier="middle">
+                    <div>
+                      <div class="flex items-center justify-between pb-space-xs mb-space-xs">
+                        <div class="flex items-center gap-space-xs"><span class="w-2.5 h-2.5 rounded-full bg-status-info"></span><h5 class="font-label-md text-label-md font-bold text-status-info uppercase tracking-wide">{{ wsm.tiers.middle.label }}</h5></div>
+                        <span class="font-label-sm text-label-sm text-text-muted">{{ wsm.tiers.middle.count }} {{ 'Campuses'|t }}</span>
+                      </div>
+                      <div class="flex flex-col gap-space-xs">
+                        {% for s in wsm.tiers.middle.items %}
+                          <a class="wk-mega-link block p-space-sm rounded-xl hover:bg-surface-container-low transition-all" data-search="{{ (s.name ~ ' ' ~ s.mascot ~ ' ' ~ s.address)|lower }}" href="{{ s.url ?: '#' }}">
+                            <div class="flex items-center justify-between">
+                              <div class="font-title-md text-title-md font-bold text-on-surface group-hover:text-primary">{{ s.name }}</div>
+                              {% if s.grades %}<span class="text-label-sm text-text-muted">{{ 'Grades @grades'|t({'@grades': s.grades}) }}</span>{% endif %}
+                            </div>
+                            <div class="font-body-sm text-body-sm text-text-muted">{{ s.feeder == 'waukee' ? 'WHS Feeder'|t : 'NWHS Pathway'|t }}{% if s.address %} &bull; {{ s.address }}{% endif %}</div>
+                          </a>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <div class="p-space-sm rounded-xl bg-accent-purple-tint/70">
+                      <div class="flex items-center gap-2 mb-1"><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">swap_calls</span><span class="font-label-sm text-label-sm font-bold text-primary">{{ 'Secondary Feeder Matrix'|t }}</span></div>
+                      <p class="font-body-sm text-body-sm text-on-surface-variant">{{ 'View transition guides across our dual-feeder structure.'|t }}</p>
+                      <a class="inline-flex items-center gap-1 font-label-sm text-label-sm font-bold text-primary hover:underline mt-2" href="/schools">{{ 'Explore Feeder Matrix'|t }} <span class="material-symbols-outlined text-[14px]" aria-hidden="true">arrow_forward</span></a>
+                    </div>
+                  </div>
+                  <!-- Col 3: Elementary Schools -->
+                  <div class="lg:col-span-3 wk-mega-group flex flex-col" data-tier="elementary">
+                    <div class="flex items-center justify-between pb-space-xs mb-space-xs">
+                      <div class="flex items-center gap-space-xs"><span class="w-2.5 h-2.5 rounded-full bg-status-success"></span><h5 class="font-label-md text-label-md font-bold text-status-success uppercase tracking-wide">{{ wsm.tiers.elementary.label }}</h5></div>
+                      <span class="font-label-sm text-label-sm text-text-muted">{{ wsm.tiers.elementary.count }} {{ 'Buildings'|t }}</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-x-space-sm gap-y-1 font-body-sm text-body-sm text-on-surface-variant">
+                      {% for s in wsm.tiers.elementary.items %}
+                        <a class="wk-mega-link p-1.5 rounded-lg hover:bg-surface-container-low hover:text-primary transition-all font-medium flex items-center gap-1" data-search="{{ (s.name ~ ' ' ~ s.mascot)|lower }}" href="{{ s.url ?: '#' }}">
+                          <span class="material-symbols-outlined text-[14px] text-accent-gold-bright" aria-hidden="true">school</span>{{ s.name }}
+                        </a>
+                      {% endfor %}
+                    </div>
+                    <div class="mt-3 pt-2 border-t border-outline-variant">
+                      <a class="inline-flex items-center gap-1 text-label-sm font-bold text-primary hover:underline" href="/schools"><span>{{ 'View all @count district campuses'|t({'@count': wsm.total}) }}</span><span class="material-symbols-outlined text-[14px]" aria-hidden="true">arrow_forward</span></a>
+                    </div>
+                  </div>
+                  <!-- Col 4: Featured spotlight + campus essentials -->
+                  <div class="lg:col-span-3 flex flex-col justify-between gap-space-md">
+                    {% if wsm.featured %}
+                    <a class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm flex flex-col group/spot" href="{{ wsm.featured.url ?: '#' }}">
+                      {% if wsm.featured.image %}
+                      <div class="w-full h-32 bg-cover bg-center relative p-space-sm flex flex-col justify-between" style="background-image: url('{{ wsm.featured.image }}')">
+                        <div class="flex items-center justify-between">
+                          <span class="px-2 py-0.5 rounded-full bg-accent-gold-bright text-on-background font-label-sm text-label-sm font-bold shadow-sm">{{ 'Featured Spotlight'|t }}</span>
+                          {% if wsm.featured.grades %}<span class="px-2 py-0.5 rounded-full bg-primary/80 backdrop-blur-sm text-on-primary font-label-sm text-label-sm">{{ 'Grades @grades'|t({'@grades': wsm.featured.grades}) }}</span>{% endif %}
+                        </div>
+                      </div>
+                      {% endif %}
+                      <div class="p-space-md flex-1 flex flex-col justify-between">
+                        <div>
+                          <h4 class="font-title-md text-title-md text-primary font-bold leading-tight">{{ wsm.featured.name }}</h4>
+                          {% if wsm.featured.summary %}<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">{{ wsm.featured.summary }}</p>{% endif %}
+                        </div>
+                        <div class="mt-space-md pt-space-xs flex items-center justify-between">
+                          {% if wsm.featured.address %}<div class="flex items-center gap-1 text-label-sm font-label-sm text-text-muted"><span class="material-symbols-outlined text-[16px] text-accent-gold-bright" aria-hidden="true">location_on</span><span>{{ wsm.featured.address }}</span></div>{% endif %}
+                          <span class="inline-flex items-center gap-0.5 font-label-sm text-label-sm font-bold text-primary group-hover/spot:underline">{{ wsm.featured.link_label ?: 'Explore'|t }} <span class="material-symbols-outlined text-[14px]" aria-hidden="true">arrow_forward</span></span>
+                        </div>
+                      </div>
+                    </a>
+                    {% endif %}
+                    <div class="bg-accent-purple-tint rounded-xl p-space-md">
+                      <div class="font-label-sm text-label-sm font-bold text-primary uppercase mb-space-xs flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-primary" aria-hidden="true">bolt</span>{{ 'Campus Essentials'|t }}</div>
+                      <div class="grid grid-cols-2 gap-space-xs font-body-sm text-body-sm">
+                        <a class="p-1 rounded text-on-surface-variant hover:text-primary flex items-center gap-1" href="/lunch-menus"><span class="material-symbols-outlined text-[16px] text-secondary" aria-hidden="true">restaurant</span>{{ 'Lunch Menus'|t }}</a>
+                        <a class="p-1 rounded text-on-surface-variant hover:text-primary flex items-center gap-1" href="/schools#feederMapSection"><span class="material-symbols-outlined text-[16px] text-secondary" aria-hidden="true">map</span>{{ 'Boundaries'|t }}</a>
+                        {% if wsm.featured.url %}
+                        <a class="p-1 rounded text-on-surface-variant hover:text-primary flex items-center gap-1" href="{{ wsm.featured.url }}#schedules-section"><span class="material-symbols-outlined text-[16px] text-secondary" aria-hidden="true">schedule</span>{{ 'Bell Times'|t }}</a>
+                        {% endif %}
+                        {% if wsm.featured.attendance_phone %}
+                        <a class="p-1 rounded text-on-surface-variant hover:text-primary flex items-center gap-1" href="tel:{{ wsm.featured.attendance_phone }}"><span class="material-symbols-outlined text-[16px] text-secondary" aria-hidden="true">assignment_late</span>{{ 'Report Absence'|t }}</a>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Footer strip -->
+                <div class="mt-space-lg pt-space-md bg-surface-container-low rounded-xl px-space-md py-space-sm flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+                  <div class="flex items-center gap-space-sm text-body-sm font-body-sm">
+                    <span class="material-symbols-outlined text-secondary text-[22px]" aria-hidden="true">info</span>
+                    <span data-wk-mega-empty hidden>{{ 'No schools match your search.'|t }}</span>
+                    <span data-wk-mega-notice><strong>{{ 'New Student Enrollment'|t }}</strong> {{ 'is now open for all residents.'|t }}</span>
+                  </div>
+                  <a class="inline-flex items-center gap-space-xs text-primary font-label-md text-label-md font-bold hover:underline" href="/enrollment">
+                    <span>{{ 'Begin Registration Online'|t }}</span><span class="material-symbols-outlined text-[16px]" aria-hidden="true">how_to_reg</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% elseif item.key == 'enroll' %}
+          <div class="relative group">
+            <a class="{{ link_classes }} inline-flex items-center gap-1{{ active ? ' ' ~ active_classes }}" data-path="{{ item.key }}" href="{{ item.href }}" aria-haspopup="true"{% if active %} aria-current="page"{% endif %}>{{ item.label }}<span class="material-symbols-outlined text-[18px]" aria-hidden="true">expand_more</span></a>
+            <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 absolute left-1/2 -translate-x-1/2 top-full pt-2 z-50 transition-opacity">
+              <div class="w-[30rem] max-w-[90vw] bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant p-space-lg grid grid-cols-2 gap-space-lg">
+                <div class="flex flex-col">
+                  {% for link in enroll_links %}
+                    <a class="block px-3 py-1.5 rounded-lg font-semibold text-on-surface hover:bg-accent-purple-tint hover:text-primary font-label-md text-label-md transition-colors" href="{{ link.href }}">{{ link.label }}</a>
+                  {% endfor %}
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider px-3 pb-space-xs">{{ 'Quick links'|t }}</span>
+                  {% for link in enroll_quick_links %}
+                    <a class="block px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-accent-purple-tint hover:text-primary font-label-md text-label-md transition-colors" href="{{ link.href }}">{{ link.label }}</a>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% elseif static_menus[item.key] is defined %}
+          <div class="relative group">
+            <a class="{{ link_classes }} inline-flex items-center gap-1{{ active ? ' ' ~ active_classes }}" data-path="{{ item.key }}" href="{{ item.href }}" aria-haspopup="true"{% if active %} aria-current="page"{% endif %}>{{ item.label }}<span class="material-symbols-outlined text-[18px]" aria-hidden="true">expand_more</span></a>
+            <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 absolute {{ static_menu_position[item.key]|default('left-0') }} top-full pt-2 z-50 transition-opacity">
+              <div class="w-72 max-h-[70vh] overflow-y-auto bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant p-space-md">
+                <div class="flex flex-col">
+                  {% for link in static_menus[item.key] %}
+                    <a class="block px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-accent-purple-tint hover:text-primary font-label-md text-label-md transition-colors" href="{{ link.href }}">{{ link.label }}</a>
+                  {% endfor %}
+                </div>
               </div>
             </div>
           </div>

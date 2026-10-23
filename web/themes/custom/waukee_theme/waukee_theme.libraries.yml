@@ -5,6 +5,7 @@ global:
       css/waukee.css: {}
   js:
     js/waukee.js: {}
+    js/schools-mega-menu.js: {}
   dependencies:
     - core/drupal
     - core/once

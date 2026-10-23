@@ -245,11 +245,12 @@ function waukee_core_group_insert(GroupInterface $group) {
 }
 
 /**
- * School names and links for the header "Schools" menu, in two columns.
+ * School data for the header "Schools" mega menu, grouped by tier.
  *
- * Left column: high schools, 9th-grade campuses, middle schools, specialized
- * centers. Right column: elementary schools. Only schools with a tier and a
- * slug are listed. Cached until a group changes.
+ * Each tier keeps its full waukee_core_school_data() record (mascot,
+ * grades, address, badge, ...) so the menu can show more than a bare link
+ * list and support client-side search/filtering. Cached until a group
+ * changes.
  */
 function waukee_core_schools_menu(): array {
   $cid = 'waukee_core:schools_menu';
@@ -257,30 +258,30 @@ function waukee_core_schools_menu(): array {
     return $cached->data;
   }
   $labels = [
-    'high' => 'High Schools',
+    'high' => 'High Schools (10–12)',
     'transition' => '9th Grade Campuses',
-    'middle' => 'Middle Schools',
-    'specialized' => 'Specialized Centers',
-    'elementary' => 'Elementary Schools',
+    'middle' => 'Middle Schools (6–8)',
+    'elementary' => 'Elementary Schools (K–5)',
+    'specialized' => 'Innovation & Specialized',
   ];
-  $storage = \Drupal::entityTypeManager()->getStorage('group');
-  $ids = $storage->getQuery()->accessCheck(TRUE)
-    ->condition('type', 'school')->exists('field_tier')->exists('field_slug')->sort('label')->execute();
-  $byTier = array_fill_keys(array_keys($labels), []);
-  foreach ($storage->loadMultiple($ids) as $group) {
-    $tier = $group->get('field_tier')->value;
-    if (isset($byTier[$tier])) {
-      $byTier[$tier][] = [
-        'name' => $group->label(),
-        'url' => Url::fromRoute('waukee_core.school_detail', ['school' => $group->get('field_slug')->value])->toString(),
-      ];
+  $byTier = waukee_core_schools_by_tier();
+  $tiers = [];
+  $total = 0;
+  $featured = NULL;
+  foreach ($labels as $tier => $label) {
+    $items = $byTier[$tier] ?? [];
+    $tiers[$tier] = ['label' => $label, 'items' => $items, 'count' => count($items)];
+    $total += count($items);
+    if (!$featured) {
+      foreach ($items as $item) {
+        if ($tier === 'specialized' && !empty($item['image'])) {
+          $featured = $item;
+          break;
+        }
+      }
     }
   }
-  $section = fn(string $tier) => ['label' => $labels[$tier], 'items' => $byTier[$tier]];
-  $menu = [
-    'left' => array_values(array_filter(array_map($section, ['high', 'transition', 'middle', 'specialized']), fn($s) => $s['items'])),
-    'right' => array_values(array_filter(array_map($section, ['elementary']), fn($s) => $s['items'])),
-  ];
+  $menu = ['tiers' => $tiers, 'total' => $total, 'featured' => $featured];
   \Drupal::cache()->set($cid, $menu, \Drupal\Core\Cache\Cache::PERMANENT, ['group_list']);
   return $menu;
 }
