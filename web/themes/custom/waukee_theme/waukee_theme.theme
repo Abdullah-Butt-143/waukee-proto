@@ -44,6 +44,103 @@ function waukee_theme_theme_suggestions_page_alter(array &$suggestions, array $v
   if (in_array($route_name, ['user.login', 'user.pass', 'user.register'], TRUE)) {
     $suggestions[] = 'page__user__login';
   }
+  // News listing, news article and the audience landing pages (Families,
+  // Students, ...) use the homepage design.
+  if ($route_name === 'view.news_feed.page_list') {
+    $suggestions[] = 'page__news';
+  }
+  elseif ($route_name === 'entity.node.canonical') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node && $node->bundle() === 'news') {
+      $suggestions[] = 'page__news__article';
+    }
+    elseif (waukee_theme_section_key()) {
+      $suggestions[] = 'page__section';
+    }
+  }
+}
+
+/**
+ * Audience landing pages: URL alias => section settings and child pages.
+ *
+ * Children are looked up by alias, so editors keep control of titles and text.
+ */
+function waukee_theme_sections(): array {
+  return [
+    '/families' => [
+      'eyebrow' => 'Current Families', 'icon' => 'family_restroom',
+      'children' => ['/enrollment' => 'how_to_reg', '/transportation' => 'directions_bus', '/families/nutrition' => 'restaurant_menu', '/families/health-services' => 'health_and_safety', '/closings' => 'ac_unit'],
+    ],
+    '/prospective-families' => [
+      'eyebrow' => 'Prospective Families', 'icon' => 'explore',
+      'children' => ['/prospective-families/why-us' => 'star', '/prospective-families/schools' => 'location_city', '/prospective-families/enroll' => 'how_to_reg'],
+    ],
+    '/students' => [
+      'eyebrow' => 'Students', 'icon' => 'school',
+      'children' => ['/students/activities' => 'sports_soccer', '/students/volunteer-hours' => 'volunteer_activism', '/students/resources' => 'local_library'],
+    ],
+  ];
+}
+
+/**
+ * Returns the audience-section alias the current request is on, if any.
+ */
+function waukee_theme_section_key(): ?string {
+  $path = rtrim(\Drupal::request()->getPathInfo(), '/');
+  return isset(waukee_theme_sections()[$path]) ? $path : NULL;
+}
+
+/**
+ * Loads the published node behind a URL alias, or NULL.
+ */
+function waukee_theme_node_by_alias(string $alias) {
+  $internal = \Drupal::service('path_alias.manager')->getPathByAlias($alias);
+  if (preg_match('#^/node/(\d+)$#', $internal, $m)) {
+    $node = \Drupal\node\Entity\Node::load($m[1]);
+    if ($node && $node->isPublished() && $node->access('view')) {
+      return $node;
+    }
+  }
+  return NULL;
+}
+
+/**
+ * Plain-text excerpt of a node's body.
+ */
+function waukee_theme_excerpt($node, int $max = 140): string {
+  $text = '';
+  if ($node->hasField('body') && !$node->get('body')->isEmpty()) {
+    $text = trim(preg_replace('/\s+/', ' ', strip_tags((string) $node->get('body')->value)));
+  }
+  return mb_strlen($text) > $max ? rtrim(mb_substr($text, 0, $max)) . '…' : $text;
+}
+
+/**
+ * Card data for one news node.
+ */
+function waukee_theme_news_item($node): array {
+  $summary = $node->hasField('field_summary') && !$node->get('field_summary')->isEmpty()
+    ? trim(strip_tags((string) $node->get('field_summary')->value))
+    : waukee_theme_excerpt($node, 160);
+  $image = NULL;
+  if ($node->hasField('field_image') && ($media = $node->get('field_image')->entity)
+    && $media->hasField('field_media_image') && ($file = $media->get('field_media_image')->entity)) {
+    $image = \Drupal::service('file_url_generator')->generateString($file->getFileUri());
+  }
+  $schools = [];
+  if ($node->hasField('field_school')) {
+    foreach ($node->get('field_school')->referencedEntities() as $term) {
+      $schools[] = $term->label();
+    }
+  }
+  return [
+    'title' => $node->label(),
+    'url' => $node->toUrl()->toString(),
+    'summary' => $summary,
+    'image' => $image,
+    'date' => \Drupal::service('date.formatter')->format($node->getCreatedTime(), 'custom', 'F j, Y'),
+    'schools' => $schools,
+  ];
 }
 
 /**
@@ -62,6 +159,95 @@ function waukee_theme_preprocess_page(array &$variables) {
     $group = waukee_core_school_by_slug(\Drupal::routeMatch()->getParameter('school'));
     $variables['school'] = $group ? waukee_core_school_data($group) : NULL;
   }
+  elseif ($route_name === 'view.news_feed.page_list') {
+    waukee_theme_preprocess_news_list($variables);
+  }
+  elseif ($route_name === 'entity.node.canonical') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node && $node->bundle() === 'news') {
+      $variables['article'] = waukee_theme_news_item($node) + [
+        'body' => $node->get('body')->processed ?? '',
+      ];
+      $variables['#cache']['tags'][] = 'node:' . $node->id();
+    }
+    elseif ($node && ($key = waukee_theme_section_key())) {
+      $section = waukee_theme_sections()[$key];
+      $children = [];
+      foreach ($section['children'] as $alias => $icon) {
+        if ($child = waukee_theme_node_by_alias($alias)) {
+          $children[] = ['title' => $child->label(), 'url' => $alias, 'icon' => $icon, 'text' => waukee_theme_excerpt($child)];
+        }
+      }
+      $variables['section'] = [
+        'title' => $node->label(),
+        'eyebrow' => $section['eyebrow'],
+        'icon' => $section['icon'],
+        'intro' => $node->get('body')->processed ?? '',
+        'children' => $children,
+      ];
+      $variables['#cache']['tags'][] = 'node_list';
+    }
+  }
+}
+
+/**
+ * Loads one page of published news for the /news design.
+ *
+ * Filter: ?school=<term id> shows that school's news plus district-wide news.
+ */
+function waukee_theme_preprocess_news_list(array &$variables): void {
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+  $term_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+  $selected = (int) \Drupal::request()->query->get('school');
+
+  $school_terms = $term_storage->loadByProperties(['vid' => 'school']);
+  $filters = [];
+  foreach ($school_terms as $term) {
+    $filters[] = ['id' => (int) $term->id(), 'name' => $term->label(), 'district' => str_starts_with($term->label(), 'District')];
+  }
+  usort($filters, fn($a, $b) => [!$a['district'], $a['name']] <=> [!$b['district'], $b['name']]);
+
+  $query = $storage->getQuery()->accessCheck(TRUE)
+    ->condition('type', 'news')->condition('status', 1)
+    ->sort('created', 'DESC')->pager(9);
+  if ($selected && isset($school_terms[$selected])) {
+    $ids = [$selected];
+    foreach ($filters as $f) {
+      if ($f['district']) {
+        $ids[] = $f['id'];
+      }
+    }
+    $query->condition('field_school', $ids, 'IN');
+  }
+  else {
+    $selected = 0;
+  }
+  $items = array_map('waukee_theme_news_item', $storage->loadMultiple($query->execute()));
+
+  // Previous/next links keep the current school filter.
+  $page = \Drupal::service('pager.parameters')->findPage();
+  $pager = \Drupal::service('pager.manager')->getPager();
+  $total_pages = $pager ? $pager->getTotalPages() : 1;
+  $link = function (int $to) use ($selected): string {
+    $args = array_filter(['school' => $selected ?: NULL, 'page' => $to ?: NULL]);
+    return '/news' . ($args ? '?' . http_build_query($args) : '');
+  };
+
+  $variables['news'] = [
+    'items' => array_values($items),
+    'filters' => $filters,
+    'selected' => $selected,
+    'all_url' => '/news',
+    'filter_urls' => array_column(array_map(fn($f) => ['id' => $f['id'], 'url' => '/news?school=' . $f['id']], $filters), 'url', 'id'),
+    'page' => $page + 1,
+    'total_pages' => $total_pages,
+    'prev_url' => $page > 0 ? $link($page - 1) : NULL,
+    'next_url' => $page + 1 < $total_pages ? $link($page + 1) : NULL,
+  ];
+  $variables['#cache']['contexts'][] = 'url.query_args';
+  $variables['#cache']['contexts'][] = 'user.permissions';
+  $variables['#cache']['tags'][] = 'node_list:news';
+  $variables['#cache']['tags'][] = 'taxonomy_term_list';
 }
 
 /**

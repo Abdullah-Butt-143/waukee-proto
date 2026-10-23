@@ -1,0 +1,83 @@
+{#
+/**
+ * @file
+ * News listing (/news) in the homepage design. `news` comes from
+ * waukee_theme_preprocess_news_list() (see waukee_theme.theme): one page of
+ * published news, the school filter chips and previous/next links.
+ */
+#}
+{{ attach_library('waukee_theme/front') }}
+<div class="bg-background font-body-md text-body-md text-on-surface antialiased">
+{% include "@waukee_theme/includes/tw-header.html.twig" %}
+<main id="main-content" class="w-full pt-20 bg-background"><div class="flex flex-col w-full">
+<section class="w-full bg-surface-container-low border-b border-surface-container py-space-sm">
+<div class="max-w-[1280px] mx-auto px-margin text-body-sm">
+<nav aria-label="Breadcrumb" class="flex items-center gap-space-xs text-on-surface-variant font-label-sm">
+<a class="hover:text-primary flex items-center gap-1 transition-colors" href="/"><span class="material-symbols-outlined text-[16px]">home</span><span>Home</span></a>
+<span class="text-outline-variant">/</span>
+<span class="text-primary font-bold">News</span>
+</nav>
+</div>
+</section>
+
+<section class="relative w-full bg-primary-container text-on-primary py-space-xl overflow-hidden shadow-sm">
+<div class="absolute -right-16 -top-20 w-96 h-96 bg-accent-gold-bright/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="max-w-[1280px] mx-auto px-margin relative z-10 flex flex-col gap-space-sm max-w-3xl">
+<div class="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-primary-fixed/20 text-secondary-fixed text-label-sm uppercase tracking-wider font-bold"><span class="material-symbols-outlined text-[15px]">newspaper</span><span>District Updates</span></div>
+<h1 class="font-display-hero text-headline-xl md:text-display-hero text-text-on-dark tracking-tight leading-tight">News</h1>
+<p class="font-body-lg text-body-lg text-surface-container-high/90 leading-relaxed">The latest stories, announcements and updates from schools across Waukee Community School District.</p>
+</div>
+</section>
+
+<section class="w-full max-w-[1280px] mx-auto px-margin py-space-xl">
+{% if news.filters %}
+<nav aria-label="{{ 'Filter news by school'|t }}" class="flex flex-wrap items-center gap-2 mb-space-lg">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold mr-2">{{ 'School'|t }}</span>
+<a href="{{ news.all_url }}" class="px-4 py-1.5 rounded-full font-label-md text-label-md font-semibold transition-colors {{ news.selected == 0 ? 'bg-primary text-text-on-dark' : 'bg-surface-container text-primary hover:bg-surface-container-high' }}"{% if news.selected == 0 %} aria-current="true"{% endif %}>{{ 'All'|t }}</a>
+{% for f in news.filters %}
+<a href="{{ news.filter_urls[f.id] }}" class="px-4 py-1.5 rounded-full font-label-md text-label-md font-semibold transition-colors {{ news.selected == f.id ? 'bg-primary text-text-on-dark' : 'bg-surface-container text-primary hover:bg-surface-container-high' }}"{% if news.selected == f.id %} aria-current="true"{% endif %}>{{ f.name }}</a>
+{% endfor %}
+</nav>
+{% endif %}
+
+{% if news.items %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+{% for item in news.items %}
+<article class="group bg-surface-base rounded-2xl overflow-hidden shadow-sm border border-surface-container hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
+<a href="{{ item.url }}" class="block relative h-48 bg-primary-container overflow-hidden" tabindex="-1" aria-hidden="true">
+{% if item.image %}
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('{{ item.image }}')"></div>
+{% else %}
+<div class="absolute inset-0 flex items-center justify-center text-accent-gold-bright/60"><span class="material-symbols-outlined text-[56px]">newspaper</span></div>
+{% endif %}
+</a>
+<div class="p-space-md flex flex-col gap-space-xs flex-1">
+<div class="flex flex-wrap items-center gap-2 font-label-sm text-label-sm">
+<span class="text-on-surface-variant">{{ item.date }}</span>
+{% for s in item.schools|slice(0, 2) %}<span class="px-2.5 py-0.5 rounded-full bg-accent-purple-tint text-primary font-semibold">{{ s }}</span>{% endfor %}
+</div>
+<h2 class="font-title-md text-title-md text-primary font-bold group-hover:text-secondary transition-colors"><a href="{{ item.url }}">{{ item.title }}</a></h2>
+{% if item.summary %}<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-3">{{ item.summary }}</p>{% endif %}
+<a href="{{ item.url }}" class="mt-auto pt-space-xs inline-flex items-center gap-1 font-label-md text-label-md text-primary font-bold hover:text-secondary transition-colors" aria-label="{{ 'Read more: @title'|t({'@title': item.title}) }}">{{ 'Read more'|t }} <span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
+</div>
+</article>
+{% endfor %}
+</div>
+
+{% if news.total_pages > 1 %}
+<nav aria-label="{{ 'Pagination'|t }}" class="mt-space-xl flex items-center justify-center gap-space-md">
+{% if news.prev_url %}<a href="{{ news.prev_url }}" rel="prev" class="inline-flex items-center gap-1 px-space-md py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-md text-label-md font-semibold transition-colors"><span class="material-symbols-outlined text-[18px]">arrow_back</span>{{ 'Previous'|t }}</a>{% endif %}
+<span class="font-label-md text-label-md text-on-surface-variant">{{ 'Page @p of @t'|t({'@p': news.page, '@t': news.total_pages}) }}</span>
+{% if news.next_url %}<a href="{{ news.next_url }}" rel="next" class="inline-flex items-center gap-1 px-space-md py-2.5 rounded-lg bg-primary hover:bg-primary-container text-text-on-dark font-label-md text-label-md font-semibold transition-colors shadow-sm">{{ 'Next'|t }}<span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>{% endif %}
+</nav>
+{% endif %}
+{% else %}
+<div class="bg-surface-base rounded-2xl p-space-lg border border-surface-container text-center">
+<span class="material-symbols-outlined text-[40px] text-outline">newspaper</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">{{ 'No news stories found.'|t }}</p>
+</div>
+{% endif %}
+</section>
+</div></main>
+{% include "@waukee_theme/includes/tw-footer.html.twig" %}
+</div>
