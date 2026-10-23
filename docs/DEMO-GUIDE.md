@@ -185,12 +185,12 @@ Nothing is public until a publisher chooses **Published** in the **Save as** dro
 | `/news` | News page in the homepage design: purple hero, a row of **School** buttons (All, District, Sample Elementary, Sample High School) to filter, three-column cards with image, date, school and summary, and **Previous / Next** buttons (9 per page). A card opens the article page (same design, with a **Back to all news** button). |
 | `/enrollment` | Designed enrollment page (hero, 4 steps, documents needed, FAQ, helpful pages, help box). |
 | `/user/login` · `/user/password` | Two-panel login and password-reset pages with the shared header and footer. |
-| `/families` (Parents) · `/prospective-families` · `/students` | Audience pages in the homepage design: purple hero with the page's intro text, an icon card for each sub-page (Enrollment, Transportation, ...), and a Calendar / News / Our Schools strip. Reached from **Students** and **Parents** in the purple strip. |
-| `/careers` · `/community` | Section pages: callout + card grid of sub-pages (older design). |
+| `/families` (Parents) · `/prospective-families` · `/students` · `/careers` · `/community` | Audience pages in the homepage design: purple hero with the page's intro text, an icon card for each sub-page (Enrollment, Transportation, ...), and a Calendar / News / Our Schools strip. Reached from **Students**, **Parents** and **Community** in the purple strip. |
+| `/careers/jobs` | Job listings in the homepage design: purple hero with a **Benefits** button, one row per open position (title, location, closing date, short text, **View details** and **Apply** buttons) and a "Recently closed" list. Each job opens its own page (same design) with an **Apply now** box. Jobs come from the **Job posting** content type, so a new posting appears here by itself. |
 | `/transportation` · `/families/nutrition` · `/families/health-services` · `/closings` | Family pages. |
 | `/prospective-families/why-us` · `/prospective-families/schools` · `/prospective-families/enroll` | Prospective families. |
 | `/students/activities` · `/students/resources` · **`/students/volunteer-hours`** | Students (volunteer form). |
-| `/careers/benefits` · `/careers/jobs` | Careers (jobs page is plain text, see limits). |
+| `/careers/benefits` | Careers: benefits (plain page). |
 | **`/community/facility-rental`** · `/community/board-of-education` · `/community/news` | Community (facility rental form). |
 | `/form/facility-rental` · `/form/volunteer-hours` | The same forms on their own page. |
 | `/calendar` · `/events` · `/lunch-menus` | Calendar, event list, lunch menus (School filter on each). |
@@ -247,7 +247,7 @@ Nothing is public until a publisher chooses **Published** in the **Save as** dro
 | Search: staff see intranet results, public users do not | **Done** | Steps 2 and 6 |
 | Accessible forms with conditional logic (facility rental, volunteer hours) | **Done** (markup checked; no screen-reader test yet) | Step 3 |
 | Emergency alert on every page (including the designed pages) | **Done** | Step 7 |
-| Audience pages for students and parents in the homepage design | **Done** | Step 1; **Students** / **Parents** in the purple strip |
+| Audience pages for students, parents, community and careers/jobs in the homepage design | **Done** | Step 1; **Students**, **Parents**, **Community** in the purple strip; **Careers** under the About menu quick links (**Jobs**) |
 | School sites with own news/events + district items | **Done** | Step 1, point 3 |
 | AI assistant answering from site content | **Not built** (design agreed: reuse the permission-aware search + Claude; needs an API key) | Say "planned" |
 | Google Workspace sign-in | **Not built** (local role-based demo users used instead) | Say "planned" |
@@ -264,7 +264,6 @@ Nothing is public until a publisher chooses **Published** in the **Save as** dro
 - A page created with `/node/add/page` (not the school route) belongs to no school and is not listed on a school page.
 - New pages are not added to any menu; use the **Pages from <school>** list, a Card grid, or an admin menu link.
 - **Search filters** are drop-downs (Content type, School), not "facets" with counts (Facets module not installed).
-- `/careers/jobs` is a text page; the three job postings exist but are not listed there yet.
 - Sample documents are small text files, not real PDFs.
 - The page-builder **Image + text** block stores a left/right setting; on the new design the home-style split section applies it, older layouts may not.
 - **Staff editing their own profile** is not demo-ready: the approval workflow gives plain staff no save transition.
