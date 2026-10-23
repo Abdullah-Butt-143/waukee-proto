@@ -335,7 +335,9 @@
 </div>
 </div>
 </section>
-{% if school.news_highlights %}
+{# Close the full-profile-only block so news shows for every school. #}
+{% endif %}
+{% if school.news_highlights or school.news %}
 <!-- News & Highlights -->
 <section class="w-full bg-surface py-space-xl">
 <div class="max-w-[1280px] mx-auto px-margin">
@@ -349,12 +351,26 @@
           <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
 </a>
 </div>
+{% if school.news %}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mb-space-lg">
+{% for item in school.news %}
+<a href="{{ item.url }}" class="block bg-surface-container-lowest rounded-xl shadow-sm p-space-md hover:shadow-md transition-shadow">
+<span class="font-label-sm uppercase tracking-wider text-secondary font-bold">{{ item.date }}</span>
+<h3 class="font-headline-md text-primary font-bold mt-1">{{ item.title }}</h3>
+{% if item.summary %}<p class="font-body-sm text-on-surface-variant mt-2">{{ item.summary }}</p>{% endif %}
+</a>
+{% endfor %}
+</div>
+{% endif %}
+{% if school.news_highlights %}
 <div class="prose max-w-none font-body-sm text-on-surface-variant">
       {{ school.news_highlights.value|raw }}
     </div>
+{% endif %}
 </div>
 </section>
 {% endif %}
+{% if school.full_profile %}
 {% if school.family_resources %}
 <!-- Family Resources & Get Involved -->
 <section class="w-full bg-surface-container-low py-space-xl">
