@@ -6,8 +6,10 @@
  */
 
 use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\group\Entity\GroupInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * Loads one "school" group by its field_slug.
@@ -172,4 +174,41 @@ function waukee_core_page_attachments(array &$attachments) {
   if (in_array($route, ['node.add', 'entity.node.edit_form', 'entity.group_relationship.create_form', 'entity.group_relationship.edit_form'], TRUE)) {
     $attachments['#attached']['library'][] = 'waukee_core/admin_forms';
   }
+}
+
+/**
+ * Implements hook_node_grants().
+ *
+ * With a node-grants module active (Permissions by Term), core's "published or
+ * can see unpublished" check in admin lists is skipped and unpublished nodes
+ * only appear when a grant allows it. These grants let reviewers (permission
+ * "view any unpublished content") see every unpublished node, and authors
+ * ("view own unpublished content") see their own, in /admin/content and
+ * /admin/content/moderated.
+ */
+function waukee_core_node_grants(AccountInterface $account, $op) {
+  $grants = [];
+  if ($op === 'view') {
+    if ($account->hasPermission('view any unpublished content')) {
+      $grants['waukee_unpublished_any'] = [0];
+    }
+    if ($account->isAuthenticated() && $account->hasPermission('view own unpublished content')) {
+      $grants['waukee_unpublished_own'] = [(int) $account->id()];
+    }
+  }
+  return $grants;
+}
+
+/**
+ * Implements hook_node_access_records().
+ */
+function waukee_core_node_access_records(NodeInterface $node) {
+  if ($node->isPublished()) {
+    return [];
+  }
+  $base = ['grant_view' => 1, 'grant_update' => 0, 'grant_delete' => 0, 'langcode' => $node->language()->getId()];
+  return [
+    ['realm' => 'waukee_unpublished_any', 'gid' => 0] + $base,
+    ['realm' => 'waukee_unpublished_own', 'gid' => (int) $node->getOwnerId()] + $base,
+  ];
 }

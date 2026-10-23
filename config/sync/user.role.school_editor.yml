@@ -31,7 +31,6 @@ permissions:
   - 'access media overview'
   - 'access toolbar'
   - 'configure editable page node layout overrides'
-  - 'create and edit custom blocks'
   - 'create announcement content'
   - 'create event content'
   - 'create lunch_menu content'

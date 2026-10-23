@@ -1,0 +1,13 @@
+{#
+/**
+ * @file
+ * Emergency alert banner for the Tailwind page designs (home, schools, news,
+ * ...). Prints the "alert" region (the waukee_emergency_alert block) at the top
+ * of <main>, under the fixed header. Styled by .wk-front-alert in css/front.css.
+ * Renders nothing while no alert is active.
+ */
+#}
+{% set wk_alert = page.alert|render|trim %}
+{% if wk_alert %}
+<div class="wk-front-alert !pt-0" role="region" aria-label="{{ 'Site alerts'|t }}">{{ wk_alert|raw }}</div>
+{% endif %}
