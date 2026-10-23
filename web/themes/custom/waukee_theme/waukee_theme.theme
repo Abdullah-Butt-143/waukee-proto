@@ -63,6 +63,9 @@ function waukee_theme_theme_suggestions_page_alter(array &$suggestions, array $v
     elseif (waukee_theme_section_key()) {
       $suggestions[] = 'page__section';
     }
+    elseif (waukee_theme_content_parent()) {
+      $suggestions[] = 'page__content';
+    }
   }
 }
 
@@ -94,6 +97,24 @@ function waukee_theme_sections(): array {
       'children' => ['/community/facility-rental' => 'meeting_room', '/community/board-of-education' => 'account_balance', '/community/news' => 'newspaper'],
     ],
   ];
+}
+
+/**
+ * Sub-pages inside an audience section that use the shared inner-page design.
+ * Forms and pages with their own design are excluded.
+ */
+function waukee_theme_content_parent(): ?string {
+  $path = rtrim(\Drupal::request()->getPathInfo(), '/');
+  $excluded = ['/careers/jobs', '/community/facility-rental', '/students/volunteer-hours', '/community/news', '/enrollment'];
+  if (in_array($path, $excluded, TRUE)) {
+    return NULL;
+  }
+  foreach (waukee_theme_sections() as $parent => $section) {
+    if (isset($section['children'][$path])) {
+      return $parent;
+    }
+  }
+  return NULL;
 }
 
 /**
@@ -237,6 +258,29 @@ function waukee_theme_preprocess_page(array &$variables) {
       ];
       $variables['#cache']['tags'][] = 'node_list:job_posting';
       $variables['#cache']['max-age'] = 3600;
+    }
+    elseif ($node && ($parent = waukee_theme_content_parent())) {
+      $section = waukee_theme_sections()[$parent];
+      $current = rtrim(\Drupal::request()->getPathInfo(), '/');
+      $parent_node = waukee_theme_node_by_alias($parent);
+      $siblings = [];
+      foreach ($section['children'] as $alias => $icon) {
+        if ($sib = waukee_theme_node_by_alias($alias)) {
+          $siblings[] = ['title' => $sib->label(), 'url' => $alias, 'icon' => $icon, 'current' => $alias === $current];
+        }
+      }
+      $variables['content_page'] = [
+        'title' => $node->label(),
+        'body' => $node->hasField('body') ? ($node->get('body')->processed ?? '') : '',
+        'eyebrow' => $section['eyebrow'],
+        'icon' => $section['icon'],
+        'parent_title' => $parent_node ? $parent_node->label() : $section['eyebrow'],
+        'parent_url' => $parent,
+        'siblings' => $siblings,
+        'updated' => \Drupal::service('date.formatter')->format($node->getChangedTime(), 'custom', 'F j, Y'),
+      ];
+      $variables['#cache']['tags'][] = 'node:' . $node->id();
+      $variables['#cache']['tags'][] = 'node_list';
     }
     elseif ($node && ($key = waukee_theme_section_key())) {
       $section = waukee_theme_sections()[$key];
