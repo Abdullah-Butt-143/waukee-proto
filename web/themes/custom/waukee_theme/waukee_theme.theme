@@ -54,6 +54,12 @@ function waukee_theme_theme_suggestions_page_alter(array &$suggestions, array $v
     if ($node && $node->bundle() === 'news') {
       $suggestions[] = 'page__news__article';
     }
+    elseif ($node && $node->bundle() === 'job_posting') {
+      $suggestions[] = 'page__jobs__posting';
+    }
+    elseif (waukee_theme_is_jobs_list()) {
+      $suggestions[] = 'page__jobs';
+    }
     elseif (waukee_theme_section_key()) {
       $suggestions[] = 'page__section';
     }
@@ -79,6 +85,50 @@ function waukee_theme_sections(): array {
       'eyebrow' => 'Students', 'icon' => 'school',
       'children' => ['/students/activities' => 'sports_soccer', '/students/volunteer-hours' => 'volunteer_activism', '/students/resources' => 'local_library'],
     ],
+    '/careers' => [
+      'eyebrow' => 'Careers', 'icon' => 'work',
+      'children' => ['/careers/jobs' => 'work', '/careers/benefits' => 'health_and_safety'],
+    ],
+    '/community' => [
+      'eyebrow' => 'Community', 'icon' => 'groups',
+      'children' => ['/community/facility-rental' => 'meeting_room', '/community/board-of-education' => 'account_balance', '/community/news' => 'newspaper'],
+    ],
+  ];
+}
+
+/**
+ * TRUE on the job listings page (/careers/jobs).
+ */
+function waukee_theme_is_jobs_list(): bool {
+  return rtrim(\Drupal::request()->getPathInfo(), '/') === '/careers/jobs';
+}
+
+/**
+ * Card data for one job posting.
+ */
+function waukee_theme_job_item($node): array {
+  $closing = NULL;
+  if ($node->hasField('field_closing_date') && !$node->get('field_closing_date')->isEmpty()) {
+    $closing = strtotime($node->get('field_closing_date')->value . ' 23:59:59');
+  }
+  $apply = NULL;
+  if ($node->hasField('field_apply_link') && !$node->get('field_apply_link')->isEmpty()) {
+    try {
+      $apply = $node->get('field_apply_link')->first()->getUrl()->toString();
+    }
+    catch (\Exception $e) {
+      $apply = NULL;
+    }
+  }
+  return [
+    'title' => $node->label(),
+    'url' => $node->toUrl()->toString(),
+    'location' => $node->hasField('field_location') ? (string) $node->get('field_location')->value : '',
+    'closing' => $closing ? \Drupal::service('date.formatter')->format($closing, 'custom', 'F j, Y') : NULL,
+    'closed' => $closing && $closing < \Drupal::time()->getRequestTime(),
+    'apply' => $apply,
+    'summary' => waukee_theme_excerpt($node, 170),
+    'body' => $node->hasField('body') ? ($node->get('body')->processed ?? '') : '',
   ];
 }
 
@@ -169,6 +219,24 @@ function waukee_theme_preprocess_page(array &$variables) {
         'body' => $node->get('body')->processed ?? '',
       ];
       $variables['#cache']['tags'][] = 'node:' . $node->id();
+    }
+    elseif ($node && $node->bundle() === 'job_posting') {
+      $variables['job'] = waukee_theme_job_item($node);
+      $variables['#cache']['tags'][] = 'node:' . $node->id();
+    }
+    elseif ($node && waukee_theme_is_jobs_list()) {
+      $ids = \Drupal::entityTypeManager()->getStorage('node')->getQuery()->accessCheck(TRUE)
+        ->condition('type', 'job_posting')->condition('status', 1)
+        ->sort('field_closing_date', 'ASC')->execute();
+      $jobs = array_map('waukee_theme_job_item', \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($ids));
+      $variables['jobs'] = [
+        'title' => $node->label(),
+        'intro' => $node->get('body')->processed ?? '',
+        'open' => array_values(array_filter($jobs, fn($j) => !$j['closed'])),
+        'closed' => array_values(array_filter($jobs, fn($j) => $j['closed'])),
+      ];
+      $variables['#cache']['tags'][] = 'node_list:job_posting';
+      $variables['#cache']['max-age'] = 3600;
     }
     elseif ($node && ($key = waukee_theme_section_key())) {
       $section = waukee_theme_sections()[$key];

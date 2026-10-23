@@ -1,0 +1,59 @@
+{#
+/**
+ * @file
+ * One job posting in the homepage design. `job` comes from
+ * waukee_theme_preprocess_page() (see waukee_theme.theme).
+ */
+#}
+{{ attach_library('waukee_theme/front') }}
+<div class="bg-background font-body-md text-body-md text-on-surface antialiased">
+{% include "@waukee_theme/includes/tw-header.html.twig" %}
+<main id="main-content" class="w-full pt-20 bg-background">{% include '@waukee_theme/includes/tw-alert.html.twig' %}<div class="flex flex-col w-full">
+<section class="w-full bg-surface-container-low border-b border-surface-container py-space-sm">
+<div class="max-w-[1280px] mx-auto px-margin text-body-sm">
+<nav aria-label="Breadcrumb" class="flex items-center gap-space-xs text-on-surface-variant font-label-sm">
+<a class="hover:text-primary flex items-center gap-1 transition-colors" href="/"><span class="material-symbols-outlined text-[16px]">home</span><span>Home</span></a>
+<span class="text-outline-variant">/</span>
+<a class="hover:text-primary transition-colors" href="/careers">Careers</a>
+<span class="text-outline-variant">/</span>
+<a class="hover:text-primary transition-colors" href="/careers/jobs">Job listings</a>
+<span class="text-outline-variant">/</span>
+<span class="text-primary font-bold line-clamp-1">{{ job.title }}</span>
+</nav>
+</div>
+</section>
+
+<section class="relative w-full bg-primary-container text-on-primary py-space-xl overflow-hidden shadow-sm">
+<div class="absolute -right-16 -top-20 w-96 h-96 bg-accent-gold-bright/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="max-w-[1280px] mx-auto px-margin relative z-10 flex flex-col gap-space-sm">
+<div class="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-primary-fixed/20 text-secondary-fixed text-label-sm uppercase tracking-wider font-bold"><span class="material-symbols-outlined text-[15px]">work</span><span>{{ job.closed ? 'Position closed'|t : 'Now hiring'|t }}</span></div>
+<h1 class="font-headline-xl md:text-display-hero text-text-on-dark tracking-tight leading-tight max-w-4xl font-extrabold">{{ job.title }}</h1>
+<div class="flex flex-wrap items-center gap-x-space-md gap-y-1 font-label-md text-label-md text-surface-container-high/90">
+{% if job.location %}<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[18px] text-accent-gold-bright">location_on</span>{{ job.location }}</span>{% endif %}
+{% if job.closing %}<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[18px] text-accent-gold-bright">event</span>{{ (job.closed ? 'Closed @date' : 'Closes @date')|t({'@date': job.closing}) }}</span>{% endif %}
+</div>
+</div>
+</section>
+
+<section class="w-full max-w-[1280px] mx-auto px-margin py-space-xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+<article class="lg:col-span-8 font-body-lg text-body-lg text-on-surface-variant leading-relaxed [&_p]:mb-4 [&_h2]:font-headline-md [&_h2]:text-primary [&_h2]:font-bold [&_h2]:mt-6 [&_h2]:mb-2 [&_h3]:font-title-md [&_h3]:text-primary [&_h3]:font-bold [&_h3]:mt-4 [&_a]:text-primary [&_a]:underline [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:mb-1">
+{{ job.body|raw }}
+</article>
+<aside class="lg:col-span-4">
+<div class="bg-surface-base rounded-2xl p-space-lg shadow-sm border border-surface-container flex flex-col gap-space-sm lg:sticky lg:top-32">
+<h2 class="font-title-md text-title-md text-primary font-bold">{{ 'Ready to apply?'|t }}</h2>
+{% if job.closed %}
+<p class="font-body-sm text-body-sm text-on-surface-variant">{{ 'This position has closed.'|t }}</p>
+{% elseif job.apply %}
+<p class="font-body-sm text-body-sm text-on-surface-variant">{{ 'Applications are handled through the link below.'|t }}</p>
+<a class="inline-flex items-center justify-center gap-2 px-space-md py-3 rounded-lg bg-primary hover:bg-primary-container text-text-on-dark font-label-md text-label-md font-semibold transition-colors shadow-sm" href="{{ job.apply }}" rel="noopener">{{ 'Apply now'|t }}<span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
+{% endif %}
+<a class="inline-flex items-center justify-center gap-2 px-space-md py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-md text-label-md font-semibold transition-colors" href="/careers/jobs"><span class="material-symbols-outlined text-[18px]">arrow_back</span>{{ 'All job listings'|t }}</a>
+</div>
+</aside>
+</div>
+</section>
+</div></main>
+{% include "@waukee_theme/includes/tw-footer.html.twig" %}
+</div>
