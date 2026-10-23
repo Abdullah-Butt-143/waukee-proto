@@ -212,3 +212,34 @@ function waukee_core_node_access_records(NodeInterface $node) {
     ['realm' => 'waukee_unpublished_own', 'gid' => (int) $node->getOwnerId()] + $base,
   ];
 }
+
+/**
+ * Makes sure a school group has a matching "School" taxonomy term.
+ *
+ * News, events and announcements tag their school with the "School" taxonomy
+ * (the "School" boxes on Add news / Add event, the /news filter, school
+ * feeds). Schools themselves are Group entities, so each group needs a term of
+ * the same name, linked through the group's "School term" field.
+ */
+function waukee_core_ensure_school_term(GroupInterface $group): void {
+  if ($group->bundle() !== 'school' || !$group->hasField('field_school')) {
+    return;
+  }
+  $storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+  $found = $storage->loadByProperties(['vid' => 'school', 'name' => $group->label()]);
+  $term = $found ? reset($found) : $storage->create(['vid' => 'school', 'name' => $group->label()]);
+  if ($term->isNew()) {
+    $term->save();
+  }
+  if ($group->get('field_school')->isEmpty()) {
+    $group->set('field_school', ['target_id' => $term->id()]);
+    $group->save();
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for group entities.
+ */
+function waukee_core_group_insert(GroupInterface $group) {
+  waukee_core_ensure_school_term($group);
+}
