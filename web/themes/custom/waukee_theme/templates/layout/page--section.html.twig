@@ -1,0 +1,62 @@
+{#
+/**
+ * @file
+ * Audience landing pages (/families, /prospective-families, /students) in the
+ * homepage design. `section` comes from waukee_theme_preprocess_page() (see
+ * waukee_theme.theme): title, intro text and the child pages as cards.
+ */
+#}
+{{ attach_library('waukee_theme/front') }}
+<div class="bg-background font-body-md text-body-md text-on-surface antialiased">
+{% include "@waukee_theme/includes/tw-header.html.twig" %}
+<main id="main-content" class="w-full pt-20 bg-background"><div class="flex flex-col w-full">
+<section class="w-full bg-surface-container-low border-b border-surface-container py-space-sm">
+<div class="max-w-[1280px] mx-auto px-margin text-body-sm">
+<nav aria-label="Breadcrumb" class="flex items-center gap-space-xs text-on-surface-variant font-label-sm">
+<a class="hover:text-primary flex items-center gap-1 transition-colors" href="/"><span class="material-symbols-outlined text-[16px]">home</span><span>Home</span></a>
+<span class="text-outline-variant">/</span>
+<span class="text-primary font-bold">{{ section.title }}</span>
+</nav>
+</div>
+</section>
+
+<section class="relative w-full bg-primary-container text-on-primary py-space-xl overflow-hidden shadow-sm">
+<div class="absolute -right-16 -top-20 w-96 h-96 bg-accent-gold-bright/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="max-w-[1280px] mx-auto px-margin relative z-10 flex flex-col gap-space-sm max-w-3xl">
+<div class="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-primary-fixed/20 text-secondary-fixed text-label-sm uppercase tracking-wider font-bold"><span class="material-symbols-outlined text-[15px]">{{ section.icon }}</span><span>{{ section.eyebrow }}</span></div>
+<h1 class="font-display-hero text-headline-xl md:text-display-hero text-text-on-dark tracking-tight leading-tight">{{ section.title }}</h1>
+{% if section.intro %}
+<div class="mt-2 p-space-md rounded-xl bg-surface-base/10 backdrop-blur-sm border border-surface-base/15 font-body-lg text-body-lg text-surface-container-high/90 leading-relaxed [&_a]:underline">{{ section.intro|raw }}</div>
+{% endif %}
+</div>
+</section>
+
+{% if section.children %}
+<section class="w-full max-w-[1280px] mx-auto px-margin py-space-xl">
+<div class="mb-space-lg max-w-2xl">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">{{ section.eyebrow }}</span>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight font-bold">{{ 'In this section'|t }}</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+{% for c in section.children %}
+<a href="{{ c.url }}" class="group bg-surface-base rounded-2xl p-space-lg shadow-sm border border-surface-container hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-accent-gold-bright flex items-center justify-center"><span class="material-symbols-outlined text-[24px]">{{ c.icon }}</span></div>
+<h3 class="font-headline-md text-headline-md text-primary font-bold group-hover:text-secondary transition-colors">{{ c.title }}</h3>
+{% if c.text %}<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">{{ c.text }}</p>{% endif %}
+<span class="mt-auto pt-space-xs inline-flex items-center gap-1 font-label-md text-label-md text-primary font-bold group-hover:text-secondary transition-colors">{{ 'Learn more'|t }} <span class="material-symbols-outlined text-[18px]">arrow_forward</span></span>
+</a>
+{% endfor %}
+</div>
+</section>
+{% endif %}
+
+<section class="w-full bg-surface-container-low py-space-xl border-t border-surface-container">
+<div class="max-w-[1280px] mx-auto px-margin grid grid-cols-1 sm:grid-cols-3 gap-space-md">
+<a class="bg-surface-base p-space-md rounded-xl border border-surface-container shadow-sm hover:shadow-md transition-all flex items-center gap-space-sm group" href="/calendar"><span class="material-symbols-outlined text-accent-gold-bright text-[24px]">calendar_month</span><span class="font-title-md text-title-md text-primary font-bold group-hover:text-secondary transition-colors">{{ 'Calendar'|t }}</span></a>
+<a class="bg-surface-base p-space-md rounded-xl border border-surface-container shadow-sm hover:shadow-md transition-all flex items-center gap-space-sm group" href="/news"><span class="material-symbols-outlined text-accent-gold-bright text-[24px]">newspaper</span><span class="font-title-md text-title-md text-primary font-bold group-hover:text-secondary transition-colors">{{ 'News'|t }}</span></a>
+<a class="bg-surface-base p-space-md rounded-xl border border-surface-container shadow-sm hover:shadow-md transition-all flex items-center gap-space-sm group" href="/schools"><span class="material-symbols-outlined text-accent-gold-bright text-[24px]">location_city</span><span class="font-title-md text-title-md text-primary font-bold group-hover:text-secondary transition-colors">{{ 'Our Schools'|t }}</span></a>
+</div>
+</section>
+</div></main>
+{% include "@waukee_theme/includes/tw-footer.html.twig" %}
+</div>
