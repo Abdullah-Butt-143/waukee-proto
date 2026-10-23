@@ -30,7 +30,17 @@
 </section>
 
 <section class="w-full max-w-[1280px] mx-auto px-margin py-space-xl">
-{% if news.filters %}
+{% if news.filters|length > 8 %}
+<form method="get" action="{{ news.all_url }}" class="flex flex-wrap items-center gap-3 mb-space-lg">
+<label for="news-school" class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">{{ 'School'|t }}</label>
+<select id="news-school" name="school" class="min-w-64 px-4 py-2.5 rounded-lg border-2 border-surface-container-high bg-surface-base text-primary font-label-md text-label-md font-semibold focus:outline-none focus:border-secondary-container">
+<option value="">{{ 'All schools'|t }}</option>
+{% for f in news.filters %}<option value="{{ f.id }}"{% if news.selected == f.id %} selected{% endif %}>{{ f.name }}</option>{% endfor %}
+</select>
+<button type="submit" class="inline-flex items-center gap-2 px-space-md py-2.5 rounded-lg bg-primary hover:bg-primary-container text-text-on-dark font-label-md text-label-md font-semibold transition-colors shadow-sm">{{ 'Show news'|t }}</button>
+{% if news.selected %}<a href="{{ news.all_url }}" class="font-label-md text-label-md text-primary font-bold underline hover:text-secondary">{{ 'Clear filter'|t }}</a>{% endif %}
+</form>
+{% elseif news.filters %}
 <nav aria-label="{{ 'Filter news by school'|t }}" class="flex flex-wrap items-center gap-2 mb-space-lg">
 <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold mr-2">{{ 'School'|t }}</span>
 <a href="{{ news.all_url }}" class="px-4 py-1.5 rounded-full font-label-md text-label-md font-semibold transition-colors {{ news.selected == 0 ? 'bg-primary text-text-on-dark' : 'bg-surface-container text-primary hover:bg-surface-container-high' }}"{% if news.selected == 0 %} aria-current="true"{% endif %}>{{ 'All'|t }}</a>

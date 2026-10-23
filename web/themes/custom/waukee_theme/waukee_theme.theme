@@ -222,6 +222,9 @@ function waukee_theme_news_item($node): array {
  */
 function waukee_theme_preprocess_page(array &$variables) {
   waukee_theme_account_links($variables);
+  // Header "Schools" menu (every page).
+  $variables['wk_schools_menu'] = function_exists('waukee_core_schools_menu') ? waukee_core_schools_menu() : [];
+  $variables['#cache']['tags'][] = 'group_list';
   $route_name = \Drupal::routeMatch()->getRouteName();
   if ($route_name === 'waukee_core.schools') {
     $variables['schools'] = waukee_core_schools_by_tier();

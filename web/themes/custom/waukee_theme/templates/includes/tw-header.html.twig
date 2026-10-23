@@ -105,7 +105,28 @@
         </div>
         {% for item in nav %}
           {% set active = current == item.href or current starts with item.href ~ '/' %}
+          {% if item.key == 'schools' and wk_schools_menu.left %}
+          <div class="relative group">
+            <a class="{{ link_classes }} inline-flex items-center gap-1{{ active ? ' ' ~ active_classes }}" data-path="{{ item.key }}" href="{{ item.href }}" aria-haspopup="true"{% if active %} aria-current="page"{% endif %}>{{ item.label }}<span class="material-symbols-outlined text-[18px]" aria-hidden="true">expand_more</span></a>
+            <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 absolute left-0 top-full pt-2 z-50 transition-opacity">
+              <div class="w-[34rem] bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant p-space-md grid grid-cols-2 gap-space-md">
+                {% for column in [wk_schools_menu.left, wk_schools_menu.right] %}
+                <div class="flex flex-col">
+                  {% for section in column %}
+                    <span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider px-3 pb-space-xs">{{ section.label }}</span>
+                    {% for school in section.items %}
+                      <a class="block px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-accent-purple-tint hover:text-primary font-label-md text-label-md transition-colors" href="{{ school.url }}">{{ school.name }}</a>
+                    {% endfor %}
+                  {% endfor %}
+                  {% if loop.last %}<a class="block px-3 py-1.5 rounded-lg text-primary hover:bg-accent-purple-tint font-label-md text-label-md font-bold transition-colors" href="/schools">{{ 'View all schools'|t }}</a>{% endif %}
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% else %}
           <a class="{{ link_classes }}{{ active ? ' ' ~ active_classes }}" data-path="{{ item.key }}" href="{{ item.href }}"{% if active %} aria-current="page"{% endif %}>{{ item.label }}</a>
+          {% endif %}
         {% endfor %}
       </nav>
       <div class="flex items-center gap-space-md">
