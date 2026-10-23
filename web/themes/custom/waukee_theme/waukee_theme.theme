@@ -60,6 +60,9 @@ function waukee_theme_theme_suggestions_page_alter(array &$suggestions, array $v
     elseif (waukee_theme_is_jobs_list()) {
       $suggestions[] = 'page__jobs';
     }
+    elseif ($node && rtrim(\Drupal::request()->getPathInfo(), '/') === '/enrollment') {
+      $suggestions[] = 'page__enrollment';
+    }
     elseif (waukee_theme_section_key()) {
       $suggestions[] = 'page__section';
     }

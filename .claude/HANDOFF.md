@@ -18,6 +18,7 @@ Rebuild public pages of the Waukee CSD Drupal 11 prototype (DDEV, `waukee-proto.
 T9 · /schools directory design · `templates/layout/page--schools.html.twig`, `js/schools-filter.js`, `templates/includes/tw-header.html.twig` + `tw-footer.html.twig` (shared header/footer, also used by page--front), libraries `front` + `schools` · done (not yet browser-verified by me)
 T10 · Waukee High School page · route `waukee_core.school_waukee_high` (`/schools/waukee-high-school`) → `SchoolsController::designPage()` (empty markup); `templates/layout/page--schools--waukee-high-school.html.twig` (all content hardcoded); WHS "Explore School" link on /schools updated · done (not browser-verified)
 T11 · User asked: clicking ANY school should show its own data dynamically (currently only WHS has a page) · NOT STARTED
+T12 · /enrollment real wording + design · scraped real waukeeschools.org/enroll text (curl with a browser UA, not WebFetch — see Gotchas) into `scripts/phase22_enroll.php` (Layout Builder blocks: hero/steps/accordion/timeline/cards/callout), then user pasted a full Tailwind mockup for the same page → built `templates/layout/page--enrollment.html.twig` (hardcoded, like the WHS page) and wired it via a `page__enrollment` suggestion in `waukee_theme_theme_suggestions_page_alter()`; this supersedes the phase22/26 Layout Builder content for rendering (same pattern as T7 superseding Phase 16's homepage) — those scripts still exist/run but their output is no longer shown. Two CC BY 2.0 stock photos (Openverse/Flickr; see template header) stand in for the real site's copyrighted student photos, stored at `web/themes/custom/waukee_theme/images/enroll-hero.jpg` + `enroll-timeline.jpg` · done (not browser-verified)
 
 ## Current state
 - Homepage, /schools and /schools/waukee-high-school render from hardcoded Twig (school data lives in page--schools.html.twig: 2 HS, 2 9th-grade, 4 middle, 11 elementary (Twig array), 3 specialized).
@@ -30,12 +31,15 @@ T11 · User asked: clicking ANY school should show its own data dynamically (cur
 - `web/modules/custom/waukee_core/waukee_core.module` — hook_theme (`waukee_schools`).
 - `web/themes/custom/waukee_theme/templates/layout/page--schools.html.twig` — current source of all school listing data.
 - `web/themes/custom/waukee_theme/templates/layout/page--schools--waukee-high-school.html.twig` — detail-page design to generalize.
-- `web/themes/custom/waukee_theme/waukee_theme.theme` — css_alter keyed on `waukee_theme/front` library.
+- `web/themes/custom/waukee_theme/waukee_theme.theme` — css_alter keyed on `waukee_theme/front` library; `page__enrollment` suggestion for /enrollment in `waukee_theme_theme_suggestions_page_alter()`.
+- `web/themes/custom/waukee_theme/templates/layout/page--enrollment.html.twig` — /enrollment design (hardcoded).
+- `scripts/phase22_enroll.php` / `scripts/phase26_enroll_photos.php` — Layout Builder version of /enrollment; superseded for rendering by page--enrollment.html.twig (T12), but kept for reference/rollback.
 
 ## Decisions
 - Keep mockup markup verbatim; only swap `#` hrefs to real site paths, never invent external URLs.
 - Real wording from waukeeschools.org beats mockup copy; don't fabricate missing text (omit + flag instead, e.g. Advisory schedule tab omitted).
 - Page templates selected by path suggestion (page--schools…); internal path matters, not alias.
+- Real photos of actual students (the live site's, or named individuals from random CC-licensed photos) aren't something to scrape/embed into the prototype on our own initiative — copyright + depicts-real-minors concerns. Default to CC BY stock photos (Openverse) or GD placeholder art; ask the user before using anything more specific.
 - Recommended for T11: Drupal content (school groups) as the single data source, editable by admins — consistent with the user's earlier choice to "wire to real Drupal content".
 
 ## Next step
@@ -57,3 +61,4 @@ Implement T11:
 - Mockup images are lh3.googleusercontent.com "aida-public" URLs (may expire); map uses OpenStreetMap embed.
 - Tailwind `hidden` class (not the `hidden` attribute) must be used for JS show/hide; flex utility classes would override the attribute.
 - Uncommitted work: everything since commit 9a2e45e on branch `feat-ahmad` (plus pre-existing staged CSS/JS and .ddev/traefik certs) — nothing committed this session.
+- WebFetch gets 403 on every waukeeschools.org URL (and its staging mirror); plain `curl` with a desktop-browser User-Agent gets 200 on the same URLs. Use `curl` (Bash tool) for future scraping of this domain, not WebFetch.
