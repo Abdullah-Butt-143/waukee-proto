@@ -1,0 +1,187 @@
+/**
+ * Editor forms (Add page / Add news / Edit), Gin admin theme, Waukee brand.
+ * Attached by waukee_core_page_attachments().
+ */
+
+:root:root:root {
+  --wk-purple: #5b2c83;
+  --wk-purple-deep: #3c1a5b;
+  --wk-purple-ink: #2a1240;
+  --wk-tint: #f1eaf8;
+  --wk-gold: #f2a900;
+  --gin-color-primary: var(--wk-purple);
+  --gin-color-primary-hover: var(--wk-purple-deep);
+  --gin-color-primary-active: var(--wk-purple-ink);
+  --gin-color-primary-light: var(--wk-tint);
+  --gin-color-primary-light-hover: #e6d9f3;
+  --gin-color-primary-light-active: #dccaee;
+  --gin-color-focus: var(--wk-gold);
+  --gin-color-focus-border: var(--wk-gold);
+  --gin-color-focus-hsl: 42 100% 47%;
+  --gin-border-color-form-element: #d9c9ea;
+  --gin-border-color-layer: #eadff5;
+  --gin-bg-app: #f7f3fb;
+  --gin-bg-layer: #fff;
+}
+
+body, input, select, textarea, button {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+body { background: #f7f3fb; }
+
+/* Page heading with a brand accent bar. */
+.page-title, h1.page-title {
+  color: var(--wk-purple-ink);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  position: relative;
+  padding-left: 1rem;
+}
+.page-title::before {
+  content: "";
+  position: absolute;
+  inset-block: 0.15em;
+  inset-inline-start: 0;
+  width: 6px;
+  border-radius: 6px;
+  background: linear-gradient(var(--wk-gold), var(--wk-purple));
+}
+
+/* Main column and sidebar become cards (the regions themselves, not each field). */
+.layout-node-form { gap: 1.5rem; }
+.layout-region-node-main,
+.layout-region-node-secondary {
+  background: #fff;
+  border: 1px solid #eadff5;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px -12px rgba(60, 26, 91, 0.18);
+  padding: 1.5rem 2rem;
+}
+.layout-region-node-main { border-top: 5px solid var(--wk-purple); }
+.layout-region-node-secondary { border-top: 5px solid var(--wk-gold); padding: 1rem 1.25rem; }
+.layout-region-node-main > *, .layout-region-node-secondary > * { box-shadow: none; }
+
+/* Labels and inputs. */
+label, .form-item__label, legend, .fieldset__label {
+  color: var(--wk-purple-ink);
+  font-weight: 700;
+}
+.form-item__description, .form-item .description {
+  color: #6b5a7d;
+}
+input[type="text"], input[type="email"], input[type="url"], input[type="number"],
+input[type="date"], input[type="datetime-local"], input[type="search"],
+input[type="password"], select, textarea, .form-element {
+  border: 2px solid #d9c9ea;
+  border-radius: 12px;
+  background-color: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+input.form-element:hover, select.form-element:hover, textarea.form-element:hover {
+  border-color: var(--wk-purple);
+}
+input.form-element:focus, select.form-element:focus, textarea.form-element:focus,
+.form-element:focus-visible {
+  border-color: var(--wk-gold);
+  box-shadow: 0 0 0 4px rgba(242, 169, 0, 0.25);
+  outline: none;
+}
+
+/* Title field: large, like a headline. */
+#edit-title-wrapper input, input#edit-title-0-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--wk-purple-ink);
+  padding: 0.85rem 1.1rem;
+}
+
+/* Rich text editor. */
+.ck.ck-editor__main > .ck-editor__editable { border-radius: 0 0 12px 12px; min-height: 260px; }
+.ck.ck-toolbar { border-radius: 12px 12px 0 0; background: var(--wk-tint); border-color: #d9c9ea; }
+.ck.ck-editor__editable:not(.ck-focused) { border-color: #d9c9ea; }
+.ck.ck-editor__editable.ck-focused { border-color: var(--wk-gold) !important; box-shadow: 0 0 0 4px rgba(242, 169, 0, 0.25) !important; }
+
+/* Collapsible sections (publishing, URL alias, ...). */
+details, .claro-details, .gin-details {
+  border: 1px solid #eadff5;
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+  margin-block: 0.75rem;
+  box-shadow: none;
+}
+details > summary, .claro-details__summary {
+  background: var(--wk-tint);
+  color: var(--wk-purple-ink);
+  font-weight: 700;
+  padding: 0.85rem 1.1rem;
+}
+details[open] > summary { border-bottom: 1px solid #eadff5; }
+details > .claro-details__wrapper, details > .details-wrapper { padding: 1rem 1.1rem; }
+
+/* Buttons. */
+.button, input.form-submit, button.button {
+  border-radius: 999px;
+  font-weight: 700;
+  padding-inline: 1.5rem;
+  transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s;
+}
+.button--primary, input.button--primary {
+  background: var(--wk-purple);
+  border-color: var(--wk-purple);
+  color: #fff;
+  box-shadow: 0 8px 18px -8px rgba(91, 44, 131, 0.6);
+}
+.button--primary:hover, .button--primary:focus {
+  background: var(--wk-purple-deep);
+  border-color: var(--wk-purple-deep);
+  transform: translateY(-1px);
+}
+.button:not(.button--primary):not(.button--danger) {
+  background: #fff;
+  color: var(--wk-purple);
+  border: 2px solid #d9c9ea;
+}
+.button:not(.button--primary):not(.button--danger):hover {
+  border-color: var(--wk-purple);
+  background: var(--wk-tint);
+}
+
+/* Save button: Gin moves it into its sticky top bar, which is covered by the
+   fixed sidebar on this site. Pin it as a floating bar at the bottom instead. */
+.gin-sticky-form-actions {
+  position: fixed !important;
+  inset-block-start: auto !important;
+  height: auto !important;
+  clip: auto !important;
+  clip-path: none !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  inset-block-end: 1.25rem !important;
+  inset-inline-end: 1rem;
+  z-index: 1000;
+  width: auto !important;
+  padding: 0.6rem 0.75rem !important;
+  background: #fff;
+  border: 1px solid #eadff5;
+  border-top: 3px solid var(--wk-gold);
+  border-radius: 999px;
+  box-shadow: 0 12px 32px -10px rgba(60, 26, 91, 0.45);
+}
+@media (min-width: 64em) {
+  .gin-sticky-form-actions {
+    inset-inline-end: calc(var(--gin-sidebar-width, 360px) + 9rem);
+  }
+}
+.gin-sticky-form-actions .form-actions, .gin-sticky-form-actions .button { margin: 0; }
+.gin-sticky-form-actions .button--primary, .gin-sticky-form-actions input#edit-submit {
+  background: var(--wk-purple) !important;
+  border-color: var(--wk-purple) !important;
+  color: #fff !important;
+  padding-inline: 2rem;
+}
+.gin-sticky-form-actions .button--primary:hover { background: var(--wk-purple-deep) !important; }
+
+/* Checkboxes and radios pick up the brand colour. */
+input[type="checkbox"]:checked, input[type="radio"]:checked { accent-color: var(--wk-purple); }

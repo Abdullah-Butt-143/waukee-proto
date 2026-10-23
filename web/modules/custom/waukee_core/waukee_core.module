@@ -161,3 +161,15 @@ function waukee_core_views_data_alter(array &$data) {
     ],
   ];
 }
+
+/**
+ * Implements hook_page_attachments().
+ *
+ * Brand styling for the content add/edit forms (admin theme).
+ */
+function waukee_core_page_attachments(array &$attachments) {
+  $route = \Drupal::routeMatch()->getRouteName();
+  if (in_array($route, ['node.add', 'entity.node.edit_form', 'entity.group_relationship.create_form', 'entity.group_relationship.edit_form'], TRUE)) {
+    $attachments['#attached']['library'][] = 'waukee_core/admin_forms';
+  }
+}
