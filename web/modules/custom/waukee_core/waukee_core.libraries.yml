@@ -1,0 +1,7 @@
+# Brand styling for the editor forms (Add/Edit page and news, incl. the
+# school "create content" forms) in the Gin admin theme.
+admin_forms:
+  css:
+    theme:
+      https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap: { type: external }
+      css/admin-forms.css: {}

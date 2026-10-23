@@ -10,7 +10,7 @@
 {% set total = schools.elementary|length + schools.middle|length + schools.transition|length + schools.high|length %}
 <div class="bg-background font-body-md text-body-md text-on-surface antialiased">
 {% include "@waukee_theme/includes/tw-header.html.twig" %}
-<main id="main-content" class="w-full pt-20 bg-background"><div class="flex flex-col w-full">
+<main id="main-content" class="w-full pt-20 bg-background">{% include '@waukee_theme/includes/tw-alert.html.twig' %}<div class="flex flex-col w-full">
 <!-- District Hero & Directory Search Header -->
 <section class="relative w-full bg-primary-container text-on-primary py-16 lg:py-20 overflow-hidden">
 <div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-secondary-fixed-dim/15 blur-3xl pointer-events-none"></div>

@@ -3,7 +3,7 @@
 Everything below is **sample content**. No real District, staff or student data.
 Site: `https://waukee-proto.ddev.site` (runs on the presenter's laptop via DDEV; show it by sharing the screen).
 
-> **Status of this guide (updated 22 Oct 2026):** every URL and every role permission in it was checked by script against the running site (public pages return 200, intranet pages return Access denied to the public, role links and permissions match). The visual look and the click-by-click form steps were **not** all clicked through in a browser, so **do one full rehearsal** before the demo (section 3 is written to be rehearsed).
+> **Status of this guide (updated 23 Oct 2026):** every URL and every role permission in it was checked by script against the running site (public pages return 200, intranet pages return Access denied to the public, role links and permissions match). The visual look and the click-by-click form steps were **not** all clicked through in a browser, so **do one full rehearsal** before the demo (section 3 is written to be rehearsed). The editor, publisher and alert flows (Steps 4, 5 and 7) were run end to end in a real browser on 23 Oct 2026; the problems that run found are fixed by `scripts/phase25_workflow_fixes.php` (see section 0).
 
 ---
 
@@ -18,9 +18,17 @@ Site: `https://waukee-proto.ddev.site` (runs on the presenter's laptop via DDEV;
 
 > Dates: lunch menus run from 23 Oct to 29 Oct 2026 and events/news are dated relative to 22 Oct 2026. If you demo later, re-run the scripts above, or the lunch-menu and "upcoming events" lists will look empty.
 
+### One-time fixes you must have applied (run once, then `ddev drush cr`)
+
+`ddev drush php:script scripts/phase25_workflow_fixes.php` does two things the editor, publisher and alert flows depend on:
+- **Reviewers can see drafts.** Without it, unpublished pages and news are missing from the **Content** and **Moderated content** lists for everyone except admins (the publisher can only open them by a direct link, and an editor cannot see their own draft in the list).
+- **Publishers can edit the alert.** Without it, the **Site emergency alert** row has no **Edit** button for `comms.publisher`.
+
+`phase23_about_hero.php` and `phase24_about_cards.php` put student photos on the About the District hero and its six cards.
+
 ### Rebuilding on a fresh clone
 
-Pages, menu links and page-builder blocks live in the **database**, not in git. On a fresh clone run `ddev drush cim -y`, then these scripts in order (all re-runnable): `phase1` … `phase13b`, `phase14_design`, `phase14_images`, `phase15_schools`, `phase15b_menu`, `phase16_homepage`, `phase16_about`, `phase17_news`, **`phase17_schools_data`** (creates the school fields and the 22 schools; **needed or `/schools` crashes**), `phase20_form_links`, `phase21_school_pages`, `phase22_enroll` (all in `scripts/`, run with `ddev drush php:script scripts/<name>.php`). If page-builder pages ever render **empty**, run `scripts/phase19_repair_layouts.php` (rebuilds deleted blocks) and `scripts/phase16_about.php`.
+Pages, menu links and page-builder blocks live in the **database**, not in git. On a fresh clone run `ddev drush cim -y`, then these scripts in order (all re-runnable): `phase1` … `phase13b`, `phase14_design`, `phase14_images`, `phase15_schools`, `phase15b_menu`, `phase16_homepage`, `phase16_about`, `phase17_news`, **`phase17_schools_data`** (creates the school fields and the 22 schools; **needed or `/schools` crashes**), `phase20_form_links`, `phase21_school_pages`, `phase22_enroll`, `phase23_about_hero`, `phase24_about_cards`, **`phase25_workflow_fixes`** (all in `scripts/`, run with `ddev drush php:script scripts/<name>.php`). If page-builder pages ever render **empty**, run `scripts/phase19_repair_layouts.php` (rebuilds deleted blocks) and `scripts/phase16_about.php`.
 
 ---
 
@@ -34,11 +42,13 @@ Pages, menu links and page-builder blocks live in the **database**, not in git. 
 
 **Footer (every page, identical):** Waukee CSD address and phone, Quick Links (Contact Us, Careers, Schools), District (School Board, Staff Directory, Staff Intranet), Connect With Us icons, and the legal row.
 
-**Account bar** (only when logged in, a thin dark strip above the header): "Signed in as <name>" plus buttons for what that person may do (see section 2). This is how editors and publishers find **Add page**, **Add news** and **Content**, since there is no admin toolbar on the public theme.
+**Editor buttons (only when logged in).** Editors and publishers find **Add page**, **Add news** and **Content** here, since there is no admin toolbar on the public theme:
+- On the designed pages (home, News, Students, Parents, Schools, Academics) they appear in the **purple strip at the very top**, in the row with Students · Parents · Community · Staff, just before your name and **Log out**.
+- On all other pages a thin **dark strip** under the header says "Signed in as <name>" and lists the same buttons plus **Scheduled** and **Admin** where allowed (see section 2).
 
-**Logging out / switching role:** click **Log out** at the right end of the account bar. On the hand-built pages (`/`, `/schools`, school profiles, `/academics`) the purple top bar shows your name and **Log out** instead. Fallback: open `/user/logout`. You can also use a private window per role.
+**Logging out / switching role:** click **Log out** in the purple strip at the top (or at the right end of the dark strip). Fallback: type `/user/logout` in the address bar. You can also use a private window per role.
 
-**Emergency alert:** a lime banner that shows on **every page including the home page** when switched on (section 4).
+**Emergency alert:** a lime banner that shows at the top of **every page including the home page, News, Schools and Academics** when switched on (Step 7).
 
 ---
 
@@ -83,32 +93,65 @@ Reach them from the header: hover **About** → **Quick links** → **Facility r
 4. Submit a valid request. Open **Mailpit**: two emails (one to the facilities office, one confirmation to the submitter).
 5. **Volunteer hours** (`/students/volunteer-hours`): choose activity **Other** → a required "describe the activity" box appears. Hours must be 0.25 to 24 (try 99).
 
-### Step 4: Editor builds and submits (5 min, `school.editor`)
-1. Open `/user/login` (the account icon in the header), log in as `school.editor`. The **account bar** shows **Add page** and **Add news**.
-2. Click **Add page** (goes to `/group/2/content/create/group_node:page`, i.e. inside **Sample Elementary**). Enter a title such as "Field day information". The **Change to** state stays **Draft**. Click **Save**.
-3. On the new page click the **Layout** tab (page builder). **Add section** → one column → **Add block**. The list shows only the approved components: Hero, Card grid, Audience pathways, Quick links, Accordion, Callout, Image + text, Video embed, the News/Events feeds and **School pages list**. Add a **Callout** and a **Hero**, fill them in, click **Save layout**.
-4. **Accessibility checker:** the Editoria11y button (bottom right of the page) counts issues. Skip a heading level in a Callout (H2 then H4) or use a link text like "click here": it flags it; fix it and it clears.
-5. Click **Edit**, set **Change to** to **In review** (there is no Published option for editors), **Save**. This is "send for approval".
-6. Click **Add news**: fill Title, Body, Summary, optional Image, and **School** (required; choose Sample Elementary). Set **Change to** to **In review**, Save.
-7. Show the limits: open `/group/3/content/create/group_node:page` or `/node/56/edit` (High School): **Access denied**.
+### Step 4: Editor builds a page and sends it for review (5 min, log in as `school.editor`)
 
-### Step 5: Publisher approves, schedules, restores (4 min, `comms.publisher`, second window)
-1. Log in. Click **Content** in the bar, or open `/admin/content/moderated` (lists content by state). Find the two "In review" items.
-2. Open the page → **Edit**. Either set **Change to** → **Published** and Save (publishes now), **or** open **Scheduling options**, set a **Publish on** time a few minutes ahead with the publish state **Published**, and Save. The **Scheduled** button in the bar (`/admin/content/scheduled`) lists scheduled items; they publish on the next cron run (`ddev drush cron` to force it).
-3. Publish the news item. Open `/news`: it is there; open `/schools/sample-elementary`: the news shows in the school's feed and the page shows under **Pages from Sample Elementary**.
-4. **Revision history and restore:** open the page, **Edit**, change the text, Save (new revision). Open the **Revisions** tab, tick two revisions and click **Compare selected revisions** to see the differences, then click **Revert** on the older one and confirm: the old version is live again and a new entry is added to the history (nothing is lost).
+**Log in.** Click the small **person icon** at the right end of the main header (the white bar), type **school.editor** and the password **Demo#2026**, click **Log in**.
+
+**Find the editing buttons.** Look at the **purple strip at the very top** of the page. After Students · Parents · Community · Staff you now see three new words: **Add page**, **Add news**, **Content**, then your name and **Log out**. (On some pages they are in a dark strip under the header instead.) A school editor only works inside their own school, Sample Elementary.
+
+**Add a page**
+1. Click **Add page** in the purple strip. A form titled "Add Group node (Basic page)" opens. It has a big white card on the left and a narrower white panel on the right.
+2. In the left card: click the **Title** box and type a title such as "Field day information". **Page owner**, **Review date** and **Image** are optional. Click inside the large **Body** box and type a few sentences.
+3. In the right panel you see **Last saved**, **Author**, a **Revision log message** box and a **Save as** drop-down. For an editor the drop-down only lists **Draft** and **In review**. Choose **In review** (this is "send for approval"). Choose **Draft** instead if you only want to keep working on it.
+4. Click the purple **Save** button. It floats at the bottom of the screen, just to the left of the small round button, and stays there as you scroll. A green message says the page was created.
+5. You now see your new page. To build it with the page builder, click the **Layout** tab (above the page title, next to View and Edit), then **Add section**, then **Add block**. The list offers only approved building blocks: Hero, Card grid, Audience pathways, Quick links, Accordion, Callout, Image + text, Video embed, the News/Events feeds and School pages list. Add a **Callout** and a **Hero**, fill them in and click **Save layout**.
+6. **Accessibility check:** the round **Editoria11y** button at the bottom right of the page counts problems. Make a heading jump from H2 to H4, or use link text such as "click here": it shows a warning. Fix it and the warning disappears.
+7. To send the page for review after building it: click the **Edit** tab, set **Save as** to **In review**, click the purple **Save**.
+
+**Add news**
+1. Click **Add news** in the purple strip.
+2. Type a **Title**, a short **Summary** and the **Body**. Tick one box under **School** (required: choose Sample Elementary, or District (all schools) for district-wide news). Tick an **Audience** box if you like.
+3. In the right panel set **Save as** to **In review**, then click the purple **Save**.
+
+**Show the limits.** A school editor cannot reach another school's pages. Open the High School's form by typing `/group/3/content/create/group_node:page` in the address bar: the answer is **Access denied**. Also note the **Save as** list has no **Published** choice: editors can never publish.
+
+### Step 5: Publisher approves, schedules and restores (4 min, log in as `comms.publisher`)
+
+Use a second browser window, or click **Log out** in the purple strip first. Log in with **comms.publisher** / **Demo#2026**.
+
+**Find what is waiting**
+1. In the purple strip click **Content**. You land on the list of all content. Under the page title there are tabs: **Overview**, **Moderated content**, **Scheduled content**.
+2. Click the **Moderated content** tab. It lists only items that are not published yet. The state column says **In review** next to the editor's page and news. (If the list says nothing is waiting but the editor did save something, the one-time fix in section 0 has not been run.)
+
+**Review it**
+3. Click the page's **title** to see it as the public would, or click **Edit** at the end of its row to open the form.
+
+**Choose one of three actions** (all use the **Save as** drop-down in the right panel, then the purple **Save**):
+- **Approve now:** set **Save as** to **Published** and click **Save**. It is public at once.
+- **Send it back:** set **Save as** to **Draft** and click **Save**. Write the reason in the **Revision log message** box first.
+- **Approve for later (schedule):** in the right panel click **Scheduling options** to open it, click **Publish on**, pick a date and time a few minutes ahead, and make sure the state next to it is **Published**. Leave **Save as** on **In review** and click **Save**. The **Scheduled content** tab (under Content) lists it. It goes live on the next cron run (`ddev drush cron` forces it).
+
+**See the result**
+4. In a private window open the page's address (shown under the page title after saving), or click **News** in the header. A published page opens without logging in. A published news story is the first card on the News page and appears in the Sample Elementary school feed. A published page is **not** added to any menu automatically.
+
+**Revision history and restore** (on any page)
+5. Click **Edit**, change a sentence, click **Save**. Click the **Revisions** tab (above the title). Tick two revisions in the list and click **Compare selected revisions** to see what changed. Then click **Revert** next to an older revision and confirm. The old text is live again, and the history gets a new line instead of losing anything.
 
 ### Step 6: Staff and the permission-aware search (3 min, `teacher.staff`)
-1. Log in. The bar shows **Announcements · Documents · Staff directory**; the top-bar **Staff Intranet** link now opens the intranet.
-2. `/intranet/announcements` (School filter), `/intranet/documents` (Category filter), `/intranet/staff-directory` (search "jordan"), `/intranet/hr-resources` (App launcher in the sidebar).
-3. `/search` → **handbook**: now **4 results** (public 2 + the Staff Handbook and Employee Handbook) versus 2 for the public. This is the proof that search respects permissions.
+1. Log in. The purple strip now shows **Announcements · Documents · Staff directory** before your name, and **Staff** among the audience links opens the intranet.
+2. Click **Announcements** (use the **School** drop-down filter), then **Documents** (**Category** filter), then **Staff directory** (type "jordan" in the search box). For the app launcher open `/intranet/hr-resources` (the launcher is in the right sidebar).
+3. Click the **search box** in the purple strip, type **handbook**, press Enter: now **4 results** (the public 2 plus the Staff Handbook and Employee Handbook) versus 2 for the public. This is the proof that search respects permissions.
 4. `/documents/salary-schedule-sample` is **Access denied even for staff** (publishers and admins only).
 
-### Step 7: Emergency alert (1 min, `admin.demo`)
-1. Log in, open `/admin/content/block`, edit **Site emergency alert**.
-2. Tick **Active**, Save.
-3. In the public window, open `/` (home), `/families`, `/schools/sample-elementary`, `/calendar`: the lime **Alert** banner shows at the top of **every** page.
-4. Untick **Active**, Save: it disappears everywhere.
+### Step 7: Emergency alert (1 min, log in as `comms.publisher` or `admin.demo`)
+
+The alert is one saved message called **Site emergency alert**. It is not a page, so it has no review step: switching it on shows it everywhere at once.
+
+1. Log in. In the purple strip click **Content**, then click the **Blocks** tab under the page title.
+2. Find the row **Site emergency alert** (type Emergency alert) and click **Edit** at the end of that row. (No Edit button for the publisher means the one-time fix in section 0 has not been run.)
+3. Change the message text if you like. Tick the **Active** check box and click **Save**.
+4. In a private window open the home page, **News**, **Schools** and any other page. A lime **Alert** banner is at the very top of every one.
+5. To switch it off: repeat steps 1 and 2, untick **Active**, click **Save**. The banner disappears everywhere (reload with Ctrl+F5 if it lingers).
 
 ### Close
 Tie each feature to the RFP exhibits: one platform, open source, no licence fee, permission-aware content, accessible forms, editorial workflow.
@@ -125,7 +168,7 @@ Tie each feature to the RFP exhibits: one platform, open source, no licence fee,
 | **Event** | `/events`, `/calendar` and the school feeds, by School field | Times show in America/Chicago. |
 | **Announcement / Document / Staff profile** | Intranet lists, the public lists if marked public, and search (permission-aware) | Audience term decides who sees it. |
 
-Nothing is public until a publisher moves it to **Published** (editors can only reach **Draft** and **In review**).
+Nothing is public until a publisher chooses **Published** in the **Save as** drop-down (editors can only choose **Draft** and **In review**).
 
 ---
 
@@ -138,11 +181,12 @@ Nothing is public until a publisher moves it to **Published** (editors can only 
 | `/schools/{slug}` (e.g. `/schools/waukee-high-school`, `/schools/northwest-high-school`, `/schools/brookview-elementary`) | One school's page, built from its group; unknown slugs give 404. |
 | `/academics` | Academics page (hand-built design). |
 | `/schools/sample-elementary` · `/schools/sample-high-school` | The two sample school "sites" used for the editor/group demo: own news/events + District items + pages list. Not in the 22-school directory. |
-| `/district` | About the District. Sub-pages: `/district/mission-vision`, `/district/superintendent`, `/district/strategic-plan`, `/district/facts`. |
-| `/news` | News list with School filter. |
+| `/district` | About the District (student photo in the purple hero and on the six "Explore the District" cards). Sub-pages: `/district/mission-vision`, `/district/superintendent`, `/district/strategic-plan`, `/district/facts`. |
+| `/news` | News page in the homepage design: purple hero, a row of **School** buttons (All, District, Sample Elementary, Sample High School) to filter, three-column cards with image, date, school and summary, and **Previous / Next** buttons (9 per page). A card opens the article page (same design, with a **Back to all news** button). |
 | `/enrollment` | Designed enrollment page (hero, 4 steps, documents needed, FAQ, helpful pages, help box). |
 | `/user/login` · `/user/password` | Two-panel login and password-reset pages with the shared header and footer. |
-| `/families` · `/prospective-families` · `/students` · `/careers` · `/community` | Section pages: callout + card grid of sub-pages. |
+| `/families` (Parents) · `/prospective-families` · `/students` | Audience pages in the homepage design: purple hero with the page's intro text, an icon card for each sub-page (Enrollment, Transportation, ...), and a Calendar / News / Our Schools strip. Reached from **Students** and **Parents** in the purple strip. |
+| `/careers` · `/community` | Section pages: callout + card grid of sub-pages (older design). |
 | `/transportation` · `/families/nutrition` · `/families/health-services` · `/closings` | Family pages. |
 | `/prospective-families/why-us` · `/prospective-families/schools` · `/prospective-families/enroll` | Prospective families. |
 | `/students/activities` · `/students/resources` · **`/students/volunteer-hours`** | Students (volunteer form). |
@@ -202,7 +246,8 @@ Nothing is public until a publisher moves it to **Published** (editors can only 
 | Revision history and one-click restore (with compare) | **Done** | Step 5, point 4 |
 | Search: staff see intranet results, public users do not | **Done** | Steps 2 and 6 |
 | Accessible forms with conditional logic (facility rental, volunteer hours) | **Done** (markup checked; no screen-reader test yet) | Step 3 |
-| Emergency alert on every page | **Done** | Step 7 |
+| Emergency alert on every page (including the designed pages) | **Done** | Step 7 |
+| Audience pages for students and parents in the homepage design | **Done** | Step 1; **Students** / **Parents** in the purple strip |
 | School sites with own news/events + district items | **Done** | Step 1, point 3 |
 | AI assistant answering from site content | **Not built** (design agreed: reuse the permission-aware search + Claude; needs an API key) | Say "planned" |
 | Google Workspace sign-in | **Not built** (local role-based demo users used instead) | Say "planned" |
@@ -239,6 +284,9 @@ Nothing is public until a publisher moves it to **Published** (editors can only 
 | Can't log in | `ddev drush uli` (admin) or `ddev drush upwd teacher.staff 'Demo#2026'` |
 | No account bar after login | Hard refresh (Ctrl+F5) and `ddev drush cr` |
 | Lunch menu or "upcoming events" empty | Dates have passed: re-run `phase13a_pages.php`, `phase13b_content.php`, `phase10_calendar_feeds.php` |
+| Editor's draft is missing from **Content**, or the publisher sees nothing under **Moderated content** | Run `ddev drush php:script scripts/phase25_workflow_fixes.php` once, then `ddev drush cr` |
+| Publisher has no **Edit** button on the alert | Same fix (`phase25_workflow_fixes.php`) |
+| No purple **Save** button on an Add/Edit form | `ddev drush cr`, then Ctrl+F5; the button floats at the bottom of the screen |
 | Alert stuck on | `/admin/content/block` → **Site emergency alert** → untick Active |
 | Scheduled page did not publish | `ddev drush cron` |
 | Form emails missing | Mailpit is at `https://waukee-proto.ddev.site:8026` (`ddev mailpit`) |
