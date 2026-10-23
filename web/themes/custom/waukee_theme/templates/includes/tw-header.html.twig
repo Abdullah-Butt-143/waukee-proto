@@ -59,6 +59,10 @@
           <a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" data-path="community" href="/community">Community</a>
           <a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" data-path="staff-intranet" href="{{ wk_intranet_url|default('/user/login') }}">Staff</a>
           {% if logged_in %}
+            {# Editor shortcuts (Add page, Add news, Content). Inner pages show them in the account bar instead (wk_hide_actions). #}
+            {% if not wk_hide_actions|default(false) %}{% for link in wk_account_links|slice(0, 3) %}
+            <a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" href="{{ link.url }}">{{ link.title }}</a>
+            {% endfor %}{% endif %}
             <a class="text-on-primary hover:text-secondary-fixed-dim transition-colors" href="{{ wk_account_url }}">{{ wk_account_name }}</a>
             <a class="text-on-primary hover:text-secondary-fixed-dim transition-colors font-bold underline" href="{{ wk_logout_url }}">{{ 'Log out'|t }}</a>
           {% endif %}
