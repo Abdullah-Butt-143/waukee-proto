@@ -8,3 +8,6 @@
 .wk-front-alert .wk-emergency-alert__label{padding:.1rem .6rem;background:#3c1a5b;color:#fff;border-radius:4px;text-transform:uppercase;letter-spacing:.05em;font-size:.85rem}
 .wk-front-alert .wk-emergency-alert p{margin:0}
 .wk-front-alert .wk-emergency-alert .field,.wk-front-alert .wk-emergency-alert .field__item{display:inline;margin:0}
+/* Drupal admin toolbar: on the designed pages it only shows a user tab and covers the fixed header. Editor links live in the purple top strip instead. */
+body.toolbar-fixed,body.toolbar-horizontal{padding-top:0!important}
+#toolbar-administration,#toolbar-administration-secondary{display:none!important}
