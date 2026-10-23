@@ -1,3 +1,10 @@
+CacheLookup public off
+CacheLookup private off
+
+<IfModule LiteSpeed>
+  Header set X-LiteSpeed-Cache-Control no-cache
+</IfModule>
+
 #
 # Apache/PHP/Drupal settings:
 #
