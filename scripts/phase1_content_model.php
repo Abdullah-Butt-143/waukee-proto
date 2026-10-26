@@ -342,7 +342,7 @@ $grant('publisher', array_merge($content_all, [
 ]));
 // School editors: create/edit own content only; no "edit any" at site level.
 $se = ['access content overview', 'view own unpublished content', 'access media overview',
-  'access administration pages', 'view the administration theme', 'access toolbar', 'create media', 'update media'];
+  'view the administration theme', 'access toolbar', 'create media', 'update media'];
 foreach (['page', 'news', 'event', 'announcement', 'lunch_menu'] as $b) {
   array_push($se, "create $b content", "edit own $b content", "view $b revisions");
 }

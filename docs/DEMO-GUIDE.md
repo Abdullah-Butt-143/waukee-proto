@@ -56,13 +56,15 @@ Pages, menu links and page-builder blocks live in the **database**, not in git. 
 
 All demo passwords: **`Demo#2026`**. Log in at `/user/login` (or the account icon in the header).
 
+**Layout Builder / site admin login:** username **`admin`**, password **`TempAdmin#2026`**. Use this account when you need the page builder (Layout Builder) or full admin access.
+
 | Login | Represents | Account bar buttons | What to show |
 |---|---|---|---|
 | *(not logged in)* | Public: **parent, student, prospective family, job seeker, community member** | none | Public site, forms, search, news, calendar. Intranet is hidden. |
 | `ddev drush uli` link (user **admin**) | Technical site administrator | Add page · Add news · Content · Scheduled · Admin · intranet links | Full admin: structure, groups, workflow, views, modules. |
 | `admin.demo` | District administrator | Add page · Add news · Content · Scheduled · Admin · intranet links | Content, users, the emergency alert. *Cannot open `/admin/group`; use the admin link for that.* |
 | `comms.publisher` | District publisher | Add page · Add news · Content · **Scheduled** · Admin · Announcements · Documents · Staff directory · My account | Review, approve, schedule, publish; compare and restore revisions; form submissions. |
-| `school.editor` | Editor for **Sample Elementary only** | **Add page · Add news** (both create inside Sample Elementary) · Content · Admin · intranet links · My account | Build a page, accessibility check, submit for review. Cannot touch the High School. |
+| `school.editor` | Editor for **Sample Elementary only** | **Add page · Add news** (both create inside Sample Elementary) · Content · intranet links · My account (no **Admin** button; `/admin` gives Access denied) | Build a page, accessibility check, submit for review. Cannot touch the High School. |
 | `teacher.staff` | Staff member | Announcements · Documents · Staff directory · My account | Intranet and permission-aware search. |
 
 About a literal "student" login: there is none. Students and families use the public site without logging in. Adding a plain student account is a one-minute job if needed.
